@@ -17,7 +17,20 @@ public class SeesawPlatform : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        other.transform.SetParent(transform, true);
-
+        if (other.CompareTag("IgnorePlatform") == false)
+        {
+            other.transform.SetParent(transform, true);
+        }
+        if (other.CompareTag("Player1"))
+        {
+            transform.parent.SendMessage("OnPlatformTriggered", gameObject);
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.transform.parent == transform && other.CompareTag("IgnorePlatform") == false)
+        {
+            other.transform.SetParent(null, true);
+        }
     }
 }
