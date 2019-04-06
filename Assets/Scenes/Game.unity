@@ -1808,11 +1808,6 @@ PrefabInstance:
       propertyPath: player2
       value: 
       objectReference: {fileID: 2553107321341475814}
-    - target: {fileID: 2329437449930610548, guid: f055718a36d21f04195bab65c3180ef5,
-        type: 3}
-      propertyPath: maxZoom
-      value: 1.3
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f055718a36d21f04195bab65c3180ef5, type: 3}
 --- !u!1 &2553107321341475814 stripped
@@ -1898,6 +1893,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 1.77
       objectReference: {fileID: 0}
+    - target: {fileID: 6276617792180158928, guid: c8e98072142bff04d8e97513337fcbb0,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4eccea3cf0d166340ad52fad4292c61b, type: 2}
     - target: {fileID: 5640461539509279273, guid: c8e98072142bff04d8e97513337fcbb0,
         type: 3}
       propertyPath: oneTimeUse
@@ -2056,5 +2056,10 @@ PrefabInstance:
       propertyPath: triggerableBy
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3655404925421811569, guid: a4a2586b9bc8abe4b85818985598386b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9364fc8124d463c4282de4d48ab576ee, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a4a2586b9bc8abe4b85818985598386b, type: 3}
