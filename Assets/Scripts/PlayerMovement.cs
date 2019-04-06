@@ -59,7 +59,7 @@ public class PlayerMovement : MonoBehaviour
         motion.z *= speed;
         if (inAirstream == false)
         {
-            airstreamMotion *= 0.9f;
+            airstreamMotion *= 0.95f;
         }
             cc.Move((motion+airstreamMotion) * Time.deltaTime);
       
