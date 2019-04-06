@@ -22,20 +22,28 @@ public class Airstream : MonoBehaviour
     {
         if (other.CompareTag("Player2"))
         {
-            object[] temp = new object[2];
-            temp[0] = direction;
-            temp[1] = strength;
+            object[] temp = new object[3];
+            temp[0] = true;
+            temp[1] = direction;
+            temp[2] = strength;
             other.SendMessage("ToggleAirstream", temp);
             Debug.LogWarning("entered");
         }
+        
 
     }
     private void OnTriggerExit(Collider other)
     {
+      
         if (other.CompareTag("Player2"))
         {
-            other.SendMessage("ToggleAirstream", new object[2]);
+            object[] temp = new object[3];
+            temp[0] = false;
+            temp[1] = 0;
+            temp[2] = 0;
+            other.SendMessage("ToggleAirstream", temp);
             Debug.LogWarning("exited");
         }
+        
     }
 }

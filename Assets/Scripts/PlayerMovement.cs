@@ -74,14 +74,15 @@ public class PlayerMovement : MonoBehaviour
 
     public void ToggleAirstream(object[] parameters)
     {
-        if (inAirstream)
+        if ((bool)parameters[0] == false)
         {
             inAirstream = false;
         } else
         {
             inAirstream = true;
-            airstreamMotion = (Vector3)parameters[0] * (float)parameters[1];
+            airstreamMotion = (Vector3)parameters[1] * (float)parameters[2];
         }
+        Debug.LogWarning(inAirstream);
     }
 
 
