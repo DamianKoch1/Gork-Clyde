@@ -38,7 +38,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Physics.Raycast(transform.position, Vector3.down, 1.1f))
+        if (Physics.Raycast(transform.position, Vector3.down, 1.3f))
         {
             if (cc.velocity.y == 0)
             {

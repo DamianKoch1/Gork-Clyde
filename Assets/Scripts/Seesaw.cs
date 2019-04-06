@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class Seesaw : MonoBehaviour
 {
-    private GameObject platform1, platform2, pushedPlatform;
+    private GameObject platform1, platform2, pushedPlatform, middle;
     private float minHeight, lerpAmount = 0;
     private Vector3 startpos, targetpos;
     void Start()
     {
         platform1 = transform.Find("Platform1").gameObject;
         minHeight = transform.Find("MinHeight").transform.position.y;
+        middle = transform.Find("Middle").gameObject;
+        middle.transform.LookAt(platform1.transform.position);
     }
 
     // Update is called once per frame
@@ -21,6 +23,7 @@ public class Seesaw : MonoBehaviour
             lerpAmount += Time.deltaTime;
             pushedPlatform.transform.position = Vector3.Lerp(startpos, targetpos, lerpAmount);
             platform2.transform.localPosition = new Vector3(platform2.transform.localPosition.x, -pushedPlatform.transform.localPosition.y, platform2.transform.localPosition.z);
+            middle.transform.LookAt(platform1.transform.position);
             if (lerpAmount >= 1)
             {
                 lerpAmount = 0;
