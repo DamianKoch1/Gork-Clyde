@@ -66,7 +66,7 @@ public class PlayerMovement : MonoBehaviour
     }
     public void Bounce(object[] parameters)
     {
-        if(motion.y < 0)
+        if(motion.y < -(float)parameters[2])
         {
             motion.y = Mathf.Min(motion.y *= -(float)parameters[0], (float)parameters[1]);
         }
