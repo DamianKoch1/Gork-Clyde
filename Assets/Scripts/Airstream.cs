@@ -18,24 +18,40 @@ public class Airstream : MonoBehaviour
     {
         
     }
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player2"))
         {
-            object[] temp = new object[2];
-            temp[0] = direction;
-            temp[1] = strength;
+            object[] temp = new object[3];
+            temp[0] = true;
+            temp[1] = direction;
+            temp[2] = strength;
             other.SendMessage("ToggleAirstream", temp);
             Debug.LogWarning("entered");
         }
+        
 
     }
     private void OnTriggerExit(Collider other)
     {
+      
         if (other.CompareTag("Player2"))
         {
-            other.SendMessage("ToggleAirstream", new object[2]);
+            object[] temp = new object[3];
+            temp[0] = false;
+            temp[1] = 0;
+            temp[2] = 0;
+            other.SendMessage("ToggleAirstream", temp);
             Debug.LogWarning("exited");
         }
+        
+    }
+
+    public void OnButtonActivated()
+    {
+        MeshRenderer mr = GetComponent<MeshRenderer>();
+        BoxCollider bc = GetComponent<BoxCollider>();
+        mr.enabled = !mr.enabled;
+        bc.enabled = !bc.enabled;
     }
 }
