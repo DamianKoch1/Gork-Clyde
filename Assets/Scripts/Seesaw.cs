@@ -7,6 +7,8 @@ public class Seesaw : MonoBehaviour
     private GameObject platform1, platform2, pushedPlatform, middle;
     private float minHeight, lerpAmount = 0;
     private Vector3 startpos, targetpos;
+    [SerializeField]
+    private bool moveBack;
     void Start()
     {
         platform1 = transform.Find("Platform1").gameObject;
@@ -29,6 +31,10 @@ public class Seesaw : MonoBehaviour
                 lerpAmount = 0;
                 pushedPlatform = null;
                 platform2 = null;
+                if (moveBack)
+                {
+                    OnPlatformTriggered(transform.Find("Platform2").gameObject);
+                }
             }
         }
     }
