@@ -27,7 +27,6 @@ public class Airstream : MonoBehaviour
             temp[1] = direction;
             temp[2] = strength;
             other.SendMessage("ToggleAirstream", temp);
-            Debug.LogWarning("entered");
         }
         
 
@@ -42,7 +41,6 @@ public class Airstream : MonoBehaviour
             temp[1] = 0;
             temp[2] = 0;
             other.SendMessage("ToggleAirstream", temp);
-            Debug.LogWarning("exited");
         }
         
     }
