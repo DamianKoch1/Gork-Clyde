@@ -21,14 +21,14 @@ public class SeesawPlatform : MonoBehaviour
         {
             other.transform.SetParent(transform, true);
         }
-        if (other.CompareTag("Player1"))
+        if (other.CompareTag("Player1") || other.CompareTag("pushable"))
         {
             transform.parent.SendMessage("OnPlatformTriggered", gameObject);
         }
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.transform.parent == transform && other.CompareTag("IgnorePlatform") == false)
+        if (other.transform.parent == transform && other.CompareTag("IgnorePlatform") == false || other.CompareTag("pushable"))
         {
             other.transform.SetParent(null, true);
         }

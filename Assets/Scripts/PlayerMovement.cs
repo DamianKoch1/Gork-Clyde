@@ -38,7 +38,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Physics.Raycast(transform.position, Vector3.down, 1.1f))
+        if (Physics.Raycast(transform.position, Vector3.down, 1.3f))
         {
             if (cc.velocity.y == 0)
             {
@@ -59,14 +59,14 @@ public class PlayerMovement : MonoBehaviour
         motion.z *= speed;
         if (inAirstream == false)
         {
-            airstreamMotion *= 0.9f;
+            airstreamMotion *= 0.95f;
         }
             cc.Move((motion+airstreamMotion) * Time.deltaTime);
       
     }
     public void Bounce(object[] parameters)
     {
-        if(motion.y < 0)
+        if(motion.y < -(float)parameters[2])
         {
             motion.y = Mathf.Min(motion.y *= -(float)parameters[0], (float)parameters[1]);
         }

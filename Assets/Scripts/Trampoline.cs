@@ -5,7 +5,7 @@ using UnityEngine;
 public class Trampoline : MonoBehaviour
 {
     [SerializeField]
-    private float bounceAmplifier, maxBounceStrength;
+    private float bounceAmplifier, maxBounceStrength, threshholdVelocity = 10f;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,9 +20,10 @@ public class Trampoline : MonoBehaviour
     {
         if (other.CompareTag("Player2"))
         {
-            object[] temp = new object[2];
+            object[] temp = new object[3];
             temp[0] = bounceAmplifier;
             temp[1] = maxBounceStrength;
+            temp[2] = threshholdVelocity;
             other.SendMessage("Bounce", temp);
         }
 
