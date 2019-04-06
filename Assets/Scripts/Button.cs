@@ -5,7 +5,10 @@ using UnityEngine;
 public class Button : MonoBehaviour
 {
     [SerializeField]
-    private GameObject target;
+    private GameObject[] targets;
+    [SerializeField]
+    private bool oneTimeUse;
+    private bool triggered;
     public enum TriggerableBy {player1, player2, all};
     public TriggerableBy triggerableBy = TriggerableBy.all;
     // Start is called before the first frame update
@@ -25,14 +28,14 @@ public class Button : MonoBehaviour
         {
             if (other.CompareTag("Player1") || other.CompareTag("Player2"))
             {
-                target.SendMessage("OnButtonActivated");
+                SendTriggered();
             }
         } else if (triggerableBy == TriggerableBy.player1 && other.CompareTag("Player1"))
         {
-            target.SendMessage("OnButtonActivated");
+            SendTriggered();
         } else if (triggerableBy == TriggerableBy.player2 && other.CompareTag("Player2"))
         {
-            target.SendMessage("OnButtonActivated");
+            SendTriggered();
         }
     }
     private void OnTriggerExit(Collider other)
@@ -41,14 +44,43 @@ public class Button : MonoBehaviour
         {
             if (other.CompareTag("Player1") || other.CompareTag("Player2"))
             {
-                target.SendMessage("OnButtonExited");
+                SendExited();
             }
         }
         else if (triggerableBy == TriggerableBy.player1 && other.CompareTag("Player1"))
         {
-            target.SendMessage("OnButtonExited");
+            SendExited();
         }
         else if (triggerableBy == TriggerableBy.player2 && other.CompareTag("Player2"))
+        {
+            SendExited();
+        }
+    }
+
+    void SendTriggered()
+    {
+        if (oneTimeUse == true)
+        {
+            if (triggered != true)
+            {
+
+                triggered = true;
+                foreach(GameObject target in targets) {
+                    target.SendMessage("OnButtonActivated");
+                }
+            }
+        }
+        else
+        {
+            foreach (GameObject target in targets)
+            {
+                target.SendMessage("OnButtonActivated");
+            }
+        }
+    }
+    void SendExited()
+    {
+        foreach(GameObject target in targets)
         {
             target.SendMessage("OnButtonExited");
         }

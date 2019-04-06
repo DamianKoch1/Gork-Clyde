@@ -46,4 +46,12 @@ public class Airstream : MonoBehaviour
         }
         
     }
+
+    public void OnButtonActivated()
+    {
+        MeshRenderer mr = GetComponent<MeshRenderer>();
+        BoxCollider bc = GetComponent<BoxCollider>();
+        mr.enabled = !mr.enabled;
+        bc.enabled = !bc.enabled;
+    }
 }
