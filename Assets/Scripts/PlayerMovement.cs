@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
     private int playerID;
     [SerializeField]
     private float speed, jumpHeight, pushSpeed, fallSpeed;
-    private Vector3 motion, pushMotion;
+    private Vector3 motion;
     private CharacterController cc;
     private string xAxis, zAxis, jumpButton;
     private bool inAirstream;
@@ -82,21 +82,8 @@ public class PlayerMovement : MonoBehaviour
             inAirstream = true;
             airstreamMotion = (Vector3)parameters[1] * (float)parameters[2];
         }
-        Debug.LogWarning(inAirstream);
     }
 
-
-    private void OnControllerColliderHit(ControllerColliderHit hit)
-    {
-        if (hit.gameObject.CompareTag("pushable"))
-        {
-            pushMotion.x = cc.velocity.x;
-            pushMotion.y = 0;
-            pushMotion.z = cc.velocity.z;
-            hit.rigidbody.velocity = pushMotion * pushSpeed;
-
-        }
-    }
 
 }
 

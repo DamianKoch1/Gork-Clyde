@@ -20,30 +20,23 @@ public class Airstream : MonoBehaviour
     }
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Player2"))
+        if (other.GetComponent<AirstreamAffected>() != null)
         {
-            object[] temp = new object[3];
-            temp[0] = true;
-            temp[1] = direction;
-            temp[2] = strength;
-            other.SendMessage("ToggleAirstream", temp);
+            AirstreamAffected airstreamAffected = other.GetComponent<AirstreamAffected>();
+            airstreamAffected.airstreamMotion = direction * strength;
+            airstreamAffected.inAirstream = true;
         }
-        
-
     }
     private void OnTriggerExit(Collider other)
     {
-      
-        if (other.CompareTag("Player2"))
+        if (other.GetComponent<AirstreamAffected>() != null)
         {
-            object[] temp = new object[3];
-            temp[0] = false;
-            temp[1] = 0;
-            temp[2] = 0;
-            other.SendMessage("ToggleAirstream", temp);
+            AirstreamAffected airstreamAffected = other.GetComponent<AirstreamAffected>();
+            airstreamAffected.inAirstream = false;
         }
-        
     }
+
+
 
     public void OnButtonActivated()
     {
