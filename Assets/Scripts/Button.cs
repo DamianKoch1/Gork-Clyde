@@ -24,36 +24,42 @@ public class Button : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (triggerableBy == TriggerableBy.all)
+        if (other.isTrigger == false)
         {
-            if (other.CompareTag("Player1") || other.CompareTag("Player2") || other.CompareTag("pushable"))
+            if (triggerableBy == TriggerableBy.all)
+            {
+                if (other.CompareTag("Player1") || other.CompareTag("Player2") || other.CompareTag("pushable"))
+                {
+                    SendTriggered();
+                }
+            } else if (triggerableBy == TriggerableBy.player1 && other.CompareTag("Player1"))
+            {
+                SendTriggered();
+            } else if (triggerableBy == TriggerableBy.player2 && other.CompareTag("Player2"))
             {
                 SendTriggered();
             }
-        } else if (triggerableBy == TriggerableBy.player1 && other.CompareTag("Player1"))
-        {
-            SendTriggered();
-        } else if (triggerableBy == TriggerableBy.player2 && other.CompareTag("Player2"))
-        {
-            SendTriggered();
         }
     }
     private void OnTriggerExit(Collider other)
     {
-        if (triggerableBy == TriggerableBy.all)
+        if (other.isTrigger == false)
         {
-            if (other.CompareTag("Player1") || other.CompareTag("Player2") || other.CompareTag("pushable"))
+            if (triggerableBy == TriggerableBy.all)
+            {
+                if (other.CompareTag("Player1") || other.CompareTag("Player2") || other.CompareTag("pushable"))
+                {
+                    SendExited();
+                }
+            }
+            else if (triggerableBy == TriggerableBy.player1 && other.CompareTag("Player1"))
             {
                 SendExited();
             }
-        }
-        else if (triggerableBy == TriggerableBy.player1 && other.CompareTag("Player1"))
-        {
-            SendExited();
-        }
-        else if (triggerableBy == TriggerableBy.player2 && other.CompareTag("Player2"))
-        {
-            SendExited();
+            else if (triggerableBy == TriggerableBy.player2 && other.CompareTag("Player2"))
+            {
+                SendExited();
+            }
         }
     }
 
