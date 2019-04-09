@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class Clide : Player
 {
-   
+    [HideInInspector]
+    public bool thrown = false;
+
+
     protected override void InitializeInputs()
     {
         xAxis = "Horizontal2";
@@ -14,6 +17,15 @@ public class Clide : Player
 
     protected override void SetVelocity()
     {
-        rb.velocity = (motion+ GetComponent<AirstreamAffected>().airstreamMotion) * Time.deltaTime * 60;
+        if (thrown == false)
+        {
+            rb.velocity = (motion+ GetComponent<AirstreamAffected>().airstreamMotion) * Time.deltaTime * 60;
+        }
+        else if (isGrounded())
+        {
+            thrown = false;
+            rb.interpolation = RigidbodyInterpolation.Interpolate;
+            rb.useGravity = false;
+        }
     }
 }

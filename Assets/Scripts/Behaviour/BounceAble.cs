@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BounceAble : MonoBehaviour
+public class Bounceable : MonoBehaviour
 {
     private Rigidbody rb;
     private float yForce;
