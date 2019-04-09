@@ -21,11 +21,12 @@ public class Clide : Player
         {
             rb.velocity = (motion+ GetComponent<AirstreamAffected>().airstreamMotion) * Time.deltaTime * 60;
         }
-        else if (isGrounded())
+        else if (isGrounded() || GetComponent<AirstreamAffected>().inAirstream)
         {
             thrown = false;
             rb.interpolation = RigidbodyInterpolation.Interpolate;
             rb.useGravity = false;
+             motion = Vector3.zero;
         }
     }
 }
