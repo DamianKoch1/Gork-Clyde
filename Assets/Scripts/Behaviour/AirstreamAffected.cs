@@ -15,5 +15,9 @@ public class AirstreamAffected : MonoBehaviour
         {
             airstreamMotion *= 0.9f;
         }
+        if (GetComponent<Clide>() == null && airstreamMotion.magnitude > 0.1f)
+        {
+            GetComponent<Rigidbody>().velocity = airstreamMotion;
+        }
     }
 }

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6667533579743793874}
   - component: {fileID: 4834388250981002090}
   - component: {fileID: 681477544730673717}
+  - component: {fileID: 2636501340637571934}
   m_Layer: 0
   m_Name: Gork
   m_TagString: Player1
@@ -125,3 +126,16 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!65 &2636501340637571934
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5338642040318428382}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.3671766, z: 1}
+  m_Center: {x: 0, y: 1.0251446, z: 0}
