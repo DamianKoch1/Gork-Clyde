@@ -9,6 +9,8 @@ public abstract class Player : MonoBehaviour
     protected Vector3 motion;
     protected Rigidbody rb;
     protected string xAxis, zAxis, jumpButton;
+    [SerializeField]
+    private Animator anim;
 
 
     protected virtual void Start()
@@ -21,16 +23,26 @@ public abstract class Player : MonoBehaviour
     {
         motion.x = Input.GetAxis(xAxis) * speed;
         motion.z = Input.GetAxis(zAxis) * speed;
+        if (motion.x == 0 && motion.z == 0)
+        {
+            anim.SetBool("walking", false);
+        }
+        else
+        {
+            anim.SetBool("walking", true);
+        }
 
         if (isGrounded())
         {
             if (Input.GetButtonDown(jumpButton))
             {
                 motion.y = jumpHeight;
+                anim.SetTrigger("jump");
             }
             else
             {
                 motion.y = 0;
+                anim.ResetTrigger("jump");
             }
         }
         else
