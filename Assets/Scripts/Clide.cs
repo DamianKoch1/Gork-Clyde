@@ -12,7 +12,7 @@ public class Clide : Player
         jumpButton = "Jump2";
     }
 
-    protected override void setVelocity()
+    protected override void SetVelocity()
     {
         rb.velocity = (motion+ GetComponent<AirstreamAffected>().airstreamMotion) * Time.deltaTime * 60;
     }
