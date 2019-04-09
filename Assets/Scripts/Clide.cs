@@ -26,7 +26,7 @@ public class Clide : Player
             thrown = false;
             rb.interpolation = RigidbodyInterpolation.Interpolate;
             rb.useGravity = false;
-             motion = Vector3.zero;
+            motion = Vector3.zero;
         }
     }
 }
