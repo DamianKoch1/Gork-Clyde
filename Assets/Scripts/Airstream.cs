@@ -7,6 +7,7 @@ public class Airstream : MonoBehaviour
     private Vector3 direction;
     [SerializeField]
     private float strength;
+    List<Collider> colliders = new List<Collider>();
     // Start is called before the first frame update
     void Start()
     {
@@ -20,35 +21,41 @@ public class Airstream : MonoBehaviour
     }
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Player2"))
+        if (other.GetComponent<AirstreamAffected>() != null)
         {
-            object[] temp = new object[3];
-            temp[0] = true;
-            temp[1] = direction;
-            temp[2] = strength;
-            other.SendMessage("ToggleAirstream", temp);
+            if (colliders.Contains(other) == false)
+            {
+                colliders.Add(other);
+            }
+            AirstreamAffected airstreamAffected = other.GetComponent<AirstreamAffected>();
+            airstreamAffected.airstreamMotion = direction * strength;
+            airstreamAffected.inAirstream = true;
         }
-        
-
     }
     private void OnTriggerExit(Collider other)
     {
-      
-        if (other.CompareTag("Player2"))
+        if (other.GetComponent<AirstreamAffected>() != null)
         {
-            object[] temp = new object[3];
-            temp[0] = false;
-            temp[1] = 0;
-            temp[2] = 0;
-            other.SendMessage("ToggleAirstream", temp);
+            if (colliders.Contains(other)){
+                colliders.Remove(other);
+            }
+            other.GetComponent<AirstreamAffected>().inAirstream = false;
         }
-        
     }
+
+
 
     public void OnButtonActivated()
     {
         MeshRenderer mr = GetComponent<MeshRenderer>();
         BoxCollider bc = GetComponent<BoxCollider>();
+        if (mr.enabled)
+        {
+            foreach (Collider collider in colliders)
+            {
+                collider.GetComponent<AirstreamAffected>().inAirstream = false;
+            }
+        }
         mr.enabled = !mr.enabled;
         bc.enabled = !bc.enabled;
     }
