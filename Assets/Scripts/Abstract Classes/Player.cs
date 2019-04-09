@@ -38,12 +38,20 @@ public abstract class Player : MonoBehaviour
             motion.y -= fallSpeed;
         }
 
-        setVelocity();
+        SetVelocity();
+        Rotate();
         
     }
-    protected virtual void setVelocity()
+    protected virtual void SetVelocity()
     {
         rb.velocity = motion * Time.deltaTime * 60;
+    }
+    protected virtual void Rotate()
+    {
+        Vector3 lookAt;
+        lookAt = transform.position + motion;
+        lookAt.y = transform.position.y;
+        transform.LookAt(lookAt);
     }
 
     public bool isGrounded()
