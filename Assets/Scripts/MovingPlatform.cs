@@ -63,7 +63,8 @@ public class MovingPlatform : MonoBehaviour
         if (targetPos == pos1)
         {
             targetPos = pos2;
-        } else
+        }
+        else
         {
             targetPos = pos1;
         }
@@ -74,7 +75,7 @@ public class MovingPlatform : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("IgnorePlatform") == false)
+        if (other.isTrigger == false)
         {
             other.transform.SetParent(onPlatformTransform, true);
             
@@ -82,7 +83,7 @@ public class MovingPlatform : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.transform.parent == onPlatformTransform && other.CompareTag("IgnorePlatform") == false)
+        if (other.transform.parent == onPlatformTransform)
         {
             other.transform.SetParent(null, true);
         }

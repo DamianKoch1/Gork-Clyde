@@ -6,6 +6,8 @@ public class Clide : Player
 {
     [HideInInspector]
     public bool thrown = false;
+    [SerializeField]
+    private float glideFallSpeed = 1f;
 
 
     protected override void InitializeInputs()
@@ -19,7 +21,12 @@ public class Clide : Player
     {
         if (thrown == false)
         {
+            if (GetComponent<AirstreamAffected>().inAirstream == false && Input.GetButton(jumpButton))
+            {
+                motion.y = Mathf.Max(motion.y, -glideFallSpeed);
+            }
             rb.velocity = (motion+ GetComponent<AirstreamAffected>().airstreamMotion) * Time.deltaTime * 60;
+            
         }
         else if (isGrounded() || GetComponent<AirstreamAffected>().inAirstream)
         {
