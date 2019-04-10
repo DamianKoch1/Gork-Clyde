@@ -226,7 +226,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 80409100}
-  m_Material: {fileID: 13400000, guid: f26bb4ebb332b1648bfdb9ffc0d39186, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -821,15 +821,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1194920562490112287, guid: a4a2586b9bc8abe4b85818985598386b,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -4.41
-      objectReference: {fileID: 0}
     - target: {fileID: 3684073623729031782, guid: a4a2586b9bc8abe4b85818985598386b,
         type: 3}
       propertyPath: mode
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1194920562490112287, guid: a4a2586b9bc8abe4b85818985598386b,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -4.41
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a4a2586b9bc8abe4b85818985598386b, type: 3}
@@ -2055,6 +2055,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3163616197933886600, guid: a4a2586b9bc8abe4b85818985598386b,
+        type: 3}
+      propertyPath: triggerableBy
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3053026653499552872, guid: a4a2586b9bc8abe4b85818985598386b,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -2065,10 +2070,5 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 9364fc8124d463c4282de4d48ab576ee, type: 2}
-    - target: {fileID: 3163616197933886600, guid: a4a2586b9bc8abe4b85818985598386b,
-        type: 3}
-      propertyPath: triggerableBy
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a4a2586b9bc8abe4b85818985598386b, type: 3}
