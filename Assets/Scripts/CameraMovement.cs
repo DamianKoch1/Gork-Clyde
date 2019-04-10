@@ -8,7 +8,8 @@ public class CameraMovement : MonoBehaviour
     private GameObject player1, player2;
     private Vector3 offset;
     private Vector3 playerMiddle;
-    private float startPlayerDistance;
+    [SerializeField]
+    private float playerDistanceZoomThreshhold;
     private float zoomMultiplier;
     [SerializeField]
     private float minZoom, maxZoom, zoomSpeed, followSpeed;
@@ -18,7 +19,6 @@ public class CameraMovement : MonoBehaviour
         {
             playerMiddle = player1.transform.position + (0.5f * (player2.transform.position - player1.transform.position));
             offset = transform.position - playerMiddle;
-            startPlayerDistance = Vector3.Distance(player1.transform.position, player2.transform.position);
         }
     }
 
@@ -28,7 +28,7 @@ public class CameraMovement : MonoBehaviour
         if (player1 != null && player2 != null)
         {
             playerMiddle = player1.transform.position + (0.5f * (player2.transform.position - player1.transform.position));
-            zoomMultiplier = Mathf.Clamp((startPlayerDistance / (Vector3.Distance(player1.transform.position, player2.transform.position)))/zoomSpeed, minZoom, maxZoom);
+            zoomMultiplier = Mathf.Clamp((playerDistanceZoomThreshhold / (Vector3.Distance(player1.transform.position, player2.transform.position)))/zoomSpeed, minZoom, maxZoom);
             transform.position = Vector3.Lerp(transform.position, playerMiddle + offset / zoomMultiplier, followSpeed);
         }
     }
