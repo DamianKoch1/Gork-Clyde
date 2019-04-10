@@ -347,6 +347,29 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &191234435 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2329437449930610536, guid: f055718a36d21f04195bab65c3180ef5,
+    type: 3}
+  m_PrefabInstance: {fileID: 2329437449874668838}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1818360610 &191234440
+ScaleConstraint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 191234435}
+  m_Enabled: 1
+  m_Weight: 1
+  m_ScaleAtRest: {x: 1, y: 1, z: 1}
+  m_ScaleOffset: {x: 1, y: 1, z: 1}
+  m_AffectScalingX: 1
+  m_AffectScalingY: 1
+  m_AffectScalingZ: 1
+  m_IsContraintActive: 1
+  m_IsLocked: 1
+  m_Sources: []
 --- !u!1001 &412480553
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -695,7 +718,7 @@ PrefabInstance:
     - target: {fileID: 2502916535230864871, guid: a4a2586b9bc8abe4b85818985598386b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.86
+      value: 0.68
       objectReference: {fileID: 0}
     - target: {fileID: 2502916535230864871, guid: a4a2586b9bc8abe4b85818985598386b,
         type: 3}
@@ -751,6 +774,21 @@ PrefabInstance:
         type: 3}
       propertyPath: targets.Array.size
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3053026653499552872, guid: a4a2586b9bc8abe4b85818985598386b,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.64
+      objectReference: {fileID: 0}
+    - target: {fileID: 3053026653499552872, guid: a4a2586b9bc8abe4b85818985598386b,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3053026653499552872, guid: a4a2586b9bc8abe4b85818985598386b,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a4a2586b9bc8abe4b85818985598386b, type: 3}

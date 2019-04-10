@@ -13,6 +13,8 @@ public class MovingPlatform : MonoBehaviour
     private float lerpAmount;
     [SerializeField]
     private float speed;
+    [SerializeField]
+    private Transform onPlatformTransform;
     // Start is called before the first frame update
     void Start()
     {
@@ -74,13 +76,13 @@ public class MovingPlatform : MonoBehaviour
     {
         if (other.CompareTag("IgnorePlatform") == false)
         {
-
-            other.transform.SetParent(transform, true);
+            other.transform.SetParent(onPlatformTransform, true);
+            
         }
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.transform.parent == transform && other.CompareTag("IgnorePlatform") == false)
+        if (other.transform.parent == onPlatformTransform && other.CompareTag("IgnorePlatform") == false)
         {
             other.transform.SetParent(null, true);
         }
