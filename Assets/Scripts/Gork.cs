@@ -73,7 +73,7 @@ public class Gork : Player
         objectRb.velocity = Vector3.zero;
         objectRb.AddForce(throwDirection*Time.deltaTime*60, ForceMode.VelocityChange);
         obj.transform.SetParent(null, true);
-        print(throwDirection);
+
         print(throwDirection.magnitude);
         objectRb = null;
     }
