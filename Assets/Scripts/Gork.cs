@@ -53,6 +53,8 @@ public class Gork : Player
     }
     private void PickUp(GameObject obj)
     {
+        anim.ResetTrigger("pickup");
+        anim.SetTrigger("pickup");
         objectRb = obj.GetComponent<Rigidbody>();
         objectRb.isKinematic = true;
         obj.transform.SetParent(heldObjectSlot.transform, true);
@@ -62,6 +64,8 @@ public class Gork : Player
     }
     private void Throw(GameObject obj)
     {
+        anim.ResetTrigger("throw");
+        anim.SetTrigger("throw");
         if (obj.GetComponent<Clide>() != null)
         {
             obj.GetComponent<Clide>().thrown = true;
