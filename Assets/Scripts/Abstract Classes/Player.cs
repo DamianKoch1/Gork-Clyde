@@ -23,13 +23,16 @@ public abstract class Player : MonoBehaviour
     {
         motion.x = Input.GetAxis(xAxis) * speed;
         motion.z = Input.GetAxis(zAxis) * speed;
-        if (motion.x == 0 && motion.z == 0)
+        if (anim != null)
         {
-            anim.SetBool("walking", false);
-        }
-        else
-        {
-            anim.SetBool("walking", true);
+            if (motion.x == 0 && motion.z == 0)
+            {
+                anim.SetBool("walking", false);
+            }
+            else
+            {
+                anim.SetBool("walking", true);
+            }
         }
 
         if (isGrounded())
@@ -37,12 +40,18 @@ public abstract class Player : MonoBehaviour
             if (Input.GetButtonDown(jumpButton))
             {
                 motion.y = jumpHeight;
-                anim.SetTrigger("jump");
+                if (anim != null)
+                {
+                    anim.SetTrigger("jump");
+                }
             }
             else
             {
                 motion.y = 0;
-                anim.ResetTrigger("jump");
+                if (anim != null)
+                {
+                    anim.ResetTrigger("jump");
+                }
             }
         }
         else
