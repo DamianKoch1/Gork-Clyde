@@ -52,14 +52,20 @@ public class Airstream : MonoBehaviour
 
     public void OnButtonActivated()
     {
+        ParticleSystem particles = transform.GetChild(0).GetComponent<ParticleSystem>();
         MeshRenderer mr = GetComponent<MeshRenderer>();
         BoxCollider bc = GetComponent<BoxCollider>();
         if (mr.enabled)
         {
+            particles.Stop();
             foreach (Collider collider in colliders)
             {
                 collider.GetComponent<AirstreamAffected>().inAirstream = false;
             }
+        }
+        else
+        {
+            particles.Play();
         }
         mr.enabled = !mr.enabled;
         bc.enabled = !bc.enabled;
