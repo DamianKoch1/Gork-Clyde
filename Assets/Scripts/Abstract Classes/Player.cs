@@ -10,7 +10,7 @@ public abstract class Player : MonoBehaviour
     protected Rigidbody rb;
     protected string xAxis, zAxis, jumpButton;
     [SerializeField]
-    private Animator anim;
+    protected Animator anim;
 
 
     protected virtual void Start()
