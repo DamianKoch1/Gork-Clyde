@@ -35,7 +35,7 @@ public abstract class Player : MonoBehaviour
             }
         }
 
-        if (isGrounded())
+        if (IsGrounded())
         {
             if (Input.GetButtonDown(jumpButton))
             {
@@ -77,7 +77,9 @@ public abstract class Player : MonoBehaviour
 
     public bool IsGrounded()
     {
-        return Physics.Raycast(transform.position, -Vector3.up, GetComponent<Collider>().bounds.extents.y + 0.1f, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore);
+        // return Physics.Raycast(transform.position, -Vector3.up, GetComponent<Collider>().bounds.extents.y + 0.1f, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore);
+        
+        return Physics.SphereCast(transform.position, GetComponent<Collider>().bounds.extents.x/2, -Vector3.up, out RaycastHit hitInfo, GetComponent<Collider>().bounds.extents.y-0.1f, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore);
     }
     protected abstract void InitializeInputs();
 
