@@ -75,7 +75,7 @@ public abstract class Player : MonoBehaviour
         transform.LookAt(lookAt);
     }
 
-    public bool isGrounded()
+    public bool IsGrounded()
     {
         return Physics.Raycast(transform.position, -Vector3.up, GetComponent<Collider>().bounds.extents.y + 0.1f, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore);
     }

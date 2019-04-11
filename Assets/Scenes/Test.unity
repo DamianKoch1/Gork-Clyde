@@ -2713,6 +2713,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gork
       objectReference: {fileID: 0}
+    - target: {fileID: 5338642040318428382, guid: 20dc443e67c39394bab339010aabb7aa,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6779424732701564715, guid: 20dc443e67c39394bab339010aabb7aa,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2768,14 +2773,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6779424732701564715, guid: 20dc443e67c39394bab339010aabb7aa,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6667533579743793874, guid: 20dc443e67c39394bab339010aabb7aa,
         type: 3}
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 6667533579743793874, guid: 20dc443e67c39394bab339010aabb7aa,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 681477544730673717, guid: 20dc443e67c39394bab339010aabb7aa,
         type: 3}
       propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5041112139827952282, guid: 20dc443e67c39394bab339010aabb7aa,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 732548675568301390, guid: 20dc443e67c39394bab339010aabb7aa,
+        type: 3}
+      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

@@ -28,7 +28,7 @@ public class Clide : Player
             rb.velocity = (motion+ GetComponent<AirstreamAffected>().airstreamMotion) * Time.deltaTime * 60;
             
         }
-        else if (isGrounded() || GetComponent<AirstreamAffected>().inAirstream)
+        else if (IsGrounded() || GetComponent<AirstreamAffected>().inAirstream)
         {
             thrown = false;
             rb.interpolation = RigidbodyInterpolation.Interpolate;
