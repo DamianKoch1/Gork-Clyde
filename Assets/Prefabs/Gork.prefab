@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 5338642040318428382}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.97717, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.4747, z: 1.5}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 3692220314561909740}
   - {fileID: 7437135215702932091}
@@ -113,6 +113,7 @@ MonoBehaviour:
   jumpHeight: 6
   fallSpeed: 0.4
   anim: {fileID: 3692220314552859734}
+  groundedChecker: {fileID: 0}
   heldObjectSlot: {fileID: 8013065875973554416}
   throwStrength: 10
   throwUpwardsAngle: 22.6
