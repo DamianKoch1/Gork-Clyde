@@ -83,4 +83,8 @@ public abstract class Player : MonoBehaviour
     }
     protected abstract void InitializeInputs();
 
+    public void ResetMotion()
+    {
+        motion = Vector3.zero;
+    }
 }
