@@ -11,12 +11,17 @@ public abstract class Player : MonoBehaviour
     protected string xAxis, zAxis, jumpButton;
     [SerializeField]
     protected Animator anim;
+    private Camera cam;
+    private Vector3 camForward;
+    private Vector3 camRight;
 
 
     protected virtual void Start()
     {
         rb = GetComponent<Rigidbody>();
         InitializeInputs();
+        cam = Camera.main;
+       
         
     }
     protected virtual void FixedUpdate()
@@ -35,7 +40,7 @@ public abstract class Player : MonoBehaviour
             }
         }
 
-        if (isGrounded())
+        if (IsGrounded())
         {
             if (Input.GetButtonDown(jumpButton))
             {
@@ -58,7 +63,7 @@ public abstract class Player : MonoBehaviour
         {
             motion.y -= fallSpeed;
         }
-
+        ApplyCamRotation();
         SetVelocity();
         Rotate();
         
@@ -75,10 +80,27 @@ public abstract class Player : MonoBehaviour
         transform.LookAt(lookAt);
     }
 
-    public bool isGrounded()
+    public bool IsGrounded()
     {
-        return Physics.Raycast(transform.position, -Vector3.up, GetComponent<Collider>().bounds.extents.y + 0.1f, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore);
+        // return Physics.Raycast(transform.position, -Vector3.up, GetComponent<Collider>().bounds.extents.y + 0.1f, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore);
+        
+        return Physics.SphereCast(transform.position, GetComponent<Collider>().bounds.extents.x/2, -Vector3.up, out RaycastHit hitInfo, GetComponent<Collider>().bounds.extents.y-0.1f, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore);
     }
     protected abstract void InitializeInputs();
 
+    public void ResetMotion()
+    {
+        motion = Vector3.zero;
+    }
+
+    private void ApplyCamRotation()
+    {
+        camForward = cam.transform.forward;
+        camForward.y = 0;
+        camForward.Normalize();
+        camRight = cam.transform.right;
+        camRight.y = 0;
+        camRight.Normalize();
+        motion = camRight * motion.x + Vector3.up * motion.y + motion.z * camForward;
+    }
 }
