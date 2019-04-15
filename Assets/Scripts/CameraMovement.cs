@@ -25,6 +25,11 @@ public class CameraMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetAxis("Mouse X") != 0)
+        {
+            offset = Quaternion.AngleAxis(Input.GetAxis("Mouse X"), Vector3.up) * offset;
+            transform.RotateAround(transform.position, Vector3.up, Input.GetAxis("Mouse X"));
+        }
         if (player1 != null && player2 != null)
         {
             playerMiddle = player1.transform.position + (0.5f * (player2.transform.position - player1.transform.position));
