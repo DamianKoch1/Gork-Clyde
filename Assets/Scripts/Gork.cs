@@ -57,6 +57,7 @@ public class Gork : Player
         anim.SetTrigger("pickup");
         objectRb = obj.GetComponent<Rigidbody>();
         objectRb.isKinematic = true;
+        Physics.IgnoreCollision(GetComponent<Collider>(), objectRb.GetComponent<Collider>());
         obj.transform.SetParent(heldObjectSlot.transform, true);
         obj.transform.position = heldObjectSlot.transform.position;
         obj.transform.LookAt(obj.transform.position + transform.forward);
@@ -66,17 +67,21 @@ public class Gork : Player
     {
         anim.ResetTrigger("throw");
         anim.SetTrigger("throw");
-        if (obj.GetComponent<Clide>() != null)
-        {
-            obj.GetComponent<Clide>().thrown = true;
-            objectRb.useGravity = true;
-        }
         objectRb.isKinematic = false;
         Vector3 throwDirection = transform.forward * throwStrength;
         throwDirection = Quaternion.AngleAxis(throwUpwardsAngle, -transform.right) * throwDirection;
         objectRb.velocity = Vector3.zero;
-        objectRb.AddForce(throwDirection*Time.deltaTime*60, ForceMode.VelocityChange);
         obj.transform.SetParent(null, true);
+        if (obj.GetComponent<Clide>() != null)
+        {
+            obj.GetComponent<Clide>().ResetMotion();
+            obj.GetComponent<AirstreamAffected>().airstreamMotion = throwDirection * Time.deltaTime * 60 * 2;
+        }
+        else
+        {
+           objectRb.AddForce(throwDirection*Time.deltaTime*60, ForceMode.VelocityChange);
+        }
+        Physics.IgnoreCollision(GetComponent<Collider>(), objectRb.GetComponent<Collider>(), false);
         objectRb = null;
     }
 }
