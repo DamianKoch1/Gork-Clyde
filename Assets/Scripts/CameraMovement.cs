@@ -12,7 +12,7 @@ public class CameraMovement : MonoBehaviour
     private float playerDistanceZoomThreshhold;
     private float zoomMultiplier;
     [SerializeField]
-    private float minZoom, maxZoom, zoomSpeed, followSpeed;
+    private float minZoom, maxZoom, zoomSpeed, followSpeed, rotateSpeed = 2;
     void Start()
     {
         if (player1 != null && player2 != null)
@@ -27,8 +27,8 @@ public class CameraMovement : MonoBehaviour
     {
         if (Input.GetAxis("Mouse X") != 0)
         {
-            offset = Quaternion.AngleAxis(Input.GetAxis("Mouse X"), Vector3.up) * offset;
-            transform.RotateAround(transform.position, Vector3.up, Input.GetAxis("Mouse X"));
+            offset = Quaternion.AngleAxis(Input.GetAxis("Mouse X")*rotateSpeed, Vector3.up) * offset;
+            transform.RotateAround(transform.position, Vector3.up, Input.GetAxis("Mouse X")*rotateSpeed);
         }
         if (player1 != null && player2 != null)
         {
