@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Clide : Player
 {
-    [HideInInspector]
-    public bool thrown = false;
     [SerializeField]
     private float glideFallSpeed = 1f;
 
@@ -19,21 +17,12 @@ public class Clide : Player
 
     protected override void SetVelocity()
     {
-        if (thrown == false)
+        if (GetComponent<AirstreamAffected>().inAirstream == false && Input.GetButton(jumpButton))
         {
-            if (GetComponent<AirstreamAffected>().inAirstream == false && Input.GetButton(jumpButton))
-            {
-                motion.y = Mathf.Max(motion.y, -glideFallSpeed);
-            }
-            rb.velocity = (motion+ GetComponent<AirstreamAffected>().airstreamMotion) * Time.deltaTime * 60;
-            
+            motion.y = Mathf.Max(motion.y, -glideFallSpeed);
         }
-        else if (IsGrounded() || GetComponent<AirstreamAffected>().inAirstream)
-        {
-            thrown = false;
-            rb.interpolation = RigidbodyInterpolation.Interpolate;
-            rb.useGravity = false;
-            motion = Vector3.zero;
-        }
+        rb.velocity = (motion + GetComponent<AirstreamAffected>().airstreamMotion) * Time.deltaTime * 60;
     }
+
+    
 }

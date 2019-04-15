@@ -13,7 +13,7 @@ public class AirstreamAffected : MonoBehaviour
     {
         if (inAirstream == false)
         {
-            airstreamMotion *= 0.9f;
+            airstreamMotion *= 0.95f;
         }
         if (GetComponent<Clide>() == null && airstreamMotion.magnitude > 0.1f)
         {
