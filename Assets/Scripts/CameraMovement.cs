@@ -32,8 +32,8 @@ public class CameraMovement : MonoBehaviour
         }
         if (Input.GetAxis("Mouse Y") != 0)
         {
-            offset = Quaternion.AngleAxis(Input.GetAxis("Mouse Y") * rotateSpeed, Vector3.forward) * offset;
-            transform.RotateAround(transform.position, Vector3.up, Input.GetAxis("Mouse Y") * rotateSpeed);
+            offset = Quaternion.AngleAxis(Input.GetAxis("Mouse Y") * rotateSpeed, -transform.right) * offset;
+            transform.RotateAround(transform.position, -transform.right, Input.GetAxis("Mouse Y") * rotateSpeed);
         }
         if (player1 != null && player2 != null)
         {
