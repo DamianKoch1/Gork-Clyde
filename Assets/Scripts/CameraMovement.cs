@@ -44,7 +44,7 @@ public class CameraMovement : MonoBehaviour
             playerMiddle = player1.transform.position + (0.5f * (player2.transform.position - player1.transform.position));
             zoomMultiplier = Mathf.Clamp((playerDistanceZoomThreshhold / (Vector3.Distance(player1.transform.position, player2.transform.position)))/zoomSpeed, minZoom, maxZoom);
             desiredPos = playerMiddle + offset / zoomMultiplier;
-            if (Physics.Raycast(desiredPos, playerMiddle - desiredPos, out hit, (playerMiddle - desiredPos).magnitude, wallLayers))
+            if (Physics.Raycast(desiredPos, playerMiddle - desiredPos, out hit, (playerMiddle - desiredPos).magnitude, wallLayers, QueryTriggerInteraction.Ignore) && Physics.Raycast(player1.transform.position, player2.transform.position - player1.transform.position, (player2.transform.position - player1.transform.position).magnitude, wallLayers, QueryTriggerInteraction.Ignore) == false)
             {
                 targetPos = Vector3.Lerp(hit.point, playerMiddle, 0.7f);
             }
