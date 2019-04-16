@@ -13,6 +13,10 @@ public class CameraMovement : MonoBehaviour
     private float zoomMultiplier;
     [SerializeField]
     private float minZoom, maxZoom, zoomSpeed, followSpeed, rotateSpeed = 2;
+    private Vector3 desiredPos, targetPos;
+    private RaycastHit hit;
+    [SerializeField]
+    private LayerMask wallLayers;
     void Start()
     {
         if (player1 != null && player2 != null)
@@ -39,7 +43,18 @@ public class CameraMovement : MonoBehaviour
         {
             playerMiddle = player1.transform.position + (0.5f * (player2.transform.position - player1.transform.position));
             zoomMultiplier = Mathf.Clamp((playerDistanceZoomThreshhold / (Vector3.Distance(player1.transform.position, player2.transform.position)))/zoomSpeed, minZoom, maxZoom);
-            transform.position = Vector3.Lerp(transform.position, playerMiddle + offset / zoomMultiplier, followSpeed);
+            desiredPos = playerMiddle + offset / zoomMultiplier;
+            //if (Physics.Raycast(desiredPos, playerMiddle - desiredPos, out hit, (playerMiddle - desiredPos).magnitude, wallLayers))
+            if (Physics.SphereCast(desiredPos, 1, playerMiddle - desiredPos, out hit, (playerMiddle - desiredPos).magnitude, wallLayers))
+            {
+               // targetPos = (hit.point - playerMiddle) * 0.8f + playerMiddle;
+                targetPos = hit.point - 0.3f * offset;
+            }
+            else
+            {
+                targetPos = desiredPos;
+            }
+            transform.position = Vector3.Lerp(transform.position, targetPos, followSpeed);
         }
     }
 }
