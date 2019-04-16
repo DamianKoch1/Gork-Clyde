@@ -58,6 +58,7 @@ public abstract class Player : MonoBehaviour
                     anim.ResetTrigger("jump");
                 }
             }
+            
         }
         else
         {
