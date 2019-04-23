@@ -14,6 +14,9 @@ public abstract class Player : MonoBehaviour
     private Camera cam;
     private Vector3 camForward;
     private Vector3 camRight;
+    [SerializeField]
+    private float maxGhostjumpDelay = 0.2f;
+    private float ghostjumpTimer = 0f;
 
 
     protected virtual void Start()
@@ -26,6 +29,10 @@ public abstract class Player : MonoBehaviour
     }
     protected virtual void FixedUpdate()
     {
+        if (ghostjumpTimer > 0)
+        {
+            ghostjumpTimer = Mathf.Max(ghostjumpTimer - Time.deltaTime, 0);
+        }
         motion.x = Input.GetAxis(xAxis) * speed;
         motion.z = Input.GetAxis(zAxis) * speed;
         if (anim != null)
@@ -39,30 +46,26 @@ public abstract class Player : MonoBehaviour
                 anim.SetBool("walking", true);
             }
         }
-
         if (IsGrounded())
         {
-            if (Input.GetButtonDown(jumpButton))
+            motion.y = 0;
+            if (anim != null)
             {
-                motion.y = jumpHeight;
-                if (anim != null)
-                {
-                    anim.SetTrigger("jump");
-                }
+                anim.ResetTrigger("jump");
             }
-            else
-            {
-                motion.y = 0;
-                if (anim != null)
-                {
-                    anim.ResetTrigger("jump");
-                }
-            }
-            
         }
         else
         {
             motion.y -= fallSpeed;
+        }
+        if (Input.GetButtonDown(jumpButton) && ghostjumpTimer > 0)
+        {
+            ghostjumpTimer = 0;
+            motion.y = jumpHeight;
+            if (anim != null)
+            {
+                anim.SetTrigger("jump");
+            }
         }
         ApplyCamRotation();
         SetVelocity();
@@ -83,9 +86,16 @@ public abstract class Player : MonoBehaviour
 
     public bool IsGrounded()
     {
-        // return Physics.Raycast(transform.position, -Vector3.up, GetComponent<Collider>().bounds.extents.y + 0.1f, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore);
-        
-        return Physics.SphereCast(transform.position, GetComponent<Collider>().bounds.extents.x/2, -Vector3.up, out RaycastHit hitInfo, GetComponent<Collider>().bounds.extents.y-0.1f, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore);
+        if (Physics.SphereCast(transform.position, GetComponent<Collider>().bounds.extents.x / 2, -Vector3.up, out RaycastHit hitInfo, GetComponent<Collider>().bounds.extents.y + 0.01f, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore))
+        {
+            ghostjumpTimer = maxGhostjumpDelay;
+            return true;
+        } 
+        else 
+        {
+            return false;
+        }
+         
     }
     protected abstract void InitializeInputs();
 
