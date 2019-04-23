@@ -9,7 +9,7 @@ public class AirstreamAffected : MonoBehaviour
     [HideInInspector]
     public bool inAirstream = false;
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (inAirstream == false)
         {
