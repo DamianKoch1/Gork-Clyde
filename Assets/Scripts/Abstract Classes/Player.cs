@@ -89,7 +89,6 @@ public abstract class Player : MonoBehaviour
     {
         if (Physics.SphereCast(transform.position, GetComponent<Collider>().bounds.extents.x / 2, -Vector3.up, out RaycastHit hitInfo, GetComponent<Collider>().bounds.extents.y - 0.1f, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore))
         {
-            transform.SetParent(hitInfo.transform, true);
             ghostjumpTimer = maxGhostjumpDelay;
             return true;
         } 

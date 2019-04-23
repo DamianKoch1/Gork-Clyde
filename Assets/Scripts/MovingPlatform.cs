@@ -8,7 +8,7 @@ public class MovingPlatform : MonoBehaviour
     private bool stop;
     private Vector3 startPos;
     private Vector3 targetPos;
-    public enum Mode {autostart, triggeredContinuous, triggeredOneshot, moveWhileOnButton};
+    public enum Mode {autostart, continuous, oneshot, pressurePlate};
     public Mode mode = Mode.autostart;
     private float lerpAmount;
     [SerializeField]
@@ -19,16 +19,19 @@ public class MovingPlatform : MonoBehaviour
     void Start()
     {
         pos1 = transform.Find("Pos1").transform.position;
+        startPos = transform.position;
         pos2 = transform.Find("Pos2").transform.position;
         targetPos = pos1;
         if (mode == Mode.autostart)
         {
             Move();
-        } else if (mode == Mode.moveWhileOnButton)
+        }
+        else if (mode == Mode.pressurePlate)
         {
             Move();
             stop = true;
-        } else
+        }
+        else
         {
             stop = true;
         }
@@ -44,7 +47,7 @@ public class MovingPlatform : MonoBehaviour
             transform.position = Vector3.Lerp(startPos, targetPos, lerpAmount);
             if (lerpAmount >= 1)
             {
-               if (mode != Mode.triggeredOneshot)
+               if (mode != Mode.oneshot)
                {
                     Move();
                }
@@ -60,6 +63,7 @@ public class MovingPlatform : MonoBehaviour
 
     void Move()
     {
+        stop = false;
         if (targetPos == pos1)
         {
             targetPos = pos2;
@@ -70,7 +74,6 @@ public class MovingPlatform : MonoBehaviour
         }
         startPos = transform.position;
         lerpAmount = 0;
-        stop = false;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -90,22 +93,18 @@ public class MovingPlatform : MonoBehaviour
     }
     public void OnButtonActivated()
     {
-        if (mode == Mode.moveWhileOnButton)
+        if (lerpAmount <= 0 || lerpAmount >= 1)
         {
-            stop = false;
-        } else
-        {
-            if (lerpAmount <= 0 || lerpAmount >= 1)
-            {
-                Move();
-            }
+            Move();
         }
     }
-    public void OnButtonExited()
+    
+    public void OnPlateActivated()
+    { 
+        stop = false;
+    }
+    public void OnPlateExited()
     {
-        if (mode == Mode.moveWhileOnButton)
-        {
-            stop = true;
-        }
+        stop = true;
     }
 }

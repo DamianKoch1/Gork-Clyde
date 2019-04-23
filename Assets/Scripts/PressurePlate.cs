@@ -2,17 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Button : MonoBehaviour
+public class PressurePlate : MonoBehaviour
 {
     [SerializeField]
     private GameObject[] targets;
-    [SerializeField]
-    private bool oneTimeUse;
-    private bool triggered;
+
     private enum TriggerableBy {player1, player2, all};
     [SerializeField]
     private TriggerableBy triggerableBy = TriggerableBy.all;
-    
+   
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.isTrigger == false)
@@ -32,27 +31,40 @@ public class Button : MonoBehaviour
             }
         }
     }
-
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.isTrigger == false)
+        {
+            if (triggerableBy == TriggerableBy.all)
+            {
+                if (other.CompareTag("Player1") || other.CompareTag("Player2") || other.CompareTag("pushable"))
+                {
+                    SendExited();
+                }
+            }
+            else if (triggerableBy == TriggerableBy.player1 && other.CompareTag("Player1"))
+            {
+                SendExited();
+            }
+            else if (triggerableBy == TriggerableBy.player2 && other.CompareTag("Player2"))
+            {
+                SendExited();
+            }
+        }
+    }
 
     void SendTriggered()
     {
-        if (oneTimeUse == true)
-        {
-            if (triggered != true)
-            {
-
-                triggered = true;
-                foreach(GameObject target in targets) {
-                    target.SendMessage("OnButtonActivated");
-                }
-            }
+        foreach(GameObject target in targets) {
+            target.SendMessage("OnPlateActivated");
         }
-        else
+    }
+      
+    void SendExited()
+    {
+        foreach(GameObject target in targets)
         {
-            foreach (GameObject target in targets)
-            {
-                target.SendMessage("OnButtonActivated");
-            }
+            target.SendMessage("OnPlateExited");
         }
     }
 }
