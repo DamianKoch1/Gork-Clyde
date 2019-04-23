@@ -17,7 +17,7 @@ public class Clide : Player
 
     protected override void SetVelocity()
     {
-        if (GetComponent<AirstreamAffected>().inAirstream == false && Input.GetButton(jumpButton))
+        if (GetComponent<AirstreamAffected>().inAirstream == false && Input.GetButton(jumpButton) && glideFallSpeed != 0)
         {
             motion.y = Mathf.Max(motion.y, -glideFallSpeed);
         }
