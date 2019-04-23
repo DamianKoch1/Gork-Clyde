@@ -60,6 +60,7 @@ public abstract class Player : MonoBehaviour
         }
         if (Input.GetButtonDown(jumpButton) && ghostjumpTimer > 0)
         {
+            transform.SetParent(null, true);
             ghostjumpTimer = 0;
             motion.y = jumpHeight;
             if (anim != null)
@@ -86,8 +87,9 @@ public abstract class Player : MonoBehaviour
 
     public bool IsGrounded()
     {
-        if (Physics.SphereCast(transform.position, GetComponent<Collider>().bounds.extents.x / 2, -Vector3.up, out RaycastHit hitInfo, GetComponent<Collider>().bounds.extents.y + 0.01f, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore))
+        if (Physics.SphereCast(transform.position, GetComponent<Collider>().bounds.extents.x / 2, -Vector3.up, out RaycastHit hitInfo, GetComponent<Collider>().bounds.extents.y - 0.1f, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore))
         {
+            transform.SetParent(hitInfo.transform, true);
             ghostjumpTimer = maxGhostjumpDelay;
             return true;
         } 
