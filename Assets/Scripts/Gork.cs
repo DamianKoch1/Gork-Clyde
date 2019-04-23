@@ -75,11 +75,11 @@ public class Gork : Player
         if (obj.GetComponent<Clide>() != null)
         {
             obj.GetComponent<Clide>().ResetMotion();
-            obj.GetComponent<AirstreamAffected>().airstreamMotion = throwDirection * Time.deltaTime * 60 * 2;
+            obj.GetComponent<AirstreamAffected>().airstreamMotion = throwDirection * Time.fixedDeltaTime * 60 * 2;
         }
         else
         {
-           objectRb.AddForce(throwDirection*Time.deltaTime*60, ForceMode.VelocityChange);
+           objectRb.AddForce(throwDirection*Time.fixedDeltaTime*60, ForceMode.VelocityChange);
         }
         Physics.IgnoreCollision(GetComponent<Collider>(), objectRb.GetComponent<Collider>(), false);
         objectRb.interpolation = RigidbodyInterpolation.Interpolate;

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6393501334172902928}
   - component: {fileID: 4931685306385337228}
   - component: {fileID: 4039839730099999629}
+  - component: {fileID: 5789133625647090556}
   m_Layer: 0
   m_Name: SmallPushable
   m_TagString: pushable
@@ -121,3 +122,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ef1ccd984b461441bb3f1b20dca628e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5789133625647090556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6393501334172902942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e74ab12b5ddbab419d06aa9a9d1b7bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  airstreamMotion: {x: 0, y: 0, z: 0}
+  inAirstream: 0
