@@ -12,8 +12,6 @@ public abstract class Player : MonoBehaviour
     [SerializeField]
     protected Animator anim;
     private Camera cam;
-    private Vector3 camForward;
-    private Vector3 camRight;
     [SerializeField]
     private float maxGhostjumpDelay = 0.2f;
     private float ghostjumpTimer = 0f;
@@ -70,14 +68,14 @@ public abstract class Player : MonoBehaviour
         }
         ApplyCamRotation();
         SetVelocity();
-        Rotate();
+        LookForward();
         
     }
     protected virtual void SetVelocity()
     {
         rb.velocity = motion * Time.deltaTime * 60;
     }
-    protected virtual void Rotate()
+    protected virtual void LookForward()
     {
         Vector3 lookAt;
         lookAt = transform.position + motion;
@@ -107,6 +105,8 @@ public abstract class Player : MonoBehaviour
 
     private void ApplyCamRotation()
     {
+        Vector3 camForward;
+        Vector3 camRight;
         camForward = cam.transform.forward;
         camForward.y = 0;
         camForward.Normalize();
