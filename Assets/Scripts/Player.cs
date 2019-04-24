@@ -66,11 +66,13 @@ public abstract class Player : MonoBehaviour
                 anim.SetTrigger("jump");
             }
         }
-        ApplyCamRotation();
+        motion = ApplyCamRotation(motion);
         SetVelocity();
         LookForward();
         
     }
+
+   
     protected virtual void SetVelocity()
     {
         rb.velocity = motion * Time.deltaTime * 60;
@@ -103,8 +105,9 @@ public abstract class Player : MonoBehaviour
         motion = Vector3.zero;
     }
 
-    private void ApplyCamRotation()
+    private Vector3 ApplyCamRotation(Vector3 vector)
     {
+        Vector3 rotatedVector;
         Vector3 camForward;
         Vector3 camRight;
         camForward = cam.transform.forward;
@@ -113,6 +116,7 @@ public abstract class Player : MonoBehaviour
         camRight = cam.transform.right;
         camRight.y = 0;
         camRight.Normalize();
-        motion = camRight * motion.x + Vector3.up * motion.y + motion.z * camForward;
+        rotatedVector = vector.x * camRight + vector.y * Vector3.up + vector.z * camForward;
+        return rotatedVector;
     }
 }
