@@ -14,11 +14,7 @@ public class Airstream : MonoBehaviour
         direction = transform.forward;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+   
     private void OnTriggerStay(Collider other)
     {
         if (other.GetComponent<AirstreamAffected>() != null)

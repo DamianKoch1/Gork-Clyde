@@ -13,6 +13,17 @@ public class MenuButton : MonoBehaviour
         SceneManager.LoadScene(sceneName);
     }
 
+    public void ToggleMenu(GameObject menu)
+    {
+        if (menu.activeSelf)
+        {
+            menu.SetActive(false);
+        }
+        else
+        {
+            menu.SetActive(true);
+        }
+    }
     public void Quit()
     {
         Application.Quit();
