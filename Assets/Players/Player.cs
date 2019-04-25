@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public abstract class Player : MonoBehaviour
 {
@@ -16,15 +14,13 @@ public abstract class Player : MonoBehaviour
     private float maxGhostjumpDelay = 0.2f;
     private float ghostjumpTimer = 0f;
 
-
     protected virtual void Start()
     {
         rb = GetComponent<Rigidbody>();
         InitializeInputs();
         cam = Camera.main;
-       
-        
     }
+
     protected virtual void FixedUpdate()
     {
         if (ghostjumpTimer > 0)
@@ -45,7 +41,7 @@ public abstract class Player : MonoBehaviour
             }
         }
         if (IsGrounded())
-        {
+        {        
             motion.y = 0;
             if (anim != null)
             {
@@ -72,31 +68,28 @@ public abstract class Player : MonoBehaviour
         
     }
 
-   
+
     protected virtual void SetVelocity()
     {
         rb.velocity = motion * Time.deltaTime * 60;
     }
-    protected virtual void LookForward()
+
+    private void LookForward()
     {
-        Vector3 lookAt;
-        lookAt = transform.position + motion;
-        lookAt.y = transform.position.y;
+        Vector3 position = transform.position;
+        Vector3 lookAt = position + motion;
+        lookAt.y = position.y;
         transform.LookAt(lookAt);
     }
 
-    public bool IsGrounded()
+    private bool IsGrounded()
     {
-        if (Physics.SphereCast(transform.position, GetComponent<Collider>().bounds.extents.x / 2, -Vector3.up, out RaycastHit hitInfo, GetComponent<Collider>().bounds.extents.y - 0.1f, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore))
-        {
-            ghostjumpTimer = maxGhostjumpDelay;
-            return true;
-        } 
-        else 
-        {
-            return false;
-        }
-         
+        if (!Physics.SphereCast(transform.position, GetComponent<Collider>().bounds.extents.x / 2, -Vector3.up,
+            out RaycastHit hitInfo, GetComponent<Collider>().bounds.extents.y - 0.1f, Physics.DefaultRaycastLayers,
+            QueryTriggerInteraction.Ignore)) return false;
+        ghostjumpTimer = maxGhostjumpDelay;
+        return true;
+
     }
     protected abstract void InitializeInputs();
 
@@ -107,16 +100,13 @@ public abstract class Player : MonoBehaviour
 
     private Vector3 ApplyCamRotation(Vector3 vector)
     {
-        Vector3 rotatedVector;
-        Vector3 camForward;
-        Vector3 camRight;
-        camForward = cam.transform.forward;
+        Vector3 camForward = cam.transform.forward;
         camForward.y = 0;
         camForward.Normalize();
-        camRight = cam.transform.right;
+        Vector3 camRight = cam.transform.right;
         camRight.y = 0;
         camRight.Normalize();
-        rotatedVector = vector.x * camRight + vector.y * Vector3.up + vector.z * camForward;
+        Vector3 rotatedVector = vector.x * camRight + vector.y * Vector3.up + vector.z * camForward;
         return rotatedVector;
     }
 }
