@@ -18,9 +18,9 @@ InputManager:
     sensitivity: 3
     snap: 1
     invert: 0
-    type: 2
+    type: 0
     axis: 0
-    joyNum: 1
+    joyNum: 0
   - serializedVersion: 3
     m_Name: Vertical
     descriptiveName: 
@@ -34,15 +34,15 @@ InputManager:
     sensitivity: 3
     snap: 1
     invert: 0
-    type: 2
-    axis: 1
-    joyNum: 1
+    type: 0
+    axis: 0
+    joyNum: 0
   - serializedVersion: 3
     m_Name: Jump
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: joystick button 1
+    positiveButton: space
     altNegativeButton: 
     altPositiveButton: 
     gravity: 1000
@@ -52,7 +52,7 @@ InputManager:
     invert: 0
     type: 0
     axis: 0
-    joyNum: 1
+    joyNum: 0
   - serializedVersion: 3
     m_Name: Mouse X
     descriptiveName: XBOX Controller Right Stick X-Axis
@@ -66,9 +66,9 @@ InputManager:
     sensitivity: 3
     snap: 0
     invert: 0
-    type: 2
+    type: 0
     axis: 3
-    joyNum: 1
+    joyNum: 0
   - serializedVersion: 3
     m_Name: Mouse Y
     descriptiveName: XBOX Controller Right Stick Y-Axis
@@ -82,9 +82,9 @@ InputManager:
     sensitivity: 3
     snap: 0
     invert: 1
-    type: 2
+    type: 0
     axis: 4
-    joyNum: 1
+    joyNum: 0
   - serializedVersion: 3
     m_Name: Mouse ScrollWheel
     descriptiveName: 
@@ -210,9 +210,9 @@ InputManager:
     sensitivity: 3
     snap: 1
     invert: 0
-    type: 2
-    axis: 3
-    joyNum: 2
+    type: 0
+    axis: 0
+    joyNum: 0
   - serializedVersion: 3
     m_Name: Vertical2
     descriptiveName: 
@@ -226,15 +226,15 @@ InputManager:
     sensitivity: 3
     snap: 1
     invert: 0
-    type: 2
-    axis: 4
-    joyNum: 2
+    type: 0
+    axis: 0
+    joyNum: 0
   - serializedVersion: 3
     m_Name: Jump2
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: joystick button 1
+    positiveButton: '[0]'
     altNegativeButton: 
     altPositiveButton: right ctrl
     gravity: 1000
@@ -244,13 +244,13 @@ InputManager:
     invert: 0
     type: 0
     axis: 0
-    joyNum: 2
+    joyNum: 0
   - serializedVersion: 3
     m_Name: GorkInteract
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: joystick button 0
+    positiveButton: e
     altNegativeButton: 
     altPositiveButton: left ctrl
     gravity: 1000
@@ -260,4 +260,4 @@ InputManager:
     invert: 0
     type: 0
     axis: 0
-    joyNum: 1
+    joyNum: 0
