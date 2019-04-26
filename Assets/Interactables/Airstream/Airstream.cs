@@ -27,10 +27,6 @@ public class Airstream : MonoBehaviour
             airstreamAffected.airstreamMotion = direction * strength;
             airstreamAffected.inAirstream = true;
             other.transform.SetParent(null, true);
-            if (other.GetComponent<Clide>() != null)
-            {
-                other.attachedRigidbody.isKinematic = false;
-            }
         }
     }
     private void OnTriggerExit(Collider other)

@@ -5,7 +5,7 @@ public abstract class Player : MonoBehaviour
     [SerializeField]
     protected float speed, jumpHeight, fallSpeed;
     protected Vector3 motion;
-    protected Rigidbody rb;
+    protected CharacterController controller;
     protected string xAxis, zAxis, jumpButton;
     [SerializeField]
     protected Animator anim;
@@ -13,10 +13,12 @@ public abstract class Player : MonoBehaviour
     [SerializeField]
     private float maxGhostjumpDelay = 0.2f;
     private float ghostjumpTimer = 0f;
+    [HideInInspector] 
+    public bool canMove = true;
 
     protected virtual void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        controller = GetComponent<CharacterController>();
         InitializeInputs();
         cam = Camera.main;
     }
@@ -26,19 +28,6 @@ public abstract class Player : MonoBehaviour
         if (ghostjumpTimer > 0)
         {
             ghostjumpTimer = Mathf.Max(ghostjumpTimer - Time.deltaTime, 0);
-        }
-        motion.x = Input.GetAxis(xAxis) * speed;
-        motion.z = Input.GetAxis(zAxis) * speed;
-        if (anim != null)
-        {
-            if (motion.x == 0 && motion.z == 0)
-            {
-                anim.SetBool("walking", false);
-            }
-            else
-            {
-                anim.SetBool("walking", true);
-            }
         }
         if (IsGrounded())
         {        
@@ -52,26 +41,43 @@ public abstract class Player : MonoBehaviour
         {
             motion.y -= fallSpeed;
         }
-        if (Input.GetButtonDown(jumpButton) && ghostjumpTimer > 0)
+
+        if (canMove == true)
         {
-            transform.SetParent(null, true);
-            ghostjumpTimer = 0;
-            motion.y = jumpHeight;
+            
+            motion.x = Input.GetAxis(xAxis) * speed;
+            motion.z = Input.GetAxis(zAxis) * speed;
             if (anim != null)
             {
-                anim.SetTrigger("jump");
+                if (motion.x == 0 && motion.z == 0)
+                {
+                    anim.SetBool("walking", false);
+                }
+                else
+                {
+                    anim.SetBool("walking", true);
+                }
             }
+            if (Input.GetButtonDown(jumpButton) && ghostjumpTimer > 0)
+            {
+                transform.SetParent(null, true);
+                ghostjumpTimer = 0;
+                motion.y = jumpHeight;
+                if (anim != null)
+                {
+                    anim.SetTrigger("jump");
+                }
+            }
+            motion = ApplyCamRotation(motion);
+            MovePlayer();
+            LookForward();
         }
-        motion = ApplyCamRotation(motion);
-        SetVelocity();
-        LookForward();
-        
     }
 
 
-    protected virtual void SetVelocity()
+    protected virtual void MovePlayer()
     {
-        rb.velocity = motion * Time.deltaTime * 60;
+        controller.Move(motion * Time.deltaTime);
     }
 
     private void LookForward()
@@ -84,9 +90,7 @@ public abstract class Player : MonoBehaviour
 
     private bool IsGrounded()
     {
-        if (!Physics.SphereCast(transform.position, GetComponent<Collider>().bounds.extents.x / 2, -Vector3.up,
-            out RaycastHit hitInfo, GetComponent<Collider>().bounds.extents.y - 0.1f, Physics.DefaultRaycastLayers,
-            QueryTriggerInteraction.Ignore)) return false;
+        if (!controller.isGrounded) return false;
         ghostjumpTimer = maxGhostjumpDelay;
         return true;
 
