@@ -14,7 +14,7 @@ Preset:
   m_Properties:
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.size
-    value: 13
+    value: 17
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[0].m_Name
@@ -58,7 +58,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[0].snap
-    value: 1
+    value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[0].invert
@@ -78,7 +78,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[1].m_Name
-    value: Vertical
+    value: Horizontal
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[1].descriptiveName
@@ -90,23 +90,23 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[1].negativeButton
-    value: s
+    value: a
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[1].positiveButton
-    value: w
+    value: d
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[1].altNegativeButton
-    value: s
+    value: a
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[1].altPositiveButton
-    value: w
+    value: d
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[1].gravity
-    value: 3
+    value: 1000
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[1].dead
@@ -114,31 +114,31 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[1].sensitivity
-    value: 3
+    value: 1000
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[1].snap
-    value: 1
+    value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[1].invert
-    value: 1
+    value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[1].type
-    value: 2
+    value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[1].axis
-    value: 1
+    value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[1].joyNum
-    value: 3
+    value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[2].m_Name
-    value: Jump
+    value: Vertical
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[2].descriptiveName
@@ -150,23 +150,23 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[2].negativeButton
-    value: 
+    value: s
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[2].positiveButton
-    value: joystick 3 button 1
+    value: w
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[2].altNegativeButton
-    value: 
+    value: s
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[2].altPositiveButton
-    value: 
+    value: w
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[2].gravity
-    value: 1000
+    value: 3
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[2].dead
@@ -174,23 +174,23 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[2].sensitivity
-    value: 1000
+    value: 3
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[2].snap
-    value: 0
+    value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[2].invert
-    value: 0
+    value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[2].type
-    value: 0
+    value: 2
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[2].axis
-    value: 0
+    value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[2].joyNum
@@ -198,11 +198,11 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[3].m_Name
-    value: Mouse X
+    value: Vertical
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[3].descriptiveName
-    value: XBOX Controller Right Stick X-Axis
+    value: 
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[3].descriptiveNegativeName
@@ -210,23 +210,23 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[3].negativeButton
-    value: 
+    value: s
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[3].positiveButton
-    value: 
+    value: w
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[3].altNegativeButton
-    value: '[6]'
+    value: s
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[3].altPositiveButton
-    value: '[4]'
+    value: w
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[3].gravity
-    value: 3
+    value: 1000
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[3].dead
@@ -234,7 +234,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[3].sensitivity
-    value: 3
+    value: 1000
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[3].snap
@@ -250,7 +250,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[3].axis
-    value: 3
+    value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[3].joyNum
@@ -258,11 +258,11 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[4].m_Name
-    value: Mouse Y
+    value: Jump
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[4].descriptiveName
-    value: XBOX Controller Right Stick Y-Axis
+    value: 
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[4].descriptiveNegativeName
@@ -274,19 +274,19 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[4].positiveButton
-    value: 
+    value: joystick 3 button 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[4].altNegativeButton
-    value: '[2]'
+    value: 
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[4].altPositiveButton
-    value: '[8]'
+    value: space
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[4].gravity
-    value: 3
+    value: 1000
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[4].dead
@@ -294,7 +294,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[4].sensitivity
-    value: 3
+    value: 1000
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[4].snap
@@ -302,7 +302,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[4].invert
-    value: 1
+    value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[4].type
@@ -310,19 +310,19 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[4].axis
-    value: 4
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_Axes.Array.data[4].joyNum
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
+    propertyPath: m_Axes.Array.data[4].joyNum
+    value: 3
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[5].m_Name
-    value: Mouse ScrollWheel
+    value: Mouse X
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[5].descriptiveName
-    value: 
+    value: XBOX Controller Right Stick X-Axis
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[5].descriptiveNegativeName
@@ -338,23 +338,23 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[5].altNegativeButton
-    value: 
+    value: '[6]'
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[5].altPositiveButton
-    value: 
+    value: '[4]'
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[5].gravity
-    value: 0
+    value: 3
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[5].dead
-    value: 0
+    value: 0.001
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[5].sensitivity
-    value: 0.1
+    value: 3
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[5].snap
@@ -366,11 +366,11 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[5].type
-    value: 1
+    value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[5].axis
-    value: 2
+    value: 3
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[5].joyNum
@@ -378,11 +378,11 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[6].m_Name
-    value: Submit
+    value: Mouse Y
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[6].descriptiveName
-    value: 
+    value: XBOX Controller Right Stick Y-Axis
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[6].descriptiveNegativeName
@@ -394,19 +394,19 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[6].positiveButton
-    value: return
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_Axes.Array.data[6].altNegativeButton
     value: 
     objectReference: {fileID: 0}
   - target: {fileID: 0}
+    propertyPath: m_Axes.Array.data[6].altNegativeButton
+    value: '[2]'
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[6].altPositiveButton
-    value: joystick button 0
+    value: '[8]'
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[6].gravity
-    value: 1000
+    value: 3
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[6].dead
@@ -414,7 +414,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[6].sensitivity
-    value: 1000
+    value: 3
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[6].snap
@@ -422,7 +422,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[6].invert
-    value: 0
+    value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[6].type
@@ -430,7 +430,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[6].axis
-    value: 0
+    value: 4
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[6].joyNum
@@ -438,7 +438,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[7].m_Name
-    value: Submit
+    value: Mouse ScrollWheel
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[7].descriptiveName
@@ -454,7 +454,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[7].positiveButton
-    value: enter
+    value: 
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[7].altNegativeButton
@@ -462,19 +462,19 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[7].altPositiveButton
-    value: space
+    value: 
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[7].gravity
-    value: 1000
+    value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[7].dead
-    value: 0.001
+    value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[7].sensitivity
-    value: 1000
+    value: 0.1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[7].snap
@@ -486,11 +486,11 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[7].type
-    value: 0
+    value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[7].axis
-    value: 0
+    value: 2
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[7].joyNum
@@ -498,7 +498,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[8].m_Name
-    value: Cancel
+    value: Submit
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[8].descriptiveName
@@ -514,7 +514,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[8].positiveButton
-    value: escape
+    value: return
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[8].altNegativeButton
@@ -522,7 +522,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[8].altPositiveButton
-    value: joystick button 7
+    value: joystick button 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[8].gravity
@@ -558,7 +558,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[9].m_Name
-    value: Horizontal2
+    value: Submit
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[9].descriptiveName
@@ -570,11 +570,11 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[9].negativeButton
-    value: left
+    value: 
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[9].positiveButton
-    value: right
+    value: enter
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[9].altNegativeButton
@@ -582,11 +582,11 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[9].altPositiveButton
-    value: 
+    value: space
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[9].gravity
-    value: 3
+    value: 1000
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[9].dead
@@ -594,11 +594,11 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[9].sensitivity
-    value: 3
+    value: 1000
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[9].snap
-    value: 1
+    value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[9].invert
@@ -606,7 +606,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[9].type
-    value: 2
+    value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[9].axis
@@ -614,11 +614,11 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[9].joyNum
-    value: 2
+    value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[10].m_Name
-    value: Vertical2
+    value: Cancel
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[10].descriptiveName
@@ -630,11 +630,11 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[10].negativeButton
-    value: down
+    value: 
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[10].positiveButton
-    value: up
+    value: escape
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[10].altNegativeButton
@@ -642,11 +642,11 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[10].altPositiveButton
-    value: 
+    value: joystick button 7
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[10].gravity
-    value: 3
+    value: 1000
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[10].dead
@@ -654,31 +654,31 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[10].sensitivity
-    value: 3
+    value: 1000
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[10].snap
-    value: 1
+    value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[10].invert
-    value: 1
+    value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[10].type
-    value: 2
+    value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[10].axis
-    value: 1
+    value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[10].joyNum
-    value: 2
+    value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[11].m_Name
-    value: Jump2
+    value: Horizontal2
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[11].descriptiveName
@@ -690,11 +690,11 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[11].negativeButton
-    value: 
+    value: left
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[11].positiveButton
-    value: joystick 2 button 1
+    value: right
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[11].altNegativeButton
@@ -702,11 +702,11 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[11].altPositiveButton
-    value: right ctrl
+    value: 
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[11].gravity
-    value: 1000
+    value: 3
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[11].dead
@@ -714,11 +714,11 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[11].sensitivity
-    value: 1000
+    value: 3
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[11].snap
-    value: 0
+    value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[11].invert
@@ -726,7 +726,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[11].type
-    value: 0
+    value: 2
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[11].axis
@@ -738,7 +738,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[12].m_Name
-    value: GorkInteract
+    value: Horizontal2
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[12].descriptiveName
@@ -750,11 +750,11 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[12].negativeButton
-    value: 
+    value: left
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[12].positiveButton
-    value: joystick 3 button 2
+    value: right
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[12].altNegativeButton
@@ -762,7 +762,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[12].altPositiveButton
-    value: left ctrl
+    value: 
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[12].gravity
@@ -794,5 +794,245 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Axes.Array.data[12].joyNum
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Axes.Array.data[13].m_Name
+    value: Vertical2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Axes.Array.data[13].descriptiveName
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Axes.Array.data[13].descriptiveNegativeName
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Axes.Array.data[13].negativeButton
+    value: down
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Axes.Array.data[13].positiveButton
+    value: up
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Axes.Array.data[13].altNegativeButton
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Axes.Array.data[13].altPositiveButton
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Axes.Array.data[13].gravity
+    value: 3
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Axes.Array.data[13].dead
+    value: 0.001
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Axes.Array.data[13].sensitivity
+    value: 3
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Axes.Array.data[13].snap
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Axes.Array.data[13].invert
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Axes.Array.data[13].type
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Axes.Array.data[13].axis
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Axes.Array.data[13].joyNum
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Axes.Array.data[14].m_Name
+    value: Vertical2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Axes.Array.data[14].descriptiveName
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Axes.Array.data[14].descriptiveNegativeName
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Axes.Array.data[14].negativeButton
+    value: down
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Axes.Array.data[14].positiveButton
+    value: up
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Axes.Array.data[14].altNegativeButton
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Axes.Array.data[14].altPositiveButton
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Axes.Array.data[14].gravity
+    value: 1000
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Axes.Array.data[14].dead
+    value: 0.001
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Axes.Array.data[14].sensitivity
+    value: 1000
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Axes.Array.data[14].snap
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Axes.Array.data[14].invert
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Axes.Array.data[14].type
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Axes.Array.data[14].axis
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Axes.Array.data[14].joyNum
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Axes.Array.data[15].m_Name
+    value: Jump2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Axes.Array.data[15].descriptiveName
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Axes.Array.data[15].descriptiveNegativeName
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Axes.Array.data[15].negativeButton
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Axes.Array.data[15].positiveButton
+    value: joystick 2 button 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Axes.Array.data[15].altNegativeButton
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Axes.Array.data[15].altPositiveButton
+    value: right ctrl
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Axes.Array.data[15].gravity
+    value: 1000
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Axes.Array.data[15].dead
+    value: 0.001
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Axes.Array.data[15].sensitivity
+    value: 1000
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Axes.Array.data[15].snap
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Axes.Array.data[15].invert
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Axes.Array.data[15].type
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Axes.Array.data[15].axis
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Axes.Array.data[15].joyNum
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Axes.Array.data[16].m_Name
+    value: GorkInteract
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Axes.Array.data[16].descriptiveName
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Axes.Array.data[16].descriptiveNegativeName
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Axes.Array.data[16].negativeButton
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Axes.Array.data[16].positiveButton
+    value: joystick 3 button 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Axes.Array.data[16].altNegativeButton
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Axes.Array.data[16].altPositiveButton
+    value: e
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Axes.Array.data[16].gravity
+    value: 1000
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Axes.Array.data[16].dead
+    value: 0.001
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Axes.Array.data[16].sensitivity
+    value: 1000
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Axes.Array.data[16].snap
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Axes.Array.data[16].invert
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Axes.Array.data[16].type
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Axes.Array.data[16].axis
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_Axes.Array.data[16].joyNum
     value: 3
     objectReference: {fileID: 0}

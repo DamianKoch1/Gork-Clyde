@@ -55,34 +55,43 @@ public class Gork : Player
     {
         anim.ResetTrigger("pickup");
         anim.SetTrigger("pickup");
-        objectRb = obj.GetComponent<Rigidbody>();
-        objectRb.isKinematic = true;
-        Physics.IgnoreCollision(GetComponent<Collider>(), objectRb.GetComponent<Collider>());
+        Physics.IgnoreCollision(GetComponent<Collider>(), obj.GetComponent<Collider>());
         obj.transform.SetParent(heldObjectSlot.transform, true);
         obj.transform.position = heldObjectSlot.transform.position;
         obj.transform.LookAt(obj.transform.position + transform.forward);
-        objectRb.interpolation = RigidbodyInterpolation.None;
+        if (obj.GetComponent<Clide>() != null)
+        {
+            obj.GetComponent<Clide>().canMove = false;
+        }
+        else
+        {
+            objectRb = obj.GetComponent<Rigidbody>();
+            objectRb.isKinematic = true;
+            objectRb.interpolation = RigidbodyInterpolation.None;
+            
+        }
     }
     private void Throw(GameObject obj)
     {
         anim.ResetTrigger("throw");
         anim.SetTrigger("throw");
-        objectRb.isKinematic = false;
         Vector3 throwDirection = transform.forward * throwStrength;
         throwDirection = Quaternion.AngleAxis(throwUpwardsAngle, -transform.right) * throwDirection;
-        objectRb.velocity = Vector3.zero;
         obj.transform.SetParent(null, true);
         if (obj.GetComponent<Clide>() != null)
         {
             obj.GetComponent<Clide>().ResetMotion();
+            obj.GetComponent<Clide>().canMove = true;
             obj.GetComponent<AirstreamAffected>().airstreamMotion = throwDirection * Time.fixedDeltaTime * 60 * 2;
         }
         else
         {
-           objectRb.AddForce(throwDirection*Time.fixedDeltaTime*60, ForceMode.VelocityChange);
+            objectRb.velocity = Vector3.zero;
+            objectRb.isKinematic = false;
+            objectRb.AddForce(throwDirection*Time.fixedDeltaTime*60, ForceMode.VelocityChange);
+            objectRb.interpolation = RigidbodyInterpolation.Interpolate;
+            objectRb = null;
         }
-        Physics.IgnoreCollision(GetComponent<Collider>(), objectRb.GetComponent<Collider>(), false);
-        objectRb.interpolation = RigidbodyInterpolation.Interpolate;
-        objectRb = null;
+        Physics.IgnoreCollision(GetComponent<Collider>(), obj.GetComponent<Collider>(), false);
     }
 }

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1088568127900295901}
   - component: {fileID: 2972539797705614291}
   - component: {fileID: 8373350507250307866}
-  - component: {fileID: 9209379768280142097}
+  - component: {fileID: 2983598227451586229}
   m_Layer: 0
   m_Name: Clide
   m_TagString: Player2
@@ -113,7 +113,7 @@ MonoBehaviour:
   fallSpeed: 0.4
   anim: {fileID: 0}
   maxGhostjumpDelay: 0.2
-  glideFallSpeed: 0.5
+  canMove: 1
 --- !u!114 &2972539797705614291
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -140,19 +140,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ef1ccd984b461441bb3f1b20dca628e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!54 &9209379768280142097
-Rigidbody:
+--- !u!143 &2983598227451586229
+CharacterController:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3874808357865764670}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
   serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 1
-  m_Constraints: 112
-  m_CollisionDetection: 0
+  m_Height: 1.9999999
+  m_Radius: 0.49999997
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}

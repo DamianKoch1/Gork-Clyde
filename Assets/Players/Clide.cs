@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class Clide : Player
 {
-    [SerializeField]
-    private float glideFallSpeed = 1f;
-
+   
 
     protected override void InitializeInputs()
     {
@@ -15,14 +13,16 @@ public class Clide : Player
         jumpButton = "Jump2";
     }
 
-    protected override void SetVelocity()
-    {
-        if (GetComponent<AirstreamAffected>().inAirstream == false && Input.GetButton(jumpButton) && glideFallSpeed != 0)
-        {
-            motion.y = Mathf.Max(motion.y, -glideFallSpeed);
-        }
-        rb.velocity = (motion + GetComponent<AirstreamAffected>().airstreamMotion) * Time.deltaTime * 60;
-    }
+    
+    
+//    protected override void SetVelocity()
+//    {
+//        if (GetComponent<AirstreamAffected>().inAirstream == false && Input.GetButton(jumpButton) && glideFallSpeed != 0)
+//        {
+//            motion.y = Mathf.Max(motion.y, -glideFallSpeed);
+//        }
+//        rb.MovePosition(transform.position + (motion + GetComponent<AirstreamAffected>().airstreamMotion) * Time.deltaTime);
+//    }
 
     
 }
