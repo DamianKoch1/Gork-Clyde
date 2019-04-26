@@ -12,7 +12,7 @@ public class Clide : Player
         zAxis = "Vertical2";
         jumpButton = "Jump2";
     }
-
+    
     
     
 //    protected override void SetVelocity()
