@@ -33,9 +33,9 @@ public class Gork : Player
 
     protected override void InitializeInputs()
     {
-        xAxis = "Horizontal";
-        zAxis = "Vertical";
-        jumpButton = "Jump";
+        xAxis = "GorkHorizontal";
+        zAxis = "GorkVertical";
+        jumpButton = "GorkJump";
     }
     private void OnTriggerEnter(Collider other)
     {
