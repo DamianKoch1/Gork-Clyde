@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 4598529638036621239}
   m_Layer: 0
   m_Name: Gork
-  m_TagString: Player1
+  m_TagString: player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -115,6 +115,7 @@ MonoBehaviour:
   anim: {fileID: 3692220314552859734}
   maxGhostjumpDelay: 0.2
   canMove: 1
+  inAirstream: 0
   heldObjectSlot: {fileID: 8013065875973554416}
   throwStrength: 10
   throwUpwardsAngle: 22.6
