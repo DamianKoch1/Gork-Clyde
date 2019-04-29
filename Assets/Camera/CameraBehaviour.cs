@@ -6,7 +6,7 @@ using UnityEngine.Experimental.PlayerLoop;
 public class CameraBehaviour : MonoBehaviour
 {
     [SerializeField]
-    private GameObject player1, player2;
+    private GameObject gork, clide;
     private Vector3 offset;
     private Vector3 playerMiddle;
     [SerializeField]
@@ -22,9 +22,10 @@ public class CameraBehaviour : MonoBehaviour
     private GameObject pauseMenu, optionsMenu;
     void Start()
     {
-        if (player1 != null && player2 != null)
+        if (gork != null && clide != null)
         {
-            playerMiddle = player1.transform.position + (0.5f * (player2.transform.position - player1.transform.position));
+           // playerMiddle = gork.transform.position + (0.5f * (clide.transform.position - gork.transform.position));
+            playerMiddle = 0.5f * (gork.transform.position + clide.transform.position);
             offset = transform.position - playerMiddle;
         }
     }
@@ -66,12 +67,12 @@ public class CameraBehaviour : MonoBehaviour
             offset = Quaternion.AngleAxis(Input.GetAxis("Mouse Y") * rotateSpeed, -transform.right) * offset;
             transform.RotateAround(transform.position, -transform.right, Input.GetAxis("Mouse Y") * rotateSpeed);
         }
-        if (player1 != null && player2 != null)
+        if (gork != null && clide != null)
         {
-            playerMiddle = player1.transform.position + (0.5f * (player2.transform.position - player1.transform.position));
-            zoomMultiplier = Mathf.Clamp((playerDistanceZoomThreshhold / (Vector3.Distance(player1.transform.position, player2.transform.position)))/zoomSpeed, minZoom, maxZoom);
+            playerMiddle = gork.transform.position + (0.5f * (clide.transform.position - gork.transform.position));
+            zoomMultiplier = Mathf.Clamp((playerDistanceZoomThreshhold / (Vector3.Distance(gork.transform.position, clide.transform.position)))/zoomSpeed, minZoom, maxZoom);
             desiredPos = playerMiddle + offset / zoomMultiplier;
-            if (Physics.Raycast(desiredPos, playerMiddle - desiredPos, out hit, (playerMiddle - desiredPos).magnitude, wallLayers, QueryTriggerInteraction.Ignore) && Physics.Raycast(player1.transform.position, player2.transform.position - player1.transform.position, (player2.transform.position - player1.transform.position).magnitude, wallLayers, QueryTriggerInteraction.Ignore) == false)
+            if (Physics.Raycast(desiredPos, playerMiddle - desiredPos, out hit, (playerMiddle - desiredPos).magnitude, wallLayers, QueryTriggerInteraction.Ignore) && Physics.Raycast(gork.transform.position, clide.transform.position - gork.transform.position, (clide.transform.position - gork.transform.position).magnitude, wallLayers, QueryTriggerInteraction.Ignore) == false)
             {
                 targetPos = Vector3.Lerp(hit.point, playerMiddle, 0.7f);
             }

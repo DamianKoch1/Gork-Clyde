@@ -8,9 +8,9 @@ public class Clide : Player
 
     protected override void InitializeInputs()
     {
-        xAxis = "Horizontal2";
-        zAxis = "Vertical2";
-        jumpButton = "Jump2";
+        xAxis = "ClideHorizontal";
+        zAxis = "ClideVertical";
+        jumpButton = "ClideJump";
     }
     
     
