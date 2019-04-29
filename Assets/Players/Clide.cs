@@ -5,7 +5,7 @@ using UnityEngine;
 public class Clide : Player
 {
 
-    public Vector3 force;
+    private Vector3 force;
 
     [SerializeField]
     private float maxForce;

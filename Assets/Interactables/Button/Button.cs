@@ -19,7 +19,7 @@ public class Button : MonoBehaviour
         {
             if (triggerableBy == TriggerableBy.all)
             {
-                if (other.CompareTag("Player1") || other.CompareTag("Player2") || other.CompareTag("pushable"))
+                if (other.CompareTag("player") || other.CompareTag("pushable"))
                 {
                     SendTriggered();
                 }

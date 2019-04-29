@@ -8,25 +8,23 @@ public class MovingPlatform : MonoBehaviour
     private bool stop;
     private Vector3 startPos;
     private Vector3 targetPos;
-    public enum Mode {autostart, continuous, oneshot, pressurePlate};
-    public Mode mode = Mode.autostart;
+    public enum Mode {Autostart, Continuous, Oneshot, PressurePlate}
+    public Mode mode = Mode.Autostart;
     private float lerpAmount;
     [SerializeField]
     private float speed;
-    [SerializeField]
-    private Transform onPlatformTransform;
-    // Start is called before the first frame update
+   
     void Start()
     {
         pos1 = transform.Find("Pos1").transform.position;
         startPos = transform.position;
         pos2 = transform.Find("Pos2").transform.position;
         targetPos = pos1;
-        if (mode == Mode.autostart)
+        if (mode == Mode.Autostart)
         {
             Move();
         }
-        else if (mode == Mode.pressurePlate)
+        else if (mode == Mode.PressurePlate)
         {
             Move();
             stop = true;
@@ -47,7 +45,7 @@ public class MovingPlatform : MonoBehaviour
             transform.position = Vector3.Lerp(startPos, targetPos, lerpAmount);
             if (lerpAmount >= 1)
             {
-               if (mode != Mode.oneshot)
+               if (mode != Mode.Oneshot)
                {
                     Move();
                }
@@ -76,21 +74,7 @@ public class MovingPlatform : MonoBehaviour
         lerpAmount = 0;
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.isTrigger == false)
-        {
-            other.transform.SetParent(onPlatformTransform, true);
-            
-        }
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.transform.parent == onPlatformTransform)
-        {
-            other.transform.SetParent(null, true);
-        }
-    }
+   
     public void OnButtonActivated()
     {
         if (lerpAmount <= 0 || lerpAmount >= 1)
