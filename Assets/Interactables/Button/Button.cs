@@ -9,24 +9,24 @@ public class Button : MonoBehaviour
     [SerializeField]
     private bool oneTimeUse;
     private bool triggered;
-    private enum TriggerableBy {player1, player2, all};
+    private enum TriggerableBy {Gork, Clide, All};
     [SerializeField]
-    private TriggerableBy triggerableBy = TriggerableBy.all;
+    private TriggerableBy triggerableBy = TriggerableBy.All;
     
     private void OnTriggerEnter(Collider other)
     {
         if (other.isTrigger == false)
         {
-            if (triggerableBy == TriggerableBy.all)
+            if (triggerableBy == TriggerableBy.All)
             {
                 if (other.CompareTag("player") || other.CompareTag("pushable"))
                 {
                     SendTriggered();
                 }
-            } else if (triggerableBy == TriggerableBy.player1 && other.CompareTag("Player1"))
+            } else if (triggerableBy == TriggerableBy.Gork && other.GetComponent<Gork>() != null)
             {
                 SendTriggered();
-            } else if (triggerableBy == TriggerableBy.player2 && other.CompareTag("Player2"))
+            } else if (triggerableBy == TriggerableBy.Clide && other.GetComponent<Clide>() != null)
             {
                 SendTriggered();
             }

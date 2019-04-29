@@ -4,21 +4,25 @@ using UnityEngine;
 
 public class MovingPlatform : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject start, target;
     private Vector3 pos1, pos2;
     private bool stop;
     private Vector3 startPos;
     private Vector3 targetPos;
-    public enum Mode {Autostart, Continuous, Oneshot, PressurePlate}
+    public enum Mode {Autostart, Continuous, Oneshot, PressurePlate};
     public Mode mode = Mode.Autostart;
-    private float lerpAmount;
     [SerializeField]
     private float speed;
+    private Rigidbody rb;
    
+
     void Start()
     {
-        pos1 = transform.Find("Pos1").transform.position;
+        rb = GetComponent<Rigidbody>();
+        pos1 = start.transform.position;
         startPos = transform.position;
-        pos2 = transform.Find("Pos2").transform.position;
+        pos2 = target.transform.position;
         targetPos = pos1;
         if (mode == Mode.Autostart)
         {
@@ -33,7 +37,6 @@ public class MovingPlatform : MonoBehaviour
         {
             stop = true;
         }
-        lerpAmount = 0;
     }
 
     // Update is called once per frame
@@ -41,9 +44,8 @@ public class MovingPlatform : MonoBehaviour
     {
         if (stop == false)
         {
-            lerpAmount += speed * Time.deltaTime;
-            transform.position = Vector3.Lerp(startPos, targetPos, lerpAmount);
-            if (lerpAmount >= 1)
+            rb.MovePosition(rb.position + (targetPos - startPos).normalized/10 * speed);
+            if (Vector3.Distance(rb.position, targetPos) < 0.1f)
             {
                if (mode != Mode.Oneshot)
                {
@@ -71,13 +73,12 @@ public class MovingPlatform : MonoBehaviour
             targetPos = pos1;
         }
         startPos = transform.position;
-        lerpAmount = 0;
     }
 
    
     public void OnButtonActivated()
     {
-        if (lerpAmount <= 0 || lerpAmount >= 1)
+        if (Vector3.Distance(rb.position, targetPos) < 0.1f)
         {
             Move();
         }

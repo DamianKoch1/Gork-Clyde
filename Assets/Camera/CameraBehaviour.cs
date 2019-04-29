@@ -24,7 +24,6 @@ public class CameraBehaviour : MonoBehaviour
     {
         if (gork != null && clide != null)
         {
-           // playerMiddle = gork.transform.position + (0.5f * (clide.transform.position - gork.transform.position));
             playerMiddle = 0.5f * (gork.transform.position + clide.transform.position);
             offset = transform.position - playerMiddle;
         }
