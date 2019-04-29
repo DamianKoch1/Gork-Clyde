@@ -3,47 +3,50 @@
 public abstract class Player : MonoBehaviour
 {
     [SerializeField]
-    protected float speed, jumpHeight, fallSpeed;
+    protected float speed, jumpHeight;
     protected Vector3 motion;
-    protected CharacterController controller;
+    [HideInInspector]
+    public Rigidbody rb;
     protected string xAxis, zAxis, jumpButton;
     [SerializeField]
     protected Animator anim;
     private Camera cam;
     [SerializeField]
-    private float maxGhostjumpDelay = 0.2f;
+    private float maxGhostjumpDelay = 0.2f, jumpCooldown;
     private float ghostjumpTimer = 0f;
     [HideInInspector] 
     public bool canMove = true, inAirstream = false;
+    private RaycastHit hit;
+    private Vector3 parentPos;
 
     protected virtual void Start()
     {
-        controller = GetComponent<CharacterController>();
+        rb = GetComponent<Rigidbody>();
         InitializeInputs();
         cam = Camera.main;
     }
 
-    protected virtual void Update()
+    protected void Update()
     {
         if (ghostjumpTimer > 0)
         {
             ghostjumpTimer = Mathf.Max(ghostjumpTimer - Time.deltaTime, 0);
         }
+        if (jumpCooldown > 0)
+        {
+            jumpCooldown = Mathf.Max(jumpCooldown - Time.deltaTime, 0);
+        }
+    }
+
+    protected virtual void FixedUpdate()
+    {
         if (IsGrounded())
-        {        
-            motion.y = 0;
+        {
+            ghostjumpTimer = maxGhostjumpDelay;
             if (anim != null)
             {
                 anim.ResetTrigger("jump");
             }
-        }
-        else if (inAirstream == false)
-        {
-            motion.y -= fallSpeed;
-        }
-        else
-        {
-            motion.y *= 0.95f;
         }
 
         if (canMove == true)
@@ -62,15 +65,20 @@ public abstract class Player : MonoBehaviour
                     anim.SetBool("walking", true);
                 }
             }
-            if (Input.GetButtonDown(jumpButton) && ghostjumpTimer > 0)
+            if (Input.GetButtonDown(jumpButton) && ghostjumpTimer > 0 && jumpCooldown == 0)
             {
                 transform.SetParent(null, true);
                 ghostjumpTimer = 0;
-                motion.y = jumpHeight;
+                jumpCooldown = 0.3f;
+                rb.AddForce(jumpHeight*Vector3.up * Time.deltaTime*60, ForceMode.VelocityChange);
                 if (anim != null)
                 {
                     anim.SetTrigger("jump");
                 }
+            }
+            if (inAirstream == false)
+            {
+                rb.AddForce(new Vector3(-rb.velocity.x, 0 , -rb.velocity.z)*Time.deltaTime*90, ForceMode.Acceleration);   
             }
             motion = ApplyCamRotation(motion);
             MovePlayer();
@@ -81,9 +89,10 @@ public abstract class Player : MonoBehaviour
 
     protected virtual void MovePlayer()
     {
-        controller.Move(motion * Time.deltaTime);
+        rb.MovePosition(rb.position + motion * Time.deltaTime);
     }
 
+  
     private void LookForward()
     {
         Vector3 position = transform.position;
@@ -94,10 +103,9 @@ public abstract class Player : MonoBehaviour
 
     private bool IsGrounded()
     {
-        if (!controller.isGrounded) return false;
-        ghostjumpTimer = maxGhostjumpDelay;
-        return true;
-
+        return Physics.SphereCast(transform.position, GetComponent<Collider>().bounds.extents.x / 2, -Vector3.up,
+            out hit, GetComponent<Collider>().bounds.extents.y - 0.1f, Physics.DefaultRaycastLayers,
+            QueryTriggerInteraction.Ignore);
     }
     protected abstract void InitializeInputs();
 

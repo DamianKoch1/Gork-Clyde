@@ -14,25 +14,12 @@ public class Airstream : MonoBehaviour
     }
 
 
-//    private void OnTriggerEnter(Collider other)
-//    {
-//        var clide = other.GetComponent<Clide>();
-//        if (clide != null)
-//        {
-//            other.transform.SetParent(null, true);
-//            clide.AddForce(direction * strength);
-//        }
-//    }
-
     private void OnTriggerStay(Collider other)
     {
-        if (other.GetComponent<AirstreamAffected>() != null)
+        var clide = other.GetComponent<Clide>();
+        if (other.GetComponent<AirstreamAffected>() != null || clide != null)
         {
-             other.GetComponent<Rigidbody>().AddForce(direction * strength * Time.deltaTime * 60, ForceMode.Acceleration);
-        }
-        else
-        {
-            var clide = other.GetComponent<Clide>();
+            other.GetComponent<Rigidbody>().AddForce(direction * strength * Time.deltaTime * 60, ForceMode.Acceleration);
             if (clide != null)
             {
                 if (clide.inAirstream == false)
@@ -40,7 +27,6 @@ public class Airstream : MonoBehaviour
                     clide.inAirstream = true;
                 }
                 other.transform.SetParent(null, true);
-                clide.AddForce(direction * strength / 10);
             }
         }
     }
