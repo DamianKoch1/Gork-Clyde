@@ -14,7 +14,7 @@ public abstract class Player : MonoBehaviour
     private float maxGhostjumpDelay = 0.2f;
     private float ghostjumpTimer = 0f;
     [HideInInspector] 
-    public bool canMove = true;
+    public bool canMove = true, inAirstream = false;
 
     protected virtual void Start()
     {
@@ -23,7 +23,7 @@ public abstract class Player : MonoBehaviour
         cam = Camera.main;
     }
 
-    protected virtual void FixedUpdate()
+    protected virtual void Update()
     {
         if (ghostjumpTimer > 0)
         {
@@ -37,9 +37,13 @@ public abstract class Player : MonoBehaviour
                 anim.ResetTrigger("jump");
             }
         }
-        else
+        else if (inAirstream == false)
         {
             motion.y -= fallSpeed;
+        }
+        else
+        {
+            motion.y *= 0.95f;
         }
 
         if (canMove == true)
