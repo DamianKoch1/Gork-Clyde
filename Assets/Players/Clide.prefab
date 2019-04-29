@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 4189789962464561530}
   - component: {fileID: 2546620093315817778}
   - component: {fileID: 1088568127900295901}
-  - component: {fileID: 2972539797705614291}
   - component: {fileID: 8373350507250307866}
   - component: {fileID: 2983598227451586229}
   m_Layer: 0
@@ -89,7 +88,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3874808357865764670}
-  m_Material: {fileID: 13400000, guid: f26bb4ebb332b1648bfdb9ffc0d39186, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
@@ -114,20 +113,8 @@ MonoBehaviour:
   anim: {fileID: 0}
   maxGhostjumpDelay: 0.2
   canMove: 1
---- !u!114 &2972539797705614291
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3874808357865764670}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e74ab12b5ddbab419d06aa9a9d1b7bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  airstreamMotion: {x: 0, y: 0, z: 0}
   inAirstream: 0
+  maxForce: 40
 --- !u!114 &8373350507250307866
 MonoBehaviour:
   m_ObjectHideFlags: 0

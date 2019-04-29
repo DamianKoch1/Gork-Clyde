@@ -7,40 +7,52 @@ public class Airstream : MonoBehaviour
     private Vector3 direction;
     [SerializeField]
     private float strength;
-    List<Collider> colliders = new List<Collider>();
-    // Start is called before the first frame update
+   
     void Start()
     {
         direction = transform.forward;
     }
 
-   
+
+//    private void OnTriggerEnter(Collider other)
+//    {
+//        var clide = other.GetComponent<Clide>();
+//        if (clide != null)
+//        {
+//            other.transform.SetParent(null, true);
+//            clide.AddForce(direction * strength);
+//        }
+//    }
+
     private void OnTriggerStay(Collider other)
     {
         if (other.GetComponent<AirstreamAffected>() != null)
         {
-            if (colliders.Contains(other) == false)
+             other.GetComponent<Rigidbody>().AddForce(direction * strength * Time.deltaTime * 60, ForceMode.Acceleration);
+        }
+        else
+        {
+            var clide = other.GetComponent<Clide>();
+            if (clide != null)
             {
-                colliders.Add(other);
+                if (clide.inAirstream == false)
+                {
+                    clide.inAirstream = true;
+                }
+                other.transform.SetParent(null, true);
+                clide.AddForce(direction * strength / 10);
             }
-            AirstreamAffected airstreamAffected = other.GetComponent<AirstreamAffected>();
-            airstreamAffected.airstreamMotion = direction * strength;
-            airstreamAffected.inAirstream = true;
-            other.transform.SetParent(null, true);
         }
     }
+
     private void OnTriggerExit(Collider other)
     {
-        if (other.GetComponent<AirstreamAffected>() != null)
+        var clide = other.GetComponent<Clide>();
+        if (clide != null)
         {
-            if (colliders.Contains(other)){
-                colliders.Remove(other);
-            }
-            other.GetComponent<AirstreamAffected>().inAirstream = false;
+            clide.inAirstream = false;
         }
     }
-
-
 
     public void OnButtonActivated()
     {
@@ -50,10 +62,6 @@ public class Airstream : MonoBehaviour
         if (mr.enabled)
         {
             particles.Stop();
-            foreach (Collider collider in colliders)
-            {
-                collider.GetComponent<AirstreamAffected>().inAirstream = false;
-            }
         }
         else
         {
