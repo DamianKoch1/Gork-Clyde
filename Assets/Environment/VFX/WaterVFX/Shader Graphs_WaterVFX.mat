@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Shader Graphs_WaterVFX
-  m_Shader: {fileID: -6465566751694194690, guid: 245df00a23a40b04fbcfba3b57657077,
+  m_Shader: {fileID: -6465566751694194690, guid: 5aefa01f8392bb441a6ff5121760e2cd,
     type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -21,16 +21,21 @@ Material:
     serializedVersion: 3
     m_TexEnvs: []
     m_Floats:
-    - Vector1_431CFAD8: 2
+    - Vector1_2430B90F: 0.5
+    - Vector1_431CFAD8: 4.28
     - Vector1_6662D365: 1
     - Vector1_7140D4AC: 5
     - Vector1_7886C887: 0
     - Vector1_81005A5E: 1
-    - Vector1_D73DCCDF: 1
+    - Vector1_963A5AAF: 2
+    - Vector1_9E0C9297: 0.5
+    - Vector1_D73DCCDF: 0.784
     - Vector1_D76FB257: 0
     - Vector1_F3777088: 0.5
     m_Colors:
-    - Color_205203C4: {r: 0, g: 0.2805743, b: 1, a: 0}
-    - Color_D1E0DB2F: {r: 1, g: 1, b: 1, a: 0}
-    - Color_E66829A8: {r: 1, g: 1, b: 1, a: 0}
-    - Vector2_FF795E28: {r: 0.1, g: 0.1, b: 0, a: 0}
+    - Color_205203C4: {r: 0.15374194, g: 2.1908226, b: 7.3411775, a: 0}
+    - Color_7190EDF7: {r: 0.4858491, g: 0.7170178, b: 1, a: 0}
+    - Color_D1E0DB2F: {r: 1, g: 1, b: 1, a: 1}
+    - Color_E66829A8: {r: 0.1882353, g: 0.5803922, b: 0.8235294, a: 0}
+    - Vector2_123F86C: {r: 0.5, g: 0.5, b: 0, a: 0}
+    - Vector2_FF795E28: {r: 0.1, g: 0.15, b: 0, a: 0}
