@@ -15,6 +15,7 @@ public class Gork : Player
 
     private void Update()
     {
+        base.Update();
         if (Input.GetButtonDown("GorkInteract"))
         {
             if (heldObjectSlot.transform.childCount == 0)
@@ -31,11 +32,19 @@ public class Gork : Player
         }
     }
 
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (hit.rigidbody != null && hit.rigidbody.isKinematic == false)
+        {
+            hit.rigidbody.AddForce(hit.moveDirection * Time.deltaTime * 60 * 30/hit.rigidbody.mass, ForceMode.VelocityChange);
+        }
+    }
+
     protected override void InitializeInputs()
     {
-        xAxis = "Horizontal";
-        zAxis = "Vertical";
-        jumpButton = "Jump";
+        xAxis = "GorkHorizontal";
+        zAxis = "GorkVertical";
+        jumpButton = "GorkJump";
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -53,36 +62,37 @@ public class Gork : Player
     }
     private void PickUp(GameObject obj)
     {
+        var clide = obj.GetComponent<Clide>();
         anim.ResetTrigger("pickup");
         anim.SetTrigger("pickup");
-        objectRb = obj.GetComponent<Rigidbody>();
-        objectRb.isKinematic = true;
-        Physics.IgnoreCollision(GetComponent<Collider>(), objectRb.GetComponent<Collider>());
+        Physics.IgnoreCollision(GetComponent<Collider>(), obj.GetComponent<Collider>());
         obj.transform.SetParent(heldObjectSlot.transform, true);
         obj.transform.position = heldObjectSlot.transform.position;
         obj.transform.LookAt(obj.transform.position + transform.forward);
-        objectRb.interpolation = RigidbodyInterpolation.None;
+        objectRb = obj.GetComponent<Rigidbody>();
+        objectRb.isKinematic = true;
+        if (clide != null)
+        {
+            clide.canMove = false;
+        }
     }
     private void Throw(GameObject obj)
     {
+        var clide = obj.GetComponent<Clide>();
         anim.ResetTrigger("throw");
         anim.SetTrigger("throw");
-        objectRb.isKinematic = false;
         Vector3 throwDirection = transform.forward * throwStrength;
         throwDirection = Quaternion.AngleAxis(throwUpwardsAngle, -transform.right) * throwDirection;
-        objectRb.velocity = Vector3.zero;
         obj.transform.SetParent(null, true);
-        if (obj.GetComponent<Clide>() != null)
+        if (clide != null)
         {
-            obj.GetComponent<Clide>().ResetMotion();
-            obj.GetComponent<AirstreamAffected>().airstreamMotion = throwDirection * Time.fixedDeltaTime * 60 * 2;
+            clide.ResetMotion();
+            clide.canMove = true;
         }
-        else
-        {
-           objectRb.AddForce(throwDirection*Time.fixedDeltaTime*60, ForceMode.VelocityChange);
-        }
-        Physics.IgnoreCollision(GetComponent<Collider>(), objectRb.GetComponent<Collider>(), false);
-        objectRb.interpolation = RigidbodyInterpolation.Interpolate;
+        objectRb.velocity = Vector3.zero;
+        objectRb.isKinematic = false;
+        objectRb.AddForce(throwDirection*Time.fixedDeltaTime*60, ForceMode.VelocityChange);
         objectRb = null;
+        Physics.IgnoreCollision(GetComponent<Collider>(), obj.GetComponent<Collider>(), false);
     }
 }
