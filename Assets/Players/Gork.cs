@@ -80,9 +80,9 @@ public class Gork : Player
         else
         {
            objectRb.AddForce(throwDirection*Time.fixedDeltaTime*60, ForceMode.VelocityChange);
+           objectRb.interpolation = RigidbodyInterpolation.Interpolate;
         }
         Physics.IgnoreCollision(GetComponent<Collider>(), objectRb.GetComponent<Collider>(), false);
-        objectRb.interpolation = RigidbodyInterpolation.Interpolate;
         objectRb = null;
     }
 }
