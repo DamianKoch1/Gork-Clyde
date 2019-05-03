@@ -70,7 +70,7 @@ public abstract class Player : MonoBehaviour
                 transform.SetParent(null, true);
                 ghostjumpTimer = 0;
                 jumpCooldown = 0.3f;
-                rb.AddForce(jumpHeight*Vector3.up * Time.deltaTime*60, ForceMode.VelocityChange);
+                rb.AddForce(jumpHeight*Vector3.up * Time.deltaTime*90, ForceMode.VelocityChange);
                 if (anim != null)
                 {
                     anim.SetTrigger("jump");
@@ -78,7 +78,7 @@ public abstract class Player : MonoBehaviour
             }
             if (inAirstream == false)
             {
-                rb.AddForce(new Vector3(-rb.velocity.x, 0 , -rb.velocity.z)*Time.deltaTime*90, ForceMode.Acceleration);   
+                rb.AddForce(new Vector3(-rb.velocity.x, 0 , -rb.velocity.z)*Time.deltaTime*60, ForceMode.Acceleration);   
             }
             motion = ApplyCamRotation(motion);
             MovePlayer();
