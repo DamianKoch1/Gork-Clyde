@@ -62,7 +62,7 @@ public class Gork : Player
     }
     private void PickUp(GameObject obj)
     {
-        var clide = obj.GetComponent<Clide>();
+        var clide = obj.GetComponent<Clyde>();
         anim.ResetTrigger("pickup");
         anim.SetTrigger("pickup");
         Physics.IgnoreCollision(GetComponent<Collider>(), obj.GetComponent<Collider>());
@@ -78,7 +78,7 @@ public class Gork : Player
     }
     private void Throw(GameObject obj)
     {
-        var clide = obj.GetComponent<Clide>();
+        var clide = obj.GetComponent<Clyde>();
         anim.ResetTrigger("throw");
         anim.SetTrigger("throw");
         Vector3 throwDirection = transform.forward * throwStrength;

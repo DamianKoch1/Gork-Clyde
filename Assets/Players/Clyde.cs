@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Clide : Player
+public class Clyde : Player
 {
    
 
