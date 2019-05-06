@@ -26,7 +26,7 @@ public class Button : MonoBehaviour
             } else if (triggerableBy == TriggerableBy.Gork && other.GetComponent<Gork>() != null)
             {
                 SendTriggered();
-            } else if (triggerableBy == TriggerableBy.Clide && other.GetComponent<Clide>() != null)
+            } else if (triggerableBy == TriggerableBy.Clide && other.GetComponent<Clyde>() != null)
             {
                 SendTriggered();
             }

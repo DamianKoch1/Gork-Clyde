@@ -16,7 +16,7 @@ public class Airstream : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        var clide = other.GetComponent<Clide>();
+        var clide = other.GetComponent<Clyde>();
         if (other.GetComponent<AirstreamAffected>() != null || clide != null)
         {
             other.GetComponent<Rigidbody>().AddForce(direction * strength * Time.deltaTime * 60, ForceMode.Acceleration);
@@ -33,7 +33,7 @@ public class Airstream : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        var clide = other.GetComponent<Clide>();
+        var clide = other.GetComponent<Clyde>();
         if (clide != null)
         {
             clide.inAirstream = false;
