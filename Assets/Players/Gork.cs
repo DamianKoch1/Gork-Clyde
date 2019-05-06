@@ -62,26 +62,23 @@ public class Gork : Player
     }
     private void PickUp(GameObject obj)
     {
-        var clide = obj.GetComponent<Clide>();
+        var clide = obj.GetComponent<Clyde>();
         anim.ResetTrigger("pickup");
         anim.SetTrigger("pickup");
         Physics.IgnoreCollision(GetComponent<Collider>(), obj.GetComponent<Collider>());
         obj.transform.SetParent(heldObjectSlot.transform, true);
         obj.transform.position = heldObjectSlot.transform.position;
         obj.transform.LookAt(obj.transform.position + transform.forward);
+        objectRb = obj.GetComponent<Rigidbody>();
+        objectRb.isKinematic = true;
         if (clide != null)
         {
             clide.canMove = false;
         }
-        else
-        {
-            objectRb = obj.GetComponent<Rigidbody>();
-            objectRb.isKinematic = true;
-        }
     }
     private void Throw(GameObject obj)
     {
-        var clide = obj.GetComponent<Clide>();
+        var clide = obj.GetComponent<Clyde>();
         anim.ResetTrigger("throw");
         anim.SetTrigger("throw");
         Vector3 throwDirection = transform.forward * throwStrength;
@@ -91,15 +88,11 @@ public class Gork : Player
         {
             clide.ResetMotion();
             clide.canMove = true;
-            clide.AddForce(throwDirection * Time.deltaTime * 60 * 2);
         }
-        else
-        {
-            objectRb.velocity = Vector3.zero;
-            objectRb.isKinematic = false;
-            objectRb.AddForce(throwDirection*Time.fixedDeltaTime*60, ForceMode.VelocityChange);
-            objectRb = null;
-        }
+        objectRb.velocity = Vector3.zero;
+        objectRb.isKinematic = false;
+        objectRb.AddForce(throwDirection*Time.fixedDeltaTime*60, ForceMode.VelocityChange);
+        objectRb = null;
         Physics.IgnoreCollision(GetComponent<Collider>(), obj.GetComponent<Collider>(), false);
     }
 }
