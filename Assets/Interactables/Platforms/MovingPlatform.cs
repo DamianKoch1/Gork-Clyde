@@ -4,82 +4,56 @@ using UnityEngine;
 
 public class MovingPlatform : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject start, target, platform;
     private Vector3 pos1, pos2;
     private bool stop;
-    private Vector3 startPos;
-    private Vector3 targetPos;
-    public enum Mode {Autostart, Continuous, Oneshot, PressurePlate}
+    public enum Mode {Autostart, Continuous, Oneshot};
     public Mode mode = Mode.Autostart;
-    private float lerpAmount;
     [SerializeField]
     private float speed;
-   
+    private Rigidbody rb;
+    private float moveAmount = 0;
+
     void Start()
     {
-        pos1 = transform.Find("Pos1").transform.position;
-        startPos = transform.position;
-        pos2 = transform.Find("Pos2").transform.position;
-        targetPos = pos1;
+        rb = platform.GetComponent<Rigidbody>();
+        pos1 = start.transform.position;
+        pos2 = target.transform.position;
         if (mode == Mode.Autostart)
         {
-            Move();
-        }
-        else if (mode == Mode.PressurePlate)
-        {
-            Move();
-            stop = true;
+            stop = false;
         }
         else
         {
             stop = true;
         }
-        lerpAmount = 0;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        moveAmount += Time.fixedDeltaTime * speed;
+        if (moveAmount >= Mathf.PI * 20) moveAmount = 0;
+        
         if (stop == false)
         {
-            lerpAmount += speed * Time.deltaTime;
-            transform.position = Vector3.Lerp(startPos, targetPos, lerpAmount);
-            if (lerpAmount >= 1)
+            rb.MovePosition(pos1 + 0.5f*(1+Mathf.Sin(moveAmount))*(pos2 - pos1));
+            if ((Vector3.Distance(rb.position, pos1) < 0.1f) || (Vector3.Distance(rb.position, pos2) < 0.1f))
             {
-               if (mode != Mode.Oneshot)
-               {
-                    Move();
-               }
-               else
+               if (mode == Mode.Oneshot)
                {
                     stop = true;
                }
             }
         }
-
-
     }
 
-    void Move()
-    {
-        stop = false;
-        if (targetPos == pos1)
-        {
-            targetPos = pos2;
-        }
-        else
-        {
-            targetPos = pos1;
-        }
-        startPos = transform.position;
-        lerpAmount = 0;
-    }
-
-   
     public void OnButtonActivated()
     {
-        if (lerpAmount <= 0 || lerpAmount >= 1)
+        if (Mathf.Abs(Mathf.Sin(moveAmount)) < 0.45f)
         {
-            Move();
+            stop = false;
         }
     }
     
