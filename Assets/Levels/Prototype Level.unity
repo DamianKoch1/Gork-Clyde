@@ -1833,7 +1833,7 @@ VideoPlayer:
   m_TargetTexture: {fileID: 0}
   m_TimeReference: 0
   m_TargetMaterialRenderer: {fileID: 0}
-  m_TargetMaterialProperty: _MainTex
+  m_TargetMaterialProperty: _BaseMap
   m_RenderMode: 3
   m_AspectRatio: 2
   m_DataSource: 0
@@ -1880,7 +1880,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 6874d98a8bc1c0e4691976aee0b38daa, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2182,7 +2182,7 @@ VideoPlayer:
   m_TargetTexture: {fileID: 0}
   m_TimeReference: 0
   m_TargetMaterialRenderer: {fileID: 0}
-  m_TargetMaterialProperty: _MainTex
+  m_TargetMaterialProperty: _BaseMap
   m_RenderMode: 3
   m_AspectRatio: 2
   m_DataSource: 0
@@ -2229,7 +2229,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 6874d98a8bc1c0e4691976aee0b38daa, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2526,7 +2526,7 @@ VideoPlayer:
   m_TargetTexture: {fileID: 0}
   m_TimeReference: 0
   m_TargetMaterialRenderer: {fileID: 0}
-  m_TargetMaterialProperty: _MainTex
+  m_TargetMaterialProperty: _BaseMap
   m_RenderMode: 3
   m_AspectRatio: 2
   m_DataSource: 0
@@ -2573,7 +2573,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 6874d98a8bc1c0e4691976aee0b38daa, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4727,7 +4727,7 @@ MonoBehaviour:
       localPivot: {x: 12, y: 0.5}
       localSize: {x: 0, y: 0}
       anchor: 9
-    _mat: {fileID: 2100000, guid: 55296d1b6ee54e14e8eb4648d4b448ee, type: 2}
+    _mat: {fileID: 2100000, guid: 6874d98a8bc1c0e4691976aee0b38daa, type: 2}
     manualUV: 0
     elementGroup: -1
     textureGroup: -1
@@ -4756,7 +4756,7 @@ MonoBehaviour:
       localPivot: {x: -0.5, y: 0.5}
       localSize: {x: 0, y: 0}
       anchor: 9
-    _mat: {fileID: 2100000, guid: 55296d1b6ee54e14e8eb4648d4b448ee, type: 2}
+    _mat: {fileID: 2100000, guid: 6874d98a8bc1c0e4691976aee0b38daa, type: 2}
     manualUV: 0
     elementGroup: -1
     textureGroup: -1
@@ -4785,7 +4785,7 @@ MonoBehaviour:
       localPivot: {x: -12, y: 0.5}
       localSize: {x: 0, y: 0}
       anchor: 9
-    _mat: {fileID: 2100000, guid: 55296d1b6ee54e14e8eb4648d4b448ee, type: 2}
+    _mat: {fileID: 2100000, guid: 6874d98a8bc1c0e4691976aee0b38daa, type: 2}
     manualUV: 0
     elementGroup: -1
     textureGroup: -1
@@ -4814,7 +4814,7 @@ MonoBehaviour:
       localPivot: {x: 0.5, y: 0.5}
       localSize: {x: 0, y: 0}
       anchor: 9
-    _mat: {fileID: 2100000, guid: 55296d1b6ee54e14e8eb4648d4b448ee, type: 2}
+    _mat: {fileID: 2100000, guid: 6874d98a8bc1c0e4691976aee0b38daa, type: 2}
     manualUV: 0
     elementGroup: -1
     textureGroup: -1
@@ -4843,7 +4843,7 @@ MonoBehaviour:
       localPivot: {x: -12, y: -0.5}
       localSize: {x: 0, y: 0}
       anchor: 9
-    _mat: {fileID: 2100000, guid: 55296d1b6ee54e14e8eb4648d4b448ee, type: 2}
+    _mat: {fileID: 2100000, guid: 6874d98a8bc1c0e4691976aee0b38daa, type: 2}
     manualUV: 0
     elementGroup: -1
     textureGroup: -1
@@ -4872,7 +4872,7 @@ MonoBehaviour:
       localPivot: {x: 12, y: -0.5}
       localSize: {x: 0, y: 0}
       anchor: 9
-    _mat: {fileID: 2100000, guid: 55296d1b6ee54e14e8eb4648d4b448ee, type: 2}
+    _mat: {fileID: 2100000, guid: 6874d98a8bc1c0e4691976aee0b38daa, type: 2}
     manualUV: 0
     elementGroup: -1
     textureGroup: -1
@@ -4901,7 +4901,7 @@ MonoBehaviour:
       localPivot: {x: 25.5, y: -0.5}
       localSize: {x: 0, y: 0}
       anchor: 9
-    _mat: {fileID: 2100000, guid: 55296d1b6ee54e14e8eb4648d4b448ee, type: 2}
+    _mat: {fileID: 2100000, guid: 6874d98a8bc1c0e4691976aee0b38daa, type: 2}
     manualUV: 0
     elementGroup: -1
     textureGroup: -1
@@ -4930,7 +4930,7 @@ MonoBehaviour:
       localPivot: {x: -25.5, y: 0.5}
       localSize: {x: 0, y: 0}
       anchor: 9
-    _mat: {fileID: 2100000, guid: 55296d1b6ee54e14e8eb4648d4b448ee, type: 2}
+    _mat: {fileID: 2100000, guid: 6874d98a8bc1c0e4691976aee0b38daa, type: 2}
     manualUV: 0
     elementGroup: -1
     textureGroup: -1
@@ -4959,7 +4959,7 @@ MonoBehaviour:
       localPivot: {x: 25.5, y: 0.5}
       localSize: {x: 0, y: 0}
       anchor: 9
-    _mat: {fileID: 2100000, guid: 55296d1b6ee54e14e8eb4648d4b448ee, type: 2}
+    _mat: {fileID: 2100000, guid: 6874d98a8bc1c0e4691976aee0b38daa, type: 2}
     manualUV: 0
     elementGroup: -1
     textureGroup: -1
@@ -4988,7 +4988,7 @@ MonoBehaviour:
       localPivot: {x: -25.5, y: -0.5}
       localSize: {x: 0, y: 0}
       anchor: 9
-    _mat: {fileID: 2100000, guid: 55296d1b6ee54e14e8eb4648d4b448ee, type: 2}
+    _mat: {fileID: 2100000, guid: 6874d98a8bc1c0e4691976aee0b38daa, type: 2}
     manualUV: 0
     elementGroup: -1
     textureGroup: -1
@@ -5017,7 +5017,7 @@ MonoBehaviour:
       localPivot: {x: 11.5, y: 0.5}
       localSize: {x: 0, y: 0}
       anchor: 9
-    _mat: {fileID: 2100000, guid: 55296d1b6ee54e14e8eb4648d4b448ee, type: 2}
+    _mat: {fileID: 2100000, guid: 6874d98a8bc1c0e4691976aee0b38daa, type: 2}
     manualUV: 0
     elementGroup: -1
     textureGroup: -1
@@ -5046,7 +5046,7 @@ MonoBehaviour:
       localPivot: {x: 25.5, y: 11.5}
       localSize: {x: 0, y: 0}
       anchor: 9
-    _mat: {fileID: 2100000, guid: 55296d1b6ee54e14e8eb4648d4b448ee, type: 2}
+    _mat: {fileID: 2100000, guid: 6874d98a8bc1c0e4691976aee0b38daa, type: 2}
     manualUV: 0
     elementGroup: -1
     textureGroup: -1
@@ -5075,7 +5075,7 @@ MonoBehaviour:
       localPivot: {x: -25.5, y: 11.5}
       localSize: {x: 0, y: 0}
       anchor: 9
-    _mat: {fileID: 2100000, guid: 55296d1b6ee54e14e8eb4648d4b448ee, type: 2}
+    _mat: {fileID: 2100000, guid: 6874d98a8bc1c0e4691976aee0b38daa, type: 2}
     manualUV: 0
     elementGroup: -1
     textureGroup: -1
@@ -5104,7 +5104,7 @@ MonoBehaviour:
       localPivot: {x: -11.5, y: 0.5}
       localSize: {x: 0, y: 0}
       anchor: 9
-    _mat: {fileID: 2100000, guid: 55296d1b6ee54e14e8eb4648d4b448ee, type: 2}
+    _mat: {fileID: 2100000, guid: 6874d98a8bc1c0e4691976aee0b38daa, type: 2}
     manualUV: 0
     elementGroup: -1
     textureGroup: -1
@@ -5133,7 +5133,7 @@ MonoBehaviour:
       localPivot: {x: 12, y: 7.5}
       localSize: {x: 0, y: 0}
       anchor: 9
-    _mat: {fileID: 2100000, guid: 55296d1b6ee54e14e8eb4648d4b448ee, type: 2}
+    _mat: {fileID: 2100000, guid: 6874d98a8bc1c0e4691976aee0b38daa, type: 2}
     manualUV: 0
     elementGroup: -1
     textureGroup: -1
@@ -5162,7 +5162,7 @@ MonoBehaviour:
       localPivot: {x: 11.5, y: 7.5}
       localSize: {x: 0, y: 0}
       anchor: 9
-    _mat: {fileID: 2100000, guid: 55296d1b6ee54e14e8eb4648d4b448ee, type: 2}
+    _mat: {fileID: 2100000, guid: 6874d98a8bc1c0e4691976aee0b38daa, type: 2}
     manualUV: 0
     elementGroup: -1
     textureGroup: -1
@@ -5191,7 +5191,7 @@ MonoBehaviour:
       localPivot: {x: -0.5, y: 7.5}
       localSize: {x: 0, y: 0}
       anchor: 9
-    _mat: {fileID: 2100000, guid: 55296d1b6ee54e14e8eb4648d4b448ee, type: 2}
+    _mat: {fileID: 2100000, guid: 6874d98a8bc1c0e4691976aee0b38daa, type: 2}
     manualUV: 0
     elementGroup: -1
     textureGroup: -1
@@ -5220,7 +5220,7 @@ MonoBehaviour:
       localPivot: {x: -12, y: 7.5}
       localSize: {x: 0, y: 0}
       anchor: 9
-    _mat: {fileID: 2100000, guid: 55296d1b6ee54e14e8eb4648d4b448ee, type: 2}
+    _mat: {fileID: 2100000, guid: 6874d98a8bc1c0e4691976aee0b38daa, type: 2}
     manualUV: 0
     elementGroup: -1
     textureGroup: -1
@@ -5249,7 +5249,7 @@ MonoBehaviour:
       localPivot: {x: -25.5, y: 7.5}
       localSize: {x: 0, y: 0}
       anchor: 9
-    _mat: {fileID: 2100000, guid: 55296d1b6ee54e14e8eb4648d4b448ee, type: 2}
+    _mat: {fileID: 2100000, guid: 6874d98a8bc1c0e4691976aee0b38daa, type: 2}
     manualUV: 0
     elementGroup: -1
     textureGroup: -1
@@ -5278,7 +5278,7 @@ MonoBehaviour:
       localPivot: {x: 0.5, y: 7.5}
       localSize: {x: 0, y: 0}
       anchor: 9
-    _mat: {fileID: 2100000, guid: 55296d1b6ee54e14e8eb4648d4b448ee, type: 2}
+    _mat: {fileID: 2100000, guid: 6874d98a8bc1c0e4691976aee0b38daa, type: 2}
     manualUV: 0
     elementGroup: -1
     textureGroup: -1
@@ -5307,7 +5307,7 @@ MonoBehaviour:
       localPivot: {x: -11.5, y: 7.5}
       localSize: {x: 0, y: 0}
       anchor: 9
-    _mat: {fileID: 2100000, guid: 55296d1b6ee54e14e8eb4648d4b448ee, type: 2}
+    _mat: {fileID: 2100000, guid: 6874d98a8bc1c0e4691976aee0b38daa, type: 2}
     manualUV: 0
     elementGroup: -1
     textureGroup: -1
@@ -5336,7 +5336,7 @@ MonoBehaviour:
       localPivot: {x: 25.5, y: 7.5}
       localSize: {x: 0, y: 0}
       anchor: 9
-    _mat: {fileID: 2100000, guid: 55296d1b6ee54e14e8eb4648d4b448ee, type: 2}
+    _mat: {fileID: 2100000, guid: 6874d98a8bc1c0e4691976aee0b38daa, type: 2}
     manualUV: 0
     elementGroup: -1
     textureGroup: -1
@@ -5365,7 +5365,7 @@ MonoBehaviour:
       localPivot: {x: 22, y: 0.5}
       localSize: {x: 0, y: 0}
       anchor: 9
-    _mat: {fileID: 2100000, guid: 55296d1b6ee54e14e8eb4648d4b448ee, type: 2}
+    _mat: {fileID: 2100000, guid: 6874d98a8bc1c0e4691976aee0b38daa, type: 2}
     manualUV: 0
     elementGroup: -1
     textureGroup: -1
@@ -5394,7 +5394,7 @@ MonoBehaviour:
       localPivot: {x: 22, y: 7.5}
       localSize: {x: 0, y: 0}
       anchor: 9
-    _mat: {fileID: 2100000, guid: 55296d1b6ee54e14e8eb4648d4b448ee, type: 2}
+    _mat: {fileID: 2100000, guid: 6874d98a8bc1c0e4691976aee0b38daa, type: 2}
     manualUV: 0
     elementGroup: -1
     textureGroup: -1
@@ -5423,7 +5423,7 @@ MonoBehaviour:
       localPivot: {x: -22, y: 7.5}
       localSize: {x: 0, y: 0}
       anchor: 9
-    _mat: {fileID: 2100000, guid: 55296d1b6ee54e14e8eb4648d4b448ee, type: 2}
+    _mat: {fileID: 2100000, guid: 6874d98a8bc1c0e4691976aee0b38daa, type: 2}
     manualUV: 0
     elementGroup: -1
     textureGroup: -1
@@ -5452,7 +5452,7 @@ MonoBehaviour:
       localPivot: {x: -22, y: 11.5}
       localSize: {x: 0, y: 0}
       anchor: 9
-    _mat: {fileID: 2100000, guid: 55296d1b6ee54e14e8eb4648d4b448ee, type: 2}
+    _mat: {fileID: 2100000, guid: 6874d98a8bc1c0e4691976aee0b38daa, type: 2}
     manualUV: 0
     elementGroup: -1
     textureGroup: -1
@@ -5481,7 +5481,7 @@ MonoBehaviour:
       localPivot: {x: -22, y: 0.5}
       localSize: {x: 0, y: 0}
       anchor: 9
-    _mat: {fileID: 2100000, guid: 55296d1b6ee54e14e8eb4648d4b448ee, type: 2}
+    _mat: {fileID: 2100000, guid: 6874d98a8bc1c0e4691976aee0b38daa, type: 2}
     manualUV: 0
     elementGroup: -1
     textureGroup: -1
@@ -5510,7 +5510,7 @@ MonoBehaviour:
       localPivot: {x: 22, y: 11.5}
       localSize: {x: 0, y: 0}
       anchor: 9
-    _mat: {fileID: 2100000, guid: 55296d1b6ee54e14e8eb4648d4b448ee, type: 2}
+    _mat: {fileID: 2100000, guid: 6874d98a8bc1c0e4691976aee0b38daa, type: 2}
     manualUV: 0
     elementGroup: -1
     textureGroup: -1
@@ -5539,7 +5539,7 @@ MonoBehaviour:
       localPivot: {x: -9, y: 0.5}
       localSize: {x: 0, y: 0}
       anchor: 9
-    _mat: {fileID: 2100000, guid: 55296d1b6ee54e14e8eb4648d4b448ee, type: 2}
+    _mat: {fileID: 2100000, guid: 6874d98a8bc1c0e4691976aee0b38daa, type: 2}
     manualUV: 0
     elementGroup: -1
     textureGroup: -1
@@ -5568,7 +5568,7 @@ MonoBehaviour:
       localPivot: {x: 9, y: 11.5}
       localSize: {x: 0, y: 0}
       anchor: 9
-    _mat: {fileID: 2100000, guid: 55296d1b6ee54e14e8eb4648d4b448ee, type: 2}
+    _mat: {fileID: 2100000, guid: 6874d98a8bc1c0e4691976aee0b38daa, type: 2}
     manualUV: 0
     elementGroup: -1
     textureGroup: -1
@@ -5597,7 +5597,7 @@ MonoBehaviour:
       localPivot: {x: 9, y: 7.5}
       localSize: {x: 0, y: 0}
       anchor: 9
-    _mat: {fileID: 2100000, guid: 55296d1b6ee54e14e8eb4648d4b448ee, type: 2}
+    _mat: {fileID: 2100000, guid: 6874d98a8bc1c0e4691976aee0b38daa, type: 2}
     manualUV: 0
     elementGroup: -1
     textureGroup: -1
@@ -5626,7 +5626,7 @@ MonoBehaviour:
       localPivot: {x: 9, y: 0.5}
       localSize: {x: 0, y: 0}
       anchor: 9
-    _mat: {fileID: 2100000, guid: 55296d1b6ee54e14e8eb4648d4b448ee, type: 2}
+    _mat: {fileID: 2100000, guid: 6874d98a8bc1c0e4691976aee0b38daa, type: 2}
     manualUV: 0
     elementGroup: -1
     textureGroup: -1
@@ -5655,7 +5655,7 @@ MonoBehaviour:
       localPivot: {x: -9, y: 7.5}
       localSize: {x: 0, y: 0}
       anchor: 9
-    _mat: {fileID: 2100000, guid: 55296d1b6ee54e14e8eb4648d4b448ee, type: 2}
+    _mat: {fileID: 2100000, guid: 6874d98a8bc1c0e4691976aee0b38daa, type: 2}
     manualUV: 0
     elementGroup: -1
     textureGroup: -1
@@ -5684,7 +5684,7 @@ MonoBehaviour:
       localPivot: {x: -9, y: 11.5}
       localSize: {x: 0, y: 0}
       anchor: 9
-    _mat: {fileID: 2100000, guid: 55296d1b6ee54e14e8eb4648d4b448ee, type: 2}
+    _mat: {fileID: 2100000, guid: 6874d98a8bc1c0e4691976aee0b38daa, type: 2}
     manualUV: 0
     elementGroup: -1
     textureGroup: -1
@@ -5713,7 +5713,7 @@ MonoBehaviour:
       localPivot: {x: -28, y: 7.5}
       localSize: {x: 0, y: 0}
       anchor: 9
-    _mat: {fileID: 2100000, guid: 55296d1b6ee54e14e8eb4648d4b448ee, type: 2}
+    _mat: {fileID: 2100000, guid: 6874d98a8bc1c0e4691976aee0b38daa, type: 2}
     manualUV: 0
     elementGroup: -1
     textureGroup: -1
@@ -5742,7 +5742,7 @@ MonoBehaviour:
       localPivot: {x: -9, y: 28}
       localSize: {x: 0, y: 0}
       anchor: 9
-    _mat: {fileID: 2100000, guid: 55296d1b6ee54e14e8eb4648d4b448ee, type: 2}
+    _mat: {fileID: 2100000, guid: 6874d98a8bc1c0e4691976aee0b38daa, type: 2}
     manualUV: 0
     elementGroup: -1
     textureGroup: -1
@@ -5771,7 +5771,7 @@ MonoBehaviour:
       localPivot: {x: 9, y: 28}
       localSize: {x: 0, y: 0}
       anchor: 9
-    _mat: {fileID: 2100000, guid: 55296d1b6ee54e14e8eb4648d4b448ee, type: 2}
+    _mat: {fileID: 2100000, guid: 6874d98a8bc1c0e4691976aee0b38daa, type: 2}
     manualUV: 0
     elementGroup: -1
     textureGroup: -1
@@ -5800,7 +5800,7 @@ MonoBehaviour:
       localPivot: {x: 28, y: 7.5}
       localSize: {x: 0, y: 0}
       anchor: 9
-    _mat: {fileID: 2100000, guid: 55296d1b6ee54e14e8eb4648d4b448ee, type: 2}
+    _mat: {fileID: 2100000, guid: 6874d98a8bc1c0e4691976aee0b38daa, type: 2}
     manualUV: 0
     elementGroup: -1
     textureGroup: -1
@@ -5829,7 +5829,7 @@ MonoBehaviour:
       localPivot: {x: -28, y: 0.5}
       localSize: {x: 0, y: 0}
       anchor: 9
-    _mat: {fileID: 2100000, guid: 55296d1b6ee54e14e8eb4648d4b448ee, type: 2}
+    _mat: {fileID: 2100000, guid: 6874d98a8bc1c0e4691976aee0b38daa, type: 2}
     manualUV: 0
     elementGroup: -1
     textureGroup: -1
@@ -5858,7 +5858,7 @@ MonoBehaviour:
       localPivot: {x: 28, y: 0.5}
       localSize: {x: 0, y: 0}
       anchor: 9
-    _mat: {fileID: 2100000, guid: 55296d1b6ee54e14e8eb4648d4b448ee, type: 2}
+    _mat: {fileID: 2100000, guid: 6874d98a8bc1c0e4691976aee0b38daa, type: 2}
     manualUV: 0
     elementGroup: -1
     textureGroup: -1
@@ -6754,7 +6754,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 70c6b282ebe1c8048b6e684d21529bb0, type: 2}
+  - {fileID: 2100000, guid: 6874d98a8bc1c0e4691976aee0b38daa, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6802,7 +6802,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh13298
+  m_Name: pb_Mesh22790
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -6954,7 +6954,7 @@ Mesh:
   m_BakedTriangleCollisionMesh: 
   m_MeshMetrics[0]: 1
   m_MeshMetrics[1]: 1
-  m_MeshOptimizationFlags: -1
+  m_MeshOptimizationFlags: 1
   m_StreamData:
     offset: 0
     size: 0
@@ -12690,6 +12690,44 @@ Transform:
   m_Father: {fileID: 675060066}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1951564658 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4262943193389458192, guid: 9d877d12077e4dc40a6188aefc360d49,
+    type: 3}
+  m_PrefabInstance: {fileID: 45165926}
+  m_PrefabAsset: {fileID: 0}
+--- !u!328 &1951564659
+VideoPlayer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1951564658}
+  m_Enabled: 1
+  m_VideoClip: {fileID: 32900000, guid: 295db7c4ab2b71344861f8ac751951a2, type: 3}
+  m_TargetCameraAlpha: 1
+  m_TargetCamera3DLayout: 0
+  m_TargetCamera: {fileID: 0}
+  m_TargetTexture: {fileID: 0}
+  m_TimeReference: 0
+  m_TargetMaterialRenderer: {fileID: 0}
+  m_TargetMaterialProperty: _MainTex
+  m_RenderMode: 3
+  m_AspectRatio: 2
+  m_DataSource: 0
+  m_PlaybackSpeed: 1
+  m_AudioOutputMode: 2
+  m_TargetAudioSources: []
+  m_DirectAudioVolumes: []
+  m_Url: 
+  m_EnabledAudioTracks: 
+  m_DirectAudioMutes: 
+  m_ControlledAudioTrackCount: 0
+  m_PlayOnAwake: 1
+  m_SkipOnDrop: 1
+  m_Looping: 0
+  m_WaitForFirstFrame: 1
+  m_FrameReadyEventEnabled: 0
 --- !u!1001 &1989462857
 PrefabInstance:
   m_ObjectHideFlags: 0
