@@ -48,7 +48,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 428acc25613cead439167ab918caaea1, type: 2}
+  - {fileID: 2100000, guid: 6ef47cd93ca9b8046ac7630e3d6da288, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1546,7 +1546,6 @@ GameObject:
   - component: {fileID: 2927804246409065628}
   - component: {fileID: 870567756241692319}
   - component: {fileID: 2487757363464354236}
-  - component: {fileID: 1954093378493996401}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -1613,16 +1612,3 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &1954093378493996401
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6029776519556305271}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}

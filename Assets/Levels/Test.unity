@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 64d0cdedf44846e45a47bc186d90ddae, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 170076734}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.53691375, g: 0.4580319, b: 0.39581826, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -202,6 +202,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1641356670063352299, guid: f0f009b5989e20e45a775b3f8d5093bb,
+        type: 3}
+      propertyPath: m_Name
+      value: Airstream (3)
+      objectReference: {fileID: 0}
     - target: {fileID: 1252764968395368951, guid: f0f009b5989e20e45a775b3f8d5093bb,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -257,11 +262,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1641356670063352299, guid: f0f009b5989e20e45a775b3f8d5093bb,
-        type: 3}
-      propertyPath: m_Name
-      value: Airstream (3)
-      objectReference: {fileID: 0}
     - target: {fileID: 2167325098335306078, guid: f0f009b5989e20e45a775b3f8d5093bb,
         type: 3}
       propertyPath: strength
@@ -296,13 +296,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 80409100}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: -0, y: -1, z: -0, w: 0.00006973743}
   m_LocalPosition: {x: 2.4783096, y: 3.303625, z: -3.548525}
   m_LocalScale: {x: 4.0440397, y: 4.0440397, z: 4.0440397}
   m_Children: []
   m_Father: {fileID: 1717855543}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -179.992, z: 0}
 --- !u!64 &80409102
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -334,7 +334,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 48521e71d8953ca4a813649d72877c33, type: 2}
+  - {fileID: 2100000, guid: 586f28e532ae7994cb394b542c62c980, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -460,7 +460,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 179685.81, y: 2.871347e-34, z: 6.82e-43, w: 1.61e-43}
+  m_BoundingSphereOverride: {x: 0, y: -1.1073683e-30, z: 6.28e-43, w: -1.0353875e-30}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -1280,6 +1280,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1641356670063352299, guid: f0f009b5989e20e45a775b3f8d5093bb,
+        type: 3}
+      propertyPath: m_Name
+      value: Airstream (2)
+      objectReference: {fileID: 0}
     - target: {fileID: 1252764968395368951, guid: f0f009b5989e20e45a775b3f8d5093bb,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1334,16 +1339,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1641356670063352299, guid: f0f009b5989e20e45a775b3f8d5093bb,
-        type: 3}
-      propertyPath: m_Name
-      value: Airstream (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 2167325098335306078, guid: f0f009b5989e20e45a775b3f8d5093bb,
-        type: 3}
-      propertyPath: strength
-      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f0f009b5989e20e45a775b3f8d5093bb, type: 3}
@@ -3220,6 +3215,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1641356670063352299, guid: f0f009b5989e20e45a775b3f8d5093bb,
+        type: 3}
+      propertyPath: m_Name
+      value: Airstream (5)
+      objectReference: {fileID: 0}
     - target: {fileID: 1252764968395368951, guid: f0f009b5989e20e45a775b3f8d5093bb,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3274,11 +3274,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1641356670063352299, guid: f0f009b5989e20e45a775b3f8d5093bb,
-        type: 3}
-      propertyPath: m_Name
-      value: Airstream (5)
       objectReference: {fileID: 0}
     - target: {fileID: 2167325098335306078, guid: f0f009b5989e20e45a775b3f8d5093bb,
         type: 3}
@@ -4121,6 +4116,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1641356670063352299, guid: f0f009b5989e20e45a775b3f8d5093bb,
+        type: 3}
+      propertyPath: m_Name
+      value: Airstream (4)
+      objectReference: {fileID: 0}
     - target: {fileID: 1252764968395368951, guid: f0f009b5989e20e45a775b3f8d5093bb,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4175,11 +4175,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1641356670063352299, guid: f0f009b5989e20e45a775b3f8d5093bb,
-        type: 3}
-      propertyPath: m_Name
-      value: Airstream (4)
       objectReference: {fileID: 0}
     - target: {fileID: 2167325098335306078, guid: f0f009b5989e20e45a775b3f8d5093bb,
         type: 3}
@@ -6125,6 +6120,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2329437449930610536, guid: f055718a36d21f04195bab65c3180ef5,
+        type: 3}
+      propertyPath: m_Name
+      value: Main Camera
+      objectReference: {fileID: 0}
     - target: {fileID: 2329437449930610551, guid: f055718a36d21f04195bab65c3180ef5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6180,21 +6180,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2329437449930610536, guid: f055718a36d21f04195bab65c3180ef5,
-        type: 3}
-      propertyPath: m_Name
-      value: Main Camera
-      objectReference: {fileID: 0}
-    - target: {fileID: 2329437449930610548, guid: f055718a36d21f04195bab65c3180ef5,
-        type: 3}
-      propertyPath: player1
-      value: 
-      objectReference: {fileID: 1198959068}
-    - target: {fileID: 2329437449930610548, guid: f055718a36d21f04195bab65c3180ef5,
-        type: 3}
-      propertyPath: player2
-      value: 
-      objectReference: {fileID: 2553107321341475814}
     - target: {fileID: 2329437449930610548, guid: f055718a36d21f04195bab65c3180ef5,
         type: 3}
       propertyPath: gork
