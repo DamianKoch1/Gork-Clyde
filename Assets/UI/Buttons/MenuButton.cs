@@ -7,12 +7,19 @@ using UnityEngine.Serialization;
 
 public class MenuButton : MonoBehaviour
 {
-   
+    public void EndBgm()
+    {
+        GameObject bgm = GameObject.FindGameObjectWithTag("bgm");
+        Destroy(bgm);
+    }
+ 
+
     public void LoadScene(string sceneName)
     {
         Time.timeScale = 1;
         SceneManager.LoadScene(sceneName);
     }
+    
 
     public void ToggleMenu(GameObject menu)
     {
