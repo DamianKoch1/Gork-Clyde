@@ -71,14 +71,14 @@ public class CameraBehaviour : MonoBehaviour
             playerMiddle = gork.transform.position + (0.5f * (clide.transform.position - gork.transform.position));
             zoomMultiplier = Mathf.Clamp((playerDistanceZoomThreshhold / (Vector3.Distance(gork.transform.position, clide.transform.position)))/zoomSpeed, minZoom, maxZoom);
             desiredPos = playerMiddle + offset / zoomMultiplier;
-            if (Physics.Raycast(desiredPos, playerMiddle - desiredPos, out hit, (playerMiddle - desiredPos).magnitude, wallLayers, QueryTriggerInteraction.Ignore) && Physics.Raycast(gork.transform.position, clide.transform.position - gork.transform.position, (clide.transform.position - gork.transform.position).magnitude, wallLayers, QueryTriggerInteraction.Ignore) == false)
-            {
-                targetPos = Vector3.Lerp(hit.point, playerMiddle, 0.7f);
-            }
-            else
-            {
+//            if (Physics.Raycast(desiredPos, playerMiddle - desiredPos, out hit, (playerMiddle - desiredPos).magnitude, wallLayers, QueryTriggerInteraction.Ignore) && Physics.Raycast(gork.transform.position, clide.transform.position - gork.transform.position, (clide.transform.position - gork.transform.position).magnitude, wallLayers, QueryTriggerInteraction.Ignore) == false)
+//            {
+//                targetPos = Vector3.Lerp(hit.point, playerMiddle, 0.7f);
+//            }
+//            else
+//            {
                 targetPos = desiredPos;
-            }
+//            }
             transform.position = Vector3.Lerp(transform.position, targetPos, followSpeed);
         }
     }
