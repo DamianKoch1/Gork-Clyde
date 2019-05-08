@@ -78,6 +78,7 @@ public class Gork : Player
     }
     private void Throw(GameObject obj)
     {
+        GetComponent<AudioSource>().Play();
         var clide = obj.GetComponent<Clyde>();
         anim.ResetTrigger("throw");
         anim.SetTrigger("throw");
