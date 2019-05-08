@@ -16,9 +16,7 @@ public abstract class Player : MonoBehaviour
     private float ghostjumpTimer = 0f;
     [HideInInspector] 
     public bool canMove = true, inAirstream = false;
-    private RaycastHit hit;
     private Vector3 parentPos;
-    private Collision collisionInfo;
 
     protected virtual void Start()
     {
@@ -85,24 +83,26 @@ public abstract class Player : MonoBehaviour
             }
             motion = ApplyCamRotation(motion);
             MovePlayer();
-            LookForward();
         }
     }
 
-    void OnCollisionStay(Collision info)
-    {
-        // Debug-draw all contact points and normals
-        foreach (ContactPoint contact in info.contacts)
-        {
-            Debug.DrawRay(contact.point, contact.normal * 10, Color.white);
-        }
-
-        collisionInfo = info;
-    }
+   
 
     protected virtual void MovePlayer()
     {
+        //fixing player moving through walls when moving diagonally
+        if (Physics.Raycast(rb.position - 0.8f*GetComponent<Collider>().bounds.extents.y*Vector3.up, motion.x * Vector3.right, 
+        GetComponent<Collider>().bounds.extents.x*1.1f,Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore))
+        {
+            motion.x = 0;
+        }
+        if (Physics.Raycast(rb.position - 0.8f*GetComponent<Collider>().bounds.extents.y*Vector3.up, motion.z * Vector3.forward, 
+        GetComponent<Collider>().bounds.extents.x*1.1f,Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore))
+        {
+            motion.z = 0;
+        }
         rb.MovePosition(rb.position + motion * Time.fixedDeltaTime);
+        LookForward();
     }
 
   
@@ -117,9 +117,10 @@ public abstract class Player : MonoBehaviour
     private bool IsGrounded()
     {
         return Physics.SphereCast(transform.position, GetComponent<Collider>().bounds.extents.x / 2, -Vector3.up,
-            out hit, GetComponent<Collider>().bounds.extents.y - 0.1f, Physics.DefaultRaycastLayers,
+            out RaycastHit hitInfo, GetComponent<Collider>().bounds.extents.y - 0.1f, Physics.DefaultRaycastLayers,
             QueryTriggerInteraction.Ignore);
     }
+    
     protected abstract void InitializeInputs();
 
     public void ResetMotion()
