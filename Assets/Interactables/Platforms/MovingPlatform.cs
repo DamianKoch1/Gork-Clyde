@@ -6,7 +6,7 @@ public class MovingPlatform : MonoBehaviour
 {
     [SerializeField]
     private GameObject start, target, platform;
-    private Vector3 pos1, pos2;
+    private Vector3 pos1, pos2, targetPos;
     private bool stop;
     public enum Mode {Autostart, Continuous, Oneshot};
     public Mode mode = Mode.Autostart;
@@ -20,11 +20,8 @@ public class MovingPlatform : MonoBehaviour
         rb = platform.GetComponent<Rigidbody>();
         pos1 = start.transform.position;
         pos2 = target.transform.position;
-        if (mode == Mode.Autostart)
-        {
-            stop = false;
-        }
-        else
+        targetPos = pos2;
+        if (mode != Mode.Autostart)
         {
             stop = true;
         }
@@ -33,17 +30,24 @@ public class MovingPlatform : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        moveAmount += Time.fixedDeltaTime * speed;
-        if (moveAmount >= Mathf.PI * 20) moveAmount = 0;
-        
         if (stop == false)
         {
-            rb.MovePosition(pos1 + 0.5f*(1+Mathf.Sin(moveAmount))*(pos2 - pos1));
-            if ((Vector3.Distance(rb.position, pos1) < 0.1f) || (Vector3.Distance(rb.position, pos2) < 0.1f))
+            if (moveAmount >= Mathf.PI * 20) moveAmount = 2 * Mathf.PI;
+            rb.MovePosition(pos1 + 0.5f*(1+Mathf.Sin(moveAmount-Mathf.PI/2))*(pos2 - pos1));
+            moveAmount += Time.fixedDeltaTime * speed;
+            if (mode == Mode.Oneshot)
             {
-               if (mode == Mode.Oneshot)
+                if ((Vector3.Distance(rb.position, targetPos) < 0.1f) && moveAmount > 0.5*Mathf.PI)
                {
                     stop = true;
+                    if (targetPos == pos1)
+                    {
+                        targetPos = pos2;
+                    }
+                    else
+                    {
+                        targetPos = pos1;
+                    }
                }
             }
         }
@@ -51,10 +55,7 @@ public class MovingPlatform : MonoBehaviour
 
     public void OnButtonActivated()
     {
-        if (Mathf.Abs(Mathf.Sin(moveAmount)) < 0.45f)
-        {
-            stop = false;
-        }
+        stop = false;
     }
     
     public void OnPlateActivated()
