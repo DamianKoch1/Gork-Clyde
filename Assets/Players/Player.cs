@@ -18,6 +18,7 @@ public abstract class Player : MonoBehaviour
     public bool canMove = true, inAirstream = false;
     private RaycastHit hit;
     private Vector3 parentPos;
+    private Collision collisionInfo;
 
     protected virtual void Start()
     {
@@ -36,8 +37,20 @@ public abstract class Player : MonoBehaviour
         {
             jumpCooldown = Mathf.Max(jumpCooldown - Time.deltaTime, 0);
         }
+        if (Input.GetButtonDown(jumpButton) && ghostjumpTimer > 0 && jumpCooldown == 0)
+        {
+            transform.SetParent(null, true);
+            ghostjumpTimer = 0;
+            jumpCooldown = 0.3f;
+            rb.AddForce(jumpHeight*Vector3.up * Time.fixedDeltaTime*90, ForceMode.VelocityChange);
+            if (anim != null)
+            {
+                anim.SetTrigger("jump");
+            }
+        }
     }
 
+    
     protected virtual void FixedUpdate()
     {
         if (IsGrounded())
@@ -52,8 +65,9 @@ public abstract class Player : MonoBehaviour
         if (canMove == true)
         {
             
-            motion.x = Input.GetAxis(xAxis) * speed;
-            motion.z = Input.GetAxis(zAxis) * speed;
+            motion.x = Input.GetAxis(xAxis);
+            motion.z = Input.GetAxis(zAxis);
+            motion = motion.normalized * speed;
             if (anim != null)
             {
                 if (motion.x == 0 && motion.z == 0)
@@ -65,20 +79,9 @@ public abstract class Player : MonoBehaviour
                     anim.SetBool("walking", true);
                 }
             }
-            if (Input.GetButtonDown(jumpButton) && ghostjumpTimer > 0 && jumpCooldown == 0)
-            {
-                transform.SetParent(null, true);
-                ghostjumpTimer = 0;
-                jumpCooldown = 0.3f;
-                rb.AddForce(jumpHeight*Vector3.up * Time.deltaTime*90, ForceMode.VelocityChange);
-                if (anim != null)
-                {
-                    anim.SetTrigger("jump");
-                }
-            }
             if (inAirstream == false)
             {
-                rb.AddForce(new Vector3(-rb.velocity.x, 0 , -rb.velocity.z)*Time.deltaTime*60, ForceMode.Acceleration);   
+                rb.AddForce(new Vector3(-rb.velocity.x, 0 , -rb.velocity.z)*Time.fixedDeltaTime*60, ForceMode.Acceleration);   
             }
             motion = ApplyCamRotation(motion);
             MovePlayer();
@@ -86,10 +89,20 @@ public abstract class Player : MonoBehaviour
         }
     }
 
+    void OnCollisionStay(Collision info)
+    {
+        // Debug-draw all contact points and normals
+        foreach (ContactPoint contact in info.contacts)
+        {
+            Debug.DrawRay(contact.point, contact.normal * 10, Color.white);
+        }
+
+        collisionInfo = info;
+    }
 
     protected virtual void MovePlayer()
     {
-        rb.MovePosition(rb.position + motion * Time.deltaTime);
+        rb.MovePosition(rb.position + motion * Time.fixedDeltaTime);
     }
 
   
