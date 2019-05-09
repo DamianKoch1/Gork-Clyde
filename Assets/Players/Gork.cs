@@ -13,10 +13,18 @@ public class Gork : Player
     private float throwUpwardsAngle = 20f;
     private Rigidbody objectRb;
 
+    public static string _xAxis, _zAxis, _jumpButton, _gorkInteract;
+
+    private void Start()
+    {
+        base.Start();
+        InitializeInputs(_xAxis, _zAxis, _jumpButton);
+    }
+    
     private void Update()
     {
         base.Update();
-        if (Input.GetButtonDown("GorkInteract"))
+        if (Input.GetButtonDown(_gorkInteract))
         {
             if (heldObjectSlot.transform.childCount == 0)
             {
@@ -40,12 +48,7 @@ public class Gork : Player
         }
     }
 
-    protected override void InitializeInputs()
-    {
-        xAxis = "GorkHorizontal";
-        zAxis = "GorkVertical";
-        jumpButton = "GorkJump";
-    }
+   
     private void OnTriggerEnter(Collider other)
     {
         if (carryableObjects.Contains(other.gameObject) == false && other.GetComponent<Carryable>() != null)

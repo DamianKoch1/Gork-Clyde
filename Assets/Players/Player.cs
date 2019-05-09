@@ -21,7 +21,6 @@ public abstract class Player : MonoBehaviour
     protected virtual void Start()
     {
         rb = GetComponent<Rigidbody>();
-        InitializeInputs();
         cam = Camera.main;
     }
 
@@ -120,8 +119,13 @@ public abstract class Player : MonoBehaviour
             out RaycastHit hitInfo, GetComponent<Collider>().bounds.extents.y - 0.1f, Physics.DefaultRaycastLayers,
             QueryTriggerInteraction.Ignore);
     }
-    
-    protected abstract void InitializeInputs();
+
+    protected void InitializeInputs(string x, string z, string jump)
+    {
+        xAxis = x;
+        zAxis = z;
+        jumpButton = jump;
+    }
 
     public void ResetMotion()
     {
