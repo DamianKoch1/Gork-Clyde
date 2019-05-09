@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Experimental.PlayerLoop;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
 public class CameraBehaviour : MonoBehaviour
@@ -24,15 +25,31 @@ public class CameraBehaviour : MonoBehaviour
     private LayerMask wallLayers;
     [SerializeField] 
     private GameObject pauseMenu, optionsMenu;
+
+    public static Animator _anim;
+    public static string _nextSceneName;
+    
     void Start()
     {
-        if (gork != null && clyde != null)
+        if (gork && clyde)
         {
             playerMiddle = 0.5f * (gork.transform.position + clyde.transform.position);
             offset = transform.position - playerMiddle;
         }
+        _anim = GetComponent<Animator>();
     }
 
+    public static void _FadeToBlack()
+    {
+        _anim.SetTrigger("fadeToBlack");
+    }
+
+    public void OnBlackFadeFinished()
+    {
+        SceneManager.LoadScene(_nextSceneName);
+    }
+        
+    
     private void Update()
     {
         //toggling pause/options menu
@@ -58,7 +75,7 @@ public class CameraBehaviour : MonoBehaviour
         }
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         //camera rotation (cutted, more for testing)
         if (Input.GetAxis("Mouse X") != 0)
@@ -72,7 +89,7 @@ public class CameraBehaviour : MonoBehaviour
             transform.RotateAround(transform.position, -transform.right, Input.GetAxis("Mouse Y") * rotateSpeed);
         }
         //
-        if (gork != null && clyde != null)
+        if (gork && clyde)
         {
             //zoom if players too far from each other
             zoomMultiplier = Mathf.Clamp((playerDistanceZoomThreshhold / (Vector3.Distance(gork.transform.position, clyde.transform.position)))/zoomSpeed, minZoom, maxZoom);

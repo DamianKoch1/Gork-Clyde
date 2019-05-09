@@ -15,7 +15,7 @@ public class ButtonObject : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        if (other.isTrigger == false)
+        if (!other.isTrigger)
         {
             if (triggerableBy == TriggerableBy.All)
             {
@@ -23,10 +23,10 @@ public class ButtonObject : MonoBehaviour
                 {
                     SendTriggered();
                 }
-            } else if (triggerableBy == TriggerableBy.Gork && other.GetComponent<Gork>() != null)
+            } else if (triggerableBy == TriggerableBy.Gork && other.GetComponent<Gork>())
             {
                 SendTriggered();
-            } else if (triggerableBy == TriggerableBy.Clide && other.GetComponent<Clyde>() != null)
+            } else if (triggerableBy == TriggerableBy.Clide && other.GetComponent<Clyde>())
             {
                 SendTriggered();
             }
@@ -36,11 +36,11 @@ public class ButtonObject : MonoBehaviour
 
     void SendTriggered()
     {
-        if (oneTimeUse == true)
+        if (oneTimeUse)
         {
-            if (triggered != true)
+            if (!triggered)
             {
-
+                GetComponent<AudioSource>().Play();
                 triggered = true;
                 foreach(GameObject target in targets) {
                     target.SendMessage("OnButtonActivated");
@@ -49,6 +49,7 @@ public class ButtonObject : MonoBehaviour
         }
         else
         {
+            GetComponent<AudioSource>().Play();
             foreach (GameObject target in targets)
             {
                 target.SendMessage("OnButtonActivated");
