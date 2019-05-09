@@ -65,6 +65,12 @@ public abstract class Player : MonoBehaviour
             motion.x = Input.GetAxis(xAxis);
             motion.z = Input.GetAxis(zAxis);
             motion = motion.normalized * speed;
+            if (inAirstream == false)
+            {
+                rb.AddForce(new Vector3(-rb.velocity.x, 0 , -rb.velocity.z)*Time.fixedDeltaTime*60, ForceMode.Acceleration);   
+            }
+            motion = ApplyCamRotation(motion);
+            MovePlayer();
             if (anim != null)
             {
                 if (motion.x == 0 && motion.z == 0)
@@ -76,12 +82,6 @@ public abstract class Player : MonoBehaviour
                     anim.SetBool("walking", true);
                 }
             }
-            if (inAirstream == false)
-            {
-                rb.AddForce(new Vector3(-rb.velocity.x, 0 , -rb.velocity.z)*Time.fixedDeltaTime*60, ForceMode.Acceleration);   
-            }
-            motion = ApplyCamRotation(motion);
-            MovePlayer();
         }
     }
 
