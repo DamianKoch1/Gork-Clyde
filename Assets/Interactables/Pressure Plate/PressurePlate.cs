@@ -14,7 +14,7 @@ public class PressurePlate : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.isTrigger == false)
+        if (!other.isTrigger)
         {
             if (triggerableBy == TriggerableBy.All)
             {
@@ -33,7 +33,7 @@ public class PressurePlate : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.isTrigger == false)
+        if (!other.isTrigger)
         {
             if (triggerableBy == TriggerableBy.All)
             {
@@ -55,6 +55,7 @@ public class PressurePlate : MonoBehaviour
 
     void SendTriggered()
     {
+        GetComponent<AudioSource>().Play();
         foreach(GameObject target in targets) {
             target.SendMessage("OnPlateActivated");
         }

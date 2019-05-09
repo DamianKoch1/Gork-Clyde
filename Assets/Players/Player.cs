@@ -58,7 +58,7 @@ public abstract class Player : MonoBehaviour
             }
         }
 
-        if (canMove == true)
+        if (canMove)
         {
             
             motion.x = Input.GetAxis(xAxis);
@@ -70,7 +70,7 @@ public abstract class Player : MonoBehaviour
             }
             motion = ApplyCamRotation(motion);
             MovePlayer();
-            if (anim != null)
+            if (anim)
             {
                 if (motion.x == 0 && motion.z == 0)
                 {
