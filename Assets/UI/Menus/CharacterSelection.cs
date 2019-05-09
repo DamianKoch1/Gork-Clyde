@@ -42,9 +42,9 @@ public class CharacterSelection : MonoBehaviour
         Gork._zAxis = "GorkVertical";
         Gork._jumpButton = "GorkJump";
         Gork._gorkInteract = "GorkInteract";
-        Clyde._xAxis = "ClideHorizontal";
-        Clyde._zAxis = "ClideVertical";
-        Clyde._jumpButton = "ClideJump";
+        Clyde._xAxis = "ClydeHorizontal";
+        Clyde._zAxis = "ClydeVertical";
+        Clyde._jumpButton = "ClydeJump";
     }
 
     void ClydeSelected()
@@ -53,10 +53,10 @@ public class CharacterSelection : MonoBehaviour
         clydeButton.interactable = false;
         gorkButton.interactable = true;
         playButton.interactable = true;
-        Gork._xAxis = "ClideHorizontal";
-        Gork._zAxis = "ClideVertical";
-        Gork._jumpButton = "ClideJump";
-        Gork._gorkInteract = "ClideInteract";
+        Gork._xAxis = "ClydeHorizontal";
+        Gork._zAxis = "ClydeVertical";
+        Gork._jumpButton = "ClydeJump";
+        Gork._gorkInteract = "ClydeInteract";
         Clyde._xAxis = "GorkHorizontal";
         Clyde._zAxis = "GorkVertical";
         Clyde._jumpButton = "GorkJump";

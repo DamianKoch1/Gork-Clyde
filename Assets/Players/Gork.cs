@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,7 +14,7 @@ public class Gork : Player
     private float throwUpwardsAngle = 20f;
     private Rigidbody objectRb;
 
-    public static string _xAxis, _zAxis, _jumpButton, _gorkInteract;
+    public static string _xAxis = "GorkHorizontal", _zAxis = "GorkVertical", _jumpButton = "GorkJump", _gorkInteract = "GorkInteract";
 
     private void Start()
     {

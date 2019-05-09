@@ -8,8 +8,7 @@ public abstract class Player : MonoBehaviour
     [HideInInspector]
     public Rigidbody rb;
     protected string xAxis, zAxis, jumpButton;
-    [SerializeField]
-    protected Animator anim;
+    public Animator anim;
     private Camera cam;
     [SerializeField]
     private float maxGhostjumpDelay = 0.2f, jumpCooldown;
