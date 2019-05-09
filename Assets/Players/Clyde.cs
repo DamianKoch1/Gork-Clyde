@@ -4,16 +4,11 @@ using UnityEngine;
 
 public class Clyde : Player
 {
-   
+    public static string _xAxis, _zAxis, _jumpButton;
 
-    protected override void InitializeInputs()
+    private void Start()
     {
-        xAxis = "ClideHorizontal";
-        zAxis = "ClideVertical";
-        jumpButton = "ClideJump";
+        base.Start();
+        InitializeInputs(_xAxis, _zAxis, _jumpButton);
     }
-
-
-
-    
 }
