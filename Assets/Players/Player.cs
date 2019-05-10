@@ -8,8 +8,7 @@ public abstract class Player : MonoBehaviour
     [HideInInspector]
     public Rigidbody rb;
     protected string xAxis, zAxis, jumpButton;
-    [SerializeField]
-    protected Animator anim;
+    public Animator anim;
     private Camera cam;
     [SerializeField]
     private float maxGhostjumpDelay = 0.2f, jumpCooldown;
@@ -21,7 +20,6 @@ public abstract class Player : MonoBehaviour
     protected virtual void Start()
     {
         rb = GetComponent<Rigidbody>();
-        InitializeInputs();
         cam = Camera.main;
     }
 
@@ -60,13 +58,19 @@ public abstract class Player : MonoBehaviour
             }
         }
 
-        if (canMove == true)
+        if (canMove)
         {
             
             motion.x = Input.GetAxis(xAxis);
             motion.z = Input.GetAxis(zAxis);
             motion = motion.normalized * speed;
-            if (anim != null)
+            if (inAirstream == false)
+            {
+                rb.AddForce(new Vector3(-rb.velocity.x, 0 , -rb.velocity.z)*Time.fixedDeltaTime*60, ForceMode.Acceleration);   
+            }
+            motion = ApplyCamRotation(motion);
+            MovePlayer();
+            if (anim)
             {
                 if (motion.x == 0 && motion.z == 0)
                 {
@@ -77,12 +81,6 @@ public abstract class Player : MonoBehaviour
                     anim.SetBool("walking", true);
                 }
             }
-            if (inAirstream == false)
-            {
-                rb.AddForce(new Vector3(-rb.velocity.x, 0 , -rb.velocity.z)*Time.fixedDeltaTime*60, ForceMode.Acceleration);   
-            }
-            motion = ApplyCamRotation(motion);
-            MovePlayer();
         }
     }
 
@@ -117,11 +115,16 @@ public abstract class Player : MonoBehaviour
     private bool IsGrounded()
     {
         return Physics.SphereCast(transform.position, GetComponent<Collider>().bounds.extents.x / 2, -Vector3.up,
-            out RaycastHit hitInfo, GetComponent<Collider>().bounds.extents.y - 0.1f, Physics.DefaultRaycastLayers,
+            out RaycastHit hitInfo, GetComponent<Collider>().bounds.extents.y - 0.1f, Physics.AllLayers,
             QueryTriggerInteraction.Ignore);
     }
-    
-    protected abstract void InitializeInputs();
+
+    protected void InitializeInputs(string x, string z, string jump)
+    {
+        xAxis = x;
+        zAxis = z;
+        jumpButton = jump;
+    }
 
     public void ResetMotion()
     {
