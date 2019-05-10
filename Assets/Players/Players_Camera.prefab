@@ -78,7 +78,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gork: {fileID: 7676004291430072583}
-  clide: {fileID: 287801606943479137}
+  clyde: {fileID: 287801606943479137}
 --- !u!1001 &2346392575276315110
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -86,11 +86,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3146860327048526420}
     m_Modifications:
-    - target: {fileID: 2329437449930610536, guid: f055718a36d21f04195bab65c3180ef5,
-        type: 3}
-      propertyPath: m_Name
-      value: Main Camera (1)
-      objectReference: {fileID: 0}
     - target: {fileID: 2329437449930610551, guid: f055718a36d21f04195bab65c3180ef5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -146,6 +141,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2329437449930610536, guid: f055718a36d21f04195bab65c3180ef5,
+        type: 3}
+      propertyPath: m_Name
+      value: Main Camera (1)
+      objectReference: {fileID: 0}
     - target: {fileID: 2329437449930610548, guid: f055718a36d21f04195bab65c3180ef5,
         type: 3}
       propertyPath: gork
@@ -156,6 +156,16 @@ PrefabInstance:
       propertyPath: clide
       value: 
       objectReference: {fileID: 287801606943479137}
+    - target: {fileID: 2329437449930610548, guid: f055718a36d21f04195bab65c3180ef5,
+        type: 3}
+      propertyPath: clyde
+      value: 
+      objectReference: {fileID: 287801606943479137}
+    - target: {fileID: 4733700987850235202, guid: f055718a36d21f04195bab65c3180ef5,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f055718a36d21f04195bab65c3180ef5, type: 3}
 --- !u!4 &55130171244439185 stripped
