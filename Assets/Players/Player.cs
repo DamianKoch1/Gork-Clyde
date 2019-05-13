@@ -8,21 +8,18 @@ public abstract class Player : MonoBehaviour
     [HideInInspector]
     public Rigidbody rb;
     protected string xAxis, zAxis, jumpButton;
-    [SerializeField]
-    protected Animator anim;
+    public Animator anim;
     private Camera cam;
     [SerializeField]
     private float maxGhostjumpDelay = 0.2f, jumpCooldown;
     private float ghostjumpTimer = 0f;
     [HideInInspector] 
     public bool canMove = true, inAirstream = false;
-    private RaycastHit hit;
     private Vector3 parentPos;
 
     protected virtual void Start()
     {
         rb = GetComponent<Rigidbody>();
-        InitializeInputs();
         cam = Camera.main;
     }
 
@@ -36,8 +33,20 @@ public abstract class Player : MonoBehaviour
         {
             jumpCooldown = Mathf.Max(jumpCooldown - Time.deltaTime, 0);
         }
+        if (Input.GetButtonDown(jumpButton) && ghostjumpTimer > 0 && jumpCooldown == 0)
+        {
+            transform.SetParent(null, true);
+            ghostjumpTimer = 0;
+            jumpCooldown = 0.3f;
+            rb.AddForce(jumpHeight*Vector3.up * Time.fixedDeltaTime*90, ForceMode.VelocityChange);
+            if (anim != null)
+            {
+                anim.SetTrigger("jump");
+            }
+        }
     }
 
+    
     protected virtual void FixedUpdate()
     {
         if (IsGrounded())
@@ -49,12 +58,19 @@ public abstract class Player : MonoBehaviour
             }
         }
 
-        if (canMove == true)
+        if (canMove)
         {
             
-            motion.x = Input.GetAxis(xAxis) * speed;
-            motion.z = Input.GetAxis(zAxis) * speed;
-            if (anim != null)
+            motion.x = Input.GetAxis(xAxis);
+            motion.z = Input.GetAxis(zAxis);
+            motion = motion.normalized * speed;
+            if (inAirstream == false)
+            {
+                rb.AddForce(new Vector3(-rb.velocity.x, 0 , -rb.velocity.z)*Time.fixedDeltaTime*60, ForceMode.Acceleration);   
+            }
+            motion = ApplyCamRotation(motion);
+            MovePlayer();
+            if (anim)
             {
                 if (motion.x == 0 && motion.z == 0)
                 {
@@ -65,31 +81,26 @@ public abstract class Player : MonoBehaviour
                     anim.SetBool("walking", true);
                 }
             }
-            if (Input.GetButtonDown(jumpButton) && ghostjumpTimer > 0 && jumpCooldown == 0)
-            {
-                transform.SetParent(null, true);
-                ghostjumpTimer = 0;
-                jumpCooldown = 0.3f;
-                rb.AddForce(jumpHeight*Vector3.up * Time.deltaTime*90, ForceMode.VelocityChange);
-                if (anim != null)
-                {
-                    anim.SetTrigger("jump");
-                }
-            }
-            if (inAirstream == false)
-            {
-                rb.AddForce(new Vector3(-rb.velocity.x, 0 , -rb.velocity.z)*Time.deltaTime*60, ForceMode.Acceleration);   
-            }
-            motion = ApplyCamRotation(motion);
-            MovePlayer();
-            LookForward();
         }
     }
 
+   
 
     protected virtual void MovePlayer()
     {
-        rb.MovePosition(rb.position + motion * Time.deltaTime);
+        //fixing player moving through walls when moving diagonally
+        if (Physics.Raycast(rb.position - 0.8f*GetComponent<Collider>().bounds.extents.y*Vector3.up, motion.x * Vector3.right, 
+        GetComponent<Collider>().bounds.extents.x*1.1f,Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore))
+        {
+            motion.x = 0;
+        }
+        if (Physics.Raycast(rb.position - 0.8f*GetComponent<Collider>().bounds.extents.y*Vector3.up, motion.z * Vector3.forward, 
+        GetComponent<Collider>().bounds.extents.x*1.1f,Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore))
+        {
+            motion.z = 0;
+        }
+        rb.MovePosition(rb.position + motion * Time.fixedDeltaTime);
+        LookForward();
     }
 
   
@@ -104,10 +115,16 @@ public abstract class Player : MonoBehaviour
     private bool IsGrounded()
     {
         return Physics.SphereCast(transform.position, GetComponent<Collider>().bounds.extents.x / 2, -Vector3.up,
-            out hit, GetComponent<Collider>().bounds.extents.y - 0.1f, Physics.DefaultRaycastLayers,
+            out RaycastHit hitInfo, GetComponent<Collider>().bounds.extents.y - 0.1f, Physics.AllLayers,
             QueryTriggerInteraction.Ignore);
     }
-    protected abstract void InitializeInputs();
+
+    protected void InitializeInputs(string x, string z, string jump)
+    {
+        xAxis = x;
+        zAxis = z;
+        jumpButton = jump;
+    }
 
     public void ResetMotion()
     {

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,10 +14,18 @@ public class Gork : Player
     private float throwUpwardsAngle = 20f;
     private Rigidbody objectRb;
 
+    public static string _xAxis = "GorkHorizontal", _zAxis = "GorkVertical", _jumpButton = "GorkJump", _gorkInteract = "GorkInteract";
+
+    private void Start()
+    {
+        base.Start();
+        InitializeInputs(_xAxis, _zAxis, _jumpButton);
+    }
+    
     private void Update()
     {
         base.Update();
-        if (Input.GetButtonDown("GorkInteract"))
+        if (Input.GetButtonDown(_gorkInteract))
         {
             if (heldObjectSlot.transform.childCount == 0)
             {
@@ -40,12 +49,7 @@ public class Gork : Player
         }
     }
 
-    protected override void InitializeInputs()
-    {
-        xAxis = "GorkHorizontal";
-        zAxis = "GorkVertical";
-        jumpButton = "GorkJump";
-    }
+   
     private void OnTriggerEnter(Collider other)
     {
         if (carryableObjects.Contains(other.gameObject) == false && other.GetComponent<Carryable>() != null)
@@ -78,6 +82,7 @@ public class Gork : Player
     }
     private void Throw(GameObject obj)
     {
+        GetComponent<AudioSource>().Play();
         var clide = obj.GetComponent<Clyde>();
         anim.ResetTrigger("throw");
         anim.SetTrigger("throw");
