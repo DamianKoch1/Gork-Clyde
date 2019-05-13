@@ -64,7 +64,7 @@ public abstract class Player : MonoBehaviour
             motion.x = Input.GetAxis(xAxis);
             motion.z = Input.GetAxis(zAxis);
             motion = motion.normalized * speed;
-            if (inAirstream == false)
+            if (!inAirstream)
             {
                 rb.AddForce(new Vector3(-rb.velocity.x, 0 , -rb.velocity.z)*Time.fixedDeltaTime*60, ForceMode.Acceleration);   
             }
