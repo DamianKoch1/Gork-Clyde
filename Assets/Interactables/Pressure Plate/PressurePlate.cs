@@ -7,25 +7,25 @@ public class PressurePlate : MonoBehaviour
     [SerializeField]
     private GameObject[] targets;
 
-    private enum TriggerableBy {player1, player2, all};
+    private enum TriggerableBy {Clyde, Gork, All};
     [SerializeField]
-    private TriggerableBy triggerableBy = TriggerableBy.all;
+    private TriggerableBy triggerableBy = TriggerableBy.All;
    
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.isTrigger == false)
+        if (!other.isTrigger)
         {
-            if (triggerableBy == TriggerableBy.all)
+            if (triggerableBy == TriggerableBy.All)
             {
-                if (other.CompareTag("Player1") || other.CompareTag("Player2") || other.CompareTag("pushable"))
+                if (other.GetComponent<Clyde>() || other.GetComponent<Gork>() || other.CompareTag("pushable"))
                 {
                     SendTriggered();
                 }
-            } else if (triggerableBy == TriggerableBy.player1 && other.CompareTag("Player1"))
+            } else if (triggerableBy == TriggerableBy.Clyde && other.GetComponent<Clyde>())
             {
                 SendTriggered();
-            } else if (triggerableBy == TriggerableBy.player2 && other.CompareTag("Player2"))
+            } else if (triggerableBy == TriggerableBy.Gork && other.GetComponent<Gork>())
             {
                 SendTriggered();
             }
@@ -33,20 +33,20 @@ public class PressurePlate : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.isTrigger == false)
+        if (!other.isTrigger)
         {
-            if (triggerableBy == TriggerableBy.all)
+            if (triggerableBy == TriggerableBy.All)
             {
-                if (other.CompareTag("Player1") || other.CompareTag("Player2") || other.CompareTag("pushable"))
+                if (other.GetComponent<Clyde>() || other.GetComponent<Gork>() || other.CompareTag("pushable"))
                 {
                     SendExited();
                 }
             }
-            else if (triggerableBy == TriggerableBy.player1 && other.CompareTag("Player1"))
+            else if (triggerableBy == TriggerableBy.Clyde && other.GetComponent<Clyde>())
             {
                 SendExited();
             }
-            else if (triggerableBy == TriggerableBy.player2 && other.CompareTag("Player2"))
+            else if (triggerableBy == TriggerableBy.Gork && other.GetComponent<Gork>())
             {
                 SendExited();
             }
@@ -55,6 +55,7 @@ public class PressurePlate : MonoBehaviour
 
     void SendTriggered()
     {
+        GetComponent<AudioSource>().Play();
         foreach(GameObject target in targets) {
             target.SendMessage("OnPlateActivated");
         }
