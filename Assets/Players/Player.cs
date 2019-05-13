@@ -117,7 +117,7 @@ public abstract class Player : MonoBehaviour
     private bool IsGrounded()
     {
         return Physics.SphereCast(transform.position, GetComponent<Collider>().bounds.extents.x / 2, -Vector3.up,
-            out RaycastHit hitInfo, GetComponent<Collider>().bounds.extents.y - 0.1f, Physics.DefaultRaycastLayers,
+            out RaycastHit hitInfo, GetComponent<Collider>().bounds.extents.y - 0.1f, Physics.AllLayers,
             QueryTriggerInteraction.Ignore);
     }
     
