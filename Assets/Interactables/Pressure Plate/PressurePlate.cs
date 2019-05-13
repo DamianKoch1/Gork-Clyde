@@ -7,6 +7,8 @@ public class PressurePlate : MonoBehaviour
     [SerializeField]
     private GameObject[] targets;
 
+    private int objectsOnPlateCount;
+
     private enum TriggerableBy {Clyde, Gork, All};
     [SerializeField]
     private TriggerableBy triggerableBy = TriggerableBy.All;
@@ -55,17 +57,25 @@ public class PressurePlate : MonoBehaviour
 
     void SendTriggered()
     {
-        GetComponent<AudioSource>().Play();
-        foreach(GameObject target in targets) {
-            target.SendMessage("OnPlateActivated");
+        if (objectsOnPlateCount == 0)
+        {
+            GetComponent<AudioSource>().Play();
+            foreach(GameObject target in targets) {
+                target.SendMessage("OnPlateActivated");
+            }    
         }
+        objectsOnPlateCount++;
     }
       
     void SendExited()
     {
-        foreach(GameObject target in targets)
+        if (objectsOnPlateCount == 1)
         {
-            target.SendMessage("OnPlateExited");
+            foreach(GameObject target in targets)
+            {
+                target.SendMessage("OnPlateExited");
+            }
         }
+        objectsOnPlateCount--;
     }
 }

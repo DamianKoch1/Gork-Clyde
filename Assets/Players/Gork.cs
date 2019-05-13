@@ -14,18 +14,18 @@ public class Gork : Player
     private float throwUpwardsAngle = 20f;
     private Rigidbody objectRb;
 
-    public static string _xAxis = "GorkHorizontal", _zAxis = "GorkVertical", _jumpButton = "GorkJump", _gorkInteract = "GorkInteract";
+    public static string XAXIS = "GorkHorizontal", ZAXIS = "GorkVertical", JUMPBUTTON = "GorkJump", GORKINTERACT = "GorkInteract";
 
     private void Start()
     {
         base.Start();
-        InitializeInputs(_xAxis, _zAxis, _jumpButton);
+        InitializeInputs(XAXIS, ZAXIS, JUMPBUTTON);
     }
     
     private void Update()
     {
         base.Update();
-        if (Input.GetButtonDown(_gorkInteract))
+        if (Input.GetButtonDown(GORKINTERACT))
         {
             if (heldObjectSlot.transform.childCount == 0)
             {
@@ -66,7 +66,7 @@ public class Gork : Player
     }
     private void PickUp(GameObject obj)
     {
-        var clide = obj.GetComponent<Clyde>();
+        var clyde = obj.GetComponent<Clyde>();
         anim.ResetTrigger("pickup");
         anim.SetTrigger("pickup");
         Physics.IgnoreCollision(GetComponent<Collider>(), obj.GetComponent<Collider>());
@@ -75,24 +75,24 @@ public class Gork : Player
         obj.transform.LookAt(obj.transform.position + transform.forward);
         objectRb = obj.GetComponent<Rigidbody>();
         objectRb.isKinematic = true;
-        if (clide != null)
+        if (clyde != null)
         {
-            clide.canMove = false;
+            clyde.canMove = false;
         }
     }
     private void Throw(GameObject obj)
     {
         GetComponent<AudioSource>().Play();
-        var clide = obj.GetComponent<Clyde>();
+        var clyde = obj.GetComponent<Clyde>();
         anim.ResetTrigger("throw");
         anim.SetTrigger("throw");
         Vector3 throwDirection = transform.forward * throwStrength;
         throwDirection = Quaternion.AngleAxis(throwUpwardsAngle, -transform.right) * throwDirection;
         obj.transform.SetParent(null, true);
-        if (clide != null)
+        if (clyde != null)
         {
-            clide.ResetMotion();
-            clide.canMove = true;
+            clyde.ResetMotion();
+            clyde.canMove = true;
         }
         objectRb.velocity = Vector3.zero;
         objectRb.isKinematic = false;

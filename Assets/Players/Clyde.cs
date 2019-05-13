@@ -5,19 +5,19 @@ using UnityEngine;
 
 public class Clyde : Player
 {
-    public static string _xAxis = "ClydeHorizontal", _zAxis = "ClydeVertical", _jumpButton = "ClydeJump";
+    public static string XAXIS = "ClydeHorizontal", ZAXIS = "ClydeVertical", JUMPBUTTON = "ClydeJump";
 
     private void Start()
     {
         base.Start();
         //for playtesting (if somehow character selection is skipped)
-        if (String.IsNullOrEmpty(_xAxis))
+        if (String.IsNullOrEmpty(XAXIS))
         {
-            _xAxis = "ClydeHorizontal";
-            _zAxis = "ClydeVertical";
-            _jumpButton = "ClydeJump";
+            XAXIS = "ClydeHorizontal";
+            ZAXIS = "ClydeVertical";
+            JUMPBUTTON = "ClydeJump";
         }
         //        
-        InitializeInputs(_xAxis, _zAxis, _jumpButton);
+        InitializeInputs(XAXIS, ZAXIS, JUMPBUTTON);
     }
 }
