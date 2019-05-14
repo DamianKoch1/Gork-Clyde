@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,10 +14,18 @@ public class Gork : Player
     private float throwUpwardsAngle = 20f;
     private Rigidbody objectRb;
 
+    public static string XAXIS = "GorkHorizontal", ZAXIS = "GorkVertical", JUMPBUTTON = "GorkJump", GORKINTERACT = "GorkInteract";
+
+    private void Start()
+    {
+        base.Start();
+        InitializeInputs(XAXIS, ZAXIS, JUMPBUTTON);
+    }
+    
     private void Update()
     {
         base.Update();
-        if (Input.GetButtonDown("GorkInteract"))
+        if (Input.GetButtonDown(GORKINTERACT))
         {
             if (heldObjectSlot.transform.childCount == 0)
             {
@@ -40,12 +49,7 @@ public class Gork : Player
         }
     }
 
-    protected override void InitializeInputs()
-    {
-        xAxis = "GorkHorizontal";
-        zAxis = "GorkVertical";
-        jumpButton = "GorkJump";
-    }
+   
     private void OnTriggerEnter(Collider other)
     {
         if (carryableObjects.Contains(other.gameObject) == false && other.GetComponent<Carryable>() != null)
@@ -62,7 +66,7 @@ public class Gork : Player
     }
     private void PickUp(GameObject obj)
     {
-        var clide = obj.GetComponent<Clyde>();
+        var clyde = obj.GetComponent<Clyde>();
         anim.ResetTrigger("pickup");
         anim.SetTrigger("pickup");
         Physics.IgnoreCollision(GetComponent<Collider>(), obj.GetComponent<Collider>());
@@ -71,23 +75,24 @@ public class Gork : Player
         obj.transform.LookAt(obj.transform.position + transform.forward);
         objectRb = obj.GetComponent<Rigidbody>();
         objectRb.isKinematic = true;
-        if (clide != null)
+        if (clyde != null)
         {
-            clide.canMove = false;
+            clyde.canMove = false;
         }
     }
     private void Throw(GameObject obj)
     {
-        var clide = obj.GetComponent<Clyde>();
+        GetComponent<AudioSource>().Play();
+        var clyde = obj.GetComponent<Clyde>();
         anim.ResetTrigger("throw");
         anim.SetTrigger("throw");
         Vector3 throwDirection = transform.forward * throwStrength;
         throwDirection = Quaternion.AngleAxis(throwUpwardsAngle, -transform.right) * throwDirection;
         obj.transform.SetParent(null, true);
-        if (clide != null)
+        if (clyde != null)
         {
-            clide.ResetMotion();
-            clide.canMove = true;
+            clyde.ResetMotion();
+            clyde.canMove = true;
         }
         objectRb.velocity = Vector3.zero;
         objectRb.isKinematic = false;
