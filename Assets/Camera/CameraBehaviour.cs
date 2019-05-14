@@ -26,8 +26,8 @@ public class CameraBehaviour : MonoBehaviour
     [SerializeField] 
     private GameObject pauseMenu, optionsMenu;
 
-    public static Animator _anim;
-    public static string _nextSceneName;
+    public static Animator ANIM;
+    public static string NEXT_SCENE_NAME;
     
     void Start()
     {
@@ -36,17 +36,17 @@ public class CameraBehaviour : MonoBehaviour
             playerMiddle = 0.5f * (gork.transform.position + clyde.transform.position);
             offset = transform.position - playerMiddle;
         }
-        _anim = GetComponent<Animator>();
+        ANIM = GetComponent<Animator>();
     }
 
-    public static void _FadeToBlack()
+    public static void FADE_TO_BLACK()
     {
-        _anim.SetTrigger("fadeToBlack");
+        ANIM.SetTrigger("fadeToBlack");
     }
 
     public void OnBlackFadeFinished()
     {
-        SceneManager.LoadScene(_nextSceneName);
+        SceneManager.LoadScene(NEXT_SCENE_NAME);
     }
         
     
