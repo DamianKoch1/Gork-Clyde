@@ -56,18 +56,41 @@ public class PlayerIndicators : MonoBehaviour
 
     private void UpdateIndicator(GameObject indicator, Vector3 target)
     {
+        Vector2 rectSize = canvasRect.sizeDelta;
+
+        RectTransform indicatorRect = indicator.GetComponent<RectTransform>();
+
         if (!indicator.activeSelf)
         {
             indicator.SetActive(true);
         }
-        Vector3 indicatorPos = cam.ScreenToViewportPoint(target);
+
+        Vector2 indicatorPos = cam.ScreenToViewportPoint(target);
+
+        Vector2 rotationVector = indicatorPos;
+        rotationVector.x = Mathf.Clamp(rotationVector.x, 0, 1);
+        rotationVector.y = Mathf.Clamp(rotationVector.y, 0, 1);
+        float zRotationAngles = 0;
+        if (rotationVector.x == 0 || rotationVector.y == 1)
+        {
+            zRotationAngles = -45 - rotationVector.x * 90 - rotationVector.y * 90;
+        }
+        else
+        {
+            zRotationAngles = -45 + rotationVector.x * 90 + rotationVector.y * 90;
+        }
+
+         indicatorRect.eulerAngles = new Vector3(0,0, zRotationAngles);
+        
         indicatorPos.x = Mathf.Clamp(indicatorPos.x, indicatorDistanceX, 1-indicatorDistanceX);
         indicatorPos.y = Mathf.Clamp(indicatorPos.y, indicatorDistanceY, 1-indicatorDistanceY);
-        indicatorPos.x *= canvasRect.sizeDelta.x;
-        indicatorPos.y *= canvasRect.sizeDelta.y;
-        indicator.GetComponent<RectTransform>().anchoredPosition = indicatorPos;
-       
+        indicatorPos.x *= rectSize.x;
+        indicatorPos.y *= rectSize.y;
+        indicatorRect.anchoredPosition = indicatorPos;
+
+
     }
+    
     
     
 }
