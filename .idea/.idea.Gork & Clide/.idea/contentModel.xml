@@ -7,8 +7,12 @@
       <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
+        <e p="Audio" t="Include">
+          <e p="KeepAudioLoaded.cs" t="Include" />
+        </e>
         <e p="Camera" t="Include">
-          <e p="CameraMovement.cs" t="Include" />
+          <e p="CameraBehaviour.cs" t="Include" />
+          <e p="PlayerMiddle.cs" t="Include" />
         </e>
         <e p="Editor" t="Include">
           <e p="ObjExporter.cs" t="Include" />
@@ -17,11 +21,16 @@
           <e p="Airstream" t="Include">
             <e p="Airstream.cs" t="Include" />
             <e p="AirstreamAffected.cs" t="Include" />
+            <e p="BlockableAirstream.cs" t="Include" />
           </e>
           <e p="Button" t="Include">
-            <e p="Button.cs" t="Include" />
+            <e p="ButtonObject.cs" t="Include" />
+          </e>
+          <e p="Goal" t="Include">
+            <e p="Goal.cs" t="Include" />
           </e>
           <e p="Platforms" t="Include">
+            <e p="CollisionEnter.cs" t="Include" />
             <e p="MovingPlatform.cs" t="Include" />
           </e>
           <e p="Pressure Plate" t="Include">
@@ -29,10 +38,11 @@
           </e>
           <e p="Pushable" t="Include">
             <e p="Carryable.cs" t="Include" />
+            <e p="Pushable.cs" t="Include" />
           </e>
         </e>
         <e p="Players" t="Include">
-          <e p="Clide.cs" t="Include" />
+          <e p="Clyde.cs" t="Include" />
           <e p="Gork.cs" t="Include" />
           <e p="Player.cs" t="Include" />
         </e>
@@ -158,6 +168,14 @@
               <e p="pb_VertexPicker.shader" t="Include" />
               <e p="pb_VertexShader.shader" t="Include" />
             </e>
+          </e>
+        </e>
+        <e p="UI" t="Include">
+          <e p="Buttons" t="Include">
+            <e p="MenuButton.cs" t="Include" />
+          </e>
+          <e p="Menus" t="Include">
+            <e p="CharacterSelection.cs" t="Include" />
           </e>
         </e>
       </e>
