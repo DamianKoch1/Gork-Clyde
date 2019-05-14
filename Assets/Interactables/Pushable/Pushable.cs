@@ -47,7 +47,6 @@ public class Pushable : MonoBehaviour
                Vector3 currentPos = rb.position;
                if (currentPos != previousPosition && rb.velocity.y < 0.1f)
                {
-                    print("a");
                     pushedParticles.transform.LookAt(pushedParticles.transform.position - (currentPos - previousPosition));
                     if (!pushedParticles.isPlaying)
                     {
