@@ -16,10 +16,13 @@ public abstract class Player : MonoBehaviour
     [HideInInspector] 
     public bool canMove = true, inAirstream = false;
     private Vector3 parentPos;
+    private ParticleSystem walkParticles;
 
     protected virtual void Start()
     {
         rb = GetComponent<Rigidbody>();
+        walkParticles = GetComponentInChildren<ParticleSystem>();
+        walkParticles.Stop();
         cam = Camera.main;
     }
 
@@ -35,11 +38,12 @@ public abstract class Player : MonoBehaviour
         }
         if (Input.GetButtonDown(jumpButton) && ghostjumpTimer > 0 && jumpCooldown == 0)
         {
+            walkParticles.Stop();
             transform.SetParent(null, true);
             ghostjumpTimer = 0;
             jumpCooldown = 0.3f;
             rb.AddForce(jumpHeight*Vector3.up * Time.fixedDeltaTime*90, ForceMode.VelocityChange);
-            if (anim != null)
+            if (anim)
             {
                 anim.SetTrigger("jump");
             }
@@ -49,36 +53,46 @@ public abstract class Player : MonoBehaviour
     
     protected virtual void FixedUpdate()
     {
-        if (IsGrounded())
-        {
-            ghostjumpTimer = maxGhostjumpDelay;
-            if (anim != null)
-            {
-                anim.ResetTrigger("jump");
-            }
-        }
-
         if (canMove)
         {
-            
             motion.x = Input.GetAxis(xAxis);
             motion.z = Input.GetAxis(zAxis);
             motion = motion.normalized * speed;
-            if (inAirstream == false)
+            if (!inAirstream)
             {
                 rb.AddForce(new Vector3(-rb.velocity.x, 0 , -rb.velocity.z)*Time.fixedDeltaTime*60, ForceMode.Acceleration);   
             }
             motion = ApplyCamRotation(motion);
             MovePlayer();
+        }
+       
+        if (IsGrounded())
+        {
+            ghostjumpTimer = maxGhostjumpDelay;
             if (anim)
             {
-                if (motion.x == 0 && motion.z == 0)
+                anim.ResetTrigger("jump");
+            }
+            if (motion.x == 0 && motion.z == 0)
+            {
+                if (anim)
                 {
                     anim.SetBool("walking", false);
                 }
-                else
+                if (walkParticles.isPlaying)
+                {
+                    walkParticles.Stop();
+                }
+            }
+            else
+            {
+                if (anim)
                 {
                     anim.SetBool("walking", true);
+                }
+                if (!walkParticles.isPlaying)
+                {
+                    walkParticles.Play();
                 }
             }
         }
