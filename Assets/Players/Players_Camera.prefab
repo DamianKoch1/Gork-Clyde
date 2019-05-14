@@ -30,9 +30,55 @@ Transform:
   - {fileID: 1728689903915372180}
   - {fileID: 9116787019246820082}
   - {fileID: 55130171244439185}
+  - {fileID: 2682243434261642879}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6504232855922362654
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2682243434261642879}
+  - component: {fileID: 315339667857233191}
+  m_Layer: 0
+  m_Name: Player Middle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2682243434261642879
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6504232855922362654}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 20.48, y: -1.05, z: -48.96}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3146860327048526420}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &315339667857233191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6504232855922362654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20844ab7b7adfaa498c3069a9626c158, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gork: {fileID: 7676004291430072583}
+  clyde: {fileID: 287801606943479137}
 --- !u!1001 &2346392575276315110
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -40,11 +86,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3146860327048526420}
     m_Modifications:
-    - target: {fileID: 2329437449930610536, guid: f055718a36d21f04195bab65c3180ef5,
-        type: 3}
-      propertyPath: m_Name
-      value: Main Camera (1)
-      objectReference: {fileID: 0}
     - target: {fileID: 2329437449930610551, guid: f055718a36d21f04195bab65c3180ef5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -100,21 +141,31 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2329437449930610548, guid: f055718a36d21f04195bab65c3180ef5,
+    - target: {fileID: 2329437449930610536, guid: f055718a36d21f04195bab65c3180ef5,
         type: 3}
-      propertyPath: maxZoom
-      value: 1.3
+      propertyPath: m_Name
+      value: Main Camera (1)
       objectReference: {fileID: 0}
     - target: {fileID: 2329437449930610548, guid: f055718a36d21f04195bab65c3180ef5,
         type: 3}
-      propertyPath: player1
+      propertyPath: gork
       value: 
       objectReference: {fileID: 7676004291430072583}
     - target: {fileID: 2329437449930610548, guid: f055718a36d21f04195bab65c3180ef5,
         type: 3}
-      propertyPath: player2
+      propertyPath: clide
       value: 
       objectReference: {fileID: 287801606943479137}
+    - target: {fileID: 2329437449930610548, guid: f055718a36d21f04195bab65c3180ef5,
+        type: 3}
+      propertyPath: clyde
+      value: 
+      objectReference: {fileID: 287801606943479137}
+    - target: {fileID: 4733700987850235202, guid: f055718a36d21f04195bab65c3180ef5,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f055718a36d21f04195bab65c3180ef5, type: 3}
 --- !u!4 &55130171244439185 stripped
@@ -133,7 +184,7 @@ PrefabInstance:
     - target: {fileID: 5338642040318428382, guid: 20dc443e67c39394bab339010aabb7aa,
         type: 3}
       propertyPath: m_Name
-      value: Player1
+      value: Gork
       objectReference: {fileID: 0}
     - target: {fileID: 6779424732701564715, guid: 20dc443e67c39394bab339010aabb7aa,
         type: 3}
@@ -214,7 +265,7 @@ PrefabInstance:
     - target: {fileID: 3874808357865764670, guid: 5db7da3d9d401f14f97a7aef596827e0,
         type: 3}
       propertyPath: m_Name
-      value: Player2
+      value: Clide
       objectReference: {fileID: 0}
     - target: {fileID: 2433603982372154571, guid: 5db7da3d9d401f14f97a7aef596827e0,
         type: 3}
