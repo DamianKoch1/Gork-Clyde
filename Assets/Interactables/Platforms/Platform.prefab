@@ -49,7 +49,7 @@ MonoBehaviour:
   start: {fileID: 2113545945728698657}
   target: {fileID: 2113545945996717951}
   platform: {fileID: 7508677580360233098}
-  mode: 0
+  mode: 2
   speed: 2
 --- !u!1 &2113545945728698657
 GameObject:
@@ -199,9 +199,11 @@ GameObject:
   - component: {fileID: 2344895240503981414}
   - component: {fileID: 4811267118706743102}
   - component: {fileID: 7796604810282063173}
+  - component: {fileID: 1284413500}
+  - component: {fileID: 1284413499}
   m_Layer: 0
   m_Name: Collider
-  m_TagString: Untagged
+  m_TagString: platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -250,3 +252,31 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3, y: 0.3, z: 3}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &1284413500
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7508677580360233098}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 0.1, z: 3}
+  m_Center: {x: 0, y: -0.2, z: 0}
+--- !u!114 &1284413499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7508677580360233098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f229282f381f5684da4c1d4e33d3f6af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 2113545945582256732}
+  message: PlatformBlocked
+  message2: PlatformUnblocked
