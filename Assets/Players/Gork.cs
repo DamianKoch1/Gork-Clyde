@@ -107,6 +107,7 @@ public class Gork : Player
             clyde.ResetMotion();
             clyde.canMove = true;
             clyde.anim.SetTrigger("thrown");
+            clyde.anim.ResetTrigger("land");
         }
         objectRb.velocity = Vector3.zero;
         objectRb.isKinematic = false;
