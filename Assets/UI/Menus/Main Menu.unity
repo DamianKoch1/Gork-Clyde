@@ -1588,11 +1588,12 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 45
       objectReference: {fileID: 0}
-    - target: {fileID: 2521810946632779391, guid: 5a49af38f5f73394697057d4ac3d5087,
+    - target: {fileID: 4099438793462039324, guid: 5a49af38f5f73394697057d4ac3d5087,
         type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      propertyPath: mixer
       value: 
-      objectReference: {fileID: 1186107815}
+      objectReference: {fileID: 24100000, guid: 412b78ee19c7f2d429dcaa2f525e7fed,
+        type: 2}
     - target: {fileID: 2521810946632779391, guid: 5a49af38f5f73394697057d4ac3d5087,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -1613,6 +1614,26 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
       objectReference: {fileID: 531899679}
+    - target: {fileID: 5918516951051350488, guid: 5a49af38f5f73394697057d4ac3d5087,
+        type: 3}
+      propertyPath: m_MaxValue
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5918516951051350488, guid: 5a49af38f5f73394697057d4ac3d5087,
+        type: 3}
+      propertyPath: m_Value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3542425910598450570, guid: 5a49af38f5f73394697057d4ac3d5087,
+        type: 3}
+      propertyPath: m_Value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3542425910598450570, guid: 5a49af38f5f73394697057d4ac3d5087,
+        type: 3}
+      propertyPath: m_MaxValue
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a49af38f5f73394697057d4ac3d5087, type: 3}
 --- !u!1001 &9154505855182278137

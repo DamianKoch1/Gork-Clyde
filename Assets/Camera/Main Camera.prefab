@@ -892,6 +892,27 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 2329437449930610550}
+    - target: {fileID: 7455982119555803132, guid: 5bc9fcf2c676be44a929f462d6bb6028,
+        type: 3}
+      propertyPath: mixer
+      value: 
+      objectReference: {fileID: 24100000, guid: 412b78ee19c7f2d429dcaa2f525e7fed,
+        type: 2}
+    - target: {fileID: 9035237174671729311, guid: 5bc9fcf2c676be44a929f462d6bb6028,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 388986013845654580}
+    - target: {fileID: 9035237174671729311, guid: 5bc9fcf2c676be44a929f462d6bb6028,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ToggleMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 9035237174671729311, guid: 5bc9fcf2c676be44a929f462d6bb6028,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5bc9fcf2c676be44a929f462d6bb6028, type: 3}
 --- !u!1 &8709443035427556024 stripped
@@ -912,3 +933,15 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 7069820785712704456}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &388986013845654580 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7455982119555803132, guid: 5bc9fcf2c676be44a929f462d6bb6028,
+    type: 3}
+  m_PrefabInstance: {fileID: 7069820785712704456}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2243020434085363138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc86bd07e306c304dbbe5c9aa6a692a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
