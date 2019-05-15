@@ -10,7 +10,7 @@ public class CharacterSelection : MonoBehaviour
     [SerializeField] 
     private Button gorkButton, clydeButton, playButton;
 
-    private bool gorkSelected = false;
+    private static bool gorkSelected = false;
     
     // Start is called before the first frame update
     void Start()
