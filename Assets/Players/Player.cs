@@ -41,6 +41,25 @@ public abstract class Player : MonoBehaviour
         {
             Jump();
         }
+        
+        //debug
+        if (Input.GetButtonDown("DebugSonic"))
+        {
+            speed *= 2;
+            jumpHeight *= 2;
+        }
+        if (Input.GetButtonDown("DebugUnSonic"))
+        {
+            speed /= 2;
+            jumpHeight /= 2;
+        }
+
+        if (Input.GetButton("DebugAirjump"))
+        {
+            rb.AddForce(Vector3.up, ForceMode.VelocityChange);
+        }
+        //
+        
     }
 
     private void Jump()
