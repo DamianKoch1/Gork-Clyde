@@ -446,7 +446,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 6.4285e-40, y: -1.177e-42, z: 5.23e-43, w: NaN}
+  m_BoundingSphereOverride: {x: 7.65e-43, y: -3.060407e-19, z: 4.5905e-41, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -3139,6 +3139,66 @@ PrefabInstance:
     - target: {fileID: 1019727576418904619, guid: 905424cad28be2048a96ef3683f75a59,
         type: 3}
       propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6674444489316030205, guid: 905424cad28be2048a96ef3683f75a59,
+        type: 3}
+      propertyPath: simulationSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6674444489316030205, guid: 905424cad28be2048a96ef3683f75a59,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.minScalar
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6674444489316030205, guid: 905424cad28be2048a96ef3683f75a59,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6674444489316030205, guid: 905424cad28be2048a96ef3683f75a59,
+        type: 3}
+      propertyPath: InitialModule.maxNumParticles
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6674444489316030205, guid: 905424cad28be2048a96ef3683f75a59,
+        type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3399342264302360850, guid: 905424cad28be2048a96ef3683f75a59,
+        type: 3}
+      propertyPath: InitialModule.maxNumParticles
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3399342264302360850, guid: 905424cad28be2048a96ef3683f75a59,
+        type: 3}
+      propertyPath: simulationSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3399342264302360850, guid: 905424cad28be2048a96ef3683f75a59,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.minScalar
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3399342264302360850, guid: 905424cad28be2048a96ef3683f75a59,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3399342264302360850, guid: 905424cad28be2048a96ef3683f75a59,
+        type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3399342264302360850, guid: 905424cad28be2048a96ef3683f75a59,
+        type: 3}
+      propertyPath: scalingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3399342264302360850, guid: 905424cad28be2048a96ef3683f75a59,
+        type: 3}
+      propertyPath: EmissionModule.rateOverDistance.scalar
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
