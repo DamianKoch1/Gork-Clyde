@@ -36,7 +36,20 @@ public class Gork : Player
             }
             else
             {
-                Throw(heldObjectSlot.transform.GetChild(0).gameObject);
+                Throw(heldObjectSlot.transform.GetChild(0).gameObject, ThrowDirection(), throwStrength);
+            }
+        }
+
+        if (heldObjectSlot.transform.childCount > 0)
+        {
+            GameObject clyde = heldObjectSlot.transform.GetChild(0).gameObject;
+            if (clyde.GetComponent<Clyde>())
+            {
+                if (Input.GetButtonDown(Clyde.JUMPBUTTON))
+                {
+                    Throw(clyde, Vector3.up, 1, true);
+                    clyde.GetComponent<Clyde>().anim.SetTrigger("throwCancelled");
+                }
             }
         }
     }
@@ -67,8 +80,7 @@ public class Gork : Player
     private void PickUp(GameObject obj)
     {
         var clyde = obj.GetComponent<Clyde>();
-        anim.ResetTrigger("pickup");
-        anim.SetTrigger("pickup");
+        anim.SetTrigger("pickUp");
         Physics.IgnoreCollision(GetComponent<Collider>(), obj.GetComponent<Collider>());
         obj.transform.SetParent(heldObjectSlot.transform, true);
         obj.transform.position = heldObjectSlot.transform.position;
@@ -78,26 +90,37 @@ public class Gork : Player
         if (clyde != null)
         {
             clyde.canMove = false;
+            clyde.anim.SetTrigger("pickedUp");
         }
     }
-    private void Throw(GameObject obj)
+    private void Throw(GameObject obj, Vector3 direction, float strength, bool muteSound = false)
     {
-        GetComponent<AudioSource>().Play();
+        if (!muteSound)
+        {
+            GetComponent<AudioSource>().Play();
+        }
         var clyde = obj.GetComponent<Clyde>();
-        anim.ResetTrigger("throw");
         anim.SetTrigger("throw");
-        Vector3 throwDirection = transform.forward * throwStrength;
-        throwDirection = Quaternion.AngleAxis(throwUpwardsAngle, -transform.right) * throwDirection;
         obj.transform.SetParent(null, true);
         if (clyde != null)
         {
             clyde.ResetMotion();
             clyde.canMove = true;
+            clyde.anim.SetTrigger("thrown");
+            clyde.anim.ResetTrigger("land");
         }
         objectRb.velocity = Vector3.zero;
         objectRb.isKinematic = false;
-        objectRb.AddForce(throwDirection*Time.fixedDeltaTime*60, ForceMode.VelocityChange);
+        objectRb.AddForce(direction*strength*Time.fixedDeltaTime*60, ForceMode.VelocityChange);
         objectRb = null;
         Physics.IgnoreCollision(GetComponent<Collider>(), obj.GetComponent<Collider>(), false);
     }
+
+    private Vector3 ThrowDirection()
+    {
+        Vector3 throwDirection = transform.forward;
+        throwDirection = Quaternion.AngleAxis(throwUpwardsAngle, -transform.right) * throwDirection;
+        return throwDirection;
+    }
+    
 }
