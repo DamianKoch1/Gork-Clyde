@@ -37,17 +37,17 @@ Cloth:
   m_SolverFrequency: 120
   m_SleepThreshold: 0.1
   m_Coefficients:
-  - maxDistance: 0.5
+  - maxDistance: 0.2
     collisionSphereDistance: 3.4028235e+38
   - maxDistance: 0.5
     collisionSphereDistance: 3.4028235e+38
   - maxDistance: 0.5
     collisionSphereDistance: 3.4028235e+38
-  - maxDistance: 0.5
+  - maxDistance: 0.2
     collisionSphereDistance: 3.4028235e+38
   - maxDistance: 0.5
     collisionSphereDistance: 3.4028235e+38
-  - maxDistance: 0.5
+  - maxDistance: 0.2
     collisionSphereDistance: 3.4028235e+38
   - maxDistance: 0
     collisionSphereDistance: 3.4028235e+38
@@ -69,7 +69,7 @@ Cloth:
     collisionSphereDistance: 3.4028235e+38
   - maxDistance: 0
     collisionSphereDistance: 3.4028235e+38
-  - maxDistance: 0.5
+  - maxDistance: 0.2
     collisionSphereDistance: 3.4028235e+38
   - maxDistance: 0
     collisionSphereDistance: 3.4028235e+38
@@ -77,25 +77,17 @@ Cloth:
     collisionSphereDistance: 3.4028235e+38
   - maxDistance: 0
     collisionSphereDistance: 3.4028235e+38
-  - maxDistance: 0.5
+  - maxDistance: 0.2
+    collisionSphereDistance: 3.4028235e+38
+  - maxDistance: 0.2
     collisionSphereDistance: 3.4028235e+38
   - maxDistance: 0.5
     collisionSphereDistance: 3.4028235e+38
   - maxDistance: 0.5
     collisionSphereDistance: 3.4028235e+38
-  - maxDistance: 0.5
+  - maxDistance: 0.2
     collisionSphereDistance: 3.4028235e+38
   - maxDistance: 0.5
-    collisionSphereDistance: 3.4028235e+38
-  - maxDistance: 0.5
-    collisionSphereDistance: 3.4028235e+38
-  - maxDistance: 0
-    collisionSphereDistance: 3.4028235e+38
-  - maxDistance: 0
-    collisionSphereDistance: 3.4028235e+38
-  - maxDistance: 0
-    collisionSphereDistance: 3.4028235e+38
-  - maxDistance: 0
     collisionSphereDistance: 3.4028235e+38
   - maxDistance: 0
     collisionSphereDistance: 3.4028235e+38
@@ -105,7 +97,19 @@ Cloth:
     collisionSphereDistance: 3.4028235e+38
   - maxDistance: 0
     collisionSphereDistance: 3.4028235e+38
-  - maxDistance: 0.5
+  - maxDistance: 0
+    collisionSphereDistance: 3.4028235e+38
+  - maxDistance: 0
+    collisionSphereDistance: 3.4028235e+38
+  - maxDistance: 0
+    collisionSphereDistance: 3.4028235e+38
+  - maxDistance: 0
+    collisionSphereDistance: 3.4028235e+38
+  - maxDistance: 0.2
+    collisionSphereDistance: 3.4028235e+38
+  - maxDistance: 0.2
+    collisionSphereDistance: 3.4028235e+38
+  - maxDistance: 0.2
     collisionSphereDistance: 3.4028235e+38
   - maxDistance: 0.5
     collisionSphereDistance: 3.4028235e+38
@@ -113,13 +117,9 @@ Cloth:
     collisionSphereDistance: 3.4028235e+38
   - maxDistance: 0.5
     collisionSphereDistance: 3.4028235e+38
-  - maxDistance: 0.5
+  - maxDistance: 0.2
     collisionSphereDistance: 3.4028235e+38
-  - maxDistance: 0.5
-    collisionSphereDistance: 3.4028235e+38
-  - maxDistance: 0.5
-    collisionSphereDistance: 3.4028235e+38
-  - maxDistance: 0.5
+  - maxDistance: 0.2
     collisionSphereDistance: 3.4028235e+38
   - maxDistance: 0.5
     collisionSphereDistance: 3.4028235e+38
@@ -5229,6 +5229,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PushableObjectLargeMesh
       objectReference: {fileID: 0}
+    - target: {fileID: -4879248091611635412, guid: 9610431aa02cd2648950afc46b2e0d7b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0d5b35174b3ae9748a68d21040ea66e1, type: 2}
     - target: {fileID: -4216859302048453862, guid: 9610431aa02cd2648950afc46b2e0d7b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5299,6 +5304,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.4118712
       objectReference: {fileID: 0}
+    - target: {fileID: -2620152240041971189, guid: 9610431aa02cd2648950afc46b2e0d7b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0d5b35174b3ae9748a68d21040ea66e1, type: 2}
     - target: {fileID: 3328451420970541062, guid: 9610431aa02cd2648950afc46b2e0d7b,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -5310,16 +5320,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: 657229597f3bdab46bf4c23af0dafd90, type: 2}
     - target: {fileID: 91850803529928462, guid: 9610431aa02cd2648950afc46b2e0d7b,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 0d5b35174b3ae9748a68d21040ea66e1, type: 2}
-    - target: {fileID: -2620152240041971189, guid: 9610431aa02cd2648950afc46b2e0d7b,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 0d5b35174b3ae9748a68d21040ea66e1, type: 2}
-    - target: {fileID: -4879248091611635412, guid: 9610431aa02cd2648950afc46b2e0d7b,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
