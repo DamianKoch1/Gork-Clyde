@@ -17,6 +17,7 @@ public abstract class Player : MonoBehaviour
     public bool canMove = true, inAirstream = false;
     private Vector3 parentPos;
     private ParticleSystem walkParticles;
+    private bool wasGrounded = false, falling = false;
 
     protected virtual void Start()
     {
@@ -38,18 +39,39 @@ public abstract class Player : MonoBehaviour
         }
         if (Input.GetButtonDown(jumpButton) && ghostjumpTimer > 0 && jumpCooldown == 0)
         {
-            walkParticles.Stop();
-            transform.SetParent(null, true);
-            ghostjumpTimer = 0;
-            jumpCooldown = 0.3f;
-            rb.AddForce(jumpHeight*Vector3.up * Time.fixedDeltaTime*90, ForceMode.VelocityChange);
-            if (anim)
-            {
-                anim.SetTrigger("jump");
-            }
+            Jump();
         }
+        
+        //debug
+        if (Input.GetButtonDown("DebugSonic"))
+        {
+            speed *= 2;
+            jumpHeight *= 2;
+        }
+        if (Input.GetButtonDown("DebugUnSonic"))
+        {
+            speed /= 2;
+            jumpHeight /= 2;
+        }
+
+        if (Input.GetButton("DebugAirjump"))
+        {
+            rb.AddForce(Vector3.up, ForceMode.VelocityChange);
+        }
+        //
+        
     }
 
+    private void Jump()
+    {
+        walkParticles.Stop();
+        transform.SetParent(null, true);
+        ghostjumpTimer = 0;
+        jumpCooldown = 0.3f;
+        rb.AddForce(jumpHeight*Vector3.up * Time.fixedDeltaTime*90, ForceMode.VelocityChange);
+        anim.SetTrigger("jump");
+        anim.ResetTrigger("land");
+    }
     
     protected virtual void FixedUpdate()
     {
@@ -57,6 +79,7 @@ public abstract class Player : MonoBehaviour
         {
             motion.x = Input.GetAxis(xAxis);
             motion.z = Input.GetAxis(zAxis);
+            anim.SetFloat("Blend", (Mathf.Abs(motion.x) + Mathf.Abs(motion.z)));
             motion = motion.normalized * speed;
             if (!inAirstream)
             {
@@ -68,32 +91,31 @@ public abstract class Player : MonoBehaviour
        
         if (IsGrounded())
         {
-            ghostjumpTimer = maxGhostjumpDelay;
-            if (anim)
+            if (!wasGrounded)
             {
+                wasGrounded = true;
+                falling = false;
+                anim.SetBool("falling", false);
+                anim.SetTrigger("land");
                 anim.ResetTrigger("jump");
             }
-            if (motion.x == 0 && motion.z == 0)
+            ghostjumpTimer = maxGhostjumpDelay;
+            if (motion.x == 0 && motion.z == 0 && walkParticles.isPlaying)
             {
-                if (anim)
-                {
-                    anim.SetBool("walking", false);
-                }
-                if (walkParticles.isPlaying)
-                {
-                    walkParticles.Stop();
-                }
+                walkParticles.Stop();
             }
-            else
+            else if (!walkParticles.isPlaying)
             {
-                if (anim)
-                {
-                    anim.SetBool("walking", true);
-                }
-                if (!walkParticles.isPlaying)
-                {
                     walkParticles.Play();
-                }
+            }
+        }
+        else
+        {
+            wasGrounded = false;
+            if (!falling && rb.velocity.y < -0.1f)
+            {
+                falling = true;
+                anim.SetBool("falling", true);
             }
         }
     }
