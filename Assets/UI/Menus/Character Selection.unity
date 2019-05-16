@@ -247,6 +247,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
       value: Main Menu
       objectReference: {fileID: 0}
+    - target: {fileID: 9154505855891437975, guid: 18edcd135db2a674994b74d9f69556a0,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1186107816}
     - target: {fileID: 9154505856568418857, guid: 18edcd135db2a674994b74d9f69556a0,
         type: 3}
       propertyPath: m_Text
@@ -421,11 +426,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 28.077946
       objectReference: {fileID: 0}
-    - target: {fileID: 4834388250981002090, guid: 20dc443e67c39394bab339010aabb7aa,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1198959069, guid: 20dc443e67c39394bab339010aabb7aa, type: 3}
       propertyPath: m_UseGravity
       value: 0
@@ -433,6 +433,11 @@ PrefabInstance:
     - target: {fileID: 1198959069, guid: 20dc443e67c39394bab339010aabb7aa, type: 3}
       propertyPath: m_IsKinematic
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4834388250981002090, guid: 20dc443e67c39394bab339010aabb7aa,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5041112139827952282, guid: 20dc443e67c39394bab339010aabb7aa,
         type: 3}
@@ -633,7 +638,12 @@ PrefabInstance:
     - target: {fileID: 9154505855891437975, guid: 18edcd135db2a674994b74d9f69556a0,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Quit
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9154505855891437975, guid: 18edcd135db2a674994b74d9f69556a0,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 9154505856568418857, guid: 18edcd135db2a674994b74d9f69556a0,
         type: 3}
@@ -760,6 +770,7 @@ GameObject:
   - component: {fileID: 1186107812}
   - component: {fileID: 1186107811}
   - component: {fileID: 1186107815}
+  - component: {fileID: 1186107816}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -862,6 +873,19 @@ MonoBehaviour:
   gorkButton: {fileID: 904831998}
   clydeButton: {fileID: 1353596666}
   playButton: {fileID: 9154505855182278138}
+--- !u!114 &1186107816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1186107810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63e4fe3f4bbf1b6468731b4ed25fe1e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clickSound: {fileID: 0}
 --- !u!224 &1187045122 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 9154505855891437972, guid: 18edcd135db2a674994b74d9f69556a0,
@@ -1410,11 +1434,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 11.584963
       objectReference: {fileID: 0}
-    - target: {fileID: 1088568127900295901, guid: 5db7da3d9d401f14f97a7aef596827e0,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2553107321341475815, guid: 5db7da3d9d401f14f97a7aef596827e0,
         type: 3}
       propertyPath: m_UseGravity
@@ -1424,6 +1443,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsKinematic
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1088568127900295901, guid: 5db7da3d9d401f14f97a7aef596827e0,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5db7da3d9d401f14f97a7aef596827e0, type: 3}
@@ -1548,6 +1572,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
       value: Level Selection
+      objectReference: {fileID: 0}
+    - target: {fileID: 9154505855891437975, guid: 18edcd135db2a674994b74d9f69556a0,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1186107816}
+    - target: {fileID: 9154505855891437975, guid: 18edcd135db2a674994b74d9f69556a0,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadScene
       objectReference: {fileID: 0}
     - target: {fileID: 9154505856568418857, guid: 18edcd135db2a674994b74d9f69556a0,
         type: 3}

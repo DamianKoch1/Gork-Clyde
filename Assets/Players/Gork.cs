@@ -93,6 +93,7 @@ public class Gork : Player
             clyde.anim.SetTrigger("pickedUp");
         }
     }
+    
     private void Throw(GameObject obj, Vector3 direction, float strength, bool muteSound = false)
     {
         if (!muteSound)
