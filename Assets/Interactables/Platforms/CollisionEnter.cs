@@ -15,6 +15,7 @@ public class CollisionEnter : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.isTrigger) return;
         if (other.CompareTag("player") || other.CompareTag("pushable"))
         {
             target.SendMessage(message);
@@ -24,6 +25,7 @@ public class CollisionEnter : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        if (other.isTrigger) return;
         if (other.CompareTag("player") || other.CompareTag("pushable"))
         {
             blockingObjCount--;
