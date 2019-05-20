@@ -47,8 +47,7 @@ public class Gork : Player
             {
                 if (Input.GetButtonDown(Clyde.JUMPBUTTON))
                 {
-                    Throw(clyde, Vector3.up, 1, true);
-                    clyde.GetComponent<Clyde>().anim.SetTrigger("throwCancelled");
+                    clyde.GetComponent<Clyde>().CancelThrow();
                 }
             }
         }
@@ -56,16 +55,17 @@ public class Gork : Player
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if (hit.rigidbody != null && hit.rigidbody.isKinematic == false)
+        if (hit.rigidbody && !hit.rigidbody.isKinematic)
         {
             hit.rigidbody.AddForce(hit.moveDirection * Time.deltaTime * 60 * 30/hit.rigidbody.mass, ForceMode.VelocityChange);
         }
     }
 
-   
+    
+    
     private void OnTriggerEnter(Collider other)
     {
-        if (carryableObjects.Contains(other.gameObject) == false && other.GetComponent<Carryable>() != null)
+        if (!carryableObjects.Contains(other.gameObject) && other.GetComponent<Carryable>())
         {
             carryableObjects.Add(other.gameObject);
         }
@@ -87,23 +87,22 @@ public class Gork : Player
         obj.transform.LookAt(obj.transform.position + transform.forward);
         objectRb = obj.GetComponent<Rigidbody>();
         objectRb.isKinematic = true;
-        if (clyde != null)
+        if (clyde)
         {
             clyde.canMove = false;
             clyde.anim.SetTrigger("pickedUp");
+            clyde.gork = gameObject;
+
         }
     }
     
-    private void Throw(GameObject obj, Vector3 direction, float strength, bool muteSound = false)
+    private void Throw(GameObject obj, Vector3 direction, float strength)
     {
-        if (!muteSound)
-        {
-            GetComponent<AudioSource>().Play();
-        }
+        GetComponent<AudioSource>().Play();
         var clyde = obj.GetComponent<Clyde>();
         anim.SetTrigger("throw");
         obj.transform.SetParent(null, true);
-        if (clyde != null)
+        if (clyde)
         {
             clyde.ResetMotion();
             clyde.canMove = true;
