@@ -121,7 +121,12 @@ public abstract class Player : MonoBehaviour
         }
     }
 
-   
+    public void Respawn()
+    {
+        ResetMotion();
+        rb.velocity = Vector3.zero;
+        rb.MovePosition(Spawnpoint.SPAWNPOINT.transform.position);
+    }
 
     protected virtual void MovePlayer()
     {
