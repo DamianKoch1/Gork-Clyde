@@ -86,6 +86,7 @@ public abstract class Player : MonoBehaviour
                 rb.AddForce(new Vector3(-rb.velocity.x, 0 , -rb.velocity.z)*Time.fixedDeltaTime*60, ForceMode.Acceleration);   
             }
             motion = ApplyCamRotation(motion);
+            LookForward();
             MovePlayer();
         }
        
@@ -125,18 +126,17 @@ public abstract class Player : MonoBehaviour
     protected virtual void MovePlayer()
     {
         //fixing player moving through walls when moving diagonally
-        if (Physics.Raycast(rb.position - 0.8f*GetComponent<Collider>().bounds.extents.y*Vector3.up, motion.x * Vector3.right, 
+        if (Physics.Raycast(rb.position - 0.7f*GetComponent<Collider>().bounds.extents.y*Vector3.up, motion.x * Vector3.right, 
         GetComponent<Collider>().bounds.extents.x*1.1f,Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore))
         {
             motion.x = 0;
         }
-        if (Physics.Raycast(rb.position - 0.8f*GetComponent<Collider>().bounds.extents.y*Vector3.up, motion.z * Vector3.forward, 
+        if (Physics.Raycast(rb.position - 0.7f*GetComponent<Collider>().bounds.extents.y*Vector3.up, motion.z * Vector3.forward, 
         GetComponent<Collider>().bounds.extents.x*1.1f,Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore))
         {
             motion.z = 0;
         }
         rb.MovePosition(rb.position + motion * Time.fixedDeltaTime);
-        LookForward();
     }
 
   

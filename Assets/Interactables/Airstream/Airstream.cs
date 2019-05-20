@@ -16,15 +16,19 @@ public class Airstream : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        var clide = other.GetComponent<Clyde>();
-        if (other.GetComponent<AirstreamAffected>() != null || clide != null)
+        var clyde = other.GetComponent<Clyde>();
+        if (other.GetComponent<AirstreamAffected>()  || clyde)
         {
             other.GetComponent<Rigidbody>().AddForce(direction * strength * Time.deltaTime * 60, ForceMode.Acceleration);
-            if (clide != null)
+            if (clyde)
             {
-                if (clide.inAirstream == false)
+                if (!clyde.inAirstream)
                 {
-                    clide.inAirstream = true;
+                    clyde.inAirstream = true;
+                    if (!clyde.canMove)
+                    {
+                        clyde.CancelThrow();
+                    }
                 }
                 other.transform.SetParent(null, true);
             }
@@ -34,7 +38,7 @@ public class Airstream : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         var clide = other.GetComponent<Clyde>();
-        if (clide != null)
+        if (clide)
         {
             clide.inAirstream = false;
         }
