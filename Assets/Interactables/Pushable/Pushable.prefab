@@ -375,6 +375,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PushableObjectLargeCloth
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 4a3a679d833317f4c9491e79ffbbbe40,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 4a3a679d833317f4c9491e79ffbbbe40,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -582,11 +587,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PushableObjectLargeMesh
       objectReference: {fileID: 0}
-    - target: {fileID: -4879248091611635412, guid: 9610431aa02cd2648950afc46b2e0d7b,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 0d5b35174b3ae9748a68d21040ea66e1, type: 2}
     - target: {fileID: -4216859302048453862, guid: 9610431aa02cd2648950afc46b2e0d7b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -658,6 +658,11 @@ PrefabInstance:
       value: 0.4118712
       objectReference: {fileID: 0}
     - target: {fileID: -2620152240041971189, guid: 9610431aa02cd2648950afc46b2e0d7b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0d5b35174b3ae9748a68d21040ea66e1, type: 2}
+    - target: {fileID: -4879248091611635412, guid: 9610431aa02cd2648950afc46b2e0d7b,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
