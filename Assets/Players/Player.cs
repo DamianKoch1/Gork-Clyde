@@ -20,6 +20,12 @@ public abstract class Player : MonoBehaviour
     private ParticleSystem walkParticles;
     private bool wasGrounded = false, falling = false;
 
+    
+    protected delegate void SetMotion();
+
+    protected SetMotion setMotion;
+
+    
     protected virtual void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -27,6 +33,7 @@ public abstract class Player : MonoBehaviour
         walkParticles.Stop();
         cam = Camera.main;
         StartCoroutine(CheckSpawnPoint());
+        setMotion = SetMotionDefault;
     }
 
     protected void Update()
@@ -64,6 +71,22 @@ public abstract class Player : MonoBehaviour
         
     }
 
+
+    protected void SetMotionDefault()
+    {
+        motion.x = Input.GetAxis(xAxis);
+        motion.z = Input.GetAxis(zAxis);
+        anim.SetFloat("Blend", (Mathf.Abs(motion.x) + Mathf.Abs(motion.z)));
+        motion = motion.normalized * speed;
+        motion = ApplyCamRotation(motion);
+        LookForward();
+    }
+    
+    
+
+    
+    
+    
     private void Jump()
     {
         walkParticles.Stop();
@@ -79,16 +102,12 @@ public abstract class Player : MonoBehaviour
     {
         if (canMove)
         {
-            motion.x = Input.GetAxis(xAxis);
-            motion.z = Input.GetAxis(zAxis);
-            anim.SetFloat("Blend", (Mathf.Abs(motion.x) + Mathf.Abs(motion.z)));
-            motion = motion.normalized * speed;
+            setMotion();
             if (!inAirstream)
             {
                 rb.AddForce(new Vector3(-rb.velocity.x, 0 , -rb.velocity.z)*Time.fixedDeltaTime*60, ForceMode.Acceleration);   
             }
-            motion = ApplyCamRotation(motion);
-            LookForward();
+           
             MovePlayer();
         }
        

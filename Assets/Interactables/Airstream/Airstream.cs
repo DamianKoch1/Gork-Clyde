@@ -8,10 +8,6 @@ public class Airstream : MonoBehaviour
     [SerializeField]
     private float strength;
    
-    void Start()
-    {
-        direction = transform.forward;
-    }
 
 
     private void OnTriggerStay(Collider other)
@@ -19,6 +15,7 @@ public class Airstream : MonoBehaviour
         var clyde = other.GetComponent<Clyde>();
         if (other.GetComponent<AirstreamAffected>()  || clyde)
         {
+            direction = transform.forward;
             other.GetComponent<Rigidbody>().AddForce(direction * strength * Time.deltaTime * 60, ForceMode.Acceleration);
             if (clyde)
             {
