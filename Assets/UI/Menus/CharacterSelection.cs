@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class CharacterSelection : MonoBehaviour
@@ -11,6 +12,8 @@ public class CharacterSelection : MonoBehaviour
     private Button gorkButton, clydeButton, playButton;
 
     private bool gorkSelected = false;
+
+    public static string NEXT_LEVEL_NAME;
     
     // Start is called before the first frame update
     void Start()
@@ -61,7 +64,11 @@ public class CharacterSelection : MonoBehaviour
         Clyde.ZAXIS = "GorkVertical";
         Clyde.JUMPBUTTON = "GorkJump";
     }
-    
+
+    public void LoadNextLevel()
+    {
+        SceneManager.LoadScene(NEXT_LEVEL_NAME);
+    }
     
     
 }

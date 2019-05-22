@@ -17,13 +17,19 @@ public class GameMenu : MonoBehaviour
     }
  
 
+    public void LoadCharacterSelection(string nextSceneName)
+    {
+        Time.timeScale = 1;
+        CharacterSelection.NEXT_LEVEL_NAME = nextSceneName;
+        SceneManager.LoadScene("Character Selection");
+    }
+
+
     public void LoadScene(string sceneName)
     {
         Time.timeScale = 1;
         SceneManager.LoadScene(sceneName);
     }
-
-  
 
     public void ToggleMenu(GameObject menu)
     {
