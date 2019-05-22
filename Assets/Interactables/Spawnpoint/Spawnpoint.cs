@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class Spawnpoint : MonoBehaviour
 {
-    [SerializeField]
-    public static GameObject SPAWNPOINT;
-
-    private void Start()
-    {
-        SPAWNPOINT = gameObject;
-    }
+    public static Vector3 GORK_SPAWN, CLYDE_SPAWN;
+ 
 }
