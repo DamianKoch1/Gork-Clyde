@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public abstract class Player : MonoBehaviour
 {
@@ -25,6 +26,7 @@ public abstract class Player : MonoBehaviour
         walkParticles = GetComponentInChildren<ParticleSystem>();
         walkParticles.Stop();
         cam = Camera.main;
+        StartCoroutine(CheckSpawnPoint());
     }
 
     protected void Update()
@@ -73,7 +75,7 @@ public abstract class Player : MonoBehaviour
         anim.ResetTrigger("land");
     }
     
-    protected virtual void FixedUpdate()
+    protected void FixedUpdate()
     {
         if (canMove)
         {
@@ -101,6 +103,8 @@ public abstract class Player : MonoBehaviour
                 anim.ResetTrigger("jump");
             }
             ghostjumpTimer = maxGhostjumpDelay;
+
+            
             if (motion.x == 0 && motion.z == 0 && walkParticles.isPlaying)
             {
                 walkParticles.Stop();
@@ -121,13 +125,32 @@ public abstract class Player : MonoBehaviour
         }
     }
 
-    public void Respawn()
+    public void Respawn(Vector3 spawnpoint)
     {
         ResetMotion();
         rb.velocity = Vector3.zero;
-        rb.MovePosition(Spawnpoint.SPAWNPOINT.transform.position);
+        rb.MovePosition(spawnpoint);
     }
 
+
+    private IEnumerator CheckSpawnPoint()
+    {
+        while (true)
+        {
+            if (IsGrounded())
+            {
+                if (Physics.Raycast(rb.position, -Vector3.up,
+                2f, Physics.AllLayers, QueryTriggerInteraction.Ignore))
+                {
+                    SetSpawnPoint();
+                }
+            }
+            yield return new WaitForSeconds(0.5f);
+        }
+    }
+
+    protected abstract void SetSpawnPoint();
+    
     protected virtual void MovePlayer()
     {
         //fixing player moving through walls when moving diagonally
@@ -153,7 +176,7 @@ public abstract class Player : MonoBehaviour
         transform.LookAt(lookAt);
     }
 
-    private bool IsGrounded()
+    protected bool IsGrounded()
     {
         return Physics.SphereCast(transform.position, GetComponent<Collider>().bounds.extents.x / 2, -Vector3.up,
             out RaycastHit hitInfo, GetComponent<Collider>().bounds.extents.y - 0.1f, Physics.AllLayers,
