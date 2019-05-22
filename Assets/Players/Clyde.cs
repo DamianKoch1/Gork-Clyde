@@ -11,12 +11,18 @@ public class Clyde : Player
     [HideInInspector]
     public GameObject gork;
 
-    private void Start()
+    private new void Start()
     {
         base.Start();
        
         InitializeInputs(XAXIS, ZAXIS, JUMPBUTTON);
     }
+
+    protected override void SetSpawnPoint()
+    {
+        Spawnpoint.CLYDE_SPAWN = rb.position;
+    }
+
 
     public void CancelThrow()
     {
