@@ -16,13 +16,13 @@ public class Gork : Player
 
     public static string XAXIS = "GorkHorizontal", ZAXIS = "GorkVertical", JUMPBUTTON = "GorkJump", GORKINTERACT = "GorkInteract";
 
-    private void Start()
+    private new void Start()
     {
         base.Start();
         InitializeInputs(XAXIS, ZAXIS, JUMPBUTTON);
     }
     
-    private void Update()
+    private new void Update()
     {
         base.Update();
         if (Input.GetButtonDown(GORKINTERACT))
@@ -52,6 +52,12 @@ public class Gork : Player
             }
         }
     }
+
+    protected override void SetSpawnPoint()
+    {
+        Spawnpoint.GORK_SPAWN = rb.position;
+    }
+
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
