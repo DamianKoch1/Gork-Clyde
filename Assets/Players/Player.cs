@@ -116,6 +116,10 @@ public abstract class Player : MonoBehaviour
         }
         else
         {
+            if (walkParticles.isPlaying)
+            {
+                walkParticles.Stop();
+            }
             wasGrounded = false;
             if (!falling && rb.velocity.y < -0.1f)
             {
