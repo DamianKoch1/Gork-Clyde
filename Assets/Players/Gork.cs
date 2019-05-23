@@ -15,9 +15,9 @@ public class Gork : Player
     private float throwUpwardsAngle = 20f;
 
     private FixedJoint fixedJoint;
-
+    private GameObject pushedObj;
     private bool pushing = false;
-    
+
 
     public static string XAXIS = "GorkHorizontal", ZAXIS = "GorkVertical", JUMPBUTTON = "GorkJump", GORKINTERACT = "GorkInteract";
 
@@ -56,23 +56,36 @@ public class Gork : Player
                 }
             }
         }
+       
+        if (pushing)
+        {
+            if (!fixedJoint || !IsGrounded() || Input.GetButtonDown(JUMPBUTTON) || Input.GetButtonDown(GORKINTERACT)) EndPushing();
+        }
+        
     }
 
 
     public void StartPushing(GameObject obj)
     {
-        if (heldObjectSlot.transform.childCount == 0 && !pushing)
+        if (heldObjectSlot.transform.childCount == 0 && !pushing && !fixedJoint)
         {
-            pushing = true;
+            pushedObj = obj;
             Rigidbody objectRb = obj.GetComponent<Rigidbody>();
             obj.layer = 2;
             Vector3 direction = objectRb.position - rb.position;
             AxisAlignToBox(direction);
             fixedJoint = gameObject.AddComponent<FixedJoint>();
             fixedJoint.connectedBody = objectRb;
+            fixedJoint.breakForce = 600f;
+            StartCoroutine(SetPushing());
         }
     }
 
+    private IEnumerator SetPushing()
+    {
+        yield return new WaitForSeconds(0.05f);
+        pushing = true;
+    }
 
     private void AxisAlignToBox(Vector3 vector)
     {
@@ -88,15 +101,19 @@ public class Gork : Player
             setMotion = SetMotionZOnly;
         }
         transform.LookAt(rb.position + vector);
+        ResetMotion();
     }
     
     public void EndPushing()
     {
-        GameObject obj = fixedJoint.connectedBody.gameObject;
-        obj.layer = 0;
-        Destroy(fixedJoint);        
+        pushedObj.layer = 0;
+        if (fixedJoint)
+        {
+            Destroy(fixedJoint);        
+        }
         setMotion = SetMotionDefault;
         pushing = false;
+        pushedObj = null;
     }
     
     
