@@ -12,7 +12,11 @@ public class Gork : Player
     private float throwStrength = 5f;
     [SerializeField] [Range(0, 90)]
     private float throwUpwardsAngle = 20f;
-    private Rigidbody objectRb;
+
+    private FixedJoint fixedJoint;
+    private GameObject pushedObj;
+    private bool pushing = false;
+
 
     public static string XAXIS = "GorkHorizontal", ZAXIS = "GorkVertical", JUMPBUTTON = "GorkJump", GORKINTERACT = "GorkInteract";
 
@@ -51,8 +55,88 @@ public class Gork : Player
                 }
             }
         }
+       
+        if (pushing)
+        {
+            if (!fixedJoint || !IsGrounded() || Input.GetButtonDown(JUMPBUTTON) || Input.GetButtonDown(GORKINTERACT)) EndPushing();
+        }
+        
     }
 
+
+    public void StartPushing(GameObject obj)
+    {
+        if (heldObjectSlot.transform.childCount == 0 && !pushing && !fixedJoint)
+        {
+            pushedObj = obj;
+            Rigidbody objectRb = obj.GetComponent<Rigidbody>();
+            obj.layer = 2;
+            Vector3 direction = objectRb.position - rb.position;
+            AxisAlignToBox(direction);
+            fixedJoint = gameObject.AddComponent<FixedJoint>();
+            fixedJoint.connectedBody = objectRb;
+            fixedJoint.breakForce = 600f;
+            StartCoroutine(SetPushing());
+        }
+    }
+
+    private IEnumerator SetPushing()
+    {
+        yield return new WaitForSeconds(0.05f);
+        pushing = true;
+    }
+
+    private void AxisAlignToBox(Vector3 vector)
+    {
+        vector.y = 0;
+        if (Mathf.Abs(vector.x) > Mathf.Abs(vector.z))
+        {
+            vector.z = 0;
+            setMotion = SetMotionXOnly;
+        }
+        else
+        {
+            vector.x = 0;
+            setMotion = SetMotionZOnly;
+        }
+        transform.LookAt(rb.position + vector);
+        ResetMotion();
+    }
+    
+    public void EndPushing()
+    {
+        pushedObj.layer = 0;
+        if (fixedJoint)
+        {
+            Destroy(fixedJoint);        
+        }
+        setMotion = SetMotionDefault;
+        pushing = false;
+        pushedObj = null;
+    }
+    
+    
+    private void SetMotionXOnly()
+    {
+        motion.x = Input.GetAxis(xAxis);
+        motion = motion.normalized * speed;
+        if (Mathf.Abs(Input.GetAxis(zAxis)) > 0.1f)
+        {
+            EndPushing();
+        }
+    }
+    
+    private void SetMotionZOnly()
+    {
+        motion.z = Input.GetAxis(zAxis);
+        motion = motion.normalized * speed;
+        if (Mathf.Abs(Input.GetAxis(xAxis)) > 0.1f)
+        {
+            EndPushing();
+        }
+    }
+    
+    
     protected override void SetSpawnPoint()
     {
         Spawnpoint.GORK_SPAWN = rb.position;
@@ -91,7 +175,7 @@ public class Gork : Player
         obj.transform.SetParent(heldObjectSlot.transform, true);
         obj.transform.position = heldObjectSlot.transform.position;
         obj.transform.LookAt(obj.transform.position + transform.forward);
-        objectRb = obj.GetComponent<Rigidbody>();
+        Rigidbody objectRb = obj.GetComponent<Rigidbody>();
         objectRb.isKinematic = true;
         if (clyde)
         {
@@ -108,6 +192,7 @@ public class Gork : Player
         var clyde = obj.GetComponent<Clyde>();
         anim.SetTrigger("throw");
         obj.transform.SetParent(null, true);
+        Rigidbody objectRb = obj.GetComponent<Rigidbody>();
         if (clyde)
         {
             clyde.ResetMotion();

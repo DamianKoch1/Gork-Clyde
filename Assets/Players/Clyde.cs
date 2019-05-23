@@ -14,7 +14,6 @@ public class Clyde : Player
     private new void Start()
     {
         base.Start();
-       
         InitializeInputs(XAXIS, ZAXIS, JUMPBUTTON);
     }
 
