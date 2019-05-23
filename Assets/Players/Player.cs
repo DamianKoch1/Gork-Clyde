@@ -82,10 +82,6 @@ public abstract class Player : MonoBehaviour
     }
     
     
-
-    
-    
-    
     private void Jump()
     {
         walkParticles.Stop();
@@ -173,7 +169,7 @@ public abstract class Player : MonoBehaviour
 
     protected abstract void SetSpawnPoint();
     
-    protected virtual void MovePlayer()
+    private void MovePlayer()
     {
         //fixing player moving through walls when moving diagonally
         if (Physics.Raycast(rb.position - 0.7f*GetComponent<Collider>().bounds.extents.y*Vector3.up, motion.x * Vector3.right, 
