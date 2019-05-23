@@ -51,18 +51,18 @@ public abstract class Player : MonoBehaviour
         }
         
         //debug
-        if (Input.GetButtonDown("DebugSonic"))
+        if (Input.GetButtonDown("DebugFast"))
         {
             speed *= 2;
             jumpHeight *= 2;
         }
-        if (Input.GetButtonDown("DebugUnSonic"))
+        if (Input.GetButtonDown("DebugSlow"))
         {
             speed /= 2;
             jumpHeight /= 2;
         }
 
-        if (Input.GetButton("DebugAirjump"))
+        if (Input.GetButton("DebugFly"))
         {
             rb.AddForce(Vector3.up, ForceMode.VelocityChange);
         }
