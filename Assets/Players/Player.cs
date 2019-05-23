@@ -16,7 +16,6 @@ public abstract class Player : MonoBehaviour
     private float ghostjumpTimer = 0f;
     [HideInInspector] 
     public bool canMove = true, inAirstream = false;
-    private Vector3 parentPos;
     private ParticleSystem walkParticles;
     private bool wasGrounded = false, falling = false;
 
