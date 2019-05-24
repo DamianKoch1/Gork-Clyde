@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 9154505855891437974}
   - component: {fileID: 9154505855891437975}
   - component: {fileID: 1384389024993732461}
+  - component: {fileID: 7405222317069188625}
   m_Layer: 5
   m_Name: MenuButton
   m_TagString: Untagged
@@ -146,6 +147,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clickSound: {fileID: 8300000, guid: 9a8b2ad366a12b24a89c3c8847a465cf, type: 3}
+--- !u!114 &7405222317069188625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9154505855891437973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1384389024993732461}
+          m_MethodName: GrabFocus
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
 --- !u!1 &9154505856568418871
 GameObject:
   m_ObjectHideFlags: 0
