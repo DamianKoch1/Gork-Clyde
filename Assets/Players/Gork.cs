@@ -82,7 +82,8 @@ public class Gork : Player
 
     private IEnumerator SetPushing()
     {
-        yield return new WaitForSeconds(0.05f);
+//        yield return new WaitForSeconds(0.05f);
+        yield return new WaitWhile(() => Input.GetButtonDown((GORKINTERACT)));
         pushing = true;
     }
 
