@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -12,12 +13,14 @@ public class CharacterSelection : MonoBehaviour
     private Button gorkButton, clydeButton, playButton;
 
     private bool gorkSelected = false;
+    private EventSystem evtSystem;
 
     public static string NEXT_LEVEL_NAME;
     
     // Start is called before the first frame update
     void Start()
     {
+        evtSystem = EventSystem.current;
         gorkButton.onClick.AddListener(GorkSelected);
         clydeButton.onClick.AddListener(ClydeSelected);
         if (String.IsNullOrEmpty(Gork.XAXIS))
@@ -48,6 +51,7 @@ public class CharacterSelection : MonoBehaviour
         Clyde.XAXIS = "ClydeHorizontal";
         Clyde.ZAXIS = "ClydeVertical";
         Clyde.JUMPBUTTON = "ClydeJump";
+        evtSystem.SetSelectedGameObject(clydeButton.gameObject);
     }
 
     void ClydeSelected()
@@ -63,6 +67,7 @@ public class CharacterSelection : MonoBehaviour
         Clyde.XAXIS = "GorkHorizontal";
         Clyde.ZAXIS = "GorkVertical";
         Clyde.JUMPBUTTON = "GorkJump";
+        evtSystem.SetSelectedGameObject(gorkButton.gameObject);
     }
 
     public void LoadNextLevel()
