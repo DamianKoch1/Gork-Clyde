@@ -9,13 +9,7 @@ public class RecordControllerInput : MonoBehaviour {
     private float xAxis, yAxis, gorkHorizontal, clydeHorizontal, UIHorizontal, gorkVertical, clydeVertical, UIVertical;
     private List<string> lastPressedKeys = new List<string>();
 
-    private void Start()
-    {
-        foreach (string a in Input.GetJoystickNames())
-        {
-             print(a);        
-        }
-    }
+   
 
     void Update () {
         joystickNames = Input.GetJoystickNames();
