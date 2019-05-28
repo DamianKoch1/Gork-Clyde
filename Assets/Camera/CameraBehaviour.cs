@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Experimental.PlayerLoop;
@@ -55,22 +56,21 @@ public class CameraBehaviour : MonoBehaviour
         //toggling pause/options menu
         if (Input.GetButtonDown("Cancel"))
         {
-            if (pauseMenu.activeSelf)
+            var optionsCanvas = optionsMenu.GetComponent<Canvas>();
+            var pauseCanvas = pauseMenu.GetComponent<Canvas>();
+            if (!pauseCanvas.enabled)
             {
-                if (optionsMenu.activeSelf)
-                {
-                    optionsMenu.SetActive(false);
-                }
-                else
-                {
-                    pauseMenu.SetActive(false);
-                    Time.timeScale = 1;
-                }
+                pauseCanvas.enabled = true;
+                Time.timeScale = 0;
+            }
+            else if (optionsCanvas.enabled)
+            {
+                optionsCanvas.enabled = false;
             }
             else
             {
-                pauseMenu.SetActive( true);
-                Time.timeScale = 0f;
+                pauseCanvas.enabled = false;
+                Time.timeScale = 1;
             }
         }
     }

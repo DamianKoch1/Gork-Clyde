@@ -12,7 +12,7 @@ public class CharacterSelection : MonoBehaviour
     [SerializeField] 
     private Button gorkButton, clydeButton, playButton;
 
-    private bool gorkSelected = false;
+    private bool gorkSelected = true;
     private EventSystem evtSystem;
 
     public static string NEXT_LEVEL_NAME;
