@@ -24,6 +24,7 @@ public class OptionsMenu : MonoBehaviour
     {
         SetSliderValues();
         canvas = GetComponent<Canvas>();
+        canvas.enabled = false;
     }
 
     private void Update()
