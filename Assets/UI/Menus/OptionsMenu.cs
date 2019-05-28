@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.UI;
 
 
 public class OptionsMenu : MonoBehaviour
@@ -9,6 +11,43 @@ public class OptionsMenu : MonoBehaviour
 
     [SerializeField] 
     private AudioMixer mixer;
+
+    [SerializeField] 
+    private Slider BgmSlider, SfxSlider;
+
+    private Canvas canvas;
+
+    [SerializeField] 
+    private bool inMainMenu = false;
+    
+    private void Start()
+    {
+        SetSliderValues();
+        canvas = GetComponent<Canvas>();
+    }
+
+    private void Update()
+    {
+        if (inMainMenu)
+        {
+            if (Input.GetButtonDown("Cancel"))
+            {
+                if (canvas.enabled)
+                {
+                    canvas.enabled = false;
+                }
+            }
+        }
+    }
+
+    private void SetSliderValues()
+    {
+        float temp;
+        mixer.GetFloat("BgmVolume", out temp);
+        BgmSlider.value = (float)Math.Pow(10, temp / 20);
+        mixer.GetFloat("SfxVolume", out temp);
+        SfxSlider.value = (float)Math.Pow(10, temp / 20);
+    }
     
     public void SetBgmVolume(float value)
     {
@@ -40,13 +79,7 @@ public class OptionsMenu : MonoBehaviour
     
     public void ToggleMenu(GameObject menu)
     {
-        if (menu.activeSelf)
-        {
-            menu.SetActive(false);
-        }
-        else
-        {
-            menu.SetActive(true);
-        }
+        var canvas = menu.GetComponent<Canvas>();
+        canvas.enabled = !canvas.enabled;
     }
 }

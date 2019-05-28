@@ -33,15 +33,15 @@ public class GameMenu : MonoBehaviour
 
     public void ToggleMenu(GameObject menu)
     {
-        if (menu.activeSelf)
-        {
-            menu.SetActive(false);
-        }
-        else
-        {
-            menu.SetActive(true);
-        }
+        var canvas = menu.GetComponent<Canvas>();
+        canvas.enabled = !canvas.enabled;
     }
+    
+    public void Unpause()
+    {
+        Time.timeScale = 1;
+    }
+    
     public void Quit()
     {
         Application.Quit();
