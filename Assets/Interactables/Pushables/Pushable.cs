@@ -7,7 +7,9 @@ public abstract class Pushable : MonoBehaviour
      private ParticleSystem pushedParticles;
      private Rigidbody rb;
      private Vector3 previousPosition, currentPosition;
-     protected bool isPushed;
+     private Vector3 particleDirection;
+     [HideInInspector]
+     public bool isPushed;
 
      private void Start()
      {
@@ -16,7 +18,7 @@ public abstract class Pushable : MonoBehaviour
 
      private void InitializeVariables()
      {
-          pushedParticles = GetComponentInChildren<ParticleSystem>();
+          pushedParticles = gameObject.GetComponentInChildren<ParticleSystem>();
           rb = GetComponent<Rigidbody>();
           previousPosition = rb.position;
           currentPosition = previousPosition;
@@ -38,15 +40,18 @@ public abstract class Pushable : MonoBehaviour
      {
           if (!isPushed) return false;
           if (rb.velocity.y > 0.1f) return false;
-          currentPosition = rb.position;    
+          
+          currentPosition = rb.position;
           if (currentPosition == previousPosition) return false;
-          previousPosition = rb.position;
+          particleDirection = previousPosition - currentPosition;
+          previousPosition = currentPosition;
+          
           return true;
      }
 
      private void PlayPushedParticles()
      {
-          pushedParticles.transform.LookAt(pushedParticles.transform.position - (currentPosition - previousPosition));
+          pushedParticles.transform.LookAt(pushedParticles.transform.position + particleDirection);
           if (!pushedParticles.isPlaying)
           {
                pushedParticles.Play();
