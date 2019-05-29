@@ -2,61 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PressurePlate : MonoBehaviour
+public class PressurePlate : TriggerObject
 {
-    [SerializeField]
-    private GameObject[] targets;
-
+    
     private int objectsOnPlateCount;
-
-    private enum TriggerableBy {Clyde, Gork, All};
-    [SerializeField]
-    private TriggerableBy triggerableBy = TriggerableBy.All;
-   
-
-    private bool MatchesTriggerCondition(Collider other)
-    {
-        switch (triggerableBy)
-        {
-            case TriggerableBy.All:
-                if (other.GetComponent<Player>() || other.GetComponent<Pushable>()) return true;
-                break;
-            
-            case TriggerableBy.Gork:
-                if (other.GetComponent<Gork>()) return true;
-                break;
-            
-            case TriggerableBy.Clyde:
-                if (other.GetComponent<Clyde>()) return true;
-                break;
-        }
-        return false;
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (!other.isTrigger)
-        {
-            if (MatchesTriggerCondition(other))
-            {
-                PlateEntered();
-            }
-        }
-    }
+    
     
     private void OnTriggerExit(Collider other)
     {
-        if (!other.isTrigger)
+        if (MatchesTriggerCondition(other))
         {
-            if (MatchesTriggerCondition(other))
-            {
-                PlateExited();
-            }
+            OnPlateExited();
         }
     }
-
-
-    private void PlateEntered()
+    
+    protected override void OnTriggered()
     {
         if (objectsOnPlateCount == 0)
         {
@@ -67,8 +27,8 @@ public class PressurePlate : MonoBehaviour
         }
         objectsOnPlateCount++;
     }
-      
-    private void PlateExited()
+    
+    private void OnPlateExited()
     {
         if (objectsOnPlateCount == 1)
         {
@@ -79,4 +39,5 @@ public class PressurePlate : MonoBehaviour
         }
         objectsOnPlateCount--;
     }
+
 }
