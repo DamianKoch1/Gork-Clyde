@@ -30,12 +30,17 @@ public class OptionsMenu : MonoBehaviour
     {
         if (inMainMenu)
         {
-            if (Input.GetButtonDown("Cancel"))
+            CheckInput();
+        }
+    }
+
+    private void CheckInput()
+    {
+        if (Input.GetButtonDown("Cancel"))
+        {
+            if (canvas.enabled)
             {
-                if (canvas.enabled)
-                {
-                    canvas.enabled = false;
-                }
+                canvas.enabled = false;
             }
         }
     }
@@ -43,8 +48,10 @@ public class OptionsMenu : MonoBehaviour
     private void SetSliderValues()
     {
         float temp;
+        
         mixer.GetFloat("BgmVolume", out temp);
         BgmSlider.value = (float)Math.Pow(10, temp / 20);
+        
         mixer.GetFloat("SfxVolume", out temp);
         SfxSlider.value = (float)Math.Pow(10, temp / 20);
     }

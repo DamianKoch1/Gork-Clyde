@@ -188,6 +188,13 @@ public class Gork : Player
     private void PickUp(GameObject obj)
     {
         var clyde = obj.GetComponent<Clyde>();
+        if (clyde)
+        {
+            if (clyde.inAirstream) return;
+            clyde.canMove = false;
+            clyde.anim.SetTrigger("pickedUp");
+            clyde.gork = gameObject;
+        }
         anim.SetTrigger("pickUp");
         Physics.IgnoreCollision(GetComponent<Collider>(), obj.GetComponent<Collider>());
         obj.transform.SetParent(heldObjectSlot.transform, true);
@@ -195,13 +202,6 @@ public class Gork : Player
         obj.transform.LookAt(obj.transform.position + transform.forward);
         Rigidbody objectRb = obj.GetComponent<Rigidbody>();
         objectRb.isKinematic = true;
-        if (clyde)
-        {
-            clyde.canMove = false;
-            clyde.anim.SetTrigger("pickedUp");
-            clyde.gork = gameObject;
-
-        }
     }
     
     private void Throw(GameObject obj, Vector3 direction, float strength)
