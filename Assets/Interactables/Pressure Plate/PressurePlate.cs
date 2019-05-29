@@ -14,48 +14,49 @@ public class PressurePlate : MonoBehaviour
     private TriggerableBy triggerableBy = TriggerableBy.All;
    
 
+    private bool MatchesTriggerCondition(Collider other)
+    {
+        switch (triggerableBy)
+        {
+            case TriggerableBy.All:
+                if (other.GetComponent<Player>() || other.CompareTag("pushable")) return true;
+                break;
+            
+            case TriggerableBy.Gork:
+                if (other.GetComponent<Gork>()) return true;
+                break;
+            
+            case TriggerableBy.Clyde:
+                if (other.GetComponent<Clyde>()) return true;
+                break;
+        }
+        return false;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (!other.isTrigger)
         {
-            if (triggerableBy == TriggerableBy.All)
+            if (MatchesTriggerCondition(other))
             {
-                if (other.GetComponent<Clyde>() || other.GetComponent<Gork>() || other.CompareTag("pushable"))
-                {
-                    SendTriggered();
-                }
-            } else if (triggerableBy == TriggerableBy.Clyde && other.GetComponent<Clyde>())
-            {
-                SendTriggered();
-            } else if (triggerableBy == TriggerableBy.Gork && other.GetComponent<Gork>())
-            {
-                SendTriggered();
+                PlateEntered();
             }
         }
     }
+    
     private void OnTriggerExit(Collider other)
     {
         if (!other.isTrigger)
         {
-            if (triggerableBy == TriggerableBy.All)
+            if (MatchesTriggerCondition(other))
             {
-                if (other.GetComponent<Clyde>() || other.GetComponent<Gork>() || other.CompareTag("pushable"))
-                {
-                    SendExited();
-                }
-            }
-            else if (triggerableBy == TriggerableBy.Clyde && other.GetComponent<Clyde>())
-            {
-                SendExited();
-            }
-            else if (triggerableBy == TriggerableBy.Gork && other.GetComponent<Gork>())
-            {
-                SendExited();
+                PlateExited();
             }
         }
     }
 
-    void SendTriggered()
+
+    private void PlateEntered()
     {
         if (objectsOnPlateCount == 0)
         {
@@ -67,7 +68,7 @@ public class PressurePlate : MonoBehaviour
         objectsOnPlateCount++;
     }
       
-    void SendExited()
+    private void PlateExited()
     {
         if (objectsOnPlateCount == 1)
         {

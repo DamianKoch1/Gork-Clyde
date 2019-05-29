@@ -13,34 +13,47 @@ public class Airstream : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         var clyde = other.GetComponent<Clyde>();
-        if (other.GetComponent<AirstreamAffected>()  || clyde)
+        if (other.GetComponent<AirstreamAffected>())
         {
-            direction = transform.forward;
-            other.GetComponent<Rigidbody>().AddForce(direction * strength * Time.deltaTime * 60, ForceMode.Acceleration);
-            if (clyde)
+            AddAirstreamForce(other.GetComponent<Rigidbody>());
+        }
+        else if (clyde)
+        {
+            if (!clyde.inAirstream)
             {
-                if (!clyde.inAirstream)
-                {
-                    clyde.inAirstream = true;
-                    if (!clyde.canMove)
-                    {
-                        clyde.CancelThrow();
-                    }
-                }
-                other.transform.SetParent(null, true);
+                OnClydeAirstreamEntered(clyde);
             }
+            AddAirstreamForce(clyde.GetComponent<Rigidbody>());
         }
     }
 
+    
     private void OnTriggerExit(Collider other)
     {
-        var clide = other.GetComponent<Clyde>();
-        if (clide)
+        var clyde = other.GetComponent<Clyde>();
+        if (clyde)
         {
-            clide.inAirstream = false;
+            clyde.inAirstream = false;
         }
     }
 
+    private void AddAirstreamForce(Rigidbody rb)
+    {
+        direction = transform.forward;
+        rb.AddForce(direction * strength * Time.deltaTime * 60, ForceMode.Acceleration);
+    }
+
+    private void OnClydeAirstreamEntered(Clyde clyde)
+    {
+        clyde.inAirstream = true;
+        if (!clyde.canMove)
+        {
+            clyde.CancelThrow();
+        }
+        clyde.gameObject.transform.SetParent(null, true);
+    }
+    
+    
     public void OnButtonActivated()
     {
         ParticleSystem particles = transform.GetChild(0).GetComponent<ParticleSystem>();

@@ -27,7 +27,7 @@ public abstract class Player : MonoBehaviour
     protected SetMotion setMotion;
 
     
-    protected virtual void Start()
+    protected void Start()
     {
         rb = GetComponent<Rigidbody>();
         walkParticles = GetComponentInChildren<ParticleSystem>();
@@ -36,6 +36,7 @@ public abstract class Player : MonoBehaviour
         StartCoroutine(CheckSpawnPoint());
         setMotion = SetMotionDefault;
     }
+    
 
     protected void Update()
     {
