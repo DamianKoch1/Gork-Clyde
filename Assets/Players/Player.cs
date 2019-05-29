@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Player : MonoBehaviour
@@ -19,6 +20,7 @@ public abstract class Player : MonoBehaviour
     private ParticleSystem walkParticles;
     private bool wasGrounded = false, falling = false;
 
+    private List<Transform> collidingTransforms = new List<Transform>();
     
     protected delegate void SetMotion();
 
@@ -70,6 +72,22 @@ public abstract class Player : MonoBehaviour
         
     }
 
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (!collidingTransforms.Contains(other.transform))
+        {
+            collidingTransforms.Add(other.transform);
+        }
+    }
+
+    private void OnCollisionExit(Collision other)
+    {
+        if (collidingTransforms.Contains(other.transform))
+        {
+            collidingTransforms.Remove(other.transform);
+        }
+    }
 
     protected void SetMotionDefault()
     {
@@ -196,6 +214,7 @@ public abstract class Player : MonoBehaviour
 
     protected bool IsGrounded()
     {
+        if (collidingTransforms.Count == 0) return false;
         return Physics.SphereCast(transform.position, GetComponent<Collider>().bounds.extents.x / 2, -Vector3.up,
             out RaycastHit hitInfo, GetComponent<Collider>().bounds.extents.y - 0.1f, Physics.AllLayers,
             QueryTriggerInteraction.Ignore);
