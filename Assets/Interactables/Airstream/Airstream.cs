@@ -56,6 +56,11 @@ public class Airstream : MonoBehaviour
     
     public void OnButtonActivated()
     {
+        ToggleAirstream();
+    }
+
+    private void ToggleAirstream()
+    {
         ParticleSystem particles = transform.GetChild(0).GetComponent<ParticleSystem>();
         MeshRenderer mr = GetComponent<MeshRenderer>();
         BoxCollider bc = GetComponent<BoxCollider>();

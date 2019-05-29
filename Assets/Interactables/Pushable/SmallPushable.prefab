@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4931685306385337228}
   - component: {fileID: 4039839730099999629}
   - component: {fileID: 5789133625647090556}
-  - component: {fileID: 3014322908893472047}
+  - component: {fileID: 3130819403160448634}
   m_Layer: 2
   m_Name: SmallPushable
   m_TagString: pushable
@@ -137,7 +137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e74ab12b5ddbab419d06aa9a9d1b7bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3014322908893472047
+--- !u!114 &3130819403160448634
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -146,7 +146,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6393501334172902942}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4bddeac458565d4899e67ee4572ecb9, type: 3}
+  m_Script: {fileID: 11500000, guid: ef3b0c2b0ae72db4db171bae1b3759b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &3838751917603649017
@@ -245,6 +245,16 @@ PrefabInstance:
         type: 3}
       propertyPath: InitialModule.startSpeed.scalar
       value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1979026611529549593, guid: d6c3d229fe2a8e64c963de12722c7f68,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1979026611529549593, guid: d6c3d229fe2a8e64c963de12722c7f68,
+        type: 3}
+      propertyPath: moveWithTransform
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d6c3d229fe2a8e64c963de12722c7f68, type: 3}
