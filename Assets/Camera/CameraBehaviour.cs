@@ -117,9 +117,7 @@ public class CameraBehaviour : MonoBehaviour
             
             //zoom if players too far from each other
             zoomMultiplier = Mathf.Clamp((playerDistanceZoomThreshhold * startPlayerDistance / playerDistance), minZoom, maxZoom);
-            print("1: "+ playerDistanceZoomThreshhold*startPlayerDistance);
-            print("2: "+playerDistance);
-            print("3: "+zoomMultiplier);
+           
             
             //if player cant move focus other player
             if (!clyde.GetComponent<Player>().canMove)
