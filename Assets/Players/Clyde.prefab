@@ -70,6 +70,7 @@ MonoBehaviour:
   jumpCooldown: 0
   canMove: 1
   inAirstream: 0
+  gork: {fileID: 0}
 --- !u!114 &8373350507250307866
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -285,6 +286,11 @@ PrefabInstance:
         type: 3}
       propertyPath: moveWithTransform
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1601969473879671137, guid: eb49f7cbe08b75444bb38f67c8c7d0fe,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb49f7cbe08b75444bb38f67c8c7d0fe, type: 3}

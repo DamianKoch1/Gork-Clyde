@@ -31,10 +31,8 @@ public class Airstream : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         var clyde = other.GetComponent<Clyde>();
-        if (clyde)
-        {
-            clyde.inAirstream = false;
-        }
+        if (!clyde) return;
+        clyde.inAirstream = false;
     }
 
     private void AddAirstreamForce(Rigidbody rb)

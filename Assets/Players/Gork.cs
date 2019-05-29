@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 public class Gork : Player
@@ -16,21 +17,38 @@ public class Gork : Player
     private FixedJoint fixedJoint;
     [HideInInspector]
     public GameObject pushedObj;
-    private bool pushing = false;
+    private bool pushing;
 
 
 
     public static string XAXIS = "GorkHorizontal", ZAXIS = "GorkVertical", JUMPBUTTON = "GorkJump", GORKINTERACT = "GorkInteract";
 
-    private new void Start()
+    protected override void Start()
     {
         base.Start();
         InitializeInputs(XAXIS, ZAXIS, JUMPBUTTON);
     }
     
-    private new void Update()
+    protected override void Update()
     {
         base.Update();
+        if (pushing)
+        {
+            if (!fixedJoint)
+            {
+                EndPushing();
+            }
+            else if (!IsGrounded())
+            {
+                EndPushing();
+            }
+        }
+        
+    }
+
+    protected override void CheckInput()
+    {
+        base.CheckInput();
         if (Input.GetButtonDown(GORKINTERACT))
         {
             if (heldObjectSlot.transform.childCount == 0)
@@ -74,32 +92,24 @@ public class Gork : Player
                 }
             }
         }
-       
-        if (pushing)
-        {
-            if (!fixedJoint || !IsGrounded())
-            {
-                EndPushing();
-            }
-        }
-        
     }
 
 
     private void StartPushing()
     {
-        if (heldObjectSlot.transform.childCount == 0 && !pushing && !fixedJoint)
-        {
-            pushing = true;    
-            Rigidbody objectRb = pushedObj.GetComponent<Rigidbody>();
-            pushedObj.layer = 2;
-            Vector3 direction = objectRb.position - rb.position;
-            AxisAlignToBox(direction);
-            fixedJoint = gameObject.AddComponent<FixedJoint>();
-            fixedJoint.connectedBody = objectRb;
-            fixedJoint.breakForce = 800f;
-            pushedObj.GetComponent<BigPushable>().isPushed = true;
-        }
+        if (heldObjectSlot.transform.childCount > 0) return;
+        if (pushing) return;
+        if (fixedJoint) return;
+
+        pushing = true;    
+        Rigidbody objectRb = pushedObj.GetComponent<Rigidbody>();
+        pushedObj.layer = 2;
+        Vector3 direction = objectRb.position - rb.position;
+        AxisAlignToBox(direction);
+        fixedJoint = gameObject.AddComponent<FixedJoint>();
+        fixedJoint.connectedBody = objectRb;
+        fixedJoint.breakForce = 800f;
+        pushedObj.GetComponent<BigPushable>().isPushed = true;
     }
 
    
@@ -163,28 +173,27 @@ public class Gork : Player
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if (hit.rigidbody && !hit.rigidbody.isKinematic)
-        {
-            hit.rigidbody.AddForce(hit.moveDirection * Time.deltaTime * 60 * 30/hit.rigidbody.mass, ForceMode.VelocityChange);
-        }
+        if (!hit.rigidbody) return;
+        if (hit.rigidbody.isKinematic) return;
+        hit.rigidbody.AddForce(hit.moveDirection * Time.deltaTime * 60 * 30/hit.rigidbody.mass, ForceMode.VelocityChange);
+        
     }
 
     
     
     private void OnTriggerEnter(Collider other)
     {
-        if (!carryableObjects.Contains(other.gameObject) && other.GetComponent<Carryable>())
-        {
-            carryableObjects.Add(other.gameObject);
-        }
+        if (carryableObjects.Contains(other.gameObject)) return;
+        if (!other.GetComponent<Carryable>()) return;
+        carryableObjects.Add(other.gameObject);
     }
+    
     private void OnTriggerExit(Collider other)
     {
-        if (carryableObjects.Contains(other.gameObject))
-        {
-            carryableObjects.Remove(other.gameObject);
-        }
+        if (!carryableObjects.Contains(other.gameObject)) return;
+        carryableObjects.Remove(other.gameObject);
     }
+    
     private void PickUp(GameObject obj)
     {
         var clyde = obj.GetComponent<Clyde>();
@@ -206,11 +215,7 @@ public class Gork : Player
     
     private void Throw(GameObject obj, Vector3 direction, float strength)
     {
-        GetComponent<AudioSource>().Play();
         var clyde = obj.GetComponent<Clyde>();
-        anim.SetTrigger("throw");
-        obj.transform.SetParent(null, true);
-        Rigidbody objectRb = obj.GetComponent<Rigidbody>();
         if (clyde)
         {
             clyde.ResetMotion();
@@ -218,6 +223,10 @@ public class Gork : Player
             clyde.anim.SetTrigger("thrown");
             clyde.anim.ResetTrigger("land");
         }
+        GetComponent<AudioSource>().Play();
+        anim.SetTrigger("throw");
+        obj.transform.SetParent(null, true);
+        Rigidbody objectRb = obj.GetComponent<Rigidbody>();
         objectRb.velocity = Vector3.zero;
         objectRb.isKinematic = false;
         objectRb.AddForce(direction*strength*Time.fixedDeltaTime*60, ForceMode.VelocityChange);

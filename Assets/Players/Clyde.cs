@@ -11,7 +11,7 @@ public class Clyde : Player
     [HideInInspector]
     public GameObject gork;
 
-    private new void Start()
+    protected override void Start()
     {
         base.Start();
         InitializeInputs(XAXIS, ZAXIS, JUMPBUTTON);

@@ -12,9 +12,13 @@ public abstract class Player : MonoBehaviour
     protected string xAxis, zAxis, jumpButton;
     public Animator anim;
     private Camera cam;
+    
+    //can jump while timer > 0, set to max when grounded, decreases otherwise
     [SerializeField]
-    private float maxGhostjumpDelay = 0.2f, jumpCooldown;
+    private float maxGhostjumpDelay = 0.2f;
     private float ghostjumpTimer = 0f;
+    
+    
     [HideInInspector] 
     public bool canMove = true, inAirstream = false;
     private ParticleSystem walkParticles;
@@ -27,28 +31,29 @@ public abstract class Player : MonoBehaviour
     protected SetMotion setMotion;
 
     
-    protected void Start()
+    protected virtual void Start()
+    {
+        InitializeVariables();
+        StartCoroutine(CheckSpawnPoint());
+    }
+
+    private void InitializeVariables()
     {
         rb = GetComponent<Rigidbody>();
         walkParticles = GetComponentInChildren<ParticleSystem>();
-        walkParticles.Stop();
         cam = Camera.main;
-        StartCoroutine(CheckSpawnPoint());
         setMotion = SetMotionDefault;
     }
-    
 
-    protected void Update()
+    protected virtual void Update()
     {
-        if (ghostjumpTimer > 0)
-        {
-            ghostjumpTimer = Mathf.Max(ghostjumpTimer - Time.deltaTime, 0);
-        }
-        if (jumpCooldown > 0)
-        {
-            jumpCooldown = Mathf.Max(jumpCooldown - Time.deltaTime, 0);
-        }
-        if (Input.GetButtonDown(jumpButton) && ghostjumpTimer > 0 && jumpCooldown == 0)
+        CheckInput();
+    }
+
+
+    protected virtual void CheckInput()
+    {
+        if (Input.GetButtonDown(jumpButton) && ghostjumpTimer > 0)
         {
             Jump();
         }
@@ -70,31 +75,34 @@ public abstract class Player : MonoBehaviour
             rb.AddForce(Vector3.up, ForceMode.VelocityChange);
         }
         //
-        
     }
 
+    private IEnumerator DecreaseGhostjumpTimer()
+    {
+        while (ghostjumpTimer > 0)
+        {
+            ghostjumpTimer -= Time.deltaTime;
+            yield return null;
+        }
+        ghostjumpTimer = 0;
+    }
 
     private void OnCollisionEnter(Collision other)
     {
-        if (!collidingTransforms.Contains(other.transform))
-        {
-            collidingTransforms.Add(other.transform);
-        }
+        if (collidingTransforms.Contains(other.transform)) return;
+        collidingTransforms.Add(other.transform);
     }
 
     private void OnCollisionExit(Collision other)
     {
-        if (collidingTransforms.Contains(other.transform))
-        {
-            collidingTransforms.Remove(other.transform);
-        }
+        if (!collidingTransforms.Contains(other.transform)) return;
+        collidingTransforms.Remove(other.transform);
     }
 
     protected void SetMotionDefault()
     {
         motion.x = Input.GetAxis(xAxis);
         motion.z = Input.GetAxis(zAxis);
-        anim.SetFloat("Blend", (Mathf.Abs(motion.x) + Mathf.Abs(motion.z)));
         motion = motion.normalized * speed;
         motion = ApplyCamRotation(motion);
         LookForward();
@@ -105,46 +113,37 @@ public abstract class Player : MonoBehaviour
     {
         walkParticles.Stop();
         transform.SetParent(null, true);
+        StopCoroutine(DecreaseGhostjumpTimer());
         ghostjumpTimer = 0;
-        jumpCooldown = 0.3f;
         rb.AddForce(jumpHeight*Vector3.up * Time.fixedDeltaTime*90, ForceMode.VelocityChange);
         anim.SetTrigger("jump");
         anim.ResetTrigger("land");
     }
-    
-    protected void FixedUpdate()
+
+
+    private void UpdateState()
     {
-        if (canMove)
-        {
-            setMotion();
-            if (!inAirstream)
-            {
-                rb.AddForce(new Vector3(-rb.velocity.x, 0 , -rb.velocity.z)*Time.fixedDeltaTime*60, ForceMode.Acceleration);   
-            }
-           
-            MovePlayer();
-        }
-       
         if (IsGrounded())
         {
             if (!wasGrounded)
             {
-                wasGrounded = true;
+                ghostjumpTimer = maxGhostjumpDelay;
                 falling = false;
                 anim.SetBool("falling", false);
                 anim.SetTrigger("land");
                 anim.ResetTrigger("jump");
             }
-            ghostjumpTimer = maxGhostjumpDelay;
+            wasGrounded = true;
 
+            anim.SetFloat("Blend", (Mathf.Abs(motion.x) + Mathf.Abs(motion.z)));
             
-            if (motion.x == 0 && motion.z == 0 && walkParticles.isPlaying)
+            if (motion.magnitude < 0.1f)
             {
                 walkParticles.Stop();
             }
             else if (!walkParticles.isPlaying)
             {
-                    walkParticles.Play();
+                walkParticles.Play();
             }
         }
         else
@@ -153,13 +152,28 @@ public abstract class Player : MonoBehaviour
             {
                 walkParticles.Stop();
             }
-            wasGrounded = false;
-            if (!falling && rb.velocity.y < -0.1f)
+
+            if (wasGrounded)
             {
-                falling = true;
-                anim.SetBool("falling", true);
+                StartCoroutine(DecreaseGhostjumpTimer());
+                wasGrounded = false;
+            }
+            if (!falling)
+            {
+                if (rb.velocity.y < -0.1f)
+                {
+                    falling = true;
+                    anim.SetBool("falling", true);
+                }
             }
         }
+    }
+    
+    protected void FixedUpdate()
+    {
+         MovePlayer();
+       
+         UpdateState();
     }
 
     public void Respawn(Vector3 spawnpoint)
@@ -170,7 +184,7 @@ public abstract class Player : MonoBehaviour
     }
 
 
-    private IEnumerator CheckSpawnPoint()
+    public IEnumerator CheckSpawnPoint()
     {
         while (true)
         {
@@ -190,6 +204,16 @@ public abstract class Player : MonoBehaviour
     
     private void MovePlayer()
     {
+        if (!canMove) return;
+        
+        setMotion();
+       
+        //applying "anti-force" to decrease sliding after exiting airstream
+        if (!inAirstream)
+        {
+            rb.AddForce(new Vector3(-rb.velocity.x, 0 , -rb.velocity.z)*Time.fixedDeltaTime*60, ForceMode.Acceleration);   
+        }
+        
         //fixing player moving through walls when moving diagonally
         if (Physics.Raycast(rb.position - 0.7f*GetComponent<Collider>().bounds.extents.y*Vector3.up, motion.x * Vector3.right, 
         GetComponent<Collider>().bounds.extents.x*1.1f,Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore))
@@ -201,6 +225,7 @@ public abstract class Player : MonoBehaviour
         {
             motion.z = 0;
         }
+        
         rb.MovePosition(rb.position + motion * Time.fixedDeltaTime);
     }
 
