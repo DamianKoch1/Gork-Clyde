@@ -14,10 +14,8 @@ public abstract class TriggerObject : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (MatchesTriggerCondition(other))
-        {
-            OnTriggered();
-        }
+        if (!MatchesTriggerCondition(other)) return;
+        OnTriggered();
     }
     
     protected bool MatchesTriggerCondition(Collider other)

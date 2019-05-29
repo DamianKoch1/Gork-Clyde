@@ -10,10 +10,8 @@ public class PressurePlate : TriggerObject
     
     private void OnTriggerExit(Collider other)
     {
-        if (MatchesTriggerCondition(other))
-        {
-            OnPlateExited();
-        }
+        if (!MatchesTriggerCondition(other)) return;
+        OnPlateExited();
     }
     
     protected override void OnTriggered()

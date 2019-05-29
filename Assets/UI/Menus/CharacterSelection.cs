@@ -20,6 +20,11 @@ public class CharacterSelection : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        InitializeButtons();
+    }
+
+    private void InitializeButtons()
+    {
         evtSystem = EventSystem.current;
         gorkButton.onClick.AddListener(GorkSelected);
         clydeButton.onClick.AddListener(ClydeSelected);
@@ -35,9 +40,8 @@ public class CharacterSelection : MonoBehaviour
         {
             clydeButton.interactable = false;
         }
-        
     }
-
+    
     void GorkSelected()
     {
         gorkSelected = true;
