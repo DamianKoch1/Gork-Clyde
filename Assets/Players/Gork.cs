@@ -14,8 +14,10 @@ public class Gork : Player
     private float throwUpwardsAngle = 20f;
 
     private FixedJoint fixedJoint;
-    private GameObject pushedObj;
+    [HideInInspector]
+    public GameObject pushedObj;
     private bool pushing = false;
+
 
 
     public static string XAXIS = "GorkHorizontal", ZAXIS = "GorkVertical", JUMPBUTTON = "GorkJump", GORKINTERACT = "GorkInteract";
@@ -42,14 +44,31 @@ public class Gork : Player
             {
                 Throw(heldObjectSlot.transform.GetChild(0).gameObject, ThrowDirection(), throwStrength);
             }
+
+            if (pushing)
+            {
+                EndPushing();
+            }
         }
 
-        if (heldObjectSlot.transform.childCount > 0)
+
+        if (Input.GetButtonUp(GORKINTERACT))
         {
-            GameObject clyde = heldObjectSlot.transform.GetChild(0).gameObject;
-            if (clyde.GetComponent<Clyde>())
+            if (pushedObj)
             {
-                if (Input.GetButtonDown(Clyde.JUMPBUTTON))
+                if (heldObjectSlot.transform.childCount == 0)
+                {
+                    StartPushing();
+                }
+            }
+        }
+        
+        if (Input.GetButtonDown(Clyde.JUMPBUTTON))
+        {
+            if (heldObjectSlot.transform.childCount > 0)
+            {
+                GameObject clyde = heldObjectSlot.transform.GetChild(0).gameObject;
+                if (clyde.GetComponent<Clyde>())
                 {
                     clyde.GetComponent<Clyde>().CancelThrow();
                 }
@@ -58,35 +77,32 @@ public class Gork : Player
        
         if (pushing)
         {
-            if (!fixedJoint || !IsGrounded() || Input.GetButtonDown(JUMPBUTTON) || Input.GetButtonDown(GORKINTERACT)) EndPushing();
+            if (!fixedJoint || !IsGrounded())
+            {
+                EndPushing();
+            }
         }
         
     }
 
 
-    public void StartPushing(GameObject obj)
+    private void StartPushing()
     {
         if (heldObjectSlot.transform.childCount == 0 && !pushing && !fixedJoint)
         {
-            pushedObj = obj;
-            Rigidbody objectRb = obj.GetComponent<Rigidbody>();
-            obj.layer = 2;
+            pushing = true;    
+            Rigidbody objectRb = pushedObj.GetComponent<Rigidbody>();
+            pushedObj.layer = 2;
             Vector3 direction = objectRb.position - rb.position;
             AxisAlignToBox(direction);
             fixedJoint = gameObject.AddComponent<FixedJoint>();
             fixedJoint.connectedBody = objectRb;
-            fixedJoint.breakForce = 600f;
-            StartCoroutine(SetPushing());
+            fixedJoint.breakForce = 800f;
+            pushedObj.GetComponent<BigPushable>().isPushed = true;
         }
     }
 
-    private IEnumerator SetPushing()
-    {
-//        yield return new WaitForSeconds(0.05f);
-        yield return new WaitWhile(() => Input.GetButtonDown((GORKINTERACT)));
-        pushing = true;
-    }
-
+   
     private void AxisAlignToBox(Vector3 vector)
     {
         vector.y = 0;
@@ -104,7 +120,7 @@ public class Gork : Player
         ResetMotion();
     }
     
-    public void EndPushing()
+    private void EndPushing()
     {
         pushedObj.layer = 0;
         if (fixedJoint)
@@ -113,6 +129,7 @@ public class Gork : Player
         }
         setMotion = SetMotionDefault;
         pushing = false;
+        pushedObj.GetComponent<BigPushable>().isPushed = false;
         pushedObj = null;
     }
     
@@ -121,7 +138,7 @@ public class Gork : Player
     {
         motion.x = Input.GetAxis(xAxis);
         motion = motion.normalized * speed;
-        if (Mathf.Abs(Input.GetAxis(zAxis)) > 0.1f)
+        if (Mathf.Abs(Input.GetAxis(zAxis)) > 0.3f)
         {
             EndPushing();
         }
@@ -131,7 +148,7 @@ public class Gork : Player
     {
         motion.z = Input.GetAxis(zAxis);
         motion = motion.normalized * speed;
-        if (Mathf.Abs(Input.GetAxis(xAxis)) > 0.1f)
+        if (Mathf.Abs(Input.GetAxis(xAxis)) > 0.3f)
         {
             EndPushing();
         }

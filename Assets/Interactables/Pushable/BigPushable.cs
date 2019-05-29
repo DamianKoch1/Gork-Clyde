@@ -25,11 +25,24 @@ public class BigPushable : MonoBehaviour
 
      private void OnTriggerStay(Collider other)
      {
-          if (other.GetComponent<Gork>())
+          var gork = other.GetComponent<Gork>();
+          if (gork)
           {
-               if (Input.GetButtonDown(Gork.GORKINTERACT))
+               if (!gork.pushedObj)
                {
-                    other.GetComponent<Gork>().StartPushing(gameObject);
+                    gork.pushedObj = gameObject;
+               }
+          }
+     }
+     
+     private void OnTriggerExit(Collider other)
+     {
+          var gork = other.GetComponent<Gork>();
+          if (gork)
+          {
+               if (gork.pushedObj)
+               {
+                    gork.pushedObj = null;
                }
           }
      }
@@ -55,6 +68,13 @@ public class BigPushable : MonoBehaviour
                     }
                }
                previousPosition = rb.position;
+          }
+          else
+          {
+               if (pushedParticles.isPlaying)
+               {
+                    pushedParticles.Stop();
+               }
           }
      }
 }
