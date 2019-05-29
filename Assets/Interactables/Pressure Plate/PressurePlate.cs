@@ -19,7 +19,7 @@ public class PressurePlate : MonoBehaviour
         switch (triggerableBy)
         {
             case TriggerableBy.All:
-                if (other.GetComponent<Player>() || other.CompareTag("pushable")) return true;
+                if (other.GetComponent<Player>() || other.GetComponent<Pushable>()) return true;
                 break;
             
             case TriggerableBy.Gork:
