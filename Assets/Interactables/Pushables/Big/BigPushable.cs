@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class BigPushable : Pushable
 {
-     public new bool isPushed;
      
      private void OnTriggerStay(Collider other)
      {
