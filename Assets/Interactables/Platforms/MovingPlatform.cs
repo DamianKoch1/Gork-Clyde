@@ -49,7 +49,7 @@ public class MovingPlatform : MonoBehaviour
             moveAmount = 0;
         }
         rb.MovePosition(pos1 + 0.5f * (1 + Mathf.Sin(moveAmount - Mathf.PI / 2)) * (pos2 - pos1));
-        moveAmount += Time.fixedDeltaTime * speed;
+        moveAmount += Time.deltaTime * speed;
     }
 
 
