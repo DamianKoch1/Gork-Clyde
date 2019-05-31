@@ -1,17 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using JetBrains.Annotations;
 using UnityEngine;
 
 public class PlayerIndicators : MonoBehaviour
 {
-    [SerializeField] 
+    [SerializeField]
     private Transform gorkTransform, clydeTransform;
-    [SerializeField] 
+    [SerializeField]
     private RectTransform canvasRect;
     private Vector3 gorkPos, clydePos;
     private Camera cam;
-    [SerializeField] 
+    [SerializeField]
     private GameObject gorkIndicator, clydeIndicator;
 
     [Range(0, 0.1f)]
@@ -40,7 +39,7 @@ public class PlayerIndicators : MonoBehaviour
             gorkIndicator.SetActive(false);
         }
     }
-    
+
     private void CheckClyde()
     {
         clydePos = cam.WorldToScreenPoint(clydeTransform.position);
@@ -54,7 +53,7 @@ public class PlayerIndicators : MonoBehaviour
         }
     }
 
-    private void UpdateIndicator(GameObject indicator, Vector3 target)
+    private void UpdateIndicator(GameObject indicator, Vector3 targetPos)
     {
         Vector2 rectSize = canvasRect.sizeDelta;
 
@@ -65,7 +64,7 @@ public class PlayerIndicators : MonoBehaviour
             indicator.SetActive(true);
         }
 
-        Vector2 indicatorPos = cam.ScreenToViewportPoint(target);
+        Vector2 indicatorPos = cam.ScreenToViewportPoint(targetPos);
 
         Vector2 rotationVector = indicatorPos;
         rotationVector.x = Mathf.Clamp(rotationVector.x, 0, 1);
@@ -80,13 +79,13 @@ public class PlayerIndicators : MonoBehaviour
             zRotationAngles = -45 + rotationVector.x * 90 + rotationVector.y * 90;
         }
 
-         indicatorRect.eulerAngles = new Vector3(0,0, zRotationAngles);
-        
-        indicatorPos.x = Mathf.Clamp(indicatorPos.x, indicatorDistanceX, 1-indicatorDistanceX);
-        indicatorPos.y = Mathf.Clamp(indicatorPos.y, indicatorDistanceY, 1-indicatorDistanceY);
+        indicatorRect.eulerAngles = new Vector3(0, 0, zRotationAngles);
+
+        indicatorPos.x = Mathf.Clamp(indicatorPos.x, indicatorDistanceX, 1 - indicatorDistanceX);
+        indicatorPos.y = Mathf.Clamp(indicatorPos.y, indicatorDistanceY, 1 - indicatorDistanceY);
         indicatorPos.x *= rectSize.x;
         indicatorPos.y *= rectSize.y;
         indicatorRect.anchoredPosition = indicatorPos;
     }
-    
+
 }

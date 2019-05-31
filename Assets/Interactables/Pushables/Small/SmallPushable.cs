@@ -8,14 +8,18 @@ public class SmallPushable : Pushable
 
     private void OnCollisionEnter(Collision other)
     {
+        if (other.collider.isTrigger) return;
         if (!other.transform.GetComponent<Player>()) return;
+
         touchedPlayerCount++;
         isPushed = true;
     }
 
     private void OnCollisionExit(Collision other)
     {
+        if (other.collider.isTrigger) return;
         if (!other.transform.GetComponent<Player>()) return;
+
         touchedPlayerCount--;
         if (touchedPlayerCount == 0)
         {

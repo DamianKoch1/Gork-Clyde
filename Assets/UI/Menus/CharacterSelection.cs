@@ -9,14 +9,14 @@ using UnityEngine.UI;
 public class CharacterSelection : MonoBehaviour
 {
 
-    [SerializeField] 
+    [SerializeField]
     private Button gorkButton, clydeButton, playButton;
 
     private bool gorkSelected = true;
     private EventSystem evtSystem;
 
     public static string NEXT_LEVEL_NAME;
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,7 +41,7 @@ public class CharacterSelection : MonoBehaviour
             clydeButton.interactable = false;
         }
     }
-    
+
     void GorkSelected()
     {
         gorkSelected = true;
@@ -78,6 +78,6 @@ public class CharacterSelection : MonoBehaviour
     {
         SceneManager.LoadScene(NEXT_LEVEL_NAME);
     }
-    
-    
+
+
 }
