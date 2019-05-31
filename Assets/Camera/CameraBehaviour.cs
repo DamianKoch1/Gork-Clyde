@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Experimental.PlayerLoop;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 
 public class CameraBehaviour : MonoBehaviour
 {
@@ -14,23 +11,23 @@ public class CameraBehaviour : MonoBehaviour
     private Vector3 offset;
     private Vector3 playerMiddle;
     private float startPlayerDistance, playerDistance;
-    
+
     [SerializeField]
     private float playerDistanceZoomThreshhold = 2;
     private float zoomMultiplier;
-    [SerializeField] 
+    [SerializeField]
     private float minZoom, maxZoom;
     [SerializeField]
     private float followSpeed, rotateSpeed = 2;
     private Vector3 targetPos;
     private RaycastHit hit;
-   
-    [SerializeField] 
+
+    [SerializeField]
     private GameObject pauseMenu, optionsMenu;
 
     private static Animator ANIM;
     public static string NEXT_SCENE_NAME;
-    
+
     private void Start()
     {
         InitializeVariables();
@@ -38,13 +35,10 @@ public class CameraBehaviour : MonoBehaviour
 
     private void InitializeVariables()
     {
-        if (gork && clyde)
-        {
-            playerMiddle = 0.5f * (gork.transform.position + clyde.transform.position);
-            offset = transform.position - playerMiddle;
-            startPlayerDistance = Vector3.Distance(gork.transform.position, clyde.transform.position);
-            playerDistance = startPlayerDistance;
-        }
+        playerMiddle = 0.5f * (gork.transform.position + clyde.transform.position);
+        offset = transform.position - playerMiddle;
+        startPlayerDistance = Vector3.Distance(gork.transform.position, clyde.transform.position);
+        playerDistance = startPlayerDistance;
         ANIM = GetComponent<Animator>();
     }
 
@@ -57,8 +51,8 @@ public class CameraBehaviour : MonoBehaviour
     {
         SceneManager.LoadScene(NEXT_SCENE_NAME);
     }
-        
-    
+
+
     private void Update()
     {
         CheckInput();
@@ -93,14 +87,14 @@ public class CameraBehaviour : MonoBehaviour
         RotateCamera();
         MoveCamera();
     }
-    
+
     //cutted, kept for debugging
     private void RotateCamera()
     {
         if (Input.GetAxis("Mouse X") != 0)
         {
-            offset = Quaternion.AngleAxis(Input.GetAxis("Mouse X")*rotateSpeed, Vector3.up) * offset;
-            transform.RotateAround(transform.position, Vector3.up, Input.GetAxis("Mouse X")*rotateSpeed);
+            offset = Quaternion.AngleAxis(Input.GetAxis("Mouse X") * rotateSpeed, Vector3.up) * offset;
+            transform.RotateAround(transform.position, Vector3.up, Input.GetAxis("Mouse X") * rotateSpeed);
         }
         if (Input.GetAxis("Mouse Y") != 0)
         {
@@ -111,30 +105,26 @@ public class CameraBehaviour : MonoBehaviour
 
     private void MoveCamera()
     {
-        if (gork && clyde)
+        playerDistance = Vector3.Distance(gork.transform.position, clyde.transform.position);
+
+        //zoom if players too far from each other
+        zoomMultiplier = Mathf.Clamp((playerDistanceZoomThreshhold * startPlayerDistance / playerDistance), minZoom, maxZoom);
+
+        //if player cant move focus other player
+        if (!clyde.GetComponent<Player>().canMove)
         {
-            playerDistance = Vector3.Distance(gork.transform.position, clyde.transform.position);
-            
-            //zoom if players too far from each other
-            zoomMultiplier = Mathf.Clamp((playerDistanceZoomThreshhold * startPlayerDistance / playerDistance), minZoom, maxZoom);
-           
-            
-            //if player cant move focus other player
-            if (!clyde.GetComponent<Player>().canMove)
-            {
-                targetPos = gork.transform.position + offset / zoomMultiplier;
-            }
-            else if (!gork.GetComponent<Player>().canMove)
-            {
-                targetPos = clyde.transform.position + offset / zoomMultiplier;
-            }
-            else
-            {
-                playerMiddle = 0.5f * (gork.transform.position + clyde.transform.position);
-                targetPos = playerMiddle + offset / zoomMultiplier;
-            }
-     
-            transform.position = Vector3.Lerp(transform.position, targetPos, followSpeed);
+            targetPos = gork.transform.position + offset / zoomMultiplier;
         }
+        else if (!gork.GetComponent<Player>().canMove)
+        {
+            targetPos = clyde.transform.position + offset / zoomMultiplier;
+        }
+        else
+        {
+            playerMiddle = 0.5f * (gork.transform.position + clyde.transform.position);
+            targetPos = playerMiddle + offset / zoomMultiplier;
+        }
+
+        transform.position = Vector3.Lerp(transform.position, targetPos, followSpeed);
     }
 }

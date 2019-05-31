@@ -12,25 +12,24 @@ public abstract class Player : MonoBehaviour
     protected string xAxis, zAxis, jumpButton;
     public Animator anim;
     private Camera cam;
-    
+
     //can jump while timer > 0, set to max when grounded, decreases otherwise
     [SerializeField]
     private float maxGhostjumpDelay = 0.2f;
     private float ghostjumpTimer = 0f;
-    
-    
-    [HideInInspector] 
+
+    [HideInInspector]
     public bool canMove = true, inAirstream = false;
     private ParticleSystem walkParticles;
     private bool wasGrounded = false, falling = false;
 
     private List<Transform> collidingTransforms = new List<Transform>();
-    
+
     protected delegate void SetMotion();
 
     protected SetMotion setMotion;
 
-    
+
     protected virtual void Start()
     {
         InitializeVariables();
@@ -57,7 +56,7 @@ public abstract class Player : MonoBehaviour
         {
             Jump();
         }
-        
+
         //debug
         if (Input.GetButtonDown("DebugFast"))
         {
@@ -103,19 +102,23 @@ public abstract class Player : MonoBehaviour
     {
         motion.x = Input.GetAxis(xAxis);
         motion.z = Input.GetAxis(zAxis);
-        motion = motion.normalized * speed;
+        if (motion.magnitude > 1)
+        {
+            motion = motion.normalized;
+        }
+        motion *= speed;
         motion = ApplyCamRotation(motion);
         LookForward();
     }
-    
-    
+
+
     private void Jump()
     {
         walkParticles.Stop();
         transform.SetParent(null, true);
         StopCoroutine(DecreaseGhostjumpTimer());
         ghostjumpTimer = 0;
-        rb.AddForce(jumpHeight*Vector3.up * Time.fixedDeltaTime*90, ForceMode.VelocityChange);
+        rb.AddForce(jumpHeight * Vector3.up * Time.deltaTime * 90, ForceMode.VelocityChange);
         anim.SetTrigger("jump");
         anim.ResetTrigger("land");
     }
@@ -136,7 +139,7 @@ public abstract class Player : MonoBehaviour
             wasGrounded = true;
 
             anim.SetFloat("Blend", (Mathf.Abs(motion.x) + Mathf.Abs(motion.z)));
-            
+
             if (motion.magnitude < 0.1f)
             {
                 walkParticles.Stop();
@@ -168,24 +171,24 @@ public abstract class Player : MonoBehaviour
             }
         }
     }
-    
+
     protected void FixedUpdate()
     {
-         MovePlayer();
-       
-         UpdateState();
+        MovePlayer();
+
+        UpdateState();
     }
 
-    public void Respawn(Vector3 spawnpoint)
+    public virtual void Respawn()
     {
         ResetMotion();
         rb.velocity = Vector3.zero;
-        rb.MovePosition(spawnpoint);
     }
 
 
     public IEnumerator CheckSpawnPoint()
     {
+        SetSpawnPoint();
         while (true)
         {
             if (IsGrounded())
@@ -201,35 +204,35 @@ public abstract class Player : MonoBehaviour
     }
 
     protected abstract void SetSpawnPoint();
-    
+
     private void MovePlayer()
     {
         if (!canMove) return;
-        
+
         setMotion();
-       
+
         //applying "anti-force" to decrease sliding after exiting airstream
         if (!inAirstream)
         {
-            rb.AddForce(new Vector3(-rb.velocity.x, 0 , -rb.velocity.z)*Time.fixedDeltaTime*60, ForceMode.Acceleration);   
+            rb.AddForce(new Vector3(-rb.velocity.x, 0, -rb.velocity.z) * Time.deltaTime * 60, ForceMode.Acceleration);
         }
-        
+
         //fixing player moving through walls when moving diagonally
-        if (Physics.Raycast(rb.position - 0.7f*GetComponent<Collider>().bounds.extents.y*Vector3.up, motion.x * Vector3.right, 
-        GetComponent<Collider>().bounds.extents.x*1.1f,Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore))
+        if (Physics.Raycast(rb.position - 0.7f * GetComponent<Collider>().bounds.extents.y * Vector3.up, motion.x * Vector3.right,
+        GetComponent<Collider>().bounds.extents.x * 1.1f, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore))
         {
             motion.x = 0;
         }
-        if (Physics.Raycast(rb.position - 0.7f*GetComponent<Collider>().bounds.extents.y*Vector3.up, motion.z * Vector3.forward, 
-        GetComponent<Collider>().bounds.extents.x*1.1f,Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore))
+        if (Physics.Raycast(rb.position - 0.7f * GetComponent<Collider>().bounds.extents.y * Vector3.up, motion.z * Vector3.forward,
+        GetComponent<Collider>().bounds.extents.x * 1.1f, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore))
         {
             motion.z = 0;
         }
-        
-        rb.MovePosition(rb.position + motion * Time.fixedDeltaTime);
+
+        rb.MovePosition(rb.position + motion * Time.deltaTime);
     }
 
-  
+
     private void LookForward()
     {
         Vector3 position = transform.position;

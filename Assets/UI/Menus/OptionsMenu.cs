@@ -9,17 +9,17 @@ using UnityEngine.UI;
 public class OptionsMenu : MonoBehaviour
 {
 
-    [SerializeField] 
+    [SerializeField]
     private AudioMixer mixer;
 
-    [SerializeField] 
+    [SerializeField]
     private Slider BgmSlider, SfxSlider;
 
     private Canvas canvas;
 
-    [SerializeField] 
+    [SerializeField]
     private bool inMainMenu = false;
-    
+
     private void Start()
     {
         SetSliderValues();
@@ -48,19 +48,19 @@ public class OptionsMenu : MonoBehaviour
     private void SetSliderValues()
     {
         float temp;
-        
+
         mixer.GetFloat("BgmVolume", out temp);
         BgmSlider.value = (float)Math.Pow(10, temp / 20);
-        
+
         mixer.GetFloat("SfxVolume", out temp);
         SfxSlider.value = (float)Math.Pow(10, temp / 20);
     }
-    
+
     public void SetBgmVolume(float value)
     {
         mixer.SetFloat("BgmVolume", Mathf.Log10(value) * 20);
     }
-   
+
     public void SetSfxVolume(float value)
     {
         mixer.SetFloat("SfxVolume", Mathf.Log10(value) * 20);
@@ -83,7 +83,7 @@ public class OptionsMenu : MonoBehaviour
     {
         Screen.fullScreen = fullscreen;
     }
-    
+
     public void ToggleMenu(GameObject menu)
     {
         var canvas = menu.GetComponent<Canvas>();

@@ -7,32 +7,35 @@ public class Airstream : MonoBehaviour
     private Vector3 direction;
     [SerializeField]
     private float strength;
-   
+
 
 
     private void OnTriggerStay(Collider other)
     {
+        if (other.isTrigger) return;
+        if (!other.GetComponent<AirstreamAffected>()) return;
+
+        AddAirstreamForce(other.GetComponent<Rigidbody>());
         var clyde = other.GetComponent<Clyde>();
-        if (other.GetComponent<AirstreamAffected>())
+        if (clyde)
         {
-            AddAirstreamForce(other.GetComponent<Rigidbody>());
-        }
-        else if (clyde)
-        {
-            if (!clyde.inAirstream)
+            if (clyde.inAirstream)
             {
                 OnClydeAirstreamEntered(clyde);
             }
-            AddAirstreamForce(clyde.GetComponent<Rigidbody>());
         }
     }
 
-    
+
     private void OnTriggerExit(Collider other)
     {
+        if (other.isTrigger) return;
+
         var clyde = other.GetComponent<Clyde>();
-        if (!clyde) return;
-        clyde.inAirstream = false;
+        if (clyde)
+        {
+            clyde.inAirstream = false;
+        }
     }
 
     private void AddAirstreamForce(Rigidbody rb)
@@ -50,8 +53,8 @@ public class Airstream : MonoBehaviour
         }
         clyde.gameObject.transform.SetParent(null, true);
     }
-    
-    
+
+
     public void OnButtonActivated()
     {
         ToggleAirstream();

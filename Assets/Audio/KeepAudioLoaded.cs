@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class KeepAudioLoaded : MonoBehaviour
 {
-    // Start is called before the first frame update
     void Start()
     {
         DontDestroyOnLoad(gameObject);
@@ -16,15 +15,8 @@ public class KeepAudioLoaded : MonoBehaviour
 
     private bool ExistsAlready()
     {
-        if (CompareTag("bgm"))
-        {
-            if (GameObject.FindGameObjectsWithTag("bgm").Length <= 1) return false;
-        }
-        if (CompareTag("sfx"))
-        {
-            if (GameObject.FindGameObjectsWithTag("sfx").Length <= 1) return false;
-        }
+        if (GameObject.FindGameObjectsWithTag(gameObject.tag).Length > 1) return true;
         return false;
     }
-    
+
 }
