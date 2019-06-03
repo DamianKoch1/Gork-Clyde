@@ -8,7 +8,7 @@ public class MovingPlatform : MonoBehaviour
     private GameObject start, target, platform;
     private Vector3 pos1, pos2, targetPos;
     private bool stop, blocked;
-    public enum Mode {Autostart, Continuous, Oneshot};
+    public enum Mode {Autostart, Triggerable};
     public Mode mode = Mode.Autostart;
     [SerializeField]
     private float speed;
@@ -28,31 +28,25 @@ public class MovingPlatform : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    private void FixedUpdate()
     {
-        if (!stop  && !blocked)
-        {
-            if (moveAmount >= Mathf.PI * 20) moveAmount = 2 * Mathf.PI;
-            rb.MovePosition(pos1 + 0.5f*(1+Mathf.Sin(moveAmount-Mathf.PI/2))*(pos2 - pos1));
-            moveAmount += Time.fixedDeltaTime * speed;
-            if (mode == Mode.Oneshot)
-            {
-                if ((Vector3.Distance(rb.position, targetPos) < 0.1f) && moveAmount > 0.5*Mathf.PI)
-                {
-                    stop = true;
-                    if (targetPos == pos1)
-                    {
-                        targetPos = pos2;
-                    }
-                    else
-                    {
-                        targetPos = pos1;
-                    }
-               }
-            }
-        }
+        MovePlatform();
+        
     }
 
+    private void MovePlatform()
+    {
+        if (stop) return;
+        if (blocked) return;
+
+        if (moveAmount >= Mathf.PI * 200)
+        {
+            moveAmount = 0;
+        }
+        rb.MovePosition(pos1 + 0.5f * (1 + Mathf.Sin(moveAmount-Mathf.PI / 2)) * (pos2 - pos1));
+        moveAmount += Time.fixedDeltaTime * speed;
+    }
+    
 
     public void PlatformBlocked()
     {

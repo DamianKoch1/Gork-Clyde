@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 public class Gork : Player
@@ -14,21 +15,40 @@ public class Gork : Player
     private float throwUpwardsAngle = 20f;
 
     private FixedJoint fixedJoint;
-    private GameObject pushedObj;
-    private bool pushing = false;
+    [HideInInspector]
+    public GameObject pushedObj;
+    private bool pushing;
+
 
 
     public static string XAXIS = "GorkHorizontal", ZAXIS = "GorkVertical", JUMPBUTTON = "GorkJump", GORKINTERACT = "GorkInteract";
 
-    private new void Start()
+    protected override void Start()
     {
         base.Start();
         InitializeInputs(XAXIS, ZAXIS, JUMPBUTTON);
     }
     
-    private new void Update()
+    protected override void Update()
     {
         base.Update();
+        if (pushing)
+        {
+            if (!fixedJoint)
+            {
+                EndPushing();
+            }
+            else if (!IsGrounded())
+            {
+                EndPushing();
+            }
+        }
+        
+    }
+
+    protected override void CheckInput()
+    {
+        base.CheckInput();
         if (Input.GetButtonDown(GORKINTERACT))
         {
             if (heldObjectSlot.transform.childCount == 0)
@@ -42,50 +62,57 @@ public class Gork : Player
             {
                 Throw(heldObjectSlot.transform.GetChild(0).gameObject, ThrowDirection(), throwStrength);
             }
+
+            if (pushing)
+            {
+                EndPushing();
+            }
         }
 
-        if (heldObjectSlot.transform.childCount > 0)
+
+        if (Input.GetButtonUp(GORKINTERACT))
         {
-            GameObject clyde = heldObjectSlot.transform.GetChild(0).gameObject;
-            if (clyde.GetComponent<Clyde>())
+            if (pushedObj)
             {
-                if (Input.GetButtonDown(Clyde.JUMPBUTTON))
+                if (heldObjectSlot.transform.childCount == 0)
+                {
+                    StartPushing();
+                }
+            }
+        }
+        
+        if (Input.GetButtonDown(Clyde.JUMPBUTTON))
+        {
+            if (heldObjectSlot.transform.childCount > 0)
+            {
+                GameObject clyde = heldObjectSlot.transform.GetChild(0).gameObject;
+                if (clyde.GetComponent<Clyde>())
                 {
                     clyde.GetComponent<Clyde>().CancelThrow();
                 }
             }
         }
-       
-        if (pushing)
-        {
-            if (!fixedJoint || !IsGrounded() || Input.GetButtonDown(JUMPBUTTON) || Input.GetButtonDown(GORKINTERACT)) EndPushing();
-        }
-        
     }
 
 
-    public void StartPushing(GameObject obj)
+    private void StartPushing()
     {
-        if (heldObjectSlot.transform.childCount == 0 && !pushing && !fixedJoint)
-        {
-            pushedObj = obj;
-            Rigidbody objectRb = obj.GetComponent<Rigidbody>();
-            obj.layer = 2;
-            Vector3 direction = objectRb.position - rb.position;
-            AxisAlignToBox(direction);
-            fixedJoint = gameObject.AddComponent<FixedJoint>();
-            fixedJoint.connectedBody = objectRb;
-            fixedJoint.breakForce = 600f;
-            StartCoroutine(SetPushing());
-        }
+        if (heldObjectSlot.transform.childCount > 0) return;
+        if (pushing) return;
+        if (fixedJoint) return;
+
+        pushing = true;    
+        Rigidbody objectRb = pushedObj.GetComponent<Rigidbody>();
+        pushedObj.layer = 2;
+        Vector3 direction = objectRb.position - rb.position;
+        AxisAlignToBox(direction);
+        fixedJoint = gameObject.AddComponent<FixedJoint>();
+        fixedJoint.connectedBody = objectRb;
+        fixedJoint.breakForce = 800f;
+        pushedObj.GetComponent<BigPushable>().isPushed = true;
     }
 
-    private IEnumerator SetPushing()
-    {
-        yield return new WaitForSeconds(0.05f);
-        pushing = true;
-    }
-
+   
     private void AxisAlignToBox(Vector3 vector)
     {
         vector.y = 0;
@@ -103,7 +130,7 @@ public class Gork : Player
         ResetMotion();
     }
     
-    public void EndPushing()
+    private void EndPushing()
     {
         pushedObj.layer = 0;
         if (fixedJoint)
@@ -112,6 +139,7 @@ public class Gork : Player
         }
         setMotion = SetMotionDefault;
         pushing = false;
+        pushedObj.GetComponent<BigPushable>().isPushed = false;
         pushedObj = null;
     }
     
@@ -120,7 +148,7 @@ public class Gork : Player
     {
         motion.x = Input.GetAxis(xAxis);
         motion = motion.normalized * speed;
-        if (Mathf.Abs(Input.GetAxis(zAxis)) > 0.1f)
+        if (Mathf.Abs(Input.GetAxis(zAxis)) > 0.3f)
         {
             EndPushing();
         }
@@ -130,7 +158,7 @@ public class Gork : Player
     {
         motion.z = Input.GetAxis(zAxis);
         motion = motion.normalized * speed;
-        if (Mathf.Abs(Input.GetAxis(xAxis)) > 0.1f)
+        if (Mathf.Abs(Input.GetAxis(xAxis)) > 0.3f)
         {
             EndPushing();
         }
@@ -145,31 +173,37 @@ public class Gork : Player
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if (hit.rigidbody && !hit.rigidbody.isKinematic)
-        {
-            hit.rigidbody.AddForce(hit.moveDirection * Time.deltaTime * 60 * 30/hit.rigidbody.mass, ForceMode.VelocityChange);
-        }
+        if (!hit.rigidbody) return;
+        if (hit.rigidbody.isKinematic) return;
+        hit.rigidbody.AddForce(hit.moveDirection * Time.deltaTime * 60 * 30/hit.rigidbody.mass, ForceMode.VelocityChange);
+        
     }
 
     
     
     private void OnTriggerEnter(Collider other)
     {
-        if (!carryableObjects.Contains(other.gameObject) && other.GetComponent<Carryable>())
-        {
-            carryableObjects.Add(other.gameObject);
-        }
+        if (carryableObjects.Contains(other.gameObject)) return;
+        if (!other.GetComponent<Carryable>()) return;
+        carryableObjects.Add(other.gameObject);
     }
+    
     private void OnTriggerExit(Collider other)
     {
-        if (carryableObjects.Contains(other.gameObject))
-        {
-            carryableObjects.Remove(other.gameObject);
-        }
+        if (!carryableObjects.Contains(other.gameObject)) return;
+        carryableObjects.Remove(other.gameObject);
     }
+    
     private void PickUp(GameObject obj)
     {
         var clyde = obj.GetComponent<Clyde>();
+        if (clyde)
+        {
+            if (clyde.inAirstream) return;
+            clyde.canMove = false;
+            clyde.anim.SetTrigger("pickedUp");
+            clyde.gork = gameObject;
+        }
         anim.SetTrigger("pickUp");
         Physics.IgnoreCollision(GetComponent<Collider>(), obj.GetComponent<Collider>());
         obj.transform.SetParent(heldObjectSlot.transform, true);
@@ -177,22 +211,11 @@ public class Gork : Player
         obj.transform.LookAt(obj.transform.position + transform.forward);
         Rigidbody objectRb = obj.GetComponent<Rigidbody>();
         objectRb.isKinematic = true;
-        if (clyde)
-        {
-            clyde.canMove = false;
-            clyde.anim.SetTrigger("pickedUp");
-            clyde.gork = gameObject;
-
-        }
     }
     
     private void Throw(GameObject obj, Vector3 direction, float strength)
     {
-        GetComponent<AudioSource>().Play();
         var clyde = obj.GetComponent<Clyde>();
-        anim.SetTrigger("throw");
-        obj.transform.SetParent(null, true);
-        Rigidbody objectRb = obj.GetComponent<Rigidbody>();
         if (clyde)
         {
             clyde.ResetMotion();
@@ -200,6 +223,10 @@ public class Gork : Player
             clyde.anim.SetTrigger("thrown");
             clyde.anim.ResetTrigger("land");
         }
+        GetComponent<AudioSource>().Play();
+        anim.SetTrigger("throw");
+        obj.transform.SetParent(null, true);
+        Rigidbody objectRb = obj.GetComponent<Rigidbody>();
         objectRb.velocity = Vector3.zero;
         objectRb.isKinematic = false;
         objectRb.AddForce(direction*strength*Time.fixedDeltaTime*60, ForceMode.VelocityChange);

@@ -11,6 +11,11 @@ public class PlayerMiddle : MonoBehaviour
 
    private void Update()
    {
+      MoveToMiddle();
+   }
+
+   private void MoveToMiddle()
+   {
       if (!clyde.GetComponent<Player>().canMove)
       {
          transform.position = gork.transform.position;
