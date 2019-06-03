@@ -6,27 +6,23 @@ using UnityEngine.SceneManagement;
 public class Goal : MonoBehaviour
 {
 
-   private int playerCount = 0;
+   private int enteredPlayerCount = 0;
    [SerializeField] 
    private string nextLevelName;
    
    private void OnTriggerEnter(Collider other)
    {
-      if (!other.isTrigger && other.GetComponent<Player>())
+      if (other.isTrigger) return;
+      var player = other.GetComponent<Player>();
+      if (!player) return;
+      
+      player.canMove = false;
+      player.anim.enabled = false;
+      StopCoroutine(player.CheckSpawnPoint());
+      enteredPlayerCount++;
+      if (enteredPlayerCount == 2)
       {
-         other.GetComponent<Player>().canMove = false;
-         if (other.GetComponent<Player>().anim)
-         {
-            other.GetComponent<Player>().anim.enabled = false;
-         }
-         if (playerCount == 1)
-         {
-            LoadNextLevel();
-         }
-         else
-         {
-            playerCount++;
-         }
+         LoadNextLevel();
       }
    }
 
