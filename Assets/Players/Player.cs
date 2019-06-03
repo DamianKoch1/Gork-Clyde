@@ -59,9 +59,16 @@ public abstract class Player : MonoBehaviour
 
     protected virtual void CheckInput()
     {
-        if (Input.GetButtonDown(jumpButton) && ghostjumpTimer > 0)
+        if (Input.GetButtonDown(jumpButton))
         {
-            Jump();
+            if (IsGrounded())
+            {
+                Jump();
+            }
+            else if (ghostjumpTimer > 0)
+            {
+                Jump();
+            }
         }
 
         //debug
