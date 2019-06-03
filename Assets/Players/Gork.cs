@@ -119,10 +119,11 @@ public class Gork : Player
         fixedJoint = gameObject.AddComponent<FixedJoint>();
         fixedJoint.connectedBody = objectRb;
         fixedJoint.breakForce = 800f;           //TODO maybe use rb mass instead of hardcoding
-        pushedObj.GetComponent<BigPushable>().isPushed = true;
+        pushedObj.GetComponent<PushableBig>().isPushed = true;
     }
 
 
+    
     private void AxisAlignToBox(Vector3 vector)
     {
         vector.y = 0;
@@ -149,7 +150,7 @@ public class Gork : Player
         }
         setMotion = SetMotionDefault;
         pushing = false;
-        pushedObj.GetComponent<BigPushable>().isPushed = false;
+        pushedObj.GetComponent<PushableBig>().isPushed = false;
         pushedObj = null;
     }
 

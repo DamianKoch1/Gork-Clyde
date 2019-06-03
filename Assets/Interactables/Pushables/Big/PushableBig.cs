@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BigPushable : Pushable
+public class PushableBig : Pushable
 {
 
     private void OnTriggerStay(Collider other)

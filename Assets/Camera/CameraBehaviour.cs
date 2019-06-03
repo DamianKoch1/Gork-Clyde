@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -33,6 +34,17 @@ public class CameraBehaviour : MonoBehaviour
         InitializeVariables();
     }
 
+    private void Update()
+    {
+        CheckInput();
+    }
+
+    private void FixedUpdate()
+    {
+        RotateCamera();
+        MoveCamera();
+    }
+    
     private void InitializeVariables()
     {
         playerMiddle = 0.5f * (gork.transform.position + clyde.transform.position);
@@ -50,12 +62,6 @@ public class CameraBehaviour : MonoBehaviour
     public void OnBlackFadeFinished()
     {
         SceneManager.LoadScene(NEXT_SCENE_NAME);
-    }
-
-
-    private void Update()
-    {
-        CheckInput();
     }
 
     private void CheckInput()
@@ -78,14 +84,9 @@ public class CameraBehaviour : MonoBehaviour
             {
                 pauseCanvas.enabled = false;
                 Time.timeScale = 1;
+                MenuButton.FocusNothing();
             }
         }
-    }
-
-    private void FixedUpdate()
-    {
-        RotateCamera();
-        MoveCamera();
     }
 
     //cutted, kept for debugging

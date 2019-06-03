@@ -21,6 +21,11 @@ public class MovingPlatform : MonoBehaviour
         InitializeVariables();
     }
 
+    private void FixedUpdate()
+    {
+        MovePlatform();
+    }
+ 
     private void InitializeVariables()
     {
         rb = platform.GetComponent<Rigidbody>();
@@ -31,12 +36,6 @@ public class MovingPlatform : MonoBehaviour
         {
             stop = true;
         }
-    }
-
-
-    private void FixedUpdate()
-    {
-        MovePlatform();
     }
 
     private void MovePlatform()

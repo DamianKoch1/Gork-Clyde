@@ -86,7 +86,7 @@ public class OptionsMenu : MonoBehaviour
 
     public void ToggleMenu(GameObject menu)
     {
-        var canvas = menu.GetComponent<Canvas>();
-        canvas.enabled = !canvas.enabled;
+        var menuCanvas = menu.GetComponent<Canvas>();
+        menuCanvas.enabled = !menuCanvas.enabled;
     }
 }

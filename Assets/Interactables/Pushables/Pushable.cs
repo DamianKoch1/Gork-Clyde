@@ -15,6 +15,11 @@ public abstract class Pushable : MonoBehaviour
         InitializeVariables();
     }
 
+    private void FixedUpdate()
+    {
+        UpdateParticles();
+    }
+
     private void InitializeVariables()
     {
         pushedParticles = gameObject.GetComponentInChildren<ParticleSystem>();
@@ -22,12 +27,7 @@ public abstract class Pushable : MonoBehaviour
         previousPosition = rb.position;
         currentPosition = previousPosition;
     }
-
-    private void FixedUpdate()
-    {
-        UpdateParticles();
-    }
-
+    
     private void UpdateParticles()
     {
         currentPosition = rb.position;
