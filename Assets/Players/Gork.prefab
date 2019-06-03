@@ -64,17 +64,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f1fca1ef53261942955f763dfddd62f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 8
-  jumpHeight: 6
+  speed: 10
+  jumpHeight: 0
   rb: {fileID: 0}
   anim: {fileID: 3692220314552859734}
   maxGhostjumpDelay: 0.2
-  jumpCooldown: 0
   canMove: 1
   inAirstream: 0
   heldObjectSlot: {fileID: 8013065875973554416}
-  throwStrength: 10
-  throwUpwardsAngle: 22.5
+  throwStrength: 12
+  throwUpwardsAngle: 50
   pushedObj: {fileID: 0}
 --- !u!65 &732548675568301390
 BoxCollider:
@@ -355,10 +354,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7219679634407634341}
     m_Modifications:
-    - target: {fileID: 100090, guid: bb8d48a41aaaba44aabd37acd087205c, type: 3}
-      propertyPath: m_Name
-      value: Reptile
-      objectReference: {fileID: 0}
     - target: {fileID: 400090, guid: bb8d48a41aaaba44aabd37acd087205c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.005500952
@@ -414,6 +409,10 @@ PrefabInstance:
     - target: {fileID: 400090, guid: bb8d48a41aaaba44aabd37acd087205c, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 100090, guid: bb8d48a41aaaba44aabd37acd087205c, type: 3}
+      propertyPath: m_Name
+      value: Reptile
       objectReference: {fileID: 0}
     - target: {fileID: 400076, guid: bb8d48a41aaaba44aabd37acd087205c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
