@@ -87,6 +87,11 @@ public class CameraBehaviour : MonoBehaviour
                 MenuButton.FocusNothing();
             }
         }
+
+        if (Input.GetButtonDown("DebugRestart"))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
 
     //cutted, kept for debugging
