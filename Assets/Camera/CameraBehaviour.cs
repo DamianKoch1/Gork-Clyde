@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -23,22 +24,16 @@ public class CameraBehaviour : MonoBehaviour
     private Vector3 targetPos;
     private RaycastHit hit;
 
-    [SerializeField]
-    private GameObject pauseMenu, optionsMenu;
+  
 
-    private static Animator ANIM;
-    public static string NEXT_SCENE_NAME;
 
     private void Start()
     {
         InitializeVariables();
+        GetComponent<CinemachineVirtualCamera>().Priority = 1;
     }
 
-    private void Update()
-    {
-        CheckInput();
-    }
-
+  
     private void FixedUpdate()
     {
         RotateCamera();
@@ -51,48 +46,9 @@ public class CameraBehaviour : MonoBehaviour
         offset = transform.position - playerMiddle;
         startPlayerDistance = Vector3.Distance(gork.transform.position, clyde.transform.position);
         playerDistance = startPlayerDistance;
-        ANIM = GetComponent<Animator>();
+        
     }
 
-    public static void FADE_TO_BLACK()
-    {
-        ANIM.SetTrigger("fadeToBlack");
-    }
-
-    public void OnBlackFadeFinished()
-    {
-        SceneManager.LoadScene(NEXT_SCENE_NAME);
-    }
-
-    private void CheckInput()
-    {
-        //toggling pause/options menu
-        if (Input.GetButtonDown("Cancel"))
-        {
-            var optionsCanvas = optionsMenu.GetComponent<Canvas>();
-            var pauseCanvas = pauseMenu.GetComponent<Canvas>();
-            if (!pauseCanvas.enabled)
-            {
-                pauseCanvas.enabled = true;
-                Time.timeScale = 0;
-            }
-            else if (optionsCanvas.enabled)
-            {
-                optionsCanvas.enabled = false;
-            }
-            else
-            {
-                pauseCanvas.enabled = false;
-                Time.timeScale = 1;
-                MenuButton.FocusNothing();
-            }
-        }
-
-        if (Input.GetButtonDown("DebugRestart"))
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
-    }
 
     //cutted, kept for debugging
     private void RotateCamera()
