@@ -9,12 +9,10 @@ public class MenuButton : MonoBehaviour
     [SerializeField]
     private AudioClip clickSound;
 
-    private EventSystem evtSystem;
     
     private void Start()
     {
         GetComponent<Button>().onClick.AddListener(PlayClickSound);
-        evtSystem = EventSystem.current;
     }
 
     private void PlayClickSound()
@@ -25,7 +23,12 @@ public class MenuButton : MonoBehaviour
 
     public void GrabFocus()
     {
-        evtSystem.SetSelectedGameObject(gameObject);
+        EventSystem.current.SetSelectedGameObject(gameObject);
     }
-    
+
+    // used to prevent clicking invisible options button after disabling pause menu
+    public static void FocusNothing()
+    {
+        EventSystem.current.SetSelectedGameObject(null);
+    }
 }

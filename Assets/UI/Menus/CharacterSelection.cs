@@ -17,12 +17,12 @@ public class CharacterSelection : MonoBehaviour
 
     public static string NEXT_LEVEL_NAME;
 
-    // Start is called before the first frame update
     void Start()
     {
         InitializeButtons();
     }
 
+    //disable gork/clyde/play button based on previous selection
     private void InitializeButtons()
     {
         evtSystem = EventSystem.current;

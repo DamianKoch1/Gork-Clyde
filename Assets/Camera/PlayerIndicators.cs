@@ -53,6 +53,7 @@ public class PlayerIndicators : MonoBehaviour
         }
     }
 
+    //move indicator to screen border pointing to player screenpos if not
     private void UpdateIndicator(GameObject indicator, Vector3 targetPos)
     {
         Vector2 rectSize = canvasRect.sizeDelta;
@@ -64,28 +65,31 @@ public class PlayerIndicators : MonoBehaviour
             indicator.SetActive(true);
         }
 
-        Vector2 indicatorPos = cam.ScreenToViewportPoint(targetPos);
+        Vector2 indicatorTargetPos = cam.ScreenToViewportPoint(targetPos);
 
-        Vector2 rotationVector = indicatorPos;
-        rotationVector.x = Mathf.Clamp(rotationVector.x, 0, 1);
-        rotationVector.y = Mathf.Clamp(rotationVector.y, 0, 1);
+        //rotating indicator based on screen edge position
+        Vector2 rotationMultiplier = indicatorTargetPos;
+        rotationMultiplier.x = Mathf.Clamp(rotationMultiplier.x, 0, 1);
+        rotationMultiplier.y = Mathf.Clamp(rotationMultiplier.y, 0, 1);
         float zRotationAngles = 0;
-        if (rotationVector.x == 0 || rotationVector.y == 1)
+        if (rotationMultiplier.x == 0 || rotationMultiplier.y == 1)
         {
-            zRotationAngles = -45 - rotationVector.x * 90 - rotationVector.y * 90;
+            zRotationAngles = -45 - rotationMultiplier.x * 90 - rotationMultiplier.y * 90;
         }
         else
         {
-            zRotationAngles = -45 + rotationVector.x * 90 + rotationVector.y * 90;
+            zRotationAngles = -45 + rotationMultiplier.x * 90 + rotationMultiplier.y * 90;
         }
 
         indicatorRect.eulerAngles = new Vector3(0, 0, zRotationAngles);
 
-        indicatorPos.x = Mathf.Clamp(indicatorPos.x, indicatorDistanceX, 1 - indicatorDistanceX);
-        indicatorPos.y = Mathf.Clamp(indicatorPos.y, indicatorDistanceY, 1 - indicatorDistanceY);
-        indicatorPos.x *= rectSize.x;
-        indicatorPos.y *= rectSize.y;
-        indicatorRect.anchoredPosition = indicatorPos;
+        //applying min distance from screen edge
+        indicatorTargetPos.x = Mathf.Clamp(indicatorTargetPos.x, indicatorDistanceX, 1 - indicatorDistanceX);
+        indicatorTargetPos.y = Mathf.Clamp(indicatorTargetPos.y, indicatorDistanceY, 1 - indicatorDistanceY);
+       
+        indicatorTargetPos.x *= rectSize.x;
+        indicatorTargetPos.y *= rectSize.y;
+        indicatorRect.anchoredPosition = indicatorTargetPos;
     }
 
 }

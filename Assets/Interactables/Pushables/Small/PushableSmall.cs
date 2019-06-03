@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SmallPushable : Pushable
+public class PushableSmall : Pushable
 {
     private int touchedPlayerCount = 0;
 

@@ -36,6 +36,19 @@ public abstract class Player : MonoBehaviour
         StartCoroutine(CheckSpawnPoint());
     }
 
+
+    protected virtual void Update()
+    {
+        CheckInput();
+    }
+
+    protected void FixedUpdate()
+    {
+        MovePlayer();
+
+        UpdateState();
+    }
+    
     private void InitializeVariables()
     {
         rb = GetComponent<Rigidbody>();
@@ -43,12 +56,6 @@ public abstract class Player : MonoBehaviour
         cam = Camera.main;
         setMotion = SetMotionDefault;
     }
-
-    protected virtual void Update()
-    {
-        CheckInput();
-    }
-
 
     protected virtual void CheckInput()
     {
@@ -128,6 +135,7 @@ public abstract class Player : MonoBehaviour
     {
         if (IsGrounded())
         {
+            //landing?
             if (!wasGrounded)
             {
                 ghostjumpTimer = maxGhostjumpDelay;
@@ -140,6 +148,7 @@ public abstract class Player : MonoBehaviour
 
             anim.SetFloat("Blend", (Mathf.Abs(motion.x) + Mathf.Abs(motion.z)));
 
+            //standing still?
             if (motion.magnitude < 0.1f)
             {
                 walkParticles.Stop();
@@ -161,6 +170,7 @@ public abstract class Player : MonoBehaviour
                 StartCoroutine(DecreaseGhostjumpTimer());
                 wasGrounded = false;
             }
+            //started falling?
             if (!falling)
             {
                 if (rb.velocity.y < -0.1f)
@@ -172,12 +182,6 @@ public abstract class Player : MonoBehaviour
         }
     }
 
-    protected void FixedUpdate()
-    {
-        MovePlayer();
-
-        UpdateState();
-    }
 
     public virtual void Respawn()
     {
@@ -193,6 +197,7 @@ public abstract class Player : MonoBehaviour
         {
             if (IsGrounded())
             {
+                //prevent spawning too close to edge
                 if (Physics.Raycast(rb.position, -Vector3.up,
                 2f, Physics.AllLayers, QueryTriggerInteraction.Ignore))
                 {
@@ -245,7 +250,7 @@ public abstract class Player : MonoBehaviour
     {
         if (collidingTransforms.Count == 0) return false;
         return Physics.SphereCast(transform.position, GetComponent<Collider>().bounds.extents.x / 2, -Vector3.up,
-            out RaycastHit hitInfo, GetComponent<Collider>().bounds.extents.y - 0.1f, Physics.AllLayers,
+            out _, GetComponent<Collider>().bounds.extents.y - 0.1f, Physics.AllLayers,
             QueryTriggerInteraction.Ignore);
     }
 
