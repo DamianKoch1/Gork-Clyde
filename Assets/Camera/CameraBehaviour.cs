@@ -9,33 +9,41 @@ using UnityEngine.Serialization;
 public class CameraBehaviour : MonoBehaviour
 {
     [SerializeField]
-    private GameObject gork;
+    private GameObject gork, clyde;
 
-    [SerializeField]
-    private GameObject clyde;
     private Vector3 offset;
     private Vector3 playerMiddle;
+    private float startPlayerDistance, playerDistance;
+    
     [SerializeField]
-    private float playerDistanceZoomThreshhold;
+    private float playerDistanceZoomThreshhold = 2;
     private float zoomMultiplier;
+    [SerializeField] 
+    private float minZoom, maxZoom;
     [SerializeField]
-    private float minZoom, maxZoom, zoomSpeed, followSpeed, rotateSpeed = 2;
-    private Vector3 desiredPos, targetPos;
+    private float followSpeed, rotateSpeed = 2;
+    private Vector3 targetPos;
     private RaycastHit hit;
-    [SerializeField]
-    private LayerMask wallLayers;
+   
     [SerializeField] 
     private GameObject pauseMenu, optionsMenu;
 
-    public static Animator ANIM;
+    private static Animator ANIM;
     public static string NEXT_SCENE_NAME;
     
-    void Start()
+    private void Start()
+    {
+        InitializeVariables();
+    }
+
+    private void InitializeVariables()
     {
         if (gork && clyde)
         {
             playerMiddle = 0.5f * (gork.transform.position + clyde.transform.position);
             offset = transform.position - playerMiddle;
+            startPlayerDistance = Vector3.Distance(gork.transform.position, clyde.transform.position);
+            playerDistance = startPlayerDistance;
         }
         ANIM = GetComponent<Animator>();
     }
@@ -52,6 +60,11 @@ public class CameraBehaviour : MonoBehaviour
         
     
     private void Update()
+    {
+        CheckInput();
+    }
+
+    private void CheckInput()
     {
         //toggling pause/options menu
         if (Input.GetButtonDown("Cancel"))
@@ -77,7 +90,13 @@ public class CameraBehaviour : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //camera rotation (cutted, more for testing)
+        RotateCamera();
+        MoveCamera();
+    }
+    
+    //cutted, kept for debugging
+    private void RotateCamera()
+    {
         if (Input.GetAxis("Mouse X") != 0)
         {
             offset = Quaternion.AngleAxis(Input.GetAxis("Mouse X")*rotateSpeed, Vector3.up) * offset;
@@ -88,36 +107,33 @@ public class CameraBehaviour : MonoBehaviour
             offset = Quaternion.AngleAxis(Input.GetAxis("Mouse Y") * rotateSpeed, -transform.right) * offset;
             transform.RotateAround(transform.position, -transform.right, Input.GetAxis("Mouse Y") * rotateSpeed);
         }
-        //
+    }
+
+    private void MoveCamera()
+    {
         if (gork && clyde)
         {
+            playerDistance = Vector3.Distance(gork.transform.position, clyde.transform.position);
+            
             //zoom if players too far from each other
-            zoomMultiplier = Mathf.Clamp((playerDistanceZoomThreshhold / (Vector3.Distance(gork.transform.position, clyde.transform.position)))/zoomSpeed, minZoom, maxZoom);
+            zoomMultiplier = Mathf.Clamp((playerDistanceZoomThreshhold * startPlayerDistance / playerDistance), minZoom, maxZoom);
+           
             
             //if player cant move focus other player
             if (!clyde.GetComponent<Player>().canMove)
             {
-                desiredPos = gork.transform.position + offset / zoomMultiplier;
+                targetPos = gork.transform.position + offset / zoomMultiplier;
             }
             else if (!gork.GetComponent<Player>().canMove)
             {
-                desiredPos = clyde.transform.position + offset / zoomMultiplier;
+                targetPos = clyde.transform.position + offset / zoomMultiplier;
             }
             else
             {
                 playerMiddle = 0.5f * (gork.transform.position + clyde.transform.position);
-                desiredPos = playerMiddle + offset / zoomMultiplier;
+                targetPos = playerMiddle + offset / zoomMultiplier;
             }
-            
-            //tried raycasting to prevent wall collision, hard to implement when camera focuses empty point
-//          if (Physics.Raycast(desiredPos, playerMiddle - desiredPos, out hit, (playerMiddle - desiredPos).magnitude, wallLayers, QueryTriggerInteraction.Ignore) && Physics.Raycast(gork.transform.position, clide.transform.position - gork.transform.position, (clide.transform.position - gork.transform.position).magnitude, wallLayers, QueryTriggerInteraction.Ignore) == false)
-//          {
-//             targetPos = Vector3.Lerp(hit.point, playerMiddle, 0.7f);
-//          }
-//          else
-//          {
-            targetPos = desiredPos;
-//          }
+     
             transform.position = Vector3.Lerp(transform.position, targetPos, followSpeed);
         }
     }
