@@ -582,6 +582,21 @@ PrefabInstance:
       propertyPath: InitialModule.startSpeed.scalar
       value: 0.9
       objectReference: {fileID: 0}
+    - target: {fileID: 1979026611529549593, guid: d6c3d229fe2a8e64c963de12722c7f68,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1979026611529549593, guid: d6c3d229fe2a8e64c963de12722c7f68,
+        type: 3}
+      propertyPath: moveWithTransform
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1979026611529549593, guid: d6c3d229fe2a8e64c963de12722c7f68,
+        type: 3}
+      propertyPath: InitialModule.maxNumParticles
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d6c3d229fe2a8e64c963de12722c7f68, type: 3}
 --- !u!4 &263305262589863143 stripped

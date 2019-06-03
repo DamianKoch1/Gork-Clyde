@@ -87,10 +87,6 @@ public class PlayerIndicators : MonoBehaviour
         indicatorPos.x *= rectSize.x;
         indicatorPos.y *= rectSize.y;
         indicatorRect.anchoredPosition = indicatorPos;
-
-
     }
-    
-    
     
 }

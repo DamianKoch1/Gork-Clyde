@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AirstreamAffected : MonoBehaviour
+[RequireComponent(typeof(Rigidbody))]
+public class Carryable : MonoBehaviour
 {
- 
+    
 }

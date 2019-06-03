@@ -9,17 +9,13 @@ public class BlockableAirstream : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("platform"))
-        {
-            blockableAirstream.SetActive(false);
-        }
+        if (!other.CompareTag("platform")) return;
+        blockableAirstream.SetActive(false);
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("platform"))
-        {
-            blockableAirstream.SetActive(true);
-        }
+        if (!other.CompareTag("platform")) return;
+        blockableAirstream.SetActive(true);
     }
 }
