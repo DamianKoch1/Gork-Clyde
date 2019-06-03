@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Experimental.PlayerLoop;
 
-public class RecordControllerInput : MonoBehaviour {
+public class RecordControllerInput : MonoBehaviour
+{
 
     private string[] joystickNames;
     private float xAxis, yAxis, gorkHorizontal, clydeHorizontal, UIHorizontal, gorkVertical, clydeVertical, UIVertical;
     private List<string> lastPressedKeys = new List<string>();
 
-   
 
-    void Update () {
+
+    void Update()
+    {
         joystickNames = Input.GetJoystickNames();
         xAxis = Input.GetAxis("Horizontal");
         yAxis = Input.GetAxis("Vertical");
@@ -21,9 +23,9 @@ public class RecordControllerInput : MonoBehaviour {
         clydeVertical = Input.GetAxis("ClydeVertical");
         UIHorizontal = Input.GetAxis("UIHorizontal");
         UIVertical = Input.GetAxis("UIVertical");
-        
-        
-        foreach ( KeyCode curKey in Enum.GetValues(typeof(KeyCode)) )
+
+
+        foreach (KeyCode curKey in Enum.GetValues(typeof(KeyCode)))
         {
             if (Input.GetKeyDown(curKey))
             {
