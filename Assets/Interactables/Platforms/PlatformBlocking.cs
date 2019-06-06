@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 public class PlatformBlocking : MonoBehaviour
@@ -16,6 +15,7 @@ public class PlatformBlocking : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (!CanBlock(other)) return;
+
         target.SendMessage(enteredMessage);
         blockingObjCount++;
     }
@@ -23,12 +23,13 @@ public class PlatformBlocking : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         if (!CanBlock(other)) return;
+
         blockingObjCount--;
         if (blockingObjCount == 0)
         {
             target.SendMessage(exitedMessage);
         }
-        
+
     }
 
     private bool CanBlock(Collider other)
