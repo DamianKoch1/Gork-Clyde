@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 
 public class GameMenu : MonoBehaviour
 {
@@ -15,7 +12,7 @@ public class GameMenu : MonoBehaviour
         GameObject bgm = GameObject.FindGameObjectWithTag("bgm");
         Destroy(bgm);
     }
- 
+
 
     public void LoadCharacterSelection(string nextSceneName)
     {
@@ -36,12 +33,12 @@ public class GameMenu : MonoBehaviour
         var canvas = menu.GetComponent<Canvas>();
         canvas.enabled = !canvas.enabled;
     }
-    
+
     public void Unpause()
     {
         Time.timeScale = 1;
     }
-    
+
     public void Quit()
     {
         Application.Quit();

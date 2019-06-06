@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 
 public class Clyde : Player
@@ -22,6 +20,11 @@ public class Clyde : Player
         Spawnpoint.CLYDE_SPAWN = rb.position;
     }
 
+    public override void Respawn()
+    {
+        base.Respawn();
+        rb.MovePosition(Spawnpoint.CLYDE_SPAWN);
+    }
 
     public void CancelThrow()
     {

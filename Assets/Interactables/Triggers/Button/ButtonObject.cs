@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class ButtonObject : TriggerObject
 {
-    
+
     [SerializeField]
     private bool oneTimeUse;
     private bool triggered;
-    
-  
+
+
     protected override void OnTriggered()
     {
         if (oneTimeUse)
