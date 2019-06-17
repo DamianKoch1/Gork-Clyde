@@ -10,11 +10,18 @@ public class Gork : Player
 	private List<GameObject> carryableObjects = new List<GameObject>();
 
 	[SerializeField]
-	private float throwStrength = 5f;
+	private float throwStrength = 12f;
+	
+	[SerializeField]
+	private float throwStrengthBox = 15f;
 
 	[SerializeField]
 	[Range(0, 90)]
-	private float throwUpwardsAngle = 20f;
+	private float throwUpwardsAngle = 50f;
+	
+	[SerializeField]
+	[Range(0, 90)]
+	private float throwUpwardsAngleBox = 60f;
 
 	private FixedJoint fixedJoint;
 
@@ -26,9 +33,10 @@ public class Gork : Player
 	[SerializeField]
 	private GameObject throwIndicatorPoint;
 
-	private GameObject[] throwIndicatorPoints = new GameObject[30];
+	private GameObject[] throwIndicatorPoints = new GameObject[20];
 
 
+	
 	public static string XAXIS = "GorkHorizontal",
 	ZAXIS = "GorkVertical",
 	JUMPBUTTON = "GorkJump",
@@ -57,23 +65,31 @@ public class Gork : Player
 
 	private void UpdateThrowIndicator()
 	{
-		//indicator: sin(angle) * _/2 - x^2 / throwstrength
+		float amplifier = 1;
+		
+		float throwStr = throwStrength;
+		
+		if (!HeldObject().GetComponent<Clyde>())
+		{
+			amplifier = 0.5f;
+			throwStr = throwStrengthBox;
+		}
+
+		Vector3 PointPosAtTime (float time) 
+		{
+			return throwIndicator.transform.position + ThrowDirection() * throwStr * time + Physics.gravity * time * time * amplifier;
+		}
+		
 		for (int i = 0; i < throwIndicatorPoints.Length; i++)
 		{
-			float x = i / 3.0f;
-			float pointHeight;
-			Vector3 pointPosition = x * throwStrength * 0.1f * transform.forward.normalized;
-
-			pointHeight = - x * x + x;
-			pointHeight += 10* x * Mathf.Sin(Mathf.Deg2Rad * throwUpwardsAngle);
-			pointPosition.y = pointHeight;
-
+			var pointPosition = PointPosAtTime(i * 0.075f);
+			
 			if (!throwIndicatorPoints[i])
 			{
 				throwIndicatorPoints[i] = Instantiate(throwIndicatorPoint, throwIndicator.transform);
 			}
 
-			throwIndicatorPoints[i].transform.position = throwIndicator.transform.position + pointPosition;
+			throwIndicatorPoints[i].transform.position = pointPosition;
 		}
 	}
 
@@ -112,7 +128,7 @@ public class Gork : Player
 			}
 			else if (IsCarryingObject())
 			{
-				Throw(HeldObject(), ThrowDirection(), throwStrength);
+				Throw(HeldObject(), ThrowDirection());
 			}
 			else if (carryableObjects.Count > 0)
 			{
@@ -279,15 +295,21 @@ public class Gork : Player
 		objectRb.isKinematic = true;
 	}
 
-	private void Throw(GameObject obj, Vector3 direction, float strength)
+	private void Throw(GameObject obj, Vector3 direction)
 	{
 		var clyde = obj.GetComponent<Clyde>();
+		float throwStr;
 		if (clyde)
 		{
+			throwStr = throwStrength;
 			clyde.ResetMotion();
 			clyde.canMove = true;
 			clyde.anim.SetTrigger("thrown");
 			clyde.anim.ResetTrigger("land");
+		}
+		else
+		{
+			throwStr = throwStrengthBox;
 		}
 
 		GetComponent<AudioSource>().Play();
@@ -296,7 +318,7 @@ public class Gork : Player
 		Rigidbody objectRb = obj.GetComponent<Rigidbody>();
 		objectRb.velocity = Vector3.zero;
 		objectRb.isKinematic = false;
-		objectRb.AddForce(direction * strength, ForceMode.VelocityChange);
+		objectRb.AddForce(direction * throwStr, ForceMode.VelocityChange);
 		objectRb = null;
 		Physics.IgnoreCollision(GetComponent<Collider>(), obj.GetComponent<Collider>(), false);
 		DeleteThrowIndicator();
@@ -305,7 +327,12 @@ public class Gork : Player
 	private Vector3 ThrowDirection()
 	{
 		Vector3 throwDirection = transform.forward;
-		throwDirection = Quaternion.AngleAxis(throwUpwardsAngle, -transform.right) * throwDirection;
+		float angle = throwUpwardsAngle;
+		if (!HeldObject().GetComponent<Clyde>())
+		{
+			angle = throwUpwardsAngleBox;
+		}
+		throwDirection = Quaternion.AngleAxis(angle, -transform.right) * throwDirection;
 		return throwDirection;
 	}
 }
