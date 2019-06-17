@@ -276,6 +276,7 @@ GameObject:
   - component: {fileID: 299557330}
   - component: {fileID: 299557332}
   - component: {fileID: 299557331}
+  - component: {fileID: 299557333}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -316,7 +317,7 @@ MonoBehaviour:
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: 163394f7e81b72648b42620199dab273, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
@@ -324,11 +325,11 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 1d53c4e5cef0f8a4b9dc6302aa5bccbe, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
-  m_FillMethod: 4
+  m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
@@ -341,6 +342,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 299557329}
   m_CullTransparentMesh: 0
+--- !u!114 &299557333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 299557329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44120ed2775e9fc448542d2f970ca3a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  x: 0.00025
+  y: 0
 --- !u!1 &531899679 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2495304635855074026, guid: 5a49af38f5f73394697057d4ac3d5087,
@@ -1427,7 +1442,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Gork & Clide
+  m_Text: Gork & Clydecraft
 --- !u!222 &1894791053
 CanvasRenderer:
   m_ObjectHideFlags: 0
