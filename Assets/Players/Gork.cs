@@ -83,6 +83,15 @@ public class Gork : Player
 		for (int i = 0; i < throwIndicatorPoints.Length; i++)
 		{
 			var pointPosition = PointPosAtTime(i * 0.075f);
+
+			bool insideCollider = 
+			Physics.OverlapSphere(pointPosition, 0.1f, Physics.AllLayers, QueryTriggerInteraction.Ignore).Length > 0;
+
+			if (insideCollider && i > 3)
+			{
+				DeleteThrowIndicator(i);
+				return;
+			}
 			
 			if (!throwIndicatorPoints[i])
 			{
@@ -93,9 +102,9 @@ public class Gork : Player
 		}
 	}
 
-	private void DeleteThrowIndicator()
+	private void DeleteThrowIndicator(int from = 0)
 	{
-		for (int i = 0; i < throwIndicatorPoints.Length; i++)
+		for (int i = from; i < throwIndicatorPoints.Length; i++)
 		{
 			if (throwIndicatorPoints[i])
 			{
