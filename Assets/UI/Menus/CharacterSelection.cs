@@ -15,11 +15,14 @@ public class CharacterSelection : MonoBehaviour
     private bool gorkSelected = true;
     private EventSystem evtSystem;
 
-    public static string NEXT_LEVEL_NAME;
+    AsyncOperation loadLoadingScreen;
+
 
     void Start()
     {
         InitializeButtons();
+        loadLoadingScreen = SceneManager.LoadSceneAsync("Loading Screen");
+        loadLoadingScreen.allowSceneActivation = false;
     }
 
     //disable gork/clyde/play button based on previous selection
@@ -76,7 +79,7 @@ public class CharacterSelection : MonoBehaviour
 
     public void LoadNextLevel()
     {
-        SceneManager.LoadScene(NEXT_LEVEL_NAME);
+        loadLoadingScreen.allowSceneActivation = true;
     }
 
 
