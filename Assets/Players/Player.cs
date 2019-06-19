@@ -85,7 +85,7 @@ public abstract class Player : MonoBehaviour
 
         if (Input.GetButton("DebugFly"))
         {
-            rb.AddForce(Vector3.up, ForceMode.VelocityChange);
+            rb.velocity = Vector3.up * 8;
         }
         //
     }
