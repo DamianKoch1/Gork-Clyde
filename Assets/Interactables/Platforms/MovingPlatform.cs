@@ -67,6 +67,11 @@ public class MovingPlatform : MonoBehaviour
         stop = false;
     }
 
+    public void OnButtonDeactivated()
+    {
+        stop = true;
+    }
+
     public void OnPlateActivated()
     {
         stop = false;
