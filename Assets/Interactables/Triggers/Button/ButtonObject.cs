@@ -15,12 +15,24 @@ public class ButtonObject : TriggerObject
         if (oneTimeUse)
         {
             if (triggered) return;
-            triggered = true;
         }
-        GetComponent<AudioSource>().Play();
-        foreach (GameObject target in targets)
+        if (!triggered)
         {
-            target.SendMessage("OnButtonActivated");
+            triggered = true;
+            GetComponent<AudioSource>().Play();
+            foreach (GameObject target in targets)
+            {
+                target.SendMessage("OnButtonActivated");
+            }
+        }
+        else
+        {
+            triggered = false;
+            GetComponent<AudioSource>().Play();
+            foreach (GameObject target in targets)
+            {
+                target.SendMessage("OnButtonDeactivated");
+            }
         }
     }
 }

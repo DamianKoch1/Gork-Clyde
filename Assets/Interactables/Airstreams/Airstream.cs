@@ -60,6 +60,11 @@ public class Airstream : MonoBehaviour
         ToggleAirstream();
     }
 
+    public void OnButtonDeactivated()
+    {
+        ToggleAirstream();
+    }
+
     private void ToggleAirstream()
     {
         ParticleSystem particles = transform.GetChild(0).GetComponent<ParticleSystem>();
