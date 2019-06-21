@@ -16,7 +16,8 @@ public abstract class Player : MonoBehaviour
     //can jump while timer > 0, set to max when grounded, decreases otherwise
     [SerializeField]
     private float maxGhostjumpDelay = 0.2f;
-    private float ghostjumpTimer = 0f;
+    [HideInInspector]
+    public float ghostjumpTimer = 0f;
 
     [HideInInspector]
     public bool canMove = true, inAirstream = false;
@@ -29,6 +30,7 @@ public abstract class Player : MonoBehaviour
 
     protected SetMotion setMotion;
 
+    protected RaycastHit groundedInfo;
 
     protected virtual void Start()
     {
@@ -255,10 +257,13 @@ public abstract class Player : MonoBehaviour
 
     protected bool IsGrounded()
     {
-        if (collidingTransforms.Count == 0) return false;
-        return Physics.SphereCast(transform.position, GetComponent<Collider>().bounds.extents.x / 2, -Vector3.up,
-            out _, GetComponent<Collider>().bounds.extents.y - 0.1f, Physics.AllLayers,
-            QueryTriggerInteraction.Ignore);
+        bool retval = false;
+        if (Physics.SphereCast(transform.position, GetComponent<Collider>().bounds.extents.x / 2, -Vector3.up,
+            out groundedInfo, GetComponent<Collider>().bounds.extents.y - 0.1f, Physics.AllLayers,
+            QueryTriggerInteraction.Ignore)) retval = true;
+        if (collidingTransforms.Count == 0) retval = false;
+        if (Mathf.Abs(rb.velocity.y) > 1) retval = false;
+        return retval;
     }
 
     protected void InitializeInputs(string x, string z, string jump)
