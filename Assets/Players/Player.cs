@@ -134,7 +134,7 @@ public abstract class Player : MonoBehaviour
         transform.SetParent(null, true);
         StopCoroutine(DecreaseGhostjumpTimer());
         ghostjumpTimer = 0;
-        rb.AddForce(jumpHeight * Vector3.up * Time.deltaTime * 90, ForceMode.VelocityChange);
+        rb.AddForce(jumpHeight * Vector3.up * 1.6f, ForceMode.VelocityChange);
         anim.SetTrigger("jump");
         anim.ResetTrigger("land");
     }
@@ -275,6 +275,7 @@ public abstract class Player : MonoBehaviour
 
     public void ResetMotion()
     {
+        rb.velocity = Vector3.zero;
         motion = Vector3.zero;
     }
 
