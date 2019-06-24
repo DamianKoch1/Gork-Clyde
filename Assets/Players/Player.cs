@@ -6,6 +6,9 @@ public abstract class Player : MonoBehaviour
 {
     [SerializeField]
     protected float speed, jumpHeight;
+    [SerializeField]
+    [Range(0, 1)]
+    private float airMovespeedPenalty = 0.9f;
     protected Vector3 motion;
     [HideInInspector]
     public Rigidbody rb;
@@ -63,7 +66,7 @@ public abstract class Player : MonoBehaviour
     {
         if (Input.GetButtonDown(jumpButton))
         {
-            if (IsGrounded())
+            if (wasGrounded)
             {
                 Jump();
             }
@@ -116,13 +119,18 @@ public abstract class Player : MonoBehaviour
 
     protected void SetMotionDefault()
     {
+        float moveSpeed = speed;
+        if (!wasGrounded)
+        {
+            moveSpeed *= airMovespeedPenalty;
+        }
         motion.x = Input.GetAxis(xAxis);
         motion.z = Input.GetAxis(zAxis);
         if (motion.magnitude > 1)
         {
             motion = motion.normalized;
         }
-        motion *= speed;
+        motion *= moveSpeed;
         motion = ApplyCamRotation(motion);
         LookForward();
     }
@@ -204,7 +212,7 @@ public abstract class Player : MonoBehaviour
         SetSpawnPoint();
         while (true)
         {
-            if (IsGrounded())
+            if (wasGrounded)
             {
                 //prevent spawning too close to edge
                 if (Physics.Raycast(rb.position, -Vector3.up,
@@ -257,10 +265,9 @@ public abstract class Player : MonoBehaviour
 
     protected bool IsGrounded()
     {
-        bool retval = false;
-        if (Physics.SphereCast(transform.position, GetComponent<Collider>().bounds.extents.x / 2, -Vector3.up,
-            out groundedInfo, GetComponent<Collider>().bounds.extents.y - 0.1f, Physics.AllLayers,
-            QueryTriggerInteraction.Ignore)) retval = true;
+        bool retval = Physics.SphereCast(transform.position, GetComponent<Collider>().bounds.extents.x / 2, -Vector3.up,
+        out groundedInfo, GetComponent<Collider>().bounds.extents.y - 0.1f, Physics.AllLayers,
+        QueryTriggerInteraction.Ignore);
         if (collidingTransforms.Count == 0) retval = false;
         if (Mathf.Abs(rb.velocity.y) > 1) retval = false;
         return retval;
