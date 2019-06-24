@@ -350,7 +350,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!114 &4395781087387056150
 MonoBehaviour:
@@ -492,11 +492,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6965418541269022108}
     m_Modifications:
-    - target: {fileID: 7649166394788936376, guid: d6c3d229fe2a8e64c963de12722c7f68,
-        type: 3}
-      propertyPath: m_Name
-      value: DustPushVFX
-      objectReference: {fileID: 0}
     - target: {fileID: 5577131024413159786, guid: d6c3d229fe2a8e64c963de12722c7f68,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -566,6 +561,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1.8627397
+      objectReference: {fileID: 0}
+    - target: {fileID: 7649166394788936376, guid: d6c3d229fe2a8e64c963de12722c7f68,
+        type: 3}
+      propertyPath: m_Name
+      value: DustPushVFX
       objectReference: {fileID: 0}
     - target: {fileID: 1979026611529549593, guid: d6c3d229fe2a8e64c963de12722c7f68,
         type: 3}
