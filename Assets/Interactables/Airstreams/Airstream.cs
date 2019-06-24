@@ -19,7 +19,7 @@ public class Airstream : MonoBehaviour
         var clyde = other.GetComponent<Clyde>();
         if (clyde)
         {
-            if (clyde.inAirstream)
+            if (!clyde.inAirstream)
             {
                 OnClydeAirstreamEntered(clyde);
             }
