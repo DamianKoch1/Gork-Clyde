@@ -31,6 +31,7 @@ public abstract class Pushable : MonoBehaviour
     private void UpdateParticles()
     {
         currentPosition = rb.position;
+        pushedParticles.transform.position = currentPosition - Vector3.up * transform.localScale.y / 5;
         if (ShowPushedParticles())
         {
             EmitPushedParticles();
