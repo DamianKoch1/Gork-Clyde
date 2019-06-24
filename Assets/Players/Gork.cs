@@ -226,20 +226,19 @@ public class Gork : Player
 
 	private void AxisAlignToBox(Vector3 vector)
 	{
+		var rotatedVector = ApplyCamRotation(vector);
 		vector.y = 0;
 		if (Mathf.Abs(vector.x) > Mathf.Abs(vector.z))
 		{
 			vector.z = 0;
-			setMotion = SetMotionXOnly;
 		}
 		else
 		{
 			vector.x = 0;
-			setMotion = SetMotionZOnly;
 		}
-
 		transform.LookAt(rb.position + vector);
 		ResetMotion();
+		setMotion = SetMotionSingleAxis;
 	}
 
 	private void StopPushing()
@@ -257,26 +256,76 @@ public class Gork : Player
 	}
 
 
-	private void SetMotionXOnly()
+	private void SetMotionSingleAxis()
 	{
-		motion.x = Input.GetAxis(xAxis);
-		motion *= speed;
-		if (Mathf.Abs(Input.GetAxis(zAxis)) > 0.3f)
+		var forward = transform.forward;
+		var camRotatedForward = ApplyCamRotation(forward);
+		if (Mathf.Abs(camRotatedForward.z) > Mathf.Abs(camRotatedForward.x))
 		{
-			StopPushing();
+			motion = forward * Input.GetAxis(zAxis) * speed;
+			if (InverseVerticalPushControls(forward, camRotatedForward))
+			{
+				motion *= -1;
+			}
+			if (Mathf.Abs(Input.GetAxis(xAxis)) > 0.5f)
+			{
+				StopPushing();
+			}
 		}
+		else
+		{
+			motion = forward * Input.GetAxis(xAxis) * speed;
+			if (InverseHorizontalPushControls(forward, camRotatedForward))
+			{
+				motion *= -1;
+			}
+			if (Mathf.Abs(Input.GetAxis(zAxis)) > 0.5f)
+			{
+				StopPushing();
+			}
+		}
+		motion.y = 0;
 	}
 
-	private void SetMotionZOnly()
+	private bool InverseVerticalPushControls(Vector3 forward, Vector3 camRotatedForward)
 	{
-		motion.z = Input.GetAxis(zAxis);
-		motion *= speed;
-		if (Mathf.Abs(Input.GetAxis(xAxis)) > 0.3f)
+		if (Mathf.Abs(camRotatedForward.z) < Mathf.Abs(camRotatedForward.x)) return false;
+		if (camRotatedForward.z > 0)
 		{
-			StopPushing();
+			if (Mathf.Abs(forward.x) > Mathf.Abs(forward.z))
+			{
+				return true;
+			}
 		}
+		else
+		{
+			if (Mathf.Abs(forward.z) > Mathf.Abs(forward.x))
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 
+	private bool InverseHorizontalPushControls(Vector3 forward, Vector3 camRotatedForward)
+	{
+		if (Mathf.Abs(camRotatedForward.x) < Mathf.Abs(camRotatedForward.z)) return false;
+		if (camRotatedForward.x > 0)
+		{
+			if (Mathf.Abs(forward.z) > Mathf.Abs(forward.x))
+			{
+				return true;
+			}
+		}
+		else
+		{
+			if (Mathf.Abs(forward.x) > Mathf.Abs(forward.z))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
 
 	protected override void SetSpawnPoint()
 	{

@@ -286,7 +286,7 @@ public abstract class Player : MonoBehaviour
         motion = Vector3.zero;
     }
 
-    private Vector3 ApplyCamRotation(Vector3 vector)
+    protected Vector3 ApplyCamRotation(Vector3 vector)
     {
         Vector3 camForward = cam.transform.forward;
         camForward.y = 0;
