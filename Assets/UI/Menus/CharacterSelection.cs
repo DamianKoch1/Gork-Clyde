@@ -58,7 +58,7 @@ public class CharacterSelection : MonoBehaviour
         Clyde.XAXIS = "ClydeHorizontal";
         Clyde.ZAXIS = "ClydeVertical";
         Clyde.JUMPBUTTON = "ClydeJump";
-        evtSystem.SetSelectedGameObject(clydeButton.gameObject);
+        evtSystem.SetSelectedGameObject(playButton.gameObject);
     }
 
     void ClydeSelected()
@@ -74,7 +74,7 @@ public class CharacterSelection : MonoBehaviour
         Clyde.XAXIS = "GorkHorizontal";
         Clyde.ZAXIS = "GorkVertical";
         Clyde.JUMPBUTTON = "GorkJump";
-        evtSystem.SetSelectedGameObject(gorkButton.gameObject);
+        evtSystem.SetSelectedGameObject(playButton.gameObject);
     }
 
     public void LoadNextLevel()
