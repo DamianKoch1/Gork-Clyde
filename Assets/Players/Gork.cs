@@ -284,12 +284,13 @@ public class Gork : Player
 		carryableObjects.Remove(other.gameObject);
 	}
 
-	private void PickUp(GameObject obj)
+	public bool PickUp(GameObject obj)
 	{
+        if (IsCarryingObject()) return false;
 		var clyde = obj.GetComponent<Clyde>();
 		if (clyde)
 		{
-			if (clyde.inAirstream) return;
+			if (clyde.inAirstream) return false;
 			clyde.canMove = false;
 			clyde.anim.SetTrigger("pickedUp");
 			clyde.gork = gameObject;
@@ -302,6 +303,7 @@ public class Gork : Player
 		obj.transform.LookAt(obj.transform.position + transform.forward);
 		Rigidbody objectRb = obj.GetComponent<Rigidbody>();
 		objectRb.isKinematic = true;
+        return true;
 	}
 
 	private void Throw(GameObject obj, Vector3 direction)
@@ -315,6 +317,8 @@ public class Gork : Player
 			clyde.canMove = true;
 			clyde.anim.SetTrigger("thrown");
 			clyde.anim.ResetTrigger("land");
+            clyde.RestartPickupCooldown();
+            clyde.ghostjumpTimer = 0;
 		}
 		else
 		{

@@ -432,6 +432,31 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3146860327048526420}
     m_Modifications:
+    - target: {fileID: 3692220314561909740, guid: 20dc443e67c39394bab339010aabb7aa,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.0055007935
+      objectReference: {fileID: 0}
+    - target: {fileID: 3692220314561909740, guid: 20dc443e67c39394bab339010aabb7aa,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.41298422
+      objectReference: {fileID: 0}
+    - target: {fileID: 4834388250981002090, guid: 20dc443e67c39394bab339010aabb7aa,
+        type: 3}
+      propertyPath: speed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4834388250981002090, guid: 20dc443e67c39394bab339010aabb7aa,
+        type: 3}
+      propertyPath: throwStrength
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4834388250981002090, guid: 20dc443e67c39394bab339010aabb7aa,
+        type: 3}
+      propertyPath: throwUpwardsAngle
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 5338642040318428382, guid: 20dc443e67c39394bab339010aabb7aa,
         type: 3}
       propertyPath: m_Name
@@ -492,31 +517,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3692220314561909740, guid: 20dc443e67c39394bab339010aabb7aa,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.0055007935
-      objectReference: {fileID: 0}
-    - target: {fileID: 3692220314561909740, guid: 20dc443e67c39394bab339010aabb7aa,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.41298422
-      objectReference: {fileID: 0}
-    - target: {fileID: 4834388250981002090, guid: 20dc443e67c39394bab339010aabb7aa,
-        type: 3}
-      propertyPath: speed
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4834388250981002090, guid: 20dc443e67c39394bab339010aabb7aa,
-        type: 3}
-      propertyPath: throwStrength
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 4834388250981002090, guid: 20dc443e67c39394bab339010aabb7aa,
-        type: 3}
-      propertyPath: throwUpwardsAngle
-      value: 50
-      objectReference: {fileID: 0}
     - target: {fileID: 1134041080778661067, guid: 20dc443e67c39394bab339010aabb7aa,
         type: 3}
       propertyPath: lengthInSec
@@ -543,11 +543,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3146860327048526420}
     m_Modifications:
-    - target: {fileID: 3256944756886205949, guid: 423b35919944a044fb48ab3983bcda75,
-        type: 3}
-      propertyPath: m_Name
-      value: Default Camera
-      objectReference: {fileID: 0}
     - target: {fileID: 3256944756886205922, guid: 423b35919944a044fb48ab3983bcda75,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -603,6 +598,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3256944756886205949, guid: 423b35919944a044fb48ab3983bcda75,
+        type: 3}
+      propertyPath: m_Name
+      value: Default Camera
+      objectReference: {fileID: 0}
     - target: {fileID: 3256944756886205921, guid: 423b35919944a044fb48ab3983bcda75,
         type: 3}
       propertyPath: gork
@@ -628,10 +628,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3146860327048526420}
     m_Modifications:
-    - target: {fileID: 3874808357865764670, guid: 5db7da3d9d401f14f97a7aef596827e0,
+    - target: {fileID: 1088568127900295901, guid: 5db7da3d9d401f14f97a7aef596827e0,
         type: 3}
-      propertyPath: m_Name
-      value: Clide
+      propertyPath: jumpHeight
+      value: 7.5
       objectReference: {fileID: 0}
     - target: {fileID: 2433603982372154571, guid: 5db7da3d9d401f14f97a7aef596827e0,
         type: 3}
@@ -703,10 +703,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.5
       objectReference: {fileID: 0}
-    - target: {fileID: 1088568127900295901, guid: 5db7da3d9d401f14f97a7aef596827e0,
+    - target: {fileID: 3874808357865764670, guid: 5db7da3d9d401f14f97a7aef596827e0,
         type: 3}
-      propertyPath: jumpHeight
-      value: 7.5
+      propertyPath: m_Name
+      value: Clide
       objectReference: {fileID: 0}
     - target: {fileID: 7680902654541984930, guid: 5db7da3d9d401f14f97a7aef596827e0,
         type: 3}

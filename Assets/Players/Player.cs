@@ -6,6 +6,9 @@ public abstract class Player : MonoBehaviour
 {
     [SerializeField]
     protected float speed, jumpHeight;
+    [SerializeField]
+    [Range(0, 1)]
+    private float airMovespeedPenalty = 0.9f;
     protected Vector3 motion;
     [HideInInspector]
     public Rigidbody rb;
@@ -16,7 +19,8 @@ public abstract class Player : MonoBehaviour
     //can jump while timer > 0, set to max when grounded, decreases otherwise
     [SerializeField]
     private float maxGhostjumpDelay = 0.2f;
-    private float ghostjumpTimer = 0f;
+    [HideInInspector]
+    public float ghostjumpTimer = 0f;
 
     [HideInInspector]
     public bool canMove = true, inAirstream = false;
@@ -29,6 +33,7 @@ public abstract class Player : MonoBehaviour
 
     protected SetMotion setMotion;
 
+    protected RaycastHit groundedInfo;
 
     protected virtual void Start()
     {
@@ -61,7 +66,7 @@ public abstract class Player : MonoBehaviour
     {
         if (Input.GetButtonDown(jumpButton))
         {
-            if (IsGrounded())
+            if (wasGrounded)
             {
                 Jump();
             }
@@ -114,13 +119,18 @@ public abstract class Player : MonoBehaviour
 
     protected void SetMotionDefault()
     {
+        float moveSpeed = speed;
+        if (!wasGrounded)
+        {
+            moveSpeed *= airMovespeedPenalty;
+        }
         motion.x = Input.GetAxis(xAxis);
         motion.z = Input.GetAxis(zAxis);
         if (motion.magnitude > 1)
         {
             motion = motion.normalized;
         }
-        motion *= speed;
+        motion *= moveSpeed;
         motion = ApplyCamRotation(motion);
         LookForward();
     }
@@ -132,7 +142,7 @@ public abstract class Player : MonoBehaviour
         transform.SetParent(null, true);
         StopCoroutine(DecreaseGhostjumpTimer());
         ghostjumpTimer = 0;
-        rb.AddForce(jumpHeight * Vector3.up * Time.deltaTime * 90, ForceMode.VelocityChange);
+        rb.AddForce(jumpHeight * Vector3.up * 1.6f, ForceMode.VelocityChange);
         anim.SetTrigger("jump");
         anim.ResetTrigger("land");
     }
@@ -202,7 +212,7 @@ public abstract class Player : MonoBehaviour
         SetSpawnPoint();
         while (true)
         {
-            if (IsGrounded())
+            if (wasGrounded)
             {
                 //prevent spawning too close to edge
                 if (Physics.Raycast(rb.position, -Vector3.up,
@@ -255,10 +265,12 @@ public abstract class Player : MonoBehaviour
 
     protected bool IsGrounded()
     {
-        if (collidingTransforms.Count == 0) return false;
-        return Physics.SphereCast(transform.position, GetComponent<Collider>().bounds.extents.x / 2, -Vector3.up,
-            out _, GetComponent<Collider>().bounds.extents.y - 0.1f, Physics.AllLayers,
-            QueryTriggerInteraction.Ignore);
+        bool retval = Physics.SphereCast(transform.position, GetComponent<Collider>().bounds.extents.x / 2, -Vector3.up,
+        out groundedInfo, GetComponent<Collider>().bounds.extents.y - 0.1f, Physics.AllLayers,
+        QueryTriggerInteraction.Ignore);
+        if (collidingTransforms.Count == 0) retval = false;
+        if (Mathf.Abs(rb.velocity.y) > 1) retval = false;
+        return retval;
     }
 
     protected void InitializeInputs(string x, string z, string jump)
@@ -270,6 +282,7 @@ public abstract class Player : MonoBehaviour
 
     public void ResetMotion()
     {
+        rb.velocity = Vector3.zero;
         motion = Vector3.zero;
     }
 
