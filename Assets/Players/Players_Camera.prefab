@@ -457,6 +457,18 @@ PrefabInstance:
       propertyPath: throwUpwardsAngle
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 4834388250981002090, guid: 20dc443e67c39394bab339010aabb7aa,
+        type: 3}
+      propertyPath: landingIndicator
+      value: 
+      objectReference: {fileID: 2026274124034000670, guid: 15f652aa94f69e44dbf8fad97a16aa46,
+        type: 3}
+    - target: {fileID: 4834388250981002090, guid: 20dc443e67c39394bab339010aabb7aa,
+        type: 3}
+      propertyPath: landingIndicatorPrefab
+      value: 
+      objectReference: {fileID: 2026274124034000670, guid: 15f652aa94f69e44dbf8fad97a16aa46,
+        type: 3}
     - target: {fileID: 5338642040318428382, guid: 20dc443e67c39394bab339010aabb7aa,
         type: 3}
       propertyPath: m_Name
@@ -628,10 +640,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3146860327048526420}
     m_Modifications:
-    - target: {fileID: 1088568127900295901, guid: 5db7da3d9d401f14f97a7aef596827e0,
+    - target: {fileID: 3874808357865764670, guid: 5db7da3d9d401f14f97a7aef596827e0,
         type: 3}
-      propertyPath: jumpHeight
-      value: 7.5
+      propertyPath: m_Name
+      value: Clide
       objectReference: {fileID: 0}
     - target: {fileID: 2433603982372154571, guid: 5db7da3d9d401f14f97a7aef596827e0,
         type: 3}
@@ -703,10 +715,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3874808357865764670, guid: 5db7da3d9d401f14f97a7aef596827e0,
+    - target: {fileID: 1088568127900295901, guid: 5db7da3d9d401f14f97a7aef596827e0,
         type: 3}
-      propertyPath: m_Name
-      value: Clide
+      propertyPath: jumpHeight
+      value: 7.5
       objectReference: {fileID: 0}
     - target: {fileID: 7680902654541984930, guid: 5db7da3d9d401f14f97a7aef596827e0,
         type: 3}
