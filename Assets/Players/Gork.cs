@@ -4,16 +4,13 @@ using UnityEngine;
 
 public class Gork : Player
 {
-	[SerializeField]
-	private GameObject heldObjectSlot, throwIndicator;
-
 	private List<GameObject> carryableObjects = new List<GameObject>();
 
 	[SerializeField]
 	private float throwStrength = 12f;
 	
 	[SerializeField]
-	private float throwStrengthBox = 15f;
+	private float throwBoxStrength = 15f;
 
 	[SerializeField]
 	[Range(0, 90)]
@@ -21,7 +18,7 @@ public class Gork : Player
 	
 	[SerializeField]
 	[Range(0, 90)]
-	private float throwUpwardsAngleBox = 60f;
+	private float throwBoxUpwardsAngle = 60f;
 
 	private FixedJoint fixedJoint;
 
@@ -30,12 +27,16 @@ public class Gork : Player
 
 	private bool pushing;
 
-	[SerializeField]
-	private GameObject throwIndicatorPoint;
-
 	private GameObject[] throwIndicatorPoints = new GameObject[20];
+	private GameObject landingIndicator;
 
-
+	[Header("References")]
+	[SerializeField]
+	private GameObject throwIndicatorPoint, landingIndicatorPrefab;
+	[SerializeField]
+	private GameObject heldObjectSlot, throwIndicator;
+	
+	
 	
 	public static string XAXIS = "GorkHorizontal",
 	ZAXIS = "GorkVertical",
@@ -61,6 +62,10 @@ public class Gork : Player
 		{
 			UpdateThrowIndicator();
 		}
+		else
+		{
+			DeleteThrowIndicator();
+		}
 	}
 
 	private void UpdateThrowIndicator()
@@ -72,7 +77,7 @@ public class Gork : Player
 		if (!HeldObject().GetComponent<Clyde>())
 		{
 			amplifier = 0.5f;
-			throwStr = throwStrengthBox;
+			throwStr = throwBoxStrength;
 		}
 
 		Vector3 PointPosAtTime (float time) 
@@ -84,13 +89,23 @@ public class Gork : Player
 		{
 			var pointPosition = PointPosAtTime(i * 0.075f);
 
-			bool insideCollider = 
-			Physics.OverlapSphere(pointPosition, 0.1f, Physics.AllLayers, QueryTriggerInteraction.Ignore).Length > 0;
-
-			if (insideCollider && i > 3)
+			if (i > 3)
 			{
-				DeleteThrowIndicator(i);
-				return;
+				for (float f = 0; f < 1; f += 0.2f)
+				{
+					var pos = PointPosAtTime((i + f) * 0.075f);
+					if (Physics.OverlapSphere(pos, 0.1f, Physics.AllLayers, QueryTriggerInteraction.Ignore)
+						.Length > 0)
+					{
+						DeleteThrowIndicator(i, false);
+						if (!landingIndicator)
+						{
+							landingIndicator = Instantiate(landingIndicatorPrefab, throwIndicator.transform);
+						}
+						landingIndicator.transform.position = pos;
+						return;
+					}
+				}
 			}
 			
 			if (!throwIndicatorPoints[i])
@@ -102,13 +117,21 @@ public class Gork : Player
 		}
 	}
 
-	private void DeleteThrowIndicator(int from = 0)
+	private void DeleteThrowIndicator(int from = 0, bool destroyLandingIndicator = true)
 	{
 		for (int i = from; i < throwIndicatorPoints.Length; i++)
 		{
 			if (throwIndicatorPoints[i])
 			{
 				Destroy(throwIndicatorPoints[i]);
+			}
+		}
+
+		if (destroyLandingIndicator)
+		{
+			if (landingIndicator)
+			{
+				Destroy(landingIndicator);
 			}
 		}
 	}
@@ -284,12 +307,13 @@ public class Gork : Player
 		carryableObjects.Remove(other.gameObject);
 	}
 
-	private void PickUp(GameObject obj)
+	public bool PickUp(GameObject obj)
 	{
+        if (IsCarryingObject()) return false;
 		var clyde = obj.GetComponent<Clyde>();
 		if (clyde)
 		{
-			if (clyde.inAirstream) return;
+			if (clyde.inAirstream) return false;
 			clyde.canMove = false;
 			clyde.anim.SetTrigger("pickedUp");
 			clyde.gork = gameObject;
@@ -302,6 +326,7 @@ public class Gork : Player
 		obj.transform.LookAt(obj.transform.position + transform.forward);
 		Rigidbody objectRb = obj.GetComponent<Rigidbody>();
 		objectRb.isKinematic = true;
+        return true;
 	}
 
 	private void Throw(GameObject obj, Vector3 direction)
@@ -315,10 +340,12 @@ public class Gork : Player
 			clyde.canMove = true;
 			clyde.anim.SetTrigger("thrown");
 			clyde.anim.ResetTrigger("land");
+            clyde.RestartPickupCooldown();
+            clyde.ghostjumpTimer = 0;
 		}
 		else
 		{
-			throwStr = throwStrengthBox;
+			throwStr = throwBoxStrength;
 		}
 
 		GetComponent<AudioSource>().Play();
@@ -339,7 +366,7 @@ public class Gork : Player
 		float angle = throwUpwardsAngle;
 		if (!HeldObject().GetComponent<Clyde>())
 		{
-			angle = throwUpwardsAngleBox;
+			angle = throwBoxUpwardsAngle;
 		}
 		throwDirection = Quaternion.AngleAxis(angle, -transform.right) * throwDirection;
 		return throwDirection;
