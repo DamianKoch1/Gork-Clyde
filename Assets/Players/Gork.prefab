@@ -98,20 +98,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   jumpHeight: 0
+  airMovespeedPenalty: 0.9
   rb: {fileID: 0}
   anim: {fileID: 794387205481408661}
   maxGhostjumpDelay: 0.2
+  ghostjumpTimer: 0
   canMove: 1
   inAirstream: 0
-  heldObjectSlot: {fileID: 8013065875973554416}
-  throwIndicator: {fileID: 4760817595200429948}
   throwStrength: 12
-  throwStrengthBox: 15
+  throwBoxStrength: 15
   throwUpwardsAngle: 50
-  throwUpwardsAngleBox: 60
+  throwBoxUpwardsAngle: 60
   pushedObj: {fileID: 0}
   throwIndicatorPoint: {fileID: 7113679517097509900, guid: 8b61f12724bc0474caabda9c313ec810,
     type: 3}
+  landingIndicatorPrefab: {fileID: 0}
+  heldObjectSlot: {fileID: 8013065875973554416}
+  throwIndicator: {fileID: 4760817595200429948}
 --- !u!65 &732548675568301390
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -395,6 +398,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gork
       objectReference: {fileID: 0}
+    - target: {fileID: -6057140222963153312, guid: 033946e41c2cefa4f81d4f57609d266f,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 6756b8e56b7a1754bb7a05273cd72e6c, type: 2}
     - target: {fileID: -4216859302048453862, guid: 033946e41c2cefa4f81d4f57609d266f,
         type: 3}
       propertyPath: m_LocalPosition.x
