@@ -212,6 +212,7 @@ public class Gork : Player
 		if (pushing) return;
 		if (fixedJoint) return;
 
+        anim.SetBool("push", true);
 		pushing = true;
 		Rigidbody objectRb = pushedObj.GetComponent<Rigidbody>();
 		pushedObj.layer = 2;
@@ -249,6 +250,7 @@ public class Gork : Player
 			Destroy(fixedJoint);
 		}
 
+		anim.SetBool("push", false);
 		setMotion = SetMotionDefault;
 		pushing = false;
 		pushedObj.GetComponent<PushableBig>().isPushed = false;
