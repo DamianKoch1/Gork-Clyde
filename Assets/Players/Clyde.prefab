@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 3874808357865764670}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.07, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 5727847779444657595}
   - {fileID: 3952801436976958748}
@@ -65,9 +65,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   jumpHeight: 7.5
+  airMovespeedPenalty: 0.75
   rb: {fileID: 0}
   anim: {fileID: 2447535924106207425}
   maxGhostjumpDelay: 0.2
+  ghostjumpTimer: 0
   canMove: 1
   inAirstream: 0
   gork: {fileID: 0}
@@ -123,11 +125,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ClideMesh0
       objectReference: {fileID: 0}
-    - target: {fileID: -6057140222963153312, guid: b079d4711bcc87d48874a20d04fe4bec,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: e82d060fff29fb942a0a11162db63b83, type: 2}
     - target: {fileID: -4216859302048453862, guid: b079d4711bcc87d48874a20d04fe4bec,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -198,6 +195,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.6
       objectReference: {fileID: 0}
+    - target: {fileID: -6057140222963153312, guid: b079d4711bcc87d48874a20d04fe4bec,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: e82d060fff29fb942a0a11162db63b83, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b079d4711bcc87d48874a20d04fe4bec, type: 3}
 --- !u!4 &5727847779444657595 stripped
@@ -296,8 +298,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1601969473879671137, guid: eb49f7cbe08b75444bb38f67c8c7d0fe,
         type: 3}
-      propertyPath: moveWithTransform
-      value: 1
+      propertyPath: lengthInSec
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 1601969473879671137, guid: eb49f7cbe08b75444bb38f67c8c7d0fe,
         type: 3}
