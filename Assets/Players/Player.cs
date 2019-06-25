@@ -163,7 +163,7 @@ public abstract class Player : MonoBehaviour
             }
             wasGrounded = true;
 
-            anim.SetFloat("Blend", (Mathf.Abs(motion.x) + Mathf.Abs(motion.z)));
+            anim.SetFloat("Blend", ((Mathf.Abs(motion.x) + Mathf.Abs(motion.z))) / speed);
 
             //standing still?
             if (motion.magnitude < 0.1f)

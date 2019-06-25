@@ -366,7 +366,6 @@ public class Gork : Player
 			if (clyde.inAirstream) return false;
 			clyde.canMove = false;
 			clyde.anim.SetTrigger("pickedUp");
-			clyde.gork = gameObject;
 		}
 
 		anim.SetTrigger("pickUp");

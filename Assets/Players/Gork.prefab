@@ -109,9 +109,9 @@ MonoBehaviour:
   throwBoxStrength: 15
   throwUpwardsAngle: 50
   throwBoxUpwardsAngle: 60
+  throwIndicatorCount: 20
+  throwIndicatorDetail: 0.07
   pushedObj: {fileID: 0}
-  throwIndicatorPoint: {fileID: 7113679517097509900, guid: 8b61f12724bc0474caabda9c313ec810,
-    type: 3}
   landingIndicatorPrefab: {fileID: 0}
   heldObjectSlot: {fileID: 8013065875973554416}
   throwIndicator: {fileID: 4760817595200429948}
@@ -398,11 +398,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gork
       objectReference: {fileID: 0}
-    - target: {fileID: -6057140222963153312, guid: 033946e41c2cefa4f81d4f57609d266f,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 6756b8e56b7a1754bb7a05273cd72e6c, type: 2}
     - target: {fileID: -4216859302048453862, guid: 033946e41c2cefa4f81d4f57609d266f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -458,6 +453,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -6057140222963153312, guid: 033946e41c2cefa4f81d4f57609d266f,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 6756b8e56b7a1754bb7a05273cd72e6c, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 033946e41c2cefa4f81d4f57609d266f, type: 3}
 --- !u!4 &7317286398438999535 stripped
