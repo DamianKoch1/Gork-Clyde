@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 4642656701241386583}
   - component: {fileID: 4410432591553584225}
   - component: {fileID: 7929018669442572440}
+  - component: {fileID: 7831277148358579235}
   m_Layer: 0
-  m_Name: PillarEndMesh01
+  m_Name: PillarEndPrefab01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,3 +78,16 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &7831277148358579235
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8517818126509970500}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.6810051, y: 1.6810058, z: 1.2293227}
+  m_Center: {x: 0, y: 0.00000014901164, z: 0.61466134}
