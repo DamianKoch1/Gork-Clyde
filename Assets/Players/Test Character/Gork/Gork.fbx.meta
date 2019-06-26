@@ -7,9 +7,6 @@ ModelImporter:
       74: 8815183293638280750
     second: Gork_HoldPusch_Arm.002
   - first:
-      74: 4415631408299888447
-    second: Grog_Throw
-  - first:
       74: -1312135765441563786
     second: Gork_Walk
   - first:
@@ -21,6 +18,9 @@ ModelImporter:
   - first:
       74: -2107672861949132582
     second: Gork_Idle
+  - first:
+      74: -2362264336455184070
+    second: Gork_Throw
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -55,35 +55,6 @@ ModelImporter:
       internalID: 8815183293638280750
       firstFrame: 0
       lastFrame: 14
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: Grog_Throw
-      takeName: Grog_Throw
-      internalID: 4415631408299888447
-      firstFrame: 0
-      lastFrame: 25
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -207,6 +178,35 @@ ModelImporter:
       loop: 0
       hasAdditiveReferencePose: 0
       loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Gork_Throw
+      takeName: Gork_Throw
+      internalID: -2362264336455184070
+      firstFrame: 0
+      lastFrame: 25
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
