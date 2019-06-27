@@ -9,6 +9,12 @@ public abstract class Player : MonoBehaviour
     [SerializeField]
     [Range(0, 1)]
     private float airMovespeedPenalty = 0.9f;
+    [SerializeField]
+    [Range(0, 1)]
+    private float throwMovespeedPenalty = 0.9f;
+    [HideInInspector]
+    public bool isThrown = false;
+    
     protected Vector3 motion;
     [HideInInspector]
     public Rigidbody rb;
@@ -120,9 +126,13 @@ public abstract class Player : MonoBehaviour
     protected void SetMotionDefault()
     {
         float moveSpeed = speed;
-        if (!wasGrounded)
+        if (isThrown)
         {
-            moveSpeed *= airMovespeedPenalty;
+            moveSpeed *= throwMovespeedPenalty;
+        }
+        else if (!wasGrounded)
+        {
+             moveSpeed *= airMovespeedPenalty;
         }
         motion.x = Input.GetAxis(xAxis);
         motion.z = Input.GetAxis(zAxis);
@@ -160,6 +170,10 @@ public abstract class Player : MonoBehaviour
                 anim.SetBool("falling", false);
                 anim.SetTrigger("land");
                 anim.ResetTrigger("jump");
+                if (isThrown)
+                {
+                    isThrown = false;
+                }
             }
             wasGrounded = true;
 

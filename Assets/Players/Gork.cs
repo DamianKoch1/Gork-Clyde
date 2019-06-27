@@ -391,6 +391,7 @@ public class Gork : Player
 			clyde.anim.ResetTrigger("land");
             clyde.RestartPickupCooldown();
             clyde.ghostjumpTimer = 0;
+            clyde.isThrown = true;
 		}
 		else
 		{
