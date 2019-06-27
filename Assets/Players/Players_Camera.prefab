@@ -274,11 +274,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3146860327048526420}
     m_Modifications:
-    - target: {fileID: 3256944756886205949, guid: 423b35919944a044fb48ab3983bcda75,
-        type: 3}
-      propertyPath: m_Name
-      value: Default Camera
-      objectReference: {fileID: 0}
     - target: {fileID: 3256944756886205922, guid: 423b35919944a044fb48ab3983bcda75,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -333,6 +328,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3256944756886205949, guid: 423b35919944a044fb48ab3983bcda75,
+        type: 3}
+      propertyPath: m_Name
+      value: Default Camera
       objectReference: {fileID: 0}
     - target: {fileID: 3256944756886205921, guid: 423b35919944a044fb48ab3983bcda75,
         type: 3}
@@ -418,6 +418,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1088568127900295901, guid: 5db7da3d9d401f14f97a7aef596827e0,
+        type: 3}
+      propertyPath: airMovespeedPenalty
+      value: 0.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5db7da3d9d401f14f97a7aef596827e0, type: 3}
