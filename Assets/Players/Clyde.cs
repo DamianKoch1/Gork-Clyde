@@ -6,8 +6,8 @@ public class Clyde : Player
 {
     public static string XAXIS = "ClydeHorizontal", ZAXIS = "ClydeVertical", JUMPBUTTON = "ClydeJump";
 
-    [HideInInspector]
-    public GameObject gork;
+    [SerializeField]
+    private GameObject gork;
 
     private float pickupCooldown = 0;
 
@@ -38,11 +38,11 @@ public class Clyde : Player
     {
         if (pickupCooldown != 0) return;
         if (!groundedInfo.transform) return;
-        var gork = groundedInfo.transform.GetComponent<Gork>();
-        if (!gork) return;
-        if (gork.PickUp(gameObject)) return;
+        var _gork = groundedInfo.transform.GetComponent<Gork>();
+        if (!_gork) return;
+        if (_gork.PickUp(gameObject)) return;
 
-        Vector3 force = gork.GetComponent<Rigidbody>().position - GetComponent<Rigidbody>().position;
+        Vector3 force = _gork.GetComponent<Rigidbody>().position - GetComponent<Rigidbody>().position;
         force.y = 0;
         force.Normalize();
         force += Vector3.up;
@@ -72,6 +72,7 @@ public class Clyde : Player
         ResetMotion();
         canMove = true;
         anim.SetTrigger("throwCancelled");
+        gork.GetComponent<Gork>().anim.SetTrigger("cancelthrow");
         rb.isKinematic = false;
         Physics.IgnoreCollision(GetComponent<Collider>(), gork.GetComponent<Collider>(), false);
         rb.AddForce((transform.forward + transform.up) * 5, ForceMode.VelocityChange);

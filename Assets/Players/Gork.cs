@@ -13,12 +13,20 @@ public class Gork : Player
 	private float throwBoxStrength = 15f;
 
 	[SerializeField]
-	[Range(0, 90)]
+	[UnityEngine.Range(0, 90)]
 	private float throwUpwardsAngle = 50f;
 	
 	[SerializeField]
-	[Range(0, 90)]
+	[UnityEngine.Range(0, 90)]
 	private float throwBoxUpwardsAngle = 60f;
+
+	[SerializeField] 
+	[Range(10, 50)] 
+	private int throwIndicatorCount = 20;
+
+	[SerializeField] 
+	[Range(0.06f, 0.1f)] 
+	private float throwIndicatorDetail = 0.08f;
 
 	private FixedJoint fixedJoint;
 
@@ -27,12 +35,12 @@ public class Gork : Player
 
 	private bool pushing;
 
-	private GameObject[] throwIndicatorPoints = new GameObject[20];
 	private GameObject landingIndicator;
+	private LineRenderer throwLineRenderer;
 
 	[Header("References")]
 	[SerializeField]
-	private GameObject throwIndicatorPoint, landingIndicatorPrefab;
+	private GameObject landingIndicatorPrefab;
 	[SerializeField]
 	private GameObject heldObjectSlot, throwIndicator;
 	
@@ -48,6 +56,7 @@ public class Gork : Player
 	{
 		base.Start();
 		InitializeInputs(XAXIS, ZAXIS, JUMPBUTTON);
+		throwLineRenderer = throwIndicator.GetComponent<LineRenderer>();
 	}
 
 	protected override void Update()
@@ -84,23 +93,25 @@ public class Gork : Player
 		{
 			return throwIndicator.transform.position + ThrowDirection() * throwStr * time + Physics.gravity * time * time * amplifier;
 		}
-		
-		for (int i = 0; i < throwIndicatorPoints.Length; i++)
+
+		throwLineRenderer.positionCount = throwIndicatorCount;
+		for (int i = 0; i < throwLineRenderer.positionCount; i++)
 		{
-			var pointPosition = PointPosAtTime(i * 0.075f);
+			var pointPosition = PointPosAtTime(i * throwIndicatorDetail);
 
 			if (i > 3)
 			{
 				for (float f = 0; f < 1; f += 0.2f)
 				{
-					var pos = PointPosAtTime((i + f) * 0.075f);
+					var pos = PointPosAtTime((i + f) * throwIndicatorDetail);
 					if (Physics.OverlapSphere(pos, 0.1f, Physics.AllLayers, QueryTriggerInteraction.Ignore)
 						.Length > 0)
 					{
-						DeleteThrowIndicator(i, false);
+						DeleteThrowIndicator(i+1, false);
+						throwLineRenderer.SetPosition(i, pos);
 						if (!landingIndicator)
 						{
-							landingIndicator = Instantiate(landingIndicatorPrefab, throwIndicator.transform);
+							landingIndicator = Instantiate(landingIndicatorPrefab);
 						}
 						landingIndicator.transform.position = pos;
 						return;
@@ -108,25 +119,13 @@ public class Gork : Player
 				}
 			}
 			
-			if (!throwIndicatorPoints[i])
-			{
-				throwIndicatorPoints[i] = Instantiate(throwIndicatorPoint, throwIndicator.transform);
-			}
-
-			throwIndicatorPoints[i].transform.position = pointPosition;
+			throwLineRenderer.SetPosition(i, pointPosition);
 		}
 	}
 
 	private void DeleteThrowIndicator(int from = 0, bool destroyLandingIndicator = true)
 	{
-		for (int i = from; i < throwIndicatorPoints.Length; i++)
-		{
-			if (throwIndicatorPoints[i])
-			{
-				Destroy(throwIndicatorPoints[i]);
-			}
-		}
-
+		throwLineRenderer.positionCount = from;
 		if (destroyLandingIndicator)
 		{
 			if (landingIndicator)
@@ -367,7 +366,6 @@ public class Gork : Player
 			if (clyde.inAirstream) return false;
 			clyde.canMove = false;
 			clyde.anim.SetTrigger("pickedUp");
-			clyde.gork = gameObject;
 		}
 
 		anim.SetTrigger("pickUp");
