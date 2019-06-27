@@ -95,17 +95,17 @@ PrefabInstance:
     - target: {fileID: 4580761131433639223, guid: f055718a36d21f04195bab65c3180ef5,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -39.79886
+      value: 20.701141
       objectReference: {fileID: 0}
     - target: {fileID: 4580761131433639223, guid: f055718a36d21f04195bab65c3180ef5,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 17.1
+      value: 19.39
       objectReference: {fileID: 0}
     - target: {fileID: 4580761131433639223, guid: f055718a36d21f04195bab65c3180ef5,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 25.300003
+      value: -66.399994
       objectReference: {fileID: 0}
     - target: {fileID: 4580761131433639223, guid: f055718a36d21f04195bab65c3180ef5,
         type: 3}
@@ -147,6 +147,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6805089711458432770, guid: f055718a36d21f04195bab65c3180ef5,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1902384556950123667, guid: f055718a36d21f04195bab65c3180ef5,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1591775493364014801, guid: f055718a36d21f04195bab65c3180ef5,
         type: 3}
       propertyPath: gorkTransform
@@ -157,6 +167,11 @@ PrefabInstance:
       propertyPath: clydeTransform
       value: 
       objectReference: {fileID: 1728689903915372180}
+    - target: {fileID: 2542559756013992164, guid: f055718a36d21f04195bab65c3180ef5,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2917781398492013116, guid: f055718a36d21f04195bab65c3180ef5,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -417,7 +432,8 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6886476051265601873, guid: f055718a36d21f04195bab65c3180ef5, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f055718a36d21f04195bab65c3180ef5, type: 3}
 --- !u!4 &3872628091456054174 stripped
 Transform:
