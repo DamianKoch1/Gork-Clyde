@@ -367,6 +367,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!136 &2014343304093137128
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6245598988383937783}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.003083294
+  m_Height: 0.014989738
+  m_Direction: 0
+  m_Center: {x: 0.00000037193297, y: 0.004767946, z: 0.012468051}
 --- !u!183 &3281893922181936281
 Cloth:
   m_ObjectHideFlags: 0
@@ -385,10 +399,10 @@ Cloth:
   m_WorldVelocityScale: 0
   m_WorldAccelerationScale: 0
   m_Friction: 1
-  m_CollisionMassScale: 0
+  m_CollisionMassScale: 1
   m_UseContinuousCollision: 1
   m_UseVirtualParticles: 1
-  m_SolverFrequency: 1
+  m_SolverFrequency: 120
   m_SleepThreshold: 0.1
   m_Coefficients:
   - maxDistance: 0
@@ -685,14 +699,11 @@ Cloth:
     collisionSphereDistance: 3.4028235e+38
   - maxDistance: 0
     collisionSphereDistance: 3.4028235e+38
-  m_CapsuleColliders: []
-  m_SphereColliders:
-  - first: {fileID: 1906611799071965510}
-    second: {fileID: 1906611799071965510}
-  - first: {fileID: 5113218445167225132}
-    second: {fileID: 5113218445167225132}
-  - first: {fileID: 49705853970886298}
-    second: {fileID: 49705853970886298}
+  m_CapsuleColliders:
+  - {fileID: 2014343304093137128}
+  - {fileID: 8021255795556619920}
+  - {fileID: 8386575446256113022}
+  m_SphereColliders: []
   m_SelfCollisionDistance: 0
   m_SelfCollisionStiffness: 1
   m_SelfAndInterCollisionIndices: 
@@ -707,8 +718,8 @@ Cloth:
   - {x: 0.6666667, y: 0.16666667, z: 0.16666667}
   - {x: 0.5, y: 0.5, z: 0}
   m_VirtualParticleIndices: 
---- !u!135 &1906611799071965510
-SphereCollider:
+--- !u!136 &8021255795556619920
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -717,11 +728,12 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.004444044
-  m_Center: {x: -0.00000014185905, y: 0.0024699725, z: 0.017282998}
---- !u!135 &5113218445167225132
-SphereCollider:
+  m_Radius: 0.0027200799
+  m_Height: 0.01310553
+  m_Direction: 0
+  m_Center: {x: -0.00010848045, y: 0.012193968, z: 0.02309082}
+--- !u!136 &8386575446256113022
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -730,22 +742,10 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.003697253
-  m_Center: {x: -0.00000014185905, y: 0.0037301865, z: 0.013409108}
---- !u!135 &49705853970886298
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6245598988383937783}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.014781888
-  m_Center: {x: -0.00000014543534, y: 0.0027712155, z: 0.036758192}
+  m_Radius: 0.003106454
+  m_Height: 0.015817076
+  m_Direction: 0
+  m_Center: {x: -0.00021389246, y: 0.004372505, z: 0.018228821}
 --- !u!1 &8013065875973554416
 GameObject:
   m_ObjectHideFlags: 0
@@ -971,32 +971,32 @@ PrefabInstance:
     - target: {fileID: 5887908791395795996, guid: 033946e41c2cefa4f81d4f57609d266f,
         type: 3}
       propertyPath: m_AABB.m_Center.x
-      value: 0.00000050438337
+      value: 2.3831603e-10
       objectReference: {fileID: 0}
     - target: {fileID: 5887908791395795996, guid: 033946e41c2cefa4f81d4f57609d266f,
         type: 3}
       propertyPath: m_AABB.m_Center.y
-      value: 0.009463839
+      value: 0.007041011
       objectReference: {fileID: 0}
     - target: {fileID: 5887908791395795996, guid: 033946e41c2cefa4f81d4f57609d266f,
         type: 3}
       propertyPath: m_AABB.m_Center.z
-      value: -0.0012701021
+      value: 0.021040669
       objectReference: {fileID: 0}
     - target: {fileID: 5887908791395795996, guid: 033946e41c2cefa4f81d4f57609d266f,
         type: 3}
       propertyPath: m_AABB.m_Extent.x
-      value: 0.0076795937
+      value: 0.0077017965
       objectReference: {fileID: 0}
     - target: {fileID: 5887908791395795996, guid: 033946e41c2cefa4f81d4f57609d266f,
         type: 3}
       propertyPath: m_AABB.m_Extent.y
-      value: 0.01033828
+      value: 0.01434468
       objectReference: {fileID: 0}
     - target: {fileID: 5887908791395795996, guid: 033946e41c2cefa4f81d4f57609d266f,
         type: 3}
       propertyPath: m_AABB.m_Extent.z
-      value: 0.010473663
+      value: 0.009727906
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 033946e41c2cefa4f81d4f57609d266f, type: 3}
