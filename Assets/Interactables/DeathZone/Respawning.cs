@@ -31,7 +31,6 @@ public class Respawning : MonoBehaviour
         SetSpawnPoint();
         while (true)
         {
-            //prevent spawning too close to edge
             if (Physics.Raycast(rb.position, -Vector3.up,
             2f, Physics.AllLayers, QueryTriggerInteraction.Ignore))
             {
