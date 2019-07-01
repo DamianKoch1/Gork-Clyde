@@ -234,13 +234,8 @@ MonoBehaviour:
   throwBoxStrength: 15
   throwUpwardsAngle: 50
   throwBoxUpwardsAngle: 60
-  throwIndicatorCount: 20
-  throwIndicatorDetail: 0.075
   pushedObj: {fileID: 0}
-  landingIndicatorPrefab: {fileID: 2026274124034000670, guid: 15f652aa94f69e44dbf8fad97a16aa46,
-    type: 3}
   heldObjectSlot: {fileID: 8013065875973554416}
-  throwIndicator: {fileID: 4760817595200429948}
 --- !u!65 &732548675568301390
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -728,10 +723,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.0027200799
+  m_Radius: 0.0025704768
   m_Height: 0.01310553
   m_Direction: 0
-  m_Center: {x: -0.00010848045, y: 0.012193968, z: 0.02309082}
+  m_Center: {x: -0.00010848045, y: 0.012194037, z: 0.025155488}
 --- !u!136 &8386575446256113022
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -971,32 +966,32 @@ PrefabInstance:
     - target: {fileID: 5887908791395795996, guid: 033946e41c2cefa4f81d4f57609d266f,
         type: 3}
       propertyPath: m_AABB.m_Center.x
-      value: 0.000024631154
+      value: 0.0000005043033
       objectReference: {fileID: 0}
     - target: {fileID: 5887908791395795996, guid: 033946e41c2cefa4f81d4f57609d266f,
         type: 3}
       propertyPath: m_AABB.m_Center.y
-      value: 0.013585557
+      value: 0.009983848
       objectReference: {fileID: 0}
     - target: {fileID: 5887908791395795996, guid: 033946e41c2cefa4f81d4f57609d266f,
         type: 3}
       propertyPath: m_AABB.m_Center.z
-      value: 0.003316506
+      value: -0.00048661232
       objectReference: {fileID: 0}
     - target: {fileID: 5887908791395795996, guid: 033946e41c2cefa4f81d4f57609d266f,
         type: 3}
       propertyPath: m_AABB.m_Extent.x
-      value: 0.0076950192
+      value: 0.0076795947
       objectReference: {fileID: 0}
     - target: {fileID: 5887908791395795996, guid: 033946e41c2cefa4f81d4f57609d266f,
         type: 3}
       propertyPath: m_AABB.m_Extent.y
-      value: 0.012093197
+      value: 0.010217263
       objectReference: {fileID: 0}
     - target: {fileID: 5887908791395795996, guid: 033946e41c2cefa4f81d4f57609d266f,
         type: 3}
       propertyPath: m_AABB.m_Extent.z
-      value: 0.014830745
+      value: 0.010992337
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 033946e41c2cefa4f81d4f57609d266f, type: 3}
