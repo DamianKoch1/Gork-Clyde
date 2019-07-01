@@ -20,13 +20,7 @@ public class Gork : Player
 	[UnityEngine.Range(0, 90)]
 	private float throwBoxUpwardsAngle = 60f;
 
-	[SerializeField] 
-	[Range(10, 50)] 
-	private int throwIndicatorCount = 20;
-
-	[SerializeField] 
-	[Range(0.06f, 0.1f)] 
-	private float throwIndicatorDetail = 0.08f;
+	private ThrowIndicator throwIndicator;	
 
 	private FixedJoint fixedJoint;
 
@@ -35,14 +29,8 @@ public class Gork : Player
 
 	private bool pushing;
 
-	private GameObject landingIndicator;
-	private LineRenderer throwLineRenderer;
-
-	[Header("References")]
 	[SerializeField]
-	private GameObject landingIndicatorPrefab;
-	[SerializeField]
-	private GameObject heldObjectSlot, throwIndicator;
+	private GameObject heldObjectSlot;
 	
 	
 	
@@ -56,7 +44,7 @@ public class Gork : Player
 	{
 		base.Start();
 		InitializeInputs(XAXIS, ZAXIS, JUMPBUTTON);
-		throwLineRenderer = throwIndicator.GetComponent<LineRenderer>();
+		throwIndicator = GetComponent<ThrowIndicator>();
 	}
 
 	protected override void Update()
@@ -69,71 +57,15 @@ public class Gork : Player
 
 		if (IsCarryingObject())
 		{
-			UpdateThrowIndicator();
+			throwIndicator.UpdateIndicator(ThrowVector(), HeldObject());
 		}
 		else
 		{
-			DeleteThrowIndicator();
+			throwIndicator.DestroyIndicator();
 		}
 	}
 
-	private void UpdateThrowIndicator()
-	{
-		float amplifier = 1;
-		
-		float throwStr = throwStrength;
-		
-		if (!HeldObject().GetComponent<Clyde>())
-		{
-			amplifier = 0.5f;
-			throwStr = throwBoxStrength;
-		}
-
-		Vector3 PointPosAtTime (float time) 
-		{
-			return throwIndicator.transform.position + ThrowDirection() * throwStr * time + Physics.gravity * time * time * amplifier;
-		}
-
-		throwLineRenderer.positionCount = throwIndicatorCount;
-		for (int i = 0; i < throwLineRenderer.positionCount; i++)
-		{
-			var pointPosition = PointPosAtTime(i * throwIndicatorDetail);
-
-			if (i > 3)
-			{
-				for (float f = 0; f < 1; f += 0.2f)
-				{
-					var pos = PointPosAtTime((i + f) * throwIndicatorDetail);
-					if (Physics.OverlapSphere(pos, 0.1f, Physics.AllLayers, QueryTriggerInteraction.Ignore)
-						.Length > 0)
-					{
-						DeleteThrowIndicator(i+1, false);
-						throwLineRenderer.SetPosition(i, pos);
-						if (!landingIndicator)
-						{
-							landingIndicator = Instantiate(landingIndicatorPrefab);
-						}
-						landingIndicator.transform.position = pos;
-						return;
-					}
-				}
-			}
-			
-			throwLineRenderer.SetPosition(i, pointPosition);
-		}
-	}
-
-	private void DeleteThrowIndicator(int from = 0, bool destroyLandingIndicator = true)
-	{
-		throwLineRenderer.positionCount = from;
-		if (destroyLandingIndicator)
-		{
-			if (landingIndicator)
-			{
-				Destroy(landingIndicator);
-			}
-		}
-	}
+	
 
 	private void CheckIfStillPushing()
 	{
@@ -159,7 +91,7 @@ public class Gork : Player
 			}
 			else if (IsCarryingObject())
 			{
-				Throw(HeldObject(), ThrowDirection());
+				Throw(HeldObject(), ThrowVector());
 			}
 			else if (carryableObjects.Count > 0)
 			{
@@ -186,7 +118,7 @@ public class Gork : Player
 				if (clyde)
 				{
 					clyde.CancelThrow();
-					DeleteThrowIndicator();
+					throwIndicator.DestroyIndicator();
 				}
 			}
 		}
@@ -216,7 +148,7 @@ public class Gork : Player
 		Rigidbody objectRb = pushedObj.GetComponent<Rigidbody>();
 		pushedObj.layer = 2;
 		Vector3 direction = objectRb.position - rb.position;
-		AxisAlignToBox(direction);
+		AxisAlignTo(direction);
 		fixedJoint = gameObject.AddComponent<FixedJoint>();
 		fixedJoint.connectedBody = objectRb;
 		fixedJoint.breakForce = 800f; //TODO maybe use rb mass instead of hardcoding
@@ -224,7 +156,7 @@ public class Gork : Player
 	}
 
 
-	private void AxisAlignToBox(Vector3 vector)
+	private void AxisAlignTo(Vector3 vector)
 	{
 		var rotatedVector = ApplyCamRotation(vector);
 		vector.y = 0;
@@ -293,17 +225,11 @@ public class Gork : Player
 		if (Mathf.Abs(camRotatedForward.z) < Mathf.Abs(camRotatedForward.x)) return false;
 		if (camRotatedForward.z > 0)
 		{
-			if (Mathf.Abs(forward.x) > Mathf.Abs(forward.z))
-			{
-				return true;
-			}
+			if (Mathf.Abs(forward.x) > Mathf.Abs(forward.z)) return true;
 		}
 		else
 		{
-			if (Mathf.Abs(forward.z) > Mathf.Abs(forward.x))
-			{
-				return true;
-			}
+			if (Mathf.Abs(forward.z) > Mathf.Abs(forward.x)) return true;
 		}
 		return false;
 	}
@@ -313,30 +239,13 @@ public class Gork : Player
 		if (Mathf.Abs(camRotatedForward.x) < Mathf.Abs(camRotatedForward.z)) return false;
 		if (camRotatedForward.x > 0)
 		{
-			if (Mathf.Abs(forward.z) > Mathf.Abs(forward.x))
-			{
-				return true;
-			}
+			if (Mathf.Abs(forward.z) > Mathf.Abs(forward.x)) return true;
 		}
 		else
 		{
-			if (Mathf.Abs(forward.x) > Mathf.Abs(forward.z))
-			{
-				return true;
-			}
+			if (Mathf.Abs(forward.x) > Mathf.Abs(forward.z)) return true;
 		}
 		return false;
-	}
-
-	protected override void SetSpawnPoint()
-	{
-		Spawnpoint.GORK_SPAWN = rb.position;
-	}
-
-	public override void Respawn()
-	{
-		base.Respawn();
-		rb.MovePosition(Spawnpoint.GORK_SPAWN);
 	}
 
 
@@ -378,13 +287,11 @@ public class Gork : Player
         return true;
 	}
 
-	private void Throw(GameObject obj, Vector3 direction)
+	private void Throw(GameObject obj, Vector3 vector)
 	{
 		var clyde = obj.GetComponent<Clyde>();
-		float throwStr;
 		if (clyde)
 		{
-			throwStr = throwStrength;
 			clyde.ResetMotion();
 			clyde.canMove = true;
 			clyde.anim.SetTrigger("thrown");
@@ -393,10 +300,6 @@ public class Gork : Player
             clyde.ghostjumpTimer = 0;
             clyde.isThrown = true;
 		}
-		else
-		{
-			throwStr = throwBoxStrength;
-		}
 
 		GetComponent<AudioSource>().Play();
 		anim.SetTrigger("throw");
@@ -404,21 +307,28 @@ public class Gork : Player
 		Rigidbody objectRb = obj.GetComponent<Rigidbody>();
 		objectRb.velocity = Vector3.zero;
 		objectRb.isKinematic = false;
-		objectRb.AddForce(direction * throwStr, ForceMode.VelocityChange);
-		objectRb = null;
+		objectRb.AddForce(vector, ForceMode.VelocityChange);
 		Physics.IgnoreCollision(GetComponent<Collider>(), obj.GetComponent<Collider>(), false);
-		DeleteThrowIndicator();
+		throwIndicator.DestroyIndicator();
 	}
 
-	private Vector3 ThrowDirection()
+	private Vector3 ThrowVector()
 	{
-		Vector3 throwDirection = transform.forward;
+		Vector3 throwVector = transform.forward;
 		float angle = throwUpwardsAngle;
 		if (!HeldObject().GetComponent<Clyde>())
 		{
 			angle = throwBoxUpwardsAngle;
 		}
-		throwDirection = Quaternion.AngleAxis(angle, -transform.right) * throwDirection;
-		return throwDirection;
+		throwVector = Quaternion.AngleAxis(angle, -transform.right) * throwVector;
+
+		float throwStr = throwStrength;
+		if (!HeldObject().GetComponent<Clyde>())
+		{
+			throwStr = throwBoxStrength;
+		}
+		throwVector *= throwStr;
+		
+		return throwVector;
 	}
 }

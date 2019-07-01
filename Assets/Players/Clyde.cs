@@ -23,16 +23,6 @@ public class Clyde : Player
         CheckIfOnGork();
     }
 
-    protected override void SetSpawnPoint()
-    {
-        Spawnpoint.CLYDE_SPAWN = rb.position;
-    }
-
-    public override void Respawn()
-    {
-        base.Respawn();
-        rb.MovePosition(Spawnpoint.CLYDE_SPAWN);
-    }
 
     private void CheckIfOnGork()
     {
