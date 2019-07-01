@@ -216,7 +216,7 @@ public class Gork : Player
 		Rigidbody objectRb = pushedObj.GetComponent<Rigidbody>();
 		pushedObj.layer = 2;
 		Vector3 direction = objectRb.position - rb.position;
-		AxisAlignToBox(direction);
+		AxisAlignTo(direction);
 		fixedJoint = gameObject.AddComponent<FixedJoint>();
 		fixedJoint.connectedBody = objectRb;
 		fixedJoint.breakForce = 800f; //TODO maybe use rb mass instead of hardcoding
@@ -224,7 +224,7 @@ public class Gork : Player
 	}
 
 
-	private void AxisAlignToBox(Vector3 vector)
+	private void AxisAlignTo(Vector3 vector)
 	{
 		var rotatedVector = ApplyCamRotation(vector);
 		vector.y = 0;
@@ -293,17 +293,11 @@ public class Gork : Player
 		if (Mathf.Abs(camRotatedForward.z) < Mathf.Abs(camRotatedForward.x)) return false;
 		if (camRotatedForward.z > 0)
 		{
-			if (Mathf.Abs(forward.x) > Mathf.Abs(forward.z))
-			{
-				return true;
-			}
+			if (Mathf.Abs(forward.x) > Mathf.Abs(forward.z)) return true;
 		}
 		else
 		{
-			if (Mathf.Abs(forward.z) > Mathf.Abs(forward.x))
-			{
-				return true;
-			}
+			if (Mathf.Abs(forward.z) > Mathf.Abs(forward.x)) return true;
 		}
 		return false;
 	}
@@ -313,30 +307,13 @@ public class Gork : Player
 		if (Mathf.Abs(camRotatedForward.x) < Mathf.Abs(camRotatedForward.z)) return false;
 		if (camRotatedForward.x > 0)
 		{
-			if (Mathf.Abs(forward.z) > Mathf.Abs(forward.x))
-			{
-				return true;
-			}
+			if (Mathf.Abs(forward.z) > Mathf.Abs(forward.x)) return true;
 		}
 		else
 		{
-			if (Mathf.Abs(forward.x) > Mathf.Abs(forward.z))
-			{
-				return true;
-			}
+			if (Mathf.Abs(forward.x) > Mathf.Abs(forward.z)) return true;
 		}
 		return false;
-	}
-
-	protected override void SetSpawnPoint()
-	{
-		Spawnpoint.GORK_SPAWN = rb.position;
-	}
-
-	public override void Respawn()
-	{
-		base.Respawn();
-		rb.MovePosition(Spawnpoint.GORK_SPAWN);
 	}
 
 
