@@ -7,8 +7,8 @@ public class DeathZone : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.isTrigger) return;
-        if (!other.GetComponent<Player>()) return;
+        if (!other.GetComponent<Respawning>()) return;
 
-        other.GetComponent<Player>().Respawn();
+        other.GetComponent<Respawning>().Respawn();
     }
 }

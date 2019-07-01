@@ -16,8 +16,8 @@ public class Goal : MonoBehaviour
         if (!player) return;
 
         player.canMove = false;
-        player.anim.enabled = false;
-        StopCoroutine(player.CheckSpawnPoint());
+        //player.anim.enabled = false;
+        StopCoroutine(player.GetComponent<Respawning>().CheckSpawnPoint());
         enteredPlayerCount++;
         if (enteredPlayerCount == 2)
         {

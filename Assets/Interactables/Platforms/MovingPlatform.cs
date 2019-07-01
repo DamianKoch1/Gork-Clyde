@@ -52,12 +52,12 @@ public class MovingPlatform : MonoBehaviour
     }
 
 
-    public void PlatformBlocked()
+    public void Blocked()
     {
         blocked = true;
     }
 
-    public void PlatformUnblocked()
+    public void Unblocked()
     {
         blocked = false;
     }
