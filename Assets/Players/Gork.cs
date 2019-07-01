@@ -1,7 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static VectorMath;
 
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(ThrowIndicator))]
+[RequireComponent(typeof(Pushing))]
 public class Gork : Player
 {
 	private List<GameObject> carryableObjects = new List<GameObject>();
@@ -13,11 +17,11 @@ public class Gork : Player
 	private float throwBoxStrength = 15f;
 
 	[SerializeField]
-	[UnityEngine.Range(0, 90)]
+	[Range(0, 90)]
 	private float throwUpwardsAngle = 50f;
 	
 	[SerializeField]
-	[UnityEngine.Range(0, 90)]
+	[Range(0, 90)]
 	private float throwBoxUpwardsAngle = 60f;
 
 	private ThrowIndicator throwIndicator;	
@@ -31,8 +35,6 @@ public class Gork : Player
 
 	[SerializeField]
 	private GameObject heldObjectSlot;
-	
-	
 	
 	public static string XAXIS = "GorkHorizontal",
 	ZAXIS = "GorkVertical",
@@ -55,6 +57,8 @@ public class Gork : Player
 			CheckIfStillPushing();
 		}
 
+	private void UpdateThrowIndicator()
+	{
 		if (IsCarryingObject())
 		{
 			throwIndicator.UpdateIndicator(ThrowVector(), HeldObject());
@@ -64,7 +68,6 @@ public class Gork : Player
 			throwIndicator.DestroyIndicator();
 		}
 	}
-
 	
 
 	private void CheckIfStillPushing()
@@ -85,18 +88,7 @@ public class Gork : Player
 
 		if (Input.GetButtonDown(GORKINTERACT))
 		{
-			if (pushing)
-			{
-				StopPushing();
-			}
-			else if (IsCarryingObject())
-			{
-				Throw(HeldObject(), ThrowVector());
-			}
-			else if (carryableObjects.Count > 0)
-			{
-				PickUp(carryableObjects[0]);
-			}
+			Interact();
 		}
 
 		if (Input.GetButtonUp(GORKINTERACT))
@@ -125,6 +117,22 @@ public class Gork : Player
 	}
 
 
+	private void Interact()
+	{
+		if (pushing)
+		{
+			StopPushing();
+		}
+		else if (IsCarryingObject())
+		{
+			Throw(HeldObject(), ThrowVector());
+		}
+		else if (carryableObjects.Count > 0)
+		{
+			PickUp(carryableObjects[0]);
+		}
+	}
+	
 	private bool IsCarryingObject()
 	{
 		if (heldObjectSlot.transform.childCount > 0) return true;
@@ -192,8 +200,8 @@ public class Gork : Player
 	private void SetMotionSingleAxis()
 	{
 		var forward = transform.forward;
-		var camRotatedForward = ApplyCamRotation(forward);
-		if (Mathf.Abs(camRotatedForward.z) > Mathf.Abs(camRotatedForward.x))
+		var camRotatedForward = ApplyCameraRotation(forward);
+		if (!AlignsToXAxis(camRotatedForward))
 		{
 			motion = forward * Input.GetAxis(zAxis) * speed;
 			if (InverseVerticalPushControls(forward, camRotatedForward))
@@ -222,28 +230,28 @@ public class Gork : Player
 
 	private bool InverseVerticalPushControls(Vector3 forward, Vector3 camRotatedForward)
 	{
-		if (Mathf.Abs(camRotatedForward.z) < Mathf.Abs(camRotatedForward.x)) return false;
+		if (AlignsToXAxis(camRotatedForward)) return false;
 		if (camRotatedForward.z > 0)
 		{
-			if (Mathf.Abs(forward.x) > Mathf.Abs(forward.z)) return true;
+			if (AlignsToXAxis(forward)) return true;
 		}
 		else
 		{
-			if (Mathf.Abs(forward.z) > Mathf.Abs(forward.x)) return true;
+			if (!AlignsToXAxis(forward)) return true;
 		}
 		return false;
 	}
 
 	private bool InverseHorizontalPushControls(Vector3 forward, Vector3 camRotatedForward)
 	{
-		if (Mathf.Abs(camRotatedForward.x) < Mathf.Abs(camRotatedForward.z)) return false;
+		if (!AlignsToXAxis(camRotatedForward)) return false;
 		if (camRotatedForward.x > 0)
 		{
-			if (Mathf.Abs(forward.z) > Mathf.Abs(forward.x)) return true;
+			if (!AlignsToXAxis(forward)) return true;
 		}
 		else
 		{
-			if (Mathf.Abs(forward.x) > Mathf.Abs(forward.z)) return true;
+			if (AlignsToXAxis(forward)) return true;
 		}
 		return false;
 	}
