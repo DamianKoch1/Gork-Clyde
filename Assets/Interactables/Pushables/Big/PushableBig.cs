@@ -5,7 +5,7 @@ using UnityEngine;
 public class PushableBig : Pushable
 {
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.isTrigger) return;
         var gork = other.GetComponent<Gork>();
