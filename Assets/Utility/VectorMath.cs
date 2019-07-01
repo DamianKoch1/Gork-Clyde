@@ -37,4 +37,8 @@ public static class VectorMath
 		transform.LookAt(transform.position + vector);
 	}
 	
+	public static void AxisAlignTo(Transform transform, Rigidbody rb)
+	{
+		AxisAlignTo(transform, rb.position - transform.position);
+	}
 }
