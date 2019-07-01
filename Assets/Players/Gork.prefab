@@ -167,6 +167,8 @@ GameObject:
   - component: {fileID: 732548675568301390}
   - component: {fileID: 1198959069}
   - component: {fileID: 1325763144624846294}
+  - component: {fileID: 14743940207327305}
+  - component: {fileID: 66782864673646573}
   m_Layer: 0
   m_Name: Gork
   m_TagString: player
@@ -222,6 +224,8 @@ MonoBehaviour:
   speed: 10
   jumpHeight: 0
   airMovespeedPenalty: 0.9
+  throwMovespeedPenalty: 0.9
+  isThrown: 0
   rb: {fileID: 0}
   anim: {fileID: 794387205481408661}
   maxGhostjumpDelay: 0.2
@@ -232,13 +236,8 @@ MonoBehaviour:
   throwBoxStrength: 15
   throwUpwardsAngle: 50
   throwBoxUpwardsAngle: 60
-  throwIndicatorCount: 20
-  throwIndicatorDetail: 0.075
   pushedObj: {fileID: 0}
-  landingIndicatorPrefab: {fileID: 2026274124034000670, guid: 15f652aa94f69e44dbf8fad97a16aa46,
-    type: 3}
   heldObjectSlot: {fileID: 8013065875973554416}
-  throwIndicator: {fileID: 4760817595200429948}
 --- !u!65 &732548675568301390
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -365,6 +364,35 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &14743940207327305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5338642040318428382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dad571bdd96ca2149b35564bc9397116, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &66782864673646573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5338642040318428382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 692e0f0a47648004d99104060013a8a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  throwIndicatorCount: 20
+  throwIndicatorDetail: 0.08
+  landingIndicatorPrefab: {fileID: 2026274124034000670, guid: 15f652aa94f69e44dbf8fad97a16aa46,
+    type: 3}
+  lineRenderer: {fileID: 1460250407380861541}
 --- !u!1 &8013065875973554416
 GameObject:
   m_ObjectHideFlags: 0
@@ -522,11 +550,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gork
       objectReference: {fileID: 0}
-    - target: {fileID: -6057140222963153312, guid: 033946e41c2cefa4f81d4f57609d266f,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 6756b8e56b7a1754bb7a05273cd72e6c, type: 2}
     - target: {fileID: -4216859302048453862, guid: 033946e41c2cefa4f81d4f57609d266f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -582,6 +605,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -6057140222963153312, guid: 033946e41c2cefa4f81d4f57609d266f,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 6756b8e56b7a1754bb7a05273cd72e6c, type: 2}
     - target: {fileID: 992518378115029572, guid: 033946e41c2cefa4f81d4f57609d266f,
         type: 3}
       propertyPath: m_Materials.Array.data[0]

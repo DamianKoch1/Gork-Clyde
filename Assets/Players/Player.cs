@@ -44,7 +44,6 @@ public abstract class Player : MonoBehaviour
     protected virtual void Start()
     {
         InitializeVariables();
-        StartCoroutine(CheckSpawnPoint());
     }
 
 
@@ -85,13 +84,11 @@ public abstract class Player : MonoBehaviour
         //debug
         if (Input.GetButtonDown("DebugFast"))
         {
-            speed *= 2;
-            jumpHeight *= 2;
+            Time.timeScale *= 2;
         }
         if (Input.GetButtonDown("DebugSlow"))
         {
-            speed /= 2;
-            jumpHeight /= 2;
+            Time.timeScale /= 2;
         }
 
         if (Input.GetButton("DebugFly"))
@@ -214,32 +211,7 @@ public abstract class Player : MonoBehaviour
     }
 
 
-    public virtual void Respawn()
-    {
-        ResetMotion();
-        rb.velocity = Vector3.zero;
-    }
-
-
-    public IEnumerator CheckSpawnPoint()
-    {
-        SetSpawnPoint();
-        while (true)
-        {
-            if (wasGrounded)
-            {
-                //prevent spawning too close to edge
-                if (Physics.Raycast(rb.position, -Vector3.up,
-                2f, Physics.AllLayers, QueryTriggerInteraction.Ignore))
-                {
-                    SetSpawnPoint();
-                }
-            }
-            yield return new WaitForSeconds(0.5f);
-        }
-    }
-
-    protected abstract void SetSpawnPoint();
+  
 
     private void MovePlayer()
     {
