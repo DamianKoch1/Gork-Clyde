@@ -30,7 +30,13 @@ public class Clyde : Player
         if (!groundedInfo.transform) return;
         var _gork = groundedInfo.transform.GetComponent<Gork>();
         if (!_gork) return;
-        _gork.throwing.PickUp(gameObject);
+        if (_gork.PickUp(gameObject)) return;
+
+        Vector3 force = _gork.GetComponent<Rigidbody>().position - GetComponent<Rigidbody>().position;
+        force.y = 0;
+        force.Normalize();
+        force += Vector3.up;
+        rb.AddForce(force * 5, ForceMode.VelocityChange);
     }
 
     public IEnumerator DecreasePickupCooldown()

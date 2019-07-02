@@ -1,14 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static VectorMath;
 
-[RequireComponent(typeof(Rigidbody))]
-[RequireComponent(typeof(Throwing))]
 public class Gork : Player
 {
-	[HideInInspector]
-	public Throwing throwing;	
+	private List<GameObject> carryableObjects = new List<GameObject>();
+
+	[SerializeField]
+	private float throwStrength = 12f;
+	
+	[SerializeField]
+	private float throwBoxStrength = 15f;
+
+	[SerializeField]
+	[UnityEngine.Range(0, 90)]
+	private float throwUpwardsAngle = 50f;
+	
+	[SerializeField]
+	[UnityEngine.Range(0, 90)]
+	private float throwBoxUpwardsAngle = 60f;
+
+	private ThrowIndicator throwIndicator;	
 
 	private FixedJoint fixedJoint;
 
@@ -16,6 +28,11 @@ public class Gork : Player
 	public GameObject pushedObj;
 
 	private bool pushing;
+
+	[SerializeField]
+	private GameObject heldObjectSlot;
+	
+	
 	
 	public static string XAXIS = "GorkHorizontal",
 	ZAXIS = "GorkVertical",
@@ -27,8 +44,7 @@ public class Gork : Player
 	{
 		base.Start();
 		InitializeInputs(XAXIS, ZAXIS, JUMPBUTTON);
-		throwing = GetComponent<Throwing>();
-		throwing.anim = anim;
+		throwIndicator = GetComponent<ThrowIndicator>();
 	}
 
 	protected override void Update()
@@ -38,7 +54,18 @@ public class Gork : Player
 		{
 			CheckIfStillPushing();
 		}
+
+		if (IsCarryingObject())
+		{
+			throwIndicator.UpdateIndicator(ThrowVector(), HeldObject());
+		}
+		else
+		{
+			throwIndicator.DestroyIndicator();
+		}
 	}
+
+	
 
 	private void CheckIfStillPushing()
 	{
@@ -58,58 +85,94 @@ public class Gork : Player
 
 		if (Input.GetButtonDown(GORKINTERACT))
 		{
-			Interact();
+			if (pushing)
+			{
+				StopPushing();
+			}
+			else if (IsCarryingObject())
+			{
+				Throw(HeldObject(), ThrowVector());
+			}
+			else if (carryableObjects.Count > 0)
+			{
+				PickUp(carryableObjects[0]);
+			}
 		}
 
 		if (Input.GetButtonUp(GORKINTERACT))
 		{
 			if (pushedObj)
 			{
-				if (!throwing.IsCarryingObject())
+				if (!IsCarryingObject())
 				{
 					StartPushing();
 				}
 			}
 		}
+
+		if (Input.GetButtonDown(Clyde.JUMPBUTTON))
+		{
+			if (IsCarryingObject())
+			{
+				var clyde = HeldObject().GetComponent<Clyde>();
+				if (clyde)
+				{
+					clyde.CancelThrow();
+					throwIndicator.DestroyIndicator();
+				}
+			}
+		}
 	}
 
-	private void Interact()
+
+	private bool IsCarryingObject()
 	{
-		if (pushing)
-		{
-			StopPushing();
-		}
-		else
-		{
-			throwing.Interact();
-		}
+		if (heldObjectSlot.transform.childCount > 0) return true;
+		return false;
 	}
-	
-	
+
+	private GameObject HeldObject()
+	{
+		if (!IsCarryingObject()) return null;
+		return heldObjectSlot.transform.GetChild(0).gameObject;
+	}
+
 	private void StartPushing()
 	{
-		if (throwing.IsCarryingObject()) return;
+		if (IsCarryingObject()) return;
 		if (pushing) return;
 		if (fixedJoint) return;
 
         anim.SetBool("push", true);
 		pushing = true;
 		Rigidbody objectRb = pushedObj.GetComponent<Rigidbody>();
-		AxisAlignTo(transform, objectRb);
-		ResetMotion();
-		setMotion = SetMotionSingleAxis;
 		pushedObj.layer = 2;
+		Vector3 direction = objectRb.position - rb.position;
+		AxisAlignTo(direction);
+		fixedJoint = gameObject.AddComponent<FixedJoint>();
+		fixedJoint.connectedBody = objectRb;
+		fixedJoint.breakForce = 800f; //TODO maybe use rb mass instead of hardcoding
 		pushedObj.GetComponent<PushableBig>().isPushed = true;
-		AddFixedJoint(objectRb);
 	}
 
-	private void AddFixedJoint(Rigidbody target)
+
+	private void AxisAlignTo(Vector3 vector)
 	{
-		fixedJoint = gameObject.AddComponent<FixedJoint>();
-		fixedJoint.connectedBody = target;
-		fixedJoint.breakForce = 800f; //TODO maybe use rb mass instead of hardcoding
+		var rotatedVector = ApplyCamRotation(vector);
+		vector.y = 0;
+		if (Mathf.Abs(vector.x) > Mathf.Abs(vector.z))
+		{
+			vector.z = 0;
+		}
+		else
+		{
+			vector.x = 0;
+		}
+		transform.LookAt(rb.position + vector);
+		ResetMotion();
+		setMotion = SetMotionSingleAxis;
 	}
-	
+
 	private void StopPushing()
 	{
 		pushedObj.layer = 0;
@@ -119,9 +182,8 @@ public class Gork : Player
 		}
 
 		anim.SetBool("push", false);
-		pushing = false;
-		ResetMotion();
 		setMotion = SetMotionDefault;
+		pushing = false;
 		pushedObj.GetComponent<PushableBig>().isPushed = false;
 		pushedObj = null;
 	}
@@ -130,8 +192,8 @@ public class Gork : Player
 	private void SetMotionSingleAxis()
 	{
 		var forward = transform.forward;
-		var camRotatedForward = ApplyCameraRotation(forward);
-		if (!AlignsToXAxis(camRotatedForward))
+		var camRotatedForward = ApplyCamRotation(forward);
+		if (Mathf.Abs(camRotatedForward.z) > Mathf.Abs(camRotatedForward.x))
 		{
 			motion = forward * Input.GetAxis(zAxis) * speed;
 			if (InverseVerticalPushControls(forward, camRotatedForward))
@@ -160,29 +222,113 @@ public class Gork : Player
 
 	private bool InverseVerticalPushControls(Vector3 forward, Vector3 camRotatedForward)
 	{
-		if (AlignsToXAxis(camRotatedForward)) return false;
+		if (Mathf.Abs(camRotatedForward.z) < Mathf.Abs(camRotatedForward.x)) return false;
 		if (camRotatedForward.z > 0)
 		{
-			if (AlignsToXAxis(forward)) return true;
+			if (Mathf.Abs(forward.x) > Mathf.Abs(forward.z)) return true;
 		}
 		else
 		{
-			if (!AlignsToXAxis(forward)) return true;
+			if (Mathf.Abs(forward.z) > Mathf.Abs(forward.x)) return true;
 		}
 		return false;
 	}
 
 	private bool InverseHorizontalPushControls(Vector3 forward, Vector3 camRotatedForward)
 	{
-		if (!AlignsToXAxis(camRotatedForward)) return false;
+		if (Mathf.Abs(camRotatedForward.x) < Mathf.Abs(camRotatedForward.z)) return false;
 		if (camRotatedForward.x > 0)
 		{
-			if (!AlignsToXAxis(forward)) return true;
+			if (Mathf.Abs(forward.z) > Mathf.Abs(forward.x)) return true;
 		}
 		else
 		{
-			if (AlignsToXAxis(forward)) return true;
+			if (Mathf.Abs(forward.x) > Mathf.Abs(forward.z)) return true;
 		}
 		return false;
+	}
+
+
+	private void OnTriggerEnter(Collider other)
+	{
+		if (other.isTrigger) return;
+		if (carryableObjects.Contains(other.gameObject)) return;
+		if (!other.GetComponent<Carryable>()) return;
+
+		carryableObjects.Add(other.gameObject);
+	}
+
+	private void OnTriggerExit(Collider other)
+	{
+		if (other.isTrigger) return;
+		if (!carryableObjects.Contains(other.gameObject)) return;
+
+		carryableObjects.Remove(other.gameObject);
+	}
+
+	public bool PickUp(GameObject obj)
+	{
+        if (IsCarryingObject()) return false;
+		var clyde = obj.GetComponent<Clyde>();
+		if (clyde)
+		{
+			if (clyde.inAirstream) return false;
+			clyde.canMove = false;
+			clyde.anim.SetTrigger("pickedUp");
+		}
+
+		anim.SetTrigger("pickUp");
+		Physics.IgnoreCollision(GetComponent<Collider>(), obj.GetComponent<Collider>());
+		obj.transform.SetParent(heldObjectSlot.transform, true);
+		obj.transform.position = heldObjectSlot.transform.position;
+		obj.transform.LookAt(obj.transform.position + transform.forward);
+		Rigidbody objectRb = obj.GetComponent<Rigidbody>();
+		objectRb.isKinematic = true;
+        return true;
+	}
+
+	private void Throw(GameObject obj, Vector3 vector)
+	{
+		var clyde = obj.GetComponent<Clyde>();
+		if (clyde)
+		{
+			clyde.ResetMotion();
+			clyde.canMove = true;
+			clyde.anim.SetTrigger("thrown");
+			clyde.anim.ResetTrigger("land");
+            clyde.RestartPickupCooldown();
+            clyde.ghostjumpTimer = 0;
+            clyde.isThrown = true;
+		}
+
+		GetComponent<AudioSource>().Play();
+		anim.SetTrigger("throw");
+		obj.transform.SetParent(null, true);
+		Rigidbody objectRb = obj.GetComponent<Rigidbody>();
+		objectRb.velocity = Vector3.zero;
+		objectRb.isKinematic = false;
+		objectRb.AddForce(vector, ForceMode.VelocityChange);
+		Physics.IgnoreCollision(GetComponent<Collider>(), obj.GetComponent<Collider>(), false);
+		throwIndicator.DestroyIndicator();
+	}
+
+	private Vector3 ThrowVector()
+	{
+		Vector3 throwVector = transform.forward;
+		float angle = throwUpwardsAngle;
+		if (!HeldObject().GetComponent<Clyde>())
+		{
+			angle = throwBoxUpwardsAngle;
+		}
+		throwVector = Quaternion.AngleAxis(angle, -transform.right) * throwVector;
+
+		float throwStr = throwStrength;
+		if (!HeldObject().GetComponent<Clyde>())
+		{
+			throwStr = throwBoxStrength;
+		}
+		throwVector *= throwStr;
+		
+		return throwVector;
 	}
 }

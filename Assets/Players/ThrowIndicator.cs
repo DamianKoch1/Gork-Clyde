@@ -33,18 +33,23 @@ public class ThrowIndicator : MonoBehaviour
         for (int i = 0; i < lineRenderer.positionCount; i++)
         {
             var pointPosition = PointPosAtTime(i * throwIndicatorDetail);
-            if (HitGround(i))
+
+            if (i > 3)
             {
-                DestroyIndicator(i+1, false);
-                lineRenderer.SetPosition(i, hit.point);
-                if (!landingIndicator)
+                if (HitGround(i))
                 {
-                    landingIndicator = Instantiate(landingIndicatorPrefab);
+                    DestroyIndicator(i+1, false);
+                    lineRenderer.SetPosition(i, hit.point);
+                    if (!landingIndicator)
+                    {
+                        landingIndicator = Instantiate(landingIndicatorPrefab);
+                    }
+                    landingIndicator.transform.up = hit.normal;
+                    landingIndicator.transform.position = hit.point + landingIndicator.transform.up * 0.1f;
+                    return;
                 }
-                landingIndicator.transform.up = hit.normal;
-                landingIndicator.transform.position = hit.point + landingIndicator.transform.up * 0.1f;
-                return;
             }
+			
             lineRenderer.SetPosition(i, pointPosition);
         }
     }
