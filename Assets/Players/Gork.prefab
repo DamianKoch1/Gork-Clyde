@@ -898,11 +898,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gork
       objectReference: {fileID: 0}
-    - target: {fileID: -6057140222963153312, guid: 033946e41c2cefa4f81d4f57609d266f,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 6756b8e56b7a1754bb7a05273cd72e6c, type: 2}
     - target: {fileID: -4216859302048453862, guid: 033946e41c2cefa4f81d4f57609d266f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -958,6 +953,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -6057140222963153312, guid: 033946e41c2cefa4f81d4f57609d266f,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 6756b8e56b7a1754bb7a05273cd72e6c, type: 2}
     - target: {fileID: 992518378115029572, guid: 033946e41c2cefa4f81d4f57609d266f,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -966,32 +966,32 @@ PrefabInstance:
     - target: {fileID: 5887908791395795996, guid: 033946e41c2cefa4f81d4f57609d266f,
         type: 3}
       propertyPath: m_AABB.m_Center.x
-      value: 0.00000050430754
+      value: -0.0000034337645
       objectReference: {fileID: 0}
     - target: {fileID: 5887908791395795996, guid: 033946e41c2cefa4f81d4f57609d266f,
         type: 3}
       propertyPath: m_AABB.m_Center.y
-      value: 0.009991398
+      value: 0.010352623
       objectReference: {fileID: 0}
     - target: {fileID: 5887908791395795996, guid: 033946e41c2cefa4f81d4f57609d266f,
         type: 3}
       propertyPath: m_AABB.m_Center.z
-      value: -0.0004799047
+      value: -0.0013997578
       objectReference: {fileID: 0}
     - target: {fileID: 5887908791395795996, guid: 033946e41c2cefa4f81d4f57609d266f,
         type: 3}
       propertyPath: m_AABB.m_Extent.x
-      value: 0.0076795947
+      value: 0.0077007078
       objectReference: {fileID: 0}
     - target: {fileID: 5887908791395795996, guid: 033946e41c2cefa4f81d4f57609d266f,
         type: 3}
       propertyPath: m_AABB.m_Extent.y
-      value: 0.010213132
+      value: 0.009867067
       objectReference: {fileID: 0}
     - target: {fileID: 5887908791395795996, guid: 033946e41c2cefa4f81d4f57609d266f,
         type: 3}
       propertyPath: m_AABB.m_Extent.z
-      value: 0.010995202
+      value: 0.010362121
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 033946e41c2cefa4f81d4f57609d266f, type: 3}
