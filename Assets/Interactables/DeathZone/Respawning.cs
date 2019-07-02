@@ -9,6 +9,9 @@ public class Respawning : MonoBehaviour
     private Vector3 spawnpoint;
     private Rigidbody rb;
 
+    [SerializeField]
+    private bool dynamicSpawnpoint = true;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -29,7 +32,7 @@ public class Respawning : MonoBehaviour
     public IEnumerator CheckSpawnPoint()
     {
         SetSpawnPoint();
-        while (true)
+        while (dynamicSpawnpoint)
         {
             if (Physics.Raycast(rb.position, -Vector3.up,
             2f, Physics.AllLayers, QueryTriggerInteraction.Ignore))
