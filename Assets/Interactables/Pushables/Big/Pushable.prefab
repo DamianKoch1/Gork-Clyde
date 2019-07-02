@@ -254,6 +254,7 @@ GameObject:
   - component: {fileID: 8962367203664091139}
   - component: {fileID: 4395781087387056150}
   - component: {fileID: 7341662568781150830}
+  - component: {fileID: 7098303819947076371}
   m_Layer: 0
   m_Name: Pushable
   m_TagString: pushable
@@ -378,6 +379,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.75
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7098303819947076371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6965418541269022097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dad571bdd96ca2149b35564bc9397116, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dynamicSpawnpoint: 0
 --- !u!1001 &3300961644908191363
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -492,6 +506,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6965418541269022108}
     m_Modifications:
+    - target: {fileID: 7649166394788936376, guid: d6c3d229fe2a8e64c963de12722c7f68,
+        type: 3}
+      propertyPath: m_Name
+      value: DustPushVFX
+      objectReference: {fileID: 0}
     - target: {fileID: 5577131024413159786, guid: d6c3d229fe2a8e64c963de12722c7f68,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -562,11 +581,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.8627397
       objectReference: {fileID: 0}
-    - target: {fileID: 7649166394788936376, guid: d6c3d229fe2a8e64c963de12722c7f68,
-        type: 3}
-      propertyPath: m_Name
-      value: DustPushVFX
-      objectReference: {fileID: 0}
     - target: {fileID: 1979026611529549593, guid: d6c3d229fe2a8e64c963de12722c7f68,
         type: 3}
       propertyPath: looping
@@ -612,6 +626,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6965418541269022108}
     m_Modifications:
+    - target: {fileID: -927199367670048503, guid: 9610431aa02cd2648950afc46b2e0d7b,
+        type: 3}
+      propertyPath: m_Name
+      value: PushableObjectLargeMesh
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 9610431aa02cd2648950afc46b2e0d7b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -681,11 +700,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.4118712
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 9610431aa02cd2648950afc46b2e0d7b,
-        type: 3}
-      propertyPath: m_Name
-      value: PushableObjectLargeMesh
       objectReference: {fileID: 0}
     - target: {fileID: -2620152240041971189, guid: 9610431aa02cd2648950afc46b2e0d7b,
         type: 3}
