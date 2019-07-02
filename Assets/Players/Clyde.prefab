@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8373350507250307866}
   - component: {fileID: 2553107321341475815}
   - component: {fileID: 5348649067866839038}
+  - component: {fileID: 4078991665789512561}
   m_Layer: 0
   m_Name: Clyde
   m_TagString: player
@@ -64,8 +65,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  jumpHeight: 7.5
-  airMovespeedPenalty: 0.9
+  jumpHeight: 8
+  airMovespeedPenalty: 0.85
+  throwMovespeedPenalty: 0.75
+  isThrown: 0
   rb: {fileID: 0}
   anim: {fileID: 2447535924106207425}
   maxGhostjumpDelay: 0.2
@@ -113,6 +116,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e74ab12b5ddbab419d06aa9a9d1b7bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4078991665789512561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3874808357865764670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dad571bdd96ca2149b35564bc9397116, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &722779343374689953
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -125,6 +140,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ClideMesh0
       objectReference: {fileID: 0}
+    - target: {fileID: -6057140222963153312, guid: b079d4711bcc87d48874a20d04fe4bec,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: e82d060fff29fb942a0a11162db63b83, type: 2}
     - target: {fileID: -4216859302048453862, guid: b079d4711bcc87d48874a20d04fe4bec,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -195,11 +215,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.6
       objectReference: {fileID: 0}
-    - target: {fileID: -6057140222963153312, guid: b079d4711bcc87d48874a20d04fe4bec,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: e82d060fff29fb942a0a11162db63b83, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b079d4711bcc87d48874a20d04fe4bec, type: 3}
 --- !u!4 &5727847779444657595 stripped

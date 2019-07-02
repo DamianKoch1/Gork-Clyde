@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovingPlatform : MonoBehaviour
+public class MovingPlatform : MonoBehaviour, IActivatable
 {
     [SerializeField]
     private GameObject start, target, platform;
@@ -52,12 +52,12 @@ public class MovingPlatform : MonoBehaviour
     }
 
 
-    public void PlatformBlocked()
+    public void Blocked()
     {
         blocked = true;
     }
 
-    public void PlatformUnblocked()
+    public void Unblocked()
     {
         blocked = false;
     }
