@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class Airstream : MonoBehaviour
+public class Airstream : MonoBehaviour, IActivatable
 {
     private Vector3 direction;
     [SerializeField]
@@ -61,6 +62,16 @@ public class Airstream : MonoBehaviour
     }
 
     public void OnButtonDeactivated()
+    {
+        ToggleAirstream();
+    }
+
+    public void OnPlateActivated()
+    {
+        ToggleAirstream();
+    }
+
+    public void OnPlateExited()
     {
         ToggleAirstream();
     }
