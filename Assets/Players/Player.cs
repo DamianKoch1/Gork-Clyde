@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static VectorMath;
 
 public abstract class Player : MonoBehaviour
 {
@@ -21,6 +20,7 @@ public abstract class Player : MonoBehaviour
     public Rigidbody rb;
     protected string xAxis, zAxis, jumpButton;
     public Animator anim;
+    private Camera cam;
 
     //can jump while timer > 0, set to max when grounded, decreases otherwise
     [SerializeField]
@@ -63,6 +63,7 @@ public abstract class Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         walkParticles = GetComponentInChildren<ParticleSystem>();
+        cam = Camera.main;
         setMotion = SetMotionDefault;
     }
 
@@ -137,7 +138,7 @@ public abstract class Player : MonoBehaviour
             motion = motion.normalized;
         }
         motion *= moveSpeed;
-        motion = ApplyCameraRotation(motion);
+        motion = ApplyCamRotation(motion);
         LookForward();
     }
 
@@ -209,6 +210,9 @@ public abstract class Player : MonoBehaviour
         }
     }
 
+
+  
+
     private void MovePlayer()
     {
         if (!canMove) return;
@@ -268,5 +272,15 @@ public abstract class Player : MonoBehaviour
         motion = Vector3.zero;
     }
 
-  
+    protected Vector3 ApplyCamRotation(Vector3 vector)
+    {
+        Vector3 camForward = cam.transform.forward;
+        camForward.y = 0;
+        camForward.Normalize();
+        Vector3 camRight = cam.transform.right;
+        camRight.y = 0;
+        camRight.Normalize();
+        Vector3 rotatedVector = vector.x * camRight + vector.y * Vector3.up + vector.z * camForward;
+        return rotatedVector;
+    }
 }
