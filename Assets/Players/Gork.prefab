@@ -169,6 +169,7 @@ GameObject:
   - component: {fileID: 1325763144624846294}
   - component: {fileID: 14743940207327305}
   - component: {fileID: 66782864673646573}
+  - component: {fileID: 1694302426540141905}
   m_Layer: 0
   m_Name: Gork
   m_TagString: player
@@ -232,12 +233,8 @@ MonoBehaviour:
   ghostjumpTimer: 0
   canMove: 1
   inAirstream: 0
-  throwStrength: 12
-  throwBoxStrength: 15
-  throwUpwardsAngle: 50
-  throwBoxUpwardsAngle: 60
+  throwing: {fileID: 0}
   pushedObj: {fileID: 0}
-  heldObjectSlot: {fileID: 8013065875973554416}
 --- !u!65 &732548675568301390
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -393,6 +390,23 @@ MonoBehaviour:
   landingIndicatorPrefab: {fileID: 2026274124034000670, guid: 15f652aa94f69e44dbf8fad97a16aa46,
     type: 3}
   lineRenderer: {fileID: 1460250407380861541}
+--- !u!114 &1694302426540141905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5338642040318428382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed7888e7ee5247b4cbf8e62281599fd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  throwStrength: 16
+  throwBoxStrength: 16
+  throwUpwardsAngle: 50
+  throwBoxUpwardsAngle: 45
+  heldObjectSlot: {fileID: 8013065875973554416}
 --- !u!1 &8013065875973554416
 GameObject:
   m_ObjectHideFlags: 0
