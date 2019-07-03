@@ -6,8 +6,7 @@ public static class VectorMath
 {
 	public static bool AlignsToXAxis(Vector3 vector)
 	{
-		if (Mathf.Abs(vector.x) > Mathf.Abs(vector.z)) return true;
-		return false;
+		return (Mathf.Abs(vector.x) > Mathf.Abs(vector.z));
 	}
 	
 	public static Vector3 ApplyCameraRotation(Vector3 vector)
