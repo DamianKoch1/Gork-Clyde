@@ -373,6 +373,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dad571bdd96ca2149b35564bc9397116, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dynamicSpawnpoint: 1
 --- !u!114 &66782864673646573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -402,6 +403,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed7888e7ee5247b4cbf8e62281599fd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anim: {fileID: 0}
   throwStrength: 16
   throwBoxStrength: 16
   throwUpwardsAngle: 50
@@ -624,11 +626,6 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 6756b8e56b7a1754bb7a05273cd72e6c, type: 2}
-    - target: {fileID: 992518378115029572, guid: 033946e41c2cefa4f81d4f57609d266f,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 86b17eaf3940fb649913b1490bafb3d6, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 033946e41c2cefa4f81d4f57609d266f, type: 3}
 --- !u!4 &7317286398438999535 stripped
