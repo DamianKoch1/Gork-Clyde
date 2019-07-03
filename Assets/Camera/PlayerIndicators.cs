@@ -72,14 +72,11 @@ public class PlayerIndicators : MonoBehaviour
         rotationMultiplier.x = Mathf.Clamp(rotationMultiplier.x, 0, 1);
         rotationMultiplier.y = Mathf.Clamp(rotationMultiplier.y, 0, 1);
         float zRotationAngles = 0;
-        if (rotationMultiplier.x == 0 || rotationMultiplier.y == 1)
-        {
-            zRotationAngles = -45 - rotationMultiplier.x * 90 - rotationMultiplier.y * 90;
-        }
-        else
-        {
-            zRotationAngles = -45 + rotationMultiplier.x * 90 + rotationMultiplier.y * 90;
-        }
+
+        zRotationAngles = (rotationMultiplier.x == 0 || rotationMultiplier.y == 1)
+            ? -45 - rotationMultiplier.x * 90 - rotationMultiplier.y * 90
+            : -45 + rotationMultiplier.x * 90 + rotationMultiplier.y * 90;
+       
 
         indicatorRect.eulerAngles = new Vector3(0, 0, zRotationAngles);
 
