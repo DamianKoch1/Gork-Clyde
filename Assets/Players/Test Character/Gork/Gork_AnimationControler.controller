@@ -349,17 +349,17 @@ AnimatorStateMachine:
     m_Position: {x: 330, y: 30, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 983577373966732844}
-    m_Position: {x: 320, y: 230, z: 0}
+    m_Position: {x: 330, y: 240, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -8134281465671233271}
-    m_Position: {x: 590, y: 230, z: 0}
+    m_Position: {x: 560, y: 240, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
-  m_AnyStatePosition: {x: 50, y: 20, z: 0}
-  m_EntryPosition: {x: 50, y: 120, z: 0}
+  m_AnyStatePosition: {x: 140, y: 40, z: 0}
+  m_EntryPosition: {x: 140, y: 120, z: 0}
   m_ExitPosition: {x: 350, y: -70, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: -8094672917640165575}
@@ -561,7 +561,7 @@ AnimatorController:
   - serializedVersion: 5
     m_Name: Arm OverrideLayer
     m_StateMachine: {fileID: -4115308837306928408}
-    m_Mask: {fileID: 0}
+    m_Mask: {fileID: 31900000, guid: 9666669ebc36a1f49a18336f59060d05, type: 2}
     m_Motions: []
     m_Behaviours: []
     m_BlendingMode: 0
