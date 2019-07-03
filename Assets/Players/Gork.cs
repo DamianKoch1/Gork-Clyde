@@ -112,18 +112,22 @@ public class Gork : Player
 	
 	private void StopPushing()
 	{
-		pushedObj.layer = 0;
 		if (fixedJoint)
 		{
 			Destroy(fixedJoint);
+		}
+
+		if (pushedObj)
+		{
+			pushedObj.layer = 0;
+			pushedObj.GetComponent<PushableBig>().isPushed = false;
+			pushedObj = null;
 		}
 
 		anim.SetBool("push", false);
 		pushing = false;
 		ResetMotion();
 		setMotion = SetMotionDefault;
-		pushedObj.GetComponent<PushableBig>().isPushed = false;
-		pushedObj = null;
 	}
 
 
