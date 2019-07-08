@@ -14,14 +14,8 @@ public class AnimateMaterialOffset : MonoBehaviour
     void Start()
     {
         var renderer = GetComponent<Renderer>();
-        if (renderer)
-        {
-            mat = GetComponent<Renderer>().material;
-        }
-        else
-        {
-            mat = GetComponent<Image>().material;
-        }
+
+        mat = renderer ? GetComponent<Renderer>().material : GetComponent<Image>().material;
     }
 
     // Update is called once per frame

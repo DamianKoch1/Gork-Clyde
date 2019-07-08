@@ -9,6 +9,9 @@ public class Airstream : MonoBehaviour, IActivatable
     [SerializeField]
     private float strength;
 
+    [SerializeField]
+    private ParticleSystem vfx1, vfx2;
+
 
 
     private void OnTriggerStay(Collider other)
@@ -78,16 +81,17 @@ public class Airstream : MonoBehaviour, IActivatable
 
     private void ToggleAirstream()
     {
-        ParticleSystem particles = transform.GetChild(0).GetComponent<ParticleSystem>();
         MeshRenderer mr = GetComponent<MeshRenderer>();
         BoxCollider bc = GetComponent<BoxCollider>();
         if (mr.enabled)
         {
-            particles.Stop();
+            vfx1.Stop();
+            vfx2.Stop();
         }
         else
         {
-            particles.Play();
+            vfx1.Play();
+            vfx2.Play();
         }
         mr.enabled = !mr.enabled;
         bc.enabled = !bc.enabled;
