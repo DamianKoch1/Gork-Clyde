@@ -620,6 +620,7 @@ GameObject:
   - component: {fileID: 1825495231}
   - component: {fileID: 1825495230}
   - component: {fileID: 1825495233}
+  - component: {fileID: 1825495234}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -690,15 +691,15 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1825495233}
-        m_MethodName: UnloadScene
-        m_Mode: 1
+      - m_Target: {fileID: 1825495234}
+        m_MethodName: LoadNextPanel
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Prototype Level
+          m_StringArgument: Lv1 Intro 4
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1825495233}
@@ -761,6 +762,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 63e4fe3f4bbf1b6468731b4ed25fe1e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1825495234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1825495228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d7d540a520ce3b4fbf608ed3ae93dab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2007414546
