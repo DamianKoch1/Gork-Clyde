@@ -47,6 +47,7 @@ public class ThrowIndicator : MonoBehaviour
             }
             lineRenderer.SetPosition(i, pointPosition);
         }
+        DestroyLandingIndicator();
     }
 
     private bool HitGround(int atIndex)
@@ -64,10 +65,15 @@ public class ThrowIndicator : MonoBehaviour
         lineRenderer.positionCount = from;
         if (destroyLandingIndicator)
         {
-            if (landingIndicator)
-            {
-                Destroy(landingIndicator);
-            }
+            DestroyLandingIndicator();
+        }
+    }
+
+    private void DestroyLandingIndicator()
+    {
+        if (landingIndicator)
+        {
+            Destroy(landingIndicator);
         }
     }
     

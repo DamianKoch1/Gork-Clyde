@@ -15,8 +15,7 @@ public class KeepAudioLoaded : MonoBehaviour
 
     private bool ExistsAlready()
     {
-        if (GameObject.FindGameObjectsWithTag(gameObject.tag).Length > 1) return true;
-        return false;
+        return (GameObject.FindGameObjectsWithTag(gameObject.tag).Length > 1);
     }
 
 }

@@ -12,18 +12,22 @@
         </e>
         <e p="Camera" t="Include">
           <e p="CameraBehaviour.cs" t="Include" />
+          <e p="Fade.cs" t="Include" />
+          <e p="IngameUI.cs" t="Include" />
           <e p="PlayerIndicators.cs" t="Include" />
           <e p="PlayerMiddle.cs" t="Include" />
-        </e>
-        <e p="Debug" t="Include">
-          <e p="RecordControllerInput.cs" t="Include" />
+          <e p="Temporary Camera" t="Include">
+            <e p="TempCamera.cs" t="Include" />
+            <e p="TempCameraActivator.cs" t="Include" />
+            <e p="TempCameraDeactivator.cs" t="Include" />
+          </e>
         </e>
         <e p="Editor" t="Include">
           <e p="ObjExporter.cs" t="Include" />
         </e>
         <e p="Environment" t="Include">
           <e p="VFX" t="Include">
-            <e p="GlowSphere2VFX" t="Include">
+            <e p="Glow2VFX" t="Include">
               <e p="ScrollScript.cs" t="Include" />
             </e>
           </e>
@@ -36,7 +40,7 @@
           </e>
           <e p="DeathZone" t="Include">
             <e p="DeathZone.cs" t="Include" />
-            <e p="Spawnpoint.cs" t="Include" />
+            <e p="Respawning.cs" t="Include" />
           </e>
           <e p="Goal" t="Include">
             <e p="Goal.cs" t="Include" />
@@ -47,12 +51,12 @@
           </e>
           <e p="Pushables" t="Include">
             <e p="Big" t="Include">
-              <e p="BigPushable.cs" t="Include" />
+              <e p="PushableBig.cs" t="Include" />
             </e>
             <e p="Carryable.cs" t="Include" />
             <e p="Pushable.cs" t="Include" />
             <e p="Small" t="Include">
-              <e p="SmallPushable.cs" t="Include" />
+              <e p="PushableSmall.cs" t="Include" />
             </e>
           </e>
           <e p="Triggers" t="Include">
@@ -69,6 +73,8 @@
           <e p="Clyde.cs" t="Include" />
           <e p="Gork.cs" t="Include" />
           <e p="Player.cs" t="Include" />
+          <e p="ThrowIndicator.cs" t="Include" />
+          <e p="Throwing.cs" t="Include" />
         </e>
         <e p="ProCore" t="Include">
           <e p="ProBuilder" t="Include">
@@ -194,13 +200,57 @@
             </e>
           </e>
         </e>
+        <e p="SplineMesh" t="Include">
+          <e p="Doc.txt" t="Include" />
+          <e p="Scripts" t="Include">
+            <e p="Bezier" t="Include">
+              <e p="CubicBezierCurve.cs" t="Include" />
+              <e p="Spline.cs" t="Include" />
+              <e p="SplineNode.cs" t="Include" />
+              <e p="SplineSample.cs" t="Include" />
+              <e p="SplineSmoother.cs" t="Include" />
+            </e>
+            <e p="Editor" t="Include">
+              <e p="SplineEditor.cs" t="Include" />
+              <e p="SplineExtrusionEditor.cs" t="Include" />
+            </e>
+            <e p="Example" t="Include">
+              <e p="ExampleContortAlong.cs" t="Include" />
+              <e p="ExampleFollowSpline.cs" t="Include" />
+              <e p="ExampleGrowingRoot.cs" t="Include" />
+              <e p="ExampleSower.cs" t="Include" />
+              <e p="ExampleTentacle.cs" t="Include" />
+              <e p="ExampleTrack.cs" t="Include" />
+              <e p="RopeBuilder.cs" t="Include" />
+            </e>
+            <e p="MeshProcessing" t="Include">
+              <e p="ExtrusionSegment.cs" t="Include" />
+              <e p="MeshBender.cs" t="Include" />
+              <e p="MeshVertex.cs" t="Include" />
+              <e p="SourceMesh.cs" t="Include" />
+              <e p="SplineExtrusion.cs" t="Include" />
+              <e p="SplineMeshTiling.cs" t="Include" />
+            </e>
+            <e p="Utils" t="Include">
+              <e p="CameraUtility.cs" t="Include" />
+              <e p="MeshUtility.cs" t="Include" />
+              <e p="UOUtility.cs" t="Include" />
+            </e>
+          </e>
+        </e>
         <e p="UI" t="Include">
+          <e p="LoadingScreen.cs" t="Include" />
           <e p="MenuButton.cs" t="Include" />
           <e p="Menus" t="Include">
+            <e p="AnimateMaterialOffset.cs" t="Include" />
             <e p="CharacterSelection.cs" t="Include" />
             <e p="GameMenu.cs" t="Include" />
             <e p="OptionsMenu.cs" t="Include" />
           </e>
+        </e>
+        <e p="Utility" t="Include">
+          <e p="IActivatable.cs" t="Include" />
+          <e p="VectorMath.cs" t="Include" />
         </e>
       </e>
       <e p="Gork &amp; Clide.sln" t="IncludeFlat" />
