@@ -12,13 +12,25 @@ public class LoadingScreen : MonoBehaviour
     [SerializeField]
     private Image loadingBar;
 
+    private bool started;
+   
     private void Start()
     {
-        StartCoroutine(LoadNextLevel());
+        started = false;
+    }
+
+    private void Update()
+    {
+        if (!started)
+        {
+            //if called from start, loading screen itself will take too long to be loaded
+            StartCoroutine(LoadNextLevel());
+        }
     }
 
     private IEnumerator LoadNextLevel()
     {
+        started = true;
         AsyncOperation loading = SceneManager.LoadSceneAsync(NEXT_LEVEL_NAME);
         loadingBar.fillAmount = 0;
         while (!loading.isDone)
