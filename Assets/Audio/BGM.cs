@@ -3,26 +3,16 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-public class BGM : MonoBehaviour
+[RequireComponent(typeof(AudioSource))]
+public class BGM : Singleton<BGM>
 {
-    private static BGM instance;
-
-    public static BGM Instance = this;
-  
-
-
-    void Start()
-    {
-        DontDestroyOnLoad(gameObject);
-        if (ExistsAlready())
-        {
-            Destroy(gameObject);
-        }
-    }
-
-    private bool ExistsAlready()
-    {
-        return (GameObject.FindGameObjectsWithTag(gameObject.tag).Length > 1);
-    }
-
+	public void SetBgm(AudioClip newBgm)
+	{
+		var audioSource = GetComponent<AudioSource>();
+		if (!audioSource.clip == newBgm)
+		{
+			audioSource.clip = newBgm;
+			audioSource.Play();
+		}
+	}
 }

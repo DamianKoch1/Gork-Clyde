@@ -2,23 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KeepAudioLoaded : MonoBehaviour
+
+//only used for button click sounds that would get swallowed because button loads another scene atm
+[RequireComponent(typeof(AudioSource))]
+public class SFX : Singleton<SFX>
 {
-    
-    
-    
-    void Start()
+    public void PlaySound(AudioClip ac)
     {
-        DontDestroyOnLoad(gameObject);
-        if (ExistsAlready())
-        {
-            Destroy(gameObject);
-        }
+        GetComponent<AudioSource>().clip = ac;
+        GetComponent<AudioSource>().Play();
     }
-
-    private bool ExistsAlready()
-    {
-        return (GameObject.FindGameObjectsWithTag(gameObject.tag).Length > 1);
-    }
-
 }

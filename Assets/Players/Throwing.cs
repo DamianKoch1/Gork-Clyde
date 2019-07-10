@@ -44,7 +44,7 @@ public class Throwing : MonoBehaviour
 
     private void CheckForCancel()
     {
-	    if (Input.GetButtonDown(Clyde.JUMPBUTTON))
+	    if (Input.GetButtonDown(Clyde.JumpButton))
 	    {
 		    if (IsCarryingObject())
 		    {

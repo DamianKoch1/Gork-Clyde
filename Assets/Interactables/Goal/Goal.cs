@@ -27,8 +27,8 @@ public class Goal : MonoBehaviour
 
     void LoadNextLevel()
     {
-        Fade.NEXT_SCENE_NAME = nextLevelName;
-        Fade.FADE_TO_BLACK();
+        Fade.NextSceneName = nextLevelName;
+        Fade.FadeToBlack();
     }
 
 }

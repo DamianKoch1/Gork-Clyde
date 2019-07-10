@@ -15,7 +15,7 @@ public class CharacterSelection : MonoBehaviour
     private bool gorkSelected = true;
     private EventSystem evtSystem;
 
-    public static string STORY_PANEL_NAME;
+    public static string StoryPanelName;
 
     
     
@@ -30,7 +30,7 @@ public class CharacterSelection : MonoBehaviour
         evtSystem = EventSystem.current;
         gorkButton.onClick.AddListener(GorkSelected);
         clydeButton.onClick.AddListener(ClydeSelected);
-        if (String.IsNullOrEmpty(Gork.XAXIS))
+        if (String.IsNullOrEmpty(Gork.XAxis))
         {
             playButton.interactable = false;
         }
@@ -50,13 +50,13 @@ public class CharacterSelection : MonoBehaviour
         gorkButton.interactable = false;
         clydeButton.interactable = true;
         playButton.interactable = true;
-        Gork.XAXIS = "GorkHorizontal";
-        Gork.ZAXIS = "GorkVertical";
-        Gork.JUMPBUTTON = "GorkJump";
-        Gork.GORKINTERACT = "GorkInteract";
-        Clyde.XAXIS = "ClydeHorizontal";
-        Clyde.ZAXIS = "ClydeVertical";
-        Clyde.JUMPBUTTON = "ClydeJump";
+        Gork.XAxis = "GorkHorizontal";
+        Gork.ZAxis = "GorkVertical";
+        Gork.JumpButton = "GorkJump";
+        Gork.GorkInteract = "GorkInteract";
+        Clyde.XAxis = "ClydeHorizontal";
+        Clyde.ZAxis = "ClydeVertical";
+        Clyde.JumpButton = "ClydeJump";
         evtSystem.SetSelectedGameObject(playButton.gameObject);
     }
 
@@ -66,19 +66,19 @@ public class CharacterSelection : MonoBehaviour
         clydeButton.interactable = false;
         gorkButton.interactable = true;
         playButton.interactable = true;
-        Gork.XAXIS = "ClydeHorizontal";
-        Gork.ZAXIS = "ClydeVertical";
-        Gork.JUMPBUTTON = "ClydeJump";
-        Gork.GORKINTERACT = "ClydeInteract";
-        Clyde.XAXIS = "GorkHorizontal";
-        Clyde.ZAXIS = "GorkVertical";
-        Clyde.JUMPBUTTON = "GorkJump";
+        Gork.XAxis = "ClydeHorizontal";
+        Gork.ZAxis = "ClydeVertical";
+        Gork.JumpButton = "ClydeJump";
+        Gork.GorkInteract = "ClydeInteract";
+        Clyde.XAxis = "GorkHorizontal";
+        Clyde.ZAxis = "GorkVertical";
+        Clyde.JumpButton = "GorkJump";
         evtSystem.SetSelectedGameObject(playButton.gameObject);
     }
 
     public void LoadStoryPanel()
     {
-        SceneManager.LoadScene(STORY_PANEL_NAME);
+        SceneManager.LoadScene(StoryPanelName);
     }
 
 

@@ -6,8 +6,16 @@ using UnityEngine.SceneManagement;
 public class IngameUI : MonoBehaviour
 {
     [SerializeField]
-    private GameObject pauseMenu, optionsMenu;
+    private AudioClip bgm;
     
+    [SerializeField]
+    private GameObject pauseMenu, optionsMenu;
+
+    private void Start()
+    {
+        BGM.Instance.SetBgm(bgm);
+    }
+
     private void Update()
     {
         CheckInput();
