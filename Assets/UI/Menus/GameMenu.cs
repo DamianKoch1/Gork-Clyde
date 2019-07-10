@@ -17,7 +17,7 @@ public class GameMenu : MonoBehaviour
     public void LoadCharacterSelection(string nextSceneName)
     {
         Time.timeScale = 1;
-        LoadingScreen.NEXT_LEVEL_NAME = nextSceneName;
+        CharacterSelection.STORY_PANEL_NAME = nextSceneName;
         SceneManager.LoadScene("Character Selection");
     }
 
