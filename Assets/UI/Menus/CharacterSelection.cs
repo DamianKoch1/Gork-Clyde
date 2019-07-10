@@ -15,14 +15,13 @@ public class CharacterSelection : MonoBehaviour
     private bool gorkSelected = true;
     private EventSystem evtSystem;
 
-    AsyncOperation loadLoadingScreen;
+    public static string STORY_PANEL_NAME;
 
-
+    
+    
     void Start()
     {
         InitializeButtons();
-        loadLoadingScreen = SceneManager.LoadSceneAsync("Loading Screen");
-        loadLoadingScreen.allowSceneActivation = false;
     }
 
     //disable gork/clyde/play button based on previous selection
@@ -77,9 +76,9 @@ public class CharacterSelection : MonoBehaviour
         evtSystem.SetSelectedGameObject(playButton.gameObject);
     }
 
-    public void LoadNextLevel()
+    public void LoadStoryPanel()
     {
-        loadLoadingScreen.allowSceneActivation = true;
+        SceneManager.LoadScene(STORY_PANEL_NAME);
     }
 
 
