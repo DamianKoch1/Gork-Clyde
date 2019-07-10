@@ -128,6 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dad571bdd96ca2149b35564bc9397116, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dynamicSpawnpoint: 1
 --- !u!1001 &722779343374689953
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -215,6 +216,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.6
       objectReference: {fileID: 0}
+    - target: {fileID: -4560490421634678440, guid: b079d4711bcc87d48874a20d04fe4bec,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ad6715028aa3b744c8651a2336198ab0, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b079d4711bcc87d48874a20d04fe4bec, type: 3}
 --- !u!4 &5727847779444657595 stripped
