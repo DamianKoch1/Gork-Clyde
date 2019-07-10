@@ -12,7 +12,7 @@ public class StoryPanel : MonoBehaviour
 
 	public void LoadLevel(string name)
 	{
-		LoadingScreen.NEXT_LEVEL_NAME = name;
+		LoadingScreen.NextLevelName = name;
 		SceneManager.LoadScene("Loading Screen");
 	}
 }

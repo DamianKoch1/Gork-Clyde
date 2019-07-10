@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Clyde : Player
 {
-    public static string XAXIS = "ClydeHorizontal", ZAXIS = "ClydeVertical", JUMPBUTTON = "ClydeJump";
+    public static string XAxis = "ClydeHorizontal", ZAxis = "ClydeVertical", JumpButton = "ClydeJump";
 
     [SerializeField]
     private GameObject gork;
@@ -14,7 +14,7 @@ public class Clyde : Player
     protected override void Start()
     {
         base.Start();
-        InitializeInputs(XAXIS, ZAXIS, JUMPBUTTON);
+        InitializeInputs(XAxis, ZAxis, JumpButton);
     }
 
     protected override void Update()

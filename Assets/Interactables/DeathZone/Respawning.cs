@@ -21,10 +21,7 @@ public class Respawning : MonoBehaviour
     
     public void Respawn()
     {
-        if (GetComponent<Player>())
-        {
-            GetComponent<Player>().ResetMotion();
-        }
+        GetComponent<Player>()?.ResetMotion();
         rb.velocity = Vector3.zero;
         rb.MovePosition(spawnpoint);
     }

@@ -17,16 +17,16 @@ public class Gork : Player
 
 	private bool pushing;
 	
-	public static string XAXIS = "GorkHorizontal",
-	ZAXIS = "GorkVertical",
-	JUMPBUTTON = "GorkJump",
-	GORKINTERACT = "GorkInteract";
+	public static string XAxis = "GorkHorizontal",
+	ZAxis = "GorkVertical",
+	JumpButton = "GorkJump",
+	GorkInteract = "GorkInteract";
 
 
 	protected override void Start()
 	{
 		base.Start();
-		InitializeInputs(XAXIS, ZAXIS, JUMPBUTTON);
+		InitializeInputs(XAxis, ZAxis, JumpButton);
 		throwing = GetComponent<Throwing>();
 		throwing.anim = anim;
 	}
@@ -56,12 +56,12 @@ public class Gork : Player
 	{
 		base.CheckInput();
 
-		if (Input.GetButtonDown(GORKINTERACT))
+		if (Input.GetButtonDown(GorkInteract))
 		{
 			Interact();
 		}
 
-		if (Input.GetButtonUp(GORKINTERACT))
+		if (Input.GetButtonUp(GorkInteract))
 		{
 			if (pushedObj)
 			{

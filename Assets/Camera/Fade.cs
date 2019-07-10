@@ -6,22 +6,22 @@ using UnityEngine.SceneManagement;
 public class Fade : MonoBehaviour
 {
   
-    private static Animator ANIM;
-    public static string NEXT_SCENE_NAME;
+    private static Animator Anim;
+    public static string NextSceneName;
 
     private void Start()
     {
-        ANIM = GetComponent<Animator>();
+        Anim = GetComponent<Animator>();
     }
     
-    public static void FADE_TO_BLACK()
+    public static void FadeToBlack()
     {
-        ANIM.SetTrigger("fadeToBlack");
+        Anim.SetTrigger("fadeToBlack");
     }
 
     public void OnBlackFadeFinished()
     {
-        SceneManager.LoadScene(NEXT_SCENE_NAME);
+        SceneManager.LoadScene(NextSceneName);
     }
 
 }

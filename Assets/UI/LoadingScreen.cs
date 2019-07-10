@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class LoadingScreen : MonoBehaviour
 {
-    public static string NEXT_LEVEL_NAME;
+    public static string NextLevelName;
 
     [SerializeField]
     private Image loadingBar;
@@ -31,7 +31,7 @@ public class LoadingScreen : MonoBehaviour
     private IEnumerator LoadNextLevel()
     {
         started = true;
-        AsyncOperation loading = SceneManager.LoadSceneAsync(NEXT_LEVEL_NAME);
+        AsyncOperation loading = SceneManager.LoadSceneAsync(NextLevelName);
         loadingBar.fillAmount = 0;
         while (!loading.isDone)
         {

@@ -17,8 +17,7 @@ public class MenuButton : MonoBehaviour
 
     private void PlayClickSound()
     {
-        GameObject.FindGameObjectWithTag("sfx").GetComponent<AudioSource>().clip = clickSound;
-        GameObject.FindGameObjectWithTag("sfx").GetComponent<AudioSource>().Play();
+        SFX.Instance.PlaySound(clickSound);
     }
 
     public void GrabFocus()

@@ -6,18 +6,19 @@ using UnityEngine.SceneManagement;
 
 public class GameMenu : MonoBehaviour
 {
-
+    [SerializeField]
+    private AudioClip bgm;
+    
     public void EndBgm()
     {
-        GameObject bgm = GameObject.FindGameObjectWithTag("bgm");
-        Destroy(bgm);
+        BGM.Instance.SetBgm(bgm);
     }
 
 
     public void LoadCharacterSelection(string nextSceneName)
     {
         Time.timeScale = 1;
-        CharacterSelection.STORY_PANEL_NAME = nextSceneName;
+        CharacterSelection.StoryPanelName = nextSceneName;
         SceneManager.LoadScene("Character Selection");
     }
 
