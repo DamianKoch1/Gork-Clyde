@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static VectorMath;
 
 public abstract class Player : MonoBehaviour
 {
@@ -20,7 +21,6 @@ public abstract class Player : MonoBehaviour
     public Rigidbody rb;
     protected string xAxis, zAxis, jumpButton;
     public Animator anim;
-    private Camera cam;
 
     //can jump while timer > 0, set to max when grounded, decreases otherwise
     [SerializeField]
@@ -63,7 +63,6 @@ public abstract class Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         walkParticles = GetComponentInChildren<ParticleSystem>();
-        cam = Camera.main;
         setMotion = SetMotionDefault;
     }
 
@@ -138,7 +137,7 @@ public abstract class Player : MonoBehaviour
             motion = motion.normalized;
         }
         motion *= moveSpeed;
-        motion = ApplyCamRotation(motion);
+        motion = ApplyCameraRotation(motion);
         LookForward();
     }
 
@@ -210,9 +209,6 @@ public abstract class Player : MonoBehaviour
         }
     }
 
-
-  
-
     private void MovePlayer()
     {
         if (!canMove) return;
@@ -226,13 +222,15 @@ public abstract class Player : MonoBehaviour
         }
 
         //fixing player moving through walls when moving diagonally
-        if (Physics.Raycast(rb.position - 0.7f * GetComponent<Collider>().bounds.extents.y * Vector3.up, motion.x * Vector3.right,
-        GetComponent<Collider>().bounds.extents.x * 1.1f, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore))
+        var extents = GetComponent<Collider>().bounds.extents;
+      
+        if (Physics.Raycast(rb.position - 0.6f * extents.y * Vector3.up, motion.x * Vector3.right,
+        extents.x * 1.1f, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore))
         {
             motion.x = 0;
         }
-        if (Physics.Raycast(rb.position - 0.7f * GetComponent<Collider>().bounds.extents.y * Vector3.up, motion.z * Vector3.forward,
-        GetComponent<Collider>().bounds.extents.x * 1.1f, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore))
+        if (Physics.Raycast(rb.position - 0.6f * extents.y * Vector3.up, motion.z * Vector3.forward,
+        extents.x * 1.1f, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore))
         {
             motion.z = 0;
         }
@@ -272,15 +270,5 @@ public abstract class Player : MonoBehaviour
         motion = Vector3.zero;
     }
 
-    protected Vector3 ApplyCamRotation(Vector3 vector)
-    {
-        Vector3 camForward = cam.transform.forward;
-        camForward.y = 0;
-        camForward.Normalize();
-        Vector3 camRight = cam.transform.right;
-        camRight.y = 0;
-        camRight.Normalize();
-        Vector3 rotatedVector = vector.x * camRight + vector.y * Vector3.up + vector.z * camForward;
-        return rotatedVector;
-    }
+  
 }
