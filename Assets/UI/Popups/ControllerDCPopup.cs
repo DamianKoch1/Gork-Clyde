@@ -8,10 +8,6 @@ public class ControllerDCPopup : MonoBehaviour
 	private bool checkingForDisconnects = false;
 	private bool isVisible = false;
 	
-	private void Start()
-	{
-		DontDestroyOnLoad(gameObject);
-	}
 
 	private void Update()
 	{
@@ -35,9 +31,9 @@ public class ControllerDCPopup : MonoBehaviour
 
 	private void CheckForDisconnects()
 	{
-		foreach (var name in Input.GetJoystickNames())
+		foreach (var joystick in Input.GetJoystickNames())
 		{
-			if (String.IsNullOrEmpty(name))
+			if (String.IsNullOrEmpty(joystick))
 			{
 				Show(true);
 				return;
