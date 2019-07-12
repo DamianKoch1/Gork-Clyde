@@ -3,13 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using static VectorMath;
 
+/// <summary>
+/// Base class for players
+/// </summary>
 public abstract class Player : MonoBehaviour
 {
     [SerializeField]
     protected float speed, jumpHeight;
+
+    /// <summary>
+    /// speed multiplier if in air
+    /// </summary>
     [SerializeField]
     [Range(0, 1)]
     private float airMovespeedPenalty = 0.9f;
+    
+    /// <summary>
+    /// speed multiplier if thrown
+    /// </summary>
     [SerializeField]
     [Range(0, 1)]
     private float throwMovespeedPenalty = 0.9f;
@@ -119,6 +130,9 @@ public abstract class Player : MonoBehaviour
         collidingTransforms.Remove(other.transform);
     }
 
+    /// <summary>
+    /// Standard moving function, rotates motion vector to camera view
+    /// </summary>
     protected void SetMotionDefault()
     {
         float moveSpeed = speed;
@@ -153,7 +167,9 @@ public abstract class Player : MonoBehaviour
         anim.ResetTrigger("land");
     }
 
-
+    /// <summary>
+    /// Setting animations / state bools
+    /// </summary>
     private void UpdateState()
     {
         if (IsGrounded())
@@ -209,6 +225,9 @@ public abstract class Player : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Moves player based on motion, prevents walking through walls
+    /// </summary>
     private void MovePlayer()
     {
         if (!canMove) return;
@@ -238,7 +257,9 @@ public abstract class Player : MonoBehaviour
         rb.MovePosition(rb.position + motion * Time.deltaTime);
     }
 
-
+    /// <summary>
+    /// looks into motion direction
+    /// </summary>
     private void LookForward()
     {
         Vector3 position = transform.position;
@@ -257,6 +278,12 @@ public abstract class Player : MonoBehaviour
         return retval;
     }
 
+    /// <summary>
+    /// Sets up input axes/buttons to listen to
+    /// </summary>
+    /// <param name="x">x axis name</param>
+    /// <param name="z">z axis name</param>
+    /// <param name="jump">jump button name</param>
     protected void InitializeInputs(string x, string z, string jump)
     {
         xAxis = x;

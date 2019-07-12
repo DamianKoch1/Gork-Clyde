@@ -28,6 +28,9 @@ public abstract class Pushable : MonoBehaviour
         currentPosition = previousPosition;
     }
     
+    /// <summary>
+    /// Shows vfx if pushed
+    /// </summary>
     private void UpdateParticles()
     {
         currentPosition = rb.position;
@@ -43,14 +46,21 @@ public abstract class Pushable : MonoBehaviour
         previousPosition = currentPosition;
     }
 
+    /// <summary>
+    /// Checks if vfx should be shown
+    /// </summary>
+    /// <returns>Returns false if not pushed / falling / position unchanged, true otherwise</returns>
     private bool ShowPushedParticles()
     {
         if (!isPushed) return false;
-        if (rb.velocity.y > 0.1f) return false;
+        if (Mathf.Abs(rb.velocity.y) > 0.1f) return false;
         if (currentPosition == previousPosition) return false;
         return true;
     }
 
+    /// <summary>
+    /// Emits vfx in correct direction
+    /// </summary>
     private void EmitPushedParticles()
     {
         Vector3 particleDirection = previousPosition - currentPosition;

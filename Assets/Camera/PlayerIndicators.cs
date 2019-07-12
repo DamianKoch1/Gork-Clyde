@@ -27,6 +27,10 @@ public class PlayerIndicators : MonoBehaviour
         CheckClyde();
     }
 
+    
+    /// <summary>
+    /// Updates gork indicator if gork is out of screen
+    /// </summary>
     private void CheckGork()
     {
         gorkPos = cam.WorldToScreenPoint(gorkTransform.position);
@@ -40,6 +44,9 @@ public class PlayerIndicators : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Updates clyde indicator if clyde is out of screen
+    /// </summary>
     private void CheckClyde()
     {
         clydePos = cam.WorldToScreenPoint(clydeTransform.position);
@@ -53,7 +60,11 @@ public class PlayerIndicators : MonoBehaviour
         }
     }
 
-    //move indicator to screen border pointing to player screenpos if not
+    /// <summary>
+    /// Move Indicator to screen border pointing to player screen position
+    /// </summary>
+    /// <param name="indicator"></param>
+    /// <param name="targetPos"></param>
     private void UpdateIndicator(GameObject indicator, Vector3 targetPos)
     {
         Vector2 rectSize = canvasRect.sizeDelta;
