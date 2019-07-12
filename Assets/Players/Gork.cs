@@ -72,7 +72,7 @@ public class Gork : Player
 
 	private void Interact()
 	{
-		if (!pushing)
+		if (pushedObj)
 		{
 			if (!throwing.IsCarryingObject())
 			{
