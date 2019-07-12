@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,11 +10,11 @@ public class Airstream : MonoBehaviour, IActivatable
     [SerializeField]
     private float strength;
 
+  
     [SerializeField]
     private ParticleSystem vfx1, vfx2;
 
-
-
+  
     private void OnTriggerStay(Collider other)
     {
         if (other.isTrigger) return;
@@ -42,12 +43,20 @@ public class Airstream : MonoBehaviour, IActivatable
         }
     }
 
+    /// <summary>
+    /// Applies airstream force to a RigidBody.
+    /// </summary>
+    /// <param name="rb">RigidBody to apply force to</param>
     private void AddAirstreamForce(Rigidbody rb)
     {
         direction = transform.forward;
         rb.AddForce(direction * strength * Time.deltaTime * 60, ForceMode.Acceleration);
     }
 
+    /// <summary>
+    /// Used to detach Clyde from gork if he tries to carry Clyde through an airstream.
+    /// </summary>
+    /// <param name="clyde">Reference to Clyde</param>
     private void OnClydeAirstreamEntered(Clyde clyde)
     {
         clyde.inAirstream = true;
@@ -79,7 +88,10 @@ public class Airstream : MonoBehaviour, IActivatable
         ToggleAirstream();
     }
 
-    private void ToggleAirstream()
+    /// <summary>
+    /// Toggles airstream on or off.
+    /// </summary>
+    public void ToggleAirstream()
     {
         MeshRenderer mr = GetComponent<MeshRenderer>();
         BoxCollider bc = GetComponent<BoxCollider>();

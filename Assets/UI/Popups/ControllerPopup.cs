@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
 
 public class ControllerPopup : MonoBehaviour
 {
+	/// <summary>
+	/// Doesnt appear on start if true, likely going into playerPrefs
+	/// </summary>
 	public static bool HasShown = false;
 
 	private void Start()
@@ -16,6 +20,10 @@ public class ControllerPopup : MonoBehaviour
 		}
 	}
 
+	/// <summary>
+	/// Shows popup
+	/// </summary>
+	/// <param name="show"></param>
 	public void Show(bool show)
 	{
 		foreach (Transform child in transform)

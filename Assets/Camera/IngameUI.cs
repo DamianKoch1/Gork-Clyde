@@ -21,9 +21,9 @@ public class IngameUI : MonoBehaviour
         CheckInput();
     }
 
+    
     private void CheckInput()
     {
-        //toggling pause/options menu
         if (Input.GetButtonDown("Cancel"))
         {
             var optionsCanvas = optionsMenu.GetComponent<Canvas>();

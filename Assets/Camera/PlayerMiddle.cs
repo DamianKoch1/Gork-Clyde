@@ -14,6 +14,10 @@ public class PlayerMiddle : MonoBehaviour
         MoveToMiddle();
     }
 
+    
+    /// <summary>
+    /// Moves between players
+    /// </summary>
     private void MoveToMiddle()
     {
         if (!clyde.GetComponent<Player>().canMove)

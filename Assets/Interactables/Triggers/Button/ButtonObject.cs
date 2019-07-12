@@ -9,7 +9,9 @@ public class ButtonObject : TriggerObject
     private bool oneTimeUse;
     private bool triggered;
 
-
+    /// <summary>
+    /// (De)activates all targets, oneTimeUse possible
+    /// </summary>
     protected override void OnTriggered()
     {
         if (oneTimeUse)

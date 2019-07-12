@@ -38,6 +38,9 @@ public class MovingPlatform : MonoBehaviour, IActivatable
         }
     }
 
+    /// <summary>
+    /// Moves between pos1 / pos2 on a sinus curve if activated & not blocked
+    /// </summary>
     private void MovePlatform()
     {
         if (stop) return;

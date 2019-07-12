@@ -14,11 +14,17 @@ public class Fade : MonoBehaviour
         Anim = GetComponent<Animator>();
     }
     
+    /// <summary>
+    /// Starts fade to black animation
+    /// </summary>
     public static void FadeToBlack()
     {
         Anim.SetTrigger("fadeToBlack");
     }
 
+    /// <summary>
+    /// loads given scene when fade is finished
+    /// </summary>
     public void OnBlackFadeFinished()
     {
         SceneManager.LoadScene(NextSceneName);

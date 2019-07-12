@@ -15,6 +15,9 @@ public class CharacterSelection : MonoBehaviour
     private bool gorkSelected = true;
     private EventSystem evtSystem;
 
+    /// <summary>
+    /// story panel that play button will load
+    /// </summary>
     public static string StoryPanelName;
 
     
@@ -44,6 +47,9 @@ public class CharacterSelection : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Setup input axes accordingly, toggle gork/clyde button enabled
+    /// </summary>
     void GorkSelected()
     {
         gorkSelected = true;
@@ -60,6 +66,9 @@ public class CharacterSelection : MonoBehaviour
         evtSystem.SetSelectedGameObject(playButton.gameObject);
     }
 
+    /// <summary>
+    /// Setup input axes accordingly, toggle gork/clyde button enabled
+    /// </summary>
     void ClydeSelected()
     {
         gorkSelected = false;

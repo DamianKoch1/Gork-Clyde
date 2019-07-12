@@ -14,6 +14,9 @@ public class PressurePlate : TriggerObject
         OnPlateExited();
     }
 
+    /// <summary>
+    /// Activates targets
+    /// </summary>
     protected override void OnTriggered()
     {
         if (objectsOnPlateCount == 0)
@@ -27,6 +30,9 @@ public class PressurePlate : TriggerObject
         objectsOnPlateCount++;
     }
 
+    /// <summary>
+    /// Deactivates targets
+    /// </summary>
     private void OnPlateExited()
     {
         if (objectsOnPlateCount == 1)
