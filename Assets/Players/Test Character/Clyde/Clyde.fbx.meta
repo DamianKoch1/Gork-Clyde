@@ -16,11 +16,20 @@ ModelImporter:
       74: 8556641245824730566
     second: Clyde_Walk
   - first:
-      74: 5146536020767509729
-    second: Clyde_Idle
+      74: 251676983656226039
+    second: Clyde_work.on.Idle.1
+  - first:
+      74: -8198697081996225202
+    second: Clyde_work.on.Idle.2
+  - first:
+      74: 2349309123744214083
+    second: Clyde_work.on.Idle.3
+  - first:
+      74: -4892617728990319261
+    second: "Clyde_Idel\xF6"
   externalObjects: {}
   materials:
-    importMaterials: 0
+    importMaterials: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1
@@ -163,11 +172,98 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Clyde_Idle
-      takeName: Clyde_Idle
-      internalID: 5146536020767509729
+      name: Clyde_work.on.Idle.1
+      takeName: Clyde_work.on.Idle.1
+      internalID: 251676983656226039
       firstFrame: 0
-      lastFrame: 100
+      lastFrame: 110
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Clyde_work.on.Idle.2
+      takeName: Clyde_work.on.Idle.2
+      internalID: -8198697081996225202
+      firstFrame: 0
+      lastFrame: 70
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Clyde_work.on.Idle.3
+      takeName: Clyde_work.on.Idle.3
+      internalID: 2349309123744214083
+      firstFrame: 0
+      lastFrame: 120
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: "Clyde_Idel\xF6"
+      takeName: "Clyde_Idel\xF6"
+      internalID: -4892617728990319261
+      firstFrame: 0
+      lastFrame: 290
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

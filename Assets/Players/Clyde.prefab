@@ -413,11 +413,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ClideMesh0
       objectReference: {fileID: 0}
-    - target: {fileID: -6057140222963153312, guid: b079d4711bcc87d48874a20d04fe4bec,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: e82d060fff29fb942a0a11162db63b83, type: 2}
     - target: {fileID: -4216859302048453862, guid: b079d4711bcc87d48874a20d04fe4bec,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -488,6 +483,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.6
       objectReference: {fileID: 0}
+    - target: {fileID: -6057140222963153312, guid: b079d4711bcc87d48874a20d04fe4bec,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: e82d060fff29fb942a0a11162db63b83, type: 2}
     - target: {fileID: -4560490421634678440, guid: b079d4711bcc87d48874a20d04fe4bec,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -496,33 +496,38 @@ PrefabInstance:
     - target: {fileID: -1178944866958211071, guid: b079d4711bcc87d48874a20d04fe4bec,
         type: 3}
       propertyPath: m_AABB.m_Center.x
-      value: -1.2467907e-10
+      value: -1.6705318e-11
       objectReference: {fileID: 0}
     - target: {fileID: -1178944866958211071, guid: b079d4711bcc87d48874a20d04fe4bec,
         type: 3}
       propertyPath: m_AABB.m_Center.y
-      value: 0.0014261622
+      value: 0.00019108667
       objectReference: {fileID: 0}
     - target: {fileID: -1178944866958211071, guid: b079d4711bcc87d48874a20d04fe4bec,
         type: 3}
       propertyPath: m_AABB.m_Center.z
-      value: 0.01688814
+      value: -0.00024195027
       objectReference: {fileID: 0}
     - target: {fileID: -1178944866958211071, guid: b079d4711bcc87d48874a20d04fe4bec,
         type: 3}
       propertyPath: m_AABB.m_Extent.x
-      value: 0.002917458
+      value: 0.0029218013
       objectReference: {fileID: 0}
     - target: {fileID: -1178944866958211071, guid: b079d4711bcc87d48874a20d04fe4bec,
         type: 3}
       propertyPath: m_AABB.m_Extent.y
-      value: 0.0033040682
+      value: 0.0033089884
       objectReference: {fileID: 0}
     - target: {fileID: -1178944866958211071, guid: b079d4711bcc87d48874a20d04fe4bec,
         type: 3}
       propertyPath: m_AABB.m_Extent.z
-      value: 0.0015537209
+      value: 0.0015560326
       objectReference: {fileID: 0}
+    - target: {fileID: -1178944866958211071, guid: b079d4711bcc87d48874a20d04fe4bec,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ad6715028aa3b744c8651a2336198ab0, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b079d4711bcc87d48874a20d04fe4bec, type: 3}
 --- !u!4 &5727847779444657595 stripped
