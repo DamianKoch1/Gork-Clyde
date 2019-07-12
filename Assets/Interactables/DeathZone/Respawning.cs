@@ -39,9 +39,12 @@ public class Respawning : MonoBehaviour
         while (dynamicSpawnpoint)
         {
             if (Physics.Raycast(rb.position, -Vector3.up,
-            2f, Physics.AllLayers, QueryTriggerInteraction.Ignore))
+            out var raycastHit, 2f,Physics.AllLayers, QueryTriggerInteraction.Ignore))
             {
-                SetSpawnPoint();
+                if (!raycastHit.transform.CompareTag("platform"))
+                {
+                    SetSpawnPoint();
+                }
             }
             yield return new WaitForSeconds(0.5f);
         }
