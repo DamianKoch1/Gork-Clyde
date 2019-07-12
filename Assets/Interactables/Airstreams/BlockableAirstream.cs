@@ -5,7 +5,7 @@ using UnityEngine;
 public class BlockableAirstream : MonoBehaviour
 {
     [SerializeField]
-    private Airstream blockableAirstream;
+    private GameObject blockableAirstream;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -13,7 +13,7 @@ public class BlockableAirstream : MonoBehaviour
 
         if (other.CompareTag("platform"))
         {
-            blockableAirstream.ToggleAirstream();
+            blockableAirstream.SetActive(false);
         }
     }
 
@@ -23,7 +23,7 @@ public class BlockableAirstream : MonoBehaviour
 
         if (other.CompareTag("platform"))
         {
-            blockableAirstream.ToggleAirstream();
+            blockableAirstream.SetActive(true);
         }
     }
 }
