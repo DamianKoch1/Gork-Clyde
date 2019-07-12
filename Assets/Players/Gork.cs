@@ -63,21 +63,21 @@ public class Gork : Player
 
 		if (Input.GetButtonUp(GorkInteract))
 		{
-			if (pushedObj)
+			if (pushing)
 			{
-				if (!throwing.IsCarryingObject())
-				{
-					StartPushing();
-				}
+				StopPushing();
 			}
 		}
 	}
 
 	private void Interact()
 	{
-		if (pushing)
+		if (!pushing)
 		{
-			StopPushing();
+			if (!throwing.IsCarryingObject())
+			{
+				StartPushing();
+			}
 		}
 		else
 		{
@@ -91,6 +91,7 @@ public class Gork : Player
 		if (throwing.IsCarryingObject()) return;
 		if (pushing) return;
 		if (fixedJoint) return;
+		if (!pushedObj) return;
 
         anim.SetBool("push", true);
 		pushing = true;
@@ -107,7 +108,7 @@ public class Gork : Player
 	{
 		fixedJoint = gameObject.AddComponent<FixedJoint>();
 		fixedJoint.connectedBody = target;
-		fixedJoint.breakForce = 800f; //TODO maybe use rb mass instead of hardcoding
+		fixedJoint.breakForce = 8000f; //TODO maybe use rb mass instead of hardcoding
 	}
 	
 	private void StopPushing()
@@ -133,60 +134,21 @@ public class Gork : Player
 
 	private void SetMotionSingleAxis()
 	{
-		var forward = transform.forward;
-		var camRotatedForward = ApplyCameraRotation(forward);
-		if (!AlignsToXAxis(camRotatedForward))
+		var x = Input.GetAxis(xAxis);
+		var z = Input.GetAxis(zAxis);
+		if (Mathf.Abs(x) > Mathf.Abs(z))
 		{
-			motion = forward * Input.GetAxis(zAxis) * speed;
-			if (InverseVerticalPushControls(forward, camRotatedForward))
-			{
-				motion *= -1;
-			}
-			if (Mathf.Abs(Input.GetAxis(xAxis)) > 0.5f)
-			{
-				StopPushing();
-			}
+			motion.x = x;
+			motion.z = 0;
 		}
 		else
 		{
-			motion = forward * Input.GetAxis(xAxis) * speed;
-			if (InverseHorizontalPushControls(forward, camRotatedForward))
-			{
-				motion *= -1;
-			}
-			if (Mathf.Abs(Input.GetAxis(zAxis)) > 0.5f)
-			{
-				StopPushing();
-			}
+			motion.x = 0;
+			motion.z = z;
 		}
+		motion *= speed;
+		motion = ApplyCameraRotation(motion);
 		motion.y = 0;
 	}
 
-	private bool InverseVerticalPushControls(Vector3 forward, Vector3 camRotatedForward)
-	{
-		if (AlignsToXAxis(camRotatedForward)) return false;
-		if (camRotatedForward.z > 0)
-		{
-			if (AlignsToXAxis(forward)) return true;
-		}
-		else
-		{
-			if (!AlignsToXAxis(forward)) return true;
-		}
-		return false;
-	}
-
-	private bool InverseHorizontalPushControls(Vector3 forward, Vector3 camRotatedForward)
-	{
-		if (!AlignsToXAxis(camRotatedForward)) return false;
-		if (camRotatedForward.x > 0)
-		{
-			if (!AlignsToXAxis(forward)) return true;
-		}
-		else
-		{
-			if (AlignsToXAxis(forward)) return true;
-		}
-		return false;
-	}
 }
