@@ -40,6 +40,9 @@ public class Gork : Player
 		}
 	}
 
+	/// <summary>
+	/// Stops pushing if fixed joint broke or if falling
+	/// </summary>
 	private void CheckIfStillPushing()
 	{
 		if (!fixedJoint)
@@ -70,6 +73,9 @@ public class Gork : Player
 		}
 	}
 
+	/// <summary>
+	/// Pickup / throw / push depending on current state
+	/// </summary>
 	private void Interact()
 	{
 		if (pushedObj)
@@ -85,7 +91,9 @@ public class Gork : Player
 		}
 	}
 	
-	
+	/// <summary>
+	/// Sets up pushing: adds fixed joint, changes movement, starts push animation
+	/// </summary>
 	private void StartPushing()
 	{
 		if (throwing.IsCarryingObject()) return;
@@ -104,13 +112,20 @@ public class Gork : Player
 		AddFixedJoint(objectRb);
 	}
 
+	/// <summary>
+	/// Adds fixed joint connecting Gork with target, adapts breakForce to target mass
+	/// </summary>
+	/// <param name="target">RigidBody to connect joint with</param>
 	private void AddFixedJoint(Rigidbody target)
 	{
 		fixedJoint = gameObject.AddComponent<FixedJoint>();
 		fixedJoint.connectedBody = target;
-		fixedJoint.breakForce = 8000f; //TODO maybe use rb mass instead of hardcoding
+		fixedJoint.breakForce = rb.mass * 400;
 	}
 	
+	/// <summary>
+	/// Reverts movement, destroys fixedJoint if still there, stops push animation
+	/// </summary>
 	private void StopPushing()
 	{
 		if (fixedJoint)
@@ -131,7 +146,9 @@ public class Gork : Player
 		setMotion = SetMotionDefault;
 	}
 
-
+	/// <summary>
+	/// Disables diagonal movement, can only move on one axis
+	/// </summary>
 	private void SetMotionSingleAxis()
 	{
 		var x = Input.GetAxis(xAxis);
@@ -148,7 +165,6 @@ public class Gork : Player
 		}
 		motion *= speed;
 		motion = ApplyCameraRotation(motion);
-		motion.y = 0;
 	}
 
 }

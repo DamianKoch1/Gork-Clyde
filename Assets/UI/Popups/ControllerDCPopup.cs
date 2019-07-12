@@ -21,6 +21,9 @@ public class ControllerDCPopup : MonoBehaviour
 		}
 	}
 
+	/// <summary>
+	/// Checks if at least 2 controllers are plugged in
+	/// </summary>
 	private void CheckControllerCount()
 	{
 		if (Input.GetJoystickNames().Length > 1)
@@ -29,6 +32,9 @@ public class ControllerDCPopup : MonoBehaviour
 		}
 	}
 
+	/// <summary>
+	/// Pauses game if ingame and shows popup when noticing joystick disconnection
+	/// </summary>
 	private void CheckForDisconnects()
 	{
 		foreach (var joystick in Input.GetJoystickNames())
@@ -41,7 +47,10 @@ public class ControllerDCPopup : MonoBehaviour
 		}
 	}
 	
-	
+	/// <summary>
+	/// Toggles Popup
+	/// </summary>
+	/// <param name="show"></param>
 	public void Show(bool show)
 	{
 		isVisible = show;
