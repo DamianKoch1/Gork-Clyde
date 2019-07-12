@@ -477,7 +477,7 @@ Cloth:
     collisionSphereDistance: 3.4028235e+38
   - maxDistance: 0
     collisionSphereDistance: 3.4028235e+38
-  - maxDistance: 0
+  - maxDistance: 1
     collisionSphereDistance: 3.4028235e+38
   - maxDistance: 1
     collisionSphereDistance: 3.4028235e+38
@@ -501,7 +501,7 @@ Cloth:
     collisionSphereDistance: 3.4028235e+38
   - maxDistance: 1
     collisionSphereDistance: 3.4028235e+38
-  - maxDistance: 0
+  - maxDistance: 1
     collisionSphereDistance: 3.4028235e+38
   - maxDistance: 4
     collisionSphereDistance: 3.4028235e+38
@@ -509,7 +509,7 @@ Cloth:
     collisionSphereDistance: 3.4028235e+38
   - maxDistance: 0
     collisionSphereDistance: 3.4028235e+38
-  - maxDistance: 0
+  - maxDistance: 1
     collisionSphereDistance: 3.4028235e+38
   - maxDistance: 1
     collisionSphereDistance: 3.4028235e+38
@@ -533,7 +533,7 @@ Cloth:
     collisionSphereDistance: 3.4028235e+38
   - maxDistance: 4
     collisionSphereDistance: 3.4028235e+38
-  - maxDistance: 0
+  - maxDistance: 1
     collisionSphereDistance: 3.4028235e+38
   - maxDistance: 3
     collisionSphereDistance: 3.4028235e+38
@@ -731,7 +731,7 @@ Cloth:
   m_SphereColliders: []
   m_SelfCollisionDistance: 0
   m_SelfCollisionStiffness: 1
-  m_SelfAndInterCollisionIndices: 
+  m_SelfAndInterCollisionIndices: 0a0000001100000012000000150000001600000017000000190000001a0000001b0000001c0000001d0000001e0000001f00000021000000220000002300000025000000260000002700000028000000290000002a0000002b0000002c0000002d0000002e0000002f000000300000003100000032000000330000003400000035000000370000003800000039000000
   m_VirtualParticleWeights:
   - {x: 0.33333334, y: 0.33333334, z: 0.33333334}
   - {x: 0.6666667, y: 0.16666667, z: 0.16666667}
@@ -810,11 +810,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6779424732701564715}
     m_Modifications:
-    - target: {fileID: 6083157086161473864, guid: eb49f7cbe08b75444bb38f67c8c7d0fe,
-        type: 3}
-      propertyPath: m_Name
-      value: DustWalkVFX
-      objectReference: {fileID: 0}
     - target: {fileID: 5366163259334342879, guid: eb49f7cbe08b75444bb38f67c8c7d0fe,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -870,6 +865,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6083157086161473864, guid: eb49f7cbe08b75444bb38f67c8c7d0fe,
+        type: 3}
+      propertyPath: m_Name
+      value: DustWalkVFX
+      objectReference: {fileID: 0}
     - target: {fileID: 1601969473879671137, guid: eb49f7cbe08b75444bb38f67c8c7d0fe,
         type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
@@ -895,16 +895,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6779424732701564715}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 033946e41c2cefa4f81d4f57609d266f,
-        type: 3}
-      propertyPath: m_Name
-      value: Gork
-      objectReference: {fileID: 0}
-    - target: {fileID: -6057140222963153312, guid: 033946e41c2cefa4f81d4f57609d266f,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 6756b8e56b7a1754bb7a05273cd72e6c, type: 2}
     - target: {fileID: -4216859302048453862, guid: 033946e41c2cefa4f81d4f57609d266f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -960,35 +950,50 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 033946e41c2cefa4f81d4f57609d266f,
+        type: 3}
+      propertyPath: m_Name
+      value: Gork
+      objectReference: {fileID: 0}
+    - target: {fileID: -6057140222963153312, guid: 033946e41c2cefa4f81d4f57609d266f,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 6756b8e56b7a1754bb7a05273cd72e6c, type: 2}
+    - target: {fileID: -8820393008324840627, guid: 033946e41c2cefa4f81d4f57609d266f,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 669e3b2250cf5b64f837cb8c413df0ce, type: 2}
     - target: {fileID: 5887908791395795996, guid: 033946e41c2cefa4f81d4f57609d266f,
         type: 3}
       propertyPath: m_AABB.m_Center.x
-      value: 0.000000057010965
+      value: -2.0199309e-10
       objectReference: {fileID: 0}
     - target: {fileID: 5887908791395795996, guid: 033946e41c2cefa4f81d4f57609d266f,
         type: 3}
       propertyPath: m_AABB.m_Center.y
-      value: 0.010554369
+      value: 0.0013061664
       objectReference: {fileID: 0}
     - target: {fileID: 5887908791395795996, guid: 033946e41c2cefa4f81d4f57609d266f,
         type: 3}
       propertyPath: m_AABB.m_Center.z
-      value: 0.0010548357
+      value: 0.017880714
       objectReference: {fileID: 0}
     - target: {fileID: 5887908791395795996, guid: 033946e41c2cefa4f81d4f57609d266f,
         type: 3}
       propertyPath: m_AABB.m_Extent.x
-      value: 0.0077367187
+      value: 0.0077017806
       objectReference: {fileID: 0}
     - target: {fileID: 5887908791395795996, guid: 033946e41c2cefa4f81d4f57609d266f,
         type: 3}
       propertyPath: m_AABB.m_Extent.y
-      value: 0.00981944
+      value: 0.010219031
       objectReference: {fileID: 0}
     - target: {fileID: 5887908791395795996, guid: 033946e41c2cefa4f81d4f57609d266f,
         type: 3}
       propertyPath: m_AABB.m_Extent.z
-      value: 0.010599379
+      value: 0.009967367
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 033946e41c2cefa4f81d4f57609d266f, type: 3}
