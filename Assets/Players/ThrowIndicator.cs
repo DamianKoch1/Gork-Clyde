@@ -83,6 +83,7 @@ public class ThrowIndicator : MonoBehaviour
             DestroyLandingIndicator();
         }
     }
+    
 
     private void DestroyLandingIndicator()
     {
@@ -92,6 +93,11 @@ public class ThrowIndicator : MonoBehaviour
         }
     }
     
+    /// <summary>
+    /// Calculates position of indicator point based on given time passed, starts at own position
+    /// </summary>
+    /// <param name="time">given time delta to calculate position for</param>
+    /// <returns>returns position of point at time</returns>
     private Vector3 PointPosAtTime(float time) 
     {
         float amplifier = 1;
