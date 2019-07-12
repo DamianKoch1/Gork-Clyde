@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using UnityEngine;
@@ -10,11 +11,22 @@ public class Airstream : MonoBehaviour, IActivatable
     [SerializeField]
     private float strength;
 
+    [SerializeField]
+    private bool activeAtStart = true;
+
   
     [SerializeField]
     private ParticleSystem vfx1, vfx2;
 
-  
+
+    private void Start()
+    {
+        if (activeAtStart)
+        {
+            ToggleAirstream();
+        }
+    }
+
     private void OnTriggerStay(Collider other)
     {
         if (other.isTrigger) return;
@@ -95,7 +107,7 @@ public class Airstream : MonoBehaviour, IActivatable
     {
         MeshRenderer mr = GetComponent<MeshRenderer>();
         BoxCollider bc = GetComponent<BoxCollider>();
-        if (mr.enabled)
+        if (bc.enabled)
         {
             vfx1.Stop();
             vfx2.Stop();
@@ -105,7 +117,6 @@ public class Airstream : MonoBehaviour, IActivatable
             vfx1.Play();
             vfx2.Play();
         }
-        mr.enabled = !mr.enabled;
         bc.enabled = !bc.enabled;
     }
 }
