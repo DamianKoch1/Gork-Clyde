@@ -19,6 +19,9 @@ public class Respawning : MonoBehaviour
     }
 
     
+    /// <summary>
+    /// Respawn at last saved spawnpoint
+    /// </summary>
     public void Respawn()
     {
         GetComponent<Player>()?.ResetMotion();
@@ -26,6 +29,10 @@ public class Respawning : MonoBehaviour
         rb.MovePosition(spawnpoint);
     }
 
+    /// <summary>
+    /// If dynamic spawnpoint is true, keeps updating spawnpoint if at valid position
+    /// </summary>
+    /// <returns></returns>
     public IEnumerator CheckSpawnPoint()
     {
         SetSpawnPoint();
@@ -40,6 +47,8 @@ public class Respawning : MonoBehaviour
         }
     }
 
+    
+    
     private void SetSpawnPoint()
     {
         spawnpoint = rb.position;

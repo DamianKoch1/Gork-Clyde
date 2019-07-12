@@ -24,6 +24,11 @@ public class ThrowIndicator : MonoBehaviour
 
     private RaycastHit hit;
     
+    /// <summary>
+    /// Updates indicator based on throw direction / strength, instanciates / deletes landing indicatior based on whether indicator hits something
+    /// </summary>
+    /// <param name="_throwVector">throw direction * strength</param>
+    /// <param name="_heldObject">held object</param>
     public void UpdateIndicator(Vector3 _throwVector, GameObject _heldObject)
     {
         throwVector = _throwVector;
@@ -50,6 +55,11 @@ public class ThrowIndicator : MonoBehaviour
         DestroyLandingIndicator();
     }
 
+    /// <summary>
+    /// Checks if indicator hits ground between 2 points
+    /// </summary>
+    /// <param name="atIndex"></param>
+    /// <returns></returns>
     private bool HitGround(int atIndex)
     {
         var pointPosition = PointPosAtTime(atIndex * throwIndicatorDetail);
@@ -60,6 +70,11 @@ public class ThrowIndicator : MonoBehaviour
         return false;
     }
     
+    /// <summary>
+    /// Destroys (a part of) the throw indicator, can also delete landing indicator
+    /// </summary>
+    /// <param name="from">point index from which to destroy, default = 0 (full indicator)</param>
+    /// <param name="destroyLandingIndicator">destroy landing indicator too? default = true</param>
     public void DestroyIndicator(int from = 0, bool destroyLandingIndicator = true)
     {
         lineRenderer.positionCount = from;
@@ -68,6 +83,7 @@ public class ThrowIndicator : MonoBehaviour
             DestroyLandingIndicator();
         }
     }
+    
 
     private void DestroyLandingIndicator()
     {
@@ -77,6 +93,11 @@ public class ThrowIndicator : MonoBehaviour
         }
     }
     
+    /// <summary>
+    /// Calculates position of indicator point based on given time passed, starts at own position
+    /// </summary>
+    /// <param name="time">given time delta to calculate position for</param>
+    /// <returns>returns position of point at time</returns>
     private Vector3 PointPosAtTime(float time) 
     {
         float amplifier = 1;

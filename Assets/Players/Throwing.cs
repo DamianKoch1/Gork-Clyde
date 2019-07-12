@@ -42,6 +42,9 @@ public class Throwing : MonoBehaviour
 	    CheckForCancel();
     }
 
+    /// <summary>
+    /// Checks if clyde cancelled throw
+    /// </summary>
     private void CheckForCancel()
     {
 	    if (Input.GetButtonDown(Clyde.JumpButton))
@@ -58,6 +61,9 @@ public class Throwing : MonoBehaviour
 	    }
     }
     
+    /// <summary>
+    /// Updates indicator when carrying object
+    /// </summary>
     private void UpdateThrowIndicator()
     {
 	    if (IsCarryingObject())

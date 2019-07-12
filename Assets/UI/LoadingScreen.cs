@@ -28,6 +28,10 @@ public class LoadingScreen : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Loads next level async, shows progress on bar
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator LoadNextLevel()
     {
         started = true;

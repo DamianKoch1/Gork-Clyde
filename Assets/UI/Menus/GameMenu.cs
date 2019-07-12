@@ -9,9 +9,12 @@ public class GameMenu : MonoBehaviour
     [SerializeField]
     private AudioClip bgm;
     
+    /// <summary>
+    /// Stops bgm
+    /// </summary>
     public void EndBgm()
     {
-        BGM.Instance.SetBgm(bgm);
+        BGM.Instance.StopBgm();
     }
 
 
@@ -29,6 +32,10 @@ public class GameMenu : MonoBehaviour
         SceneManager.LoadScene(sceneName);
     }
 
+    /// <summary>
+    /// Toggles pause/options menu
+    /// </summary>
+    /// <param name="menu">menu to toggle</param>
     public void ToggleMenu(GameObject menu)
     {
         var canvas = menu.GetComponent<Canvas>();

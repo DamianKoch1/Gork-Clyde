@@ -4,11 +4,21 @@ using UnityEngine;
 
 public static class VectorMath
 {
+	/// <summary>
+	/// Checks if a vector aligns closer to x axis than to z axis
+	/// </summary>
+	/// <param name="vector">vector to check</param>
+	/// <returns>Returns true if vectors absolute x is bigger than z</returns>
 	public static bool AlignsToXAxis(Vector3 vector)
 	{
 		return (Mathf.Abs(vector.x) > Mathf.Abs(vector.z));
 	}
 	
+	/// <summary>
+	/// Rotates a vector to current camera perspective while keeping y value
+	/// </summary>
+	/// <param name="vector">vector to rotate</param>
+	/// <returns>Returns rotated vector</returns>
 	public static Vector3 ApplyCameraRotation(Vector3 vector)
 	{
 		Camera cam = Camera.main;
@@ -22,6 +32,11 @@ public static class VectorMath
 		return rotatedVector;
 	}
 	
+	/// <summary>
+	/// Makes a transform look at a position while aligning to closest axis (x/z)
+	/// </summary>
+	/// <param name="transform">transform to rotate</param>
+	/// <param name="vector">vector to look at</param>
 	public static void AxisAlignTo(Transform transform, Vector3 vector)
 	{
 		vector.y = 0;
@@ -36,6 +51,11 @@ public static class VectorMath
 		transform.LookAt(transform.position + vector);
 	}
 	
+	/// <summary>
+	/// Makes a transform look at a RigidBody while aligning to closest axis (x/z)
+	/// </summary>
+	/// <param name="transform">transform to rotate</param>
+	/// <param name="rb">RigidBody to look at</param>
 	public static void AxisAlignTo(Transform transform, Rigidbody rb)
 	{
 		AxisAlignTo(transform, rb.position - transform.position);

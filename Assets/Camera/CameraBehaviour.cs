@@ -14,6 +14,9 @@ public class CameraBehaviour : MonoBehaviour
     private Vector3 playerMiddle;
     private float startPlayerDistance, playerDistance;
 
+    /// <summary>
+    /// max tolerated player distance before zoom = this * playerDistance at start
+    /// </summary>
     [SerializeField]
     private float playerDistanceZoomThreshhold = 2;
     private float zoomMultiplier;
@@ -49,8 +52,9 @@ public class CameraBehaviour : MonoBehaviour
         
     }
 
-
-    //cutted, kept for debugging
+    /// <summary>
+    ///cutted, kept for playtesting
+    /// </summary>
     private void RotateCamera()
     {
         if (Input.GetAxis("Mouse X") != 0)
@@ -65,14 +69,15 @@ public class CameraBehaviour : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Camera stays between players, zooms based on distance, if player can't move focuses other only
+    /// </summary>
     private void MoveCamera()
     {
         playerDistance = Vector3.Distance(gork.transform.position, clyde.transform.position);
 
-        //zoom if players too far from each other
         zoomMultiplier = Mathf.Clamp((playerDistanceZoomThreshhold * startPlayerDistance / playerDistance), minZoom, maxZoom);
 
-        //if player cant move focus other player
         if (!clyde.GetComponent<Player>().canMove)
         {
             targetPos = gork.transform.position + offset / zoomMultiplier;

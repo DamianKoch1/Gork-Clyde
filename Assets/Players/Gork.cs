@@ -40,6 +40,9 @@ public class Gork : Player
 		}
 	}
 
+	/// <summary>
+	/// Stops pushing if fixed joint broke or if falling
+	/// </summary>
 	private void CheckIfStillPushing()
 	{
 		if (!fixedJoint)
@@ -63,21 +66,24 @@ public class Gork : Player
 
 		if (Input.GetButtonUp(GorkInteract))
 		{
-			if (pushedObj)
+			if (pushing)
 			{
-				if (!throwing.IsCarryingObject())
-				{
-					StartPushing();
-				}
+				StopPushing();
 			}
 		}
 	}
 
+	/// <summary>
+	/// Pickup / throw / push depending on current state
+	/// </summary>
 	private void Interact()
 	{
-		if (pushing)
+		if (pushedObj)
 		{
-			StopPushing();
+			if (!throwing.IsCarryingObject())
+			{
+				StartPushing();
+			}
 		}
 		else
 		{
@@ -85,12 +91,15 @@ public class Gork : Player
 		}
 	}
 	
-	
+	/// <summary>
+	/// Sets up pushing: adds fixed joint, changes movement, starts push animation
+	/// </summary>
 	private void StartPushing()
 	{
 		if (throwing.IsCarryingObject()) return;
 		if (pushing) return;
 		if (fixedJoint) return;
+		if (!pushedObj) return;
 
         anim.SetBool("push", true);
 		pushing = true;
@@ -103,13 +112,20 @@ public class Gork : Player
 		AddFixedJoint(objectRb);
 	}
 
+	/// <summary>
+	/// Adds fixed joint connecting Gork with target, adapts breakForce to target mass
+	/// </summary>
+	/// <param name="target">RigidBody to connect joint with</param>
 	private void AddFixedJoint(Rigidbody target)
 	{
 		fixedJoint = gameObject.AddComponent<FixedJoint>();
 		fixedJoint.connectedBody = target;
-		fixedJoint.breakForce = 800f; //TODO maybe use rb mass instead of hardcoding
+		fixedJoint.breakForce = rb.mass * 400;
 	}
 	
+	/// <summary>
+	/// Reverts movement, destroys fixedJoint if still there, stops push animation
+	/// </summary>
 	private void StopPushing()
 	{
 		if (fixedJoint)
@@ -130,63 +146,25 @@ public class Gork : Player
 		setMotion = SetMotionDefault;
 	}
 
-
+	/// <summary>
+	/// Disables diagonal movement, can only move on one axis
+	/// </summary>
 	private void SetMotionSingleAxis()
 	{
-		var forward = transform.forward;
-		var camRotatedForward = ApplyCameraRotation(forward);
-		if (!AlignsToXAxis(camRotatedForward))
+		var x = Input.GetAxis(xAxis);
+		var z = Input.GetAxis(zAxis);
+		if (Mathf.Abs(x) > Mathf.Abs(z))
 		{
-			motion = forward * Input.GetAxis(zAxis) * speed;
-			if (InverseVerticalPushControls(forward, camRotatedForward))
-			{
-				motion *= -1;
-			}
-			if (Mathf.Abs(Input.GetAxis(xAxis)) > 0.5f)
-			{
-				StopPushing();
-			}
+			motion.x = x;
+			motion.z = 0;
 		}
 		else
 		{
-			motion = forward * Input.GetAxis(xAxis) * speed;
-			if (InverseHorizontalPushControls(forward, camRotatedForward))
-			{
-				motion *= -1;
-			}
-			if (Mathf.Abs(Input.GetAxis(zAxis)) > 0.5f)
-			{
-				StopPushing();
-			}
+			motion.x = 0;
+			motion.z = z;
 		}
-		motion.y = 0;
+		motion *= speed;
+		motion = ApplyCameraRotation(motion);
 	}
 
-	private bool InverseVerticalPushControls(Vector3 forward, Vector3 camRotatedForward)
-	{
-		if (AlignsToXAxis(camRotatedForward)) return false;
-		if (camRotatedForward.z > 0)
-		{
-			if (AlignsToXAxis(forward)) return true;
-		}
-		else
-		{
-			if (!AlignsToXAxis(forward)) return true;
-		}
-		return false;
-	}
-
-	private bool InverseHorizontalPushControls(Vector3 forward, Vector3 camRotatedForward)
-	{
-		if (!AlignsToXAxis(camRotatedForward)) return false;
-		if (camRotatedForward.x > 0)
-		{
-			if (!AlignsToXAxis(forward)) return true;
-		}
-		else
-		{
-			if (AlignsToXAxis(forward)) return true;
-		}
-		return false;
-	}
 }

@@ -45,6 +45,9 @@ public class OptionsMenu : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Matches slider values with current bus volumes
+    /// </summary>
     private void SetSliderValues()
     {
         float temp;

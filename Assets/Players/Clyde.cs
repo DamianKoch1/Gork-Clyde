@@ -6,9 +6,15 @@ public class Clyde : Player
 {
     public static string XAxis = "ClydeHorizontal", ZAxis = "ClydeVertical", JumpButton = "ClydeJump";
 
+    /// <summary>
+    /// reference to gork, reenabling collision with when cancelling throw
+    /// </summary>
     [SerializeField]
     private GameObject gork;
 
+    /// <summary>
+    /// starts after being thrown, can't get picked up while > 0
+    /// </summary>
     private float pickupCooldown = 0;
 
     protected override void Start()
@@ -23,7 +29,9 @@ public class Clyde : Player
         CheckIfOnGork();
     }
 
-
+    /// <summary>
+    /// Makes gork pick clyde up if clyde stands on him, prevents jumping on top of gork to reach unintended heights
+    /// </summary>
     private void CheckIfOnGork()
     {
         if (pickupCooldown != 0) return;
@@ -43,12 +51,18 @@ public class Clyde : Player
         pickupCooldown = 0;
     }
 
+    /// <summary>
+    /// Called when thrown
+    /// </summary>
     public void RestartPickupCooldown()
     {
         StopCoroutine(DecreasePickupCooldown());
         StartCoroutine(DecreasePickupCooldown());
     }
 
+    /// <summary>
+    /// Clyde can exit gork if he wants, adds small forward force
+    /// </summary>
     public void CancelThrow()
     {
         transform.SetParent(null, true);

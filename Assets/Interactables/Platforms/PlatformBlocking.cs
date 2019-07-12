@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Used to prevent platforms squashing objects below
+/// </summary>
 public class PlatformBlocking : MonoBehaviour
 {
     private MovingPlatform platform;
 
     private int blockingObjCount = 0;
-
-    [SerializeField]
-    private string enteredMessage, exitedMessage;
 
     private void Start()
     {
@@ -27,7 +27,6 @@ public class PlatformBlocking : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         if (!CanBlock(other)) return;
-
         blockingObjCount--;
         if (blockingObjCount == 0)
         {
@@ -36,6 +35,11 @@ public class PlatformBlocking : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Checks if collider is able to block platform
+    /// </summary>
+    /// <param name="other">collider to check</param>
+    /// <returns>returns true if collider can block, false otherwise</returns>
     private bool CanBlock(Collider other)
     {
         if (other.isTrigger) return false;
