@@ -19,6 +19,8 @@ public class PlayerIndicators : MonoBehaviour
     private void Start()
     {
         cam = GetComponent<Camera>();
+        gorkIndicator.SetActive(true);
+        clydeIndicator.SetActive(true);
     }
 
     private void Update()

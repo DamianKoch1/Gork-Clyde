@@ -15,7 +15,7 @@ public class Respawning : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        StartCoroutine(CheckSpawnPoint());
+        StartCoroutine(UpdateSpawnPoint());
     }
 
     
@@ -30,10 +30,10 @@ public class Respawning : MonoBehaviour
     }
 
     /// <summary>
-    /// If dynamic spawnpoint is true, keeps updating spawnpoint if at valid position
+    /// If dynamicSpawnpoint is false, only sets spawnpoint at start
     /// </summary>
     /// <returns></returns>
-    public IEnumerator CheckSpawnPoint()
+    public IEnumerator UpdateSpawnPoint()
     {
         SetSpawnPoint();
         while (dynamicSpawnpoint)
@@ -41,7 +41,7 @@ public class Respawning : MonoBehaviour
             if (Physics.Raycast(rb.position, -Vector3.up,
             out var raycastHit, 2f,Physics.AllLayers, QueryTriggerInteraction.Ignore))
             {
-                if (!raycastHit.transform.CompareTag("platform"))
+                if (IsValidSpawnpoint(raycastHit))
                 {
                     SetSpawnPoint();
                 }
@@ -50,7 +50,17 @@ public class Respawning : MonoBehaviour
         }
     }
 
-    
+    /// <summary>
+    /// Checks if a RaycastHit contains a valid spawnpoint
+    /// </summary>
+    /// <param name="hit">RaycastHit to check</param>
+    /// <returns></returns>
+    private bool IsValidSpawnpoint(RaycastHit hit)
+    {
+        if (hit.transform.CompareTag("platform")) return false;
+        return true;
+    }
+        
     
     private void SetSpawnPoint()
     {
