@@ -18,8 +18,25 @@ public abstract class Pushable : MonoBehaviour
     private void FixedUpdate()
     {
         UpdateParticles();
+        UpdateLayer();
     }
 
+
+    /// <summary>
+    /// prevents big pushables getting pushed from just walking against it
+    /// </summary>
+    private void UpdateLayer()
+    {
+        if (isPushed)
+        {
+            gameObject.layer = 2;
+        }
+        else
+        {
+            gameObject.layer = 0;
+        }
+    }
+    
     private void InitializeVariables()
     {
         pushedParticles = gameObject.GetComponentInChildren<ParticleSystem>();

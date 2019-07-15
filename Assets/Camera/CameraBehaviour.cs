@@ -94,4 +94,23 @@ public class CameraBehaviour : MonoBehaviour
 
         transform.position = Vector3.Lerp(transform.position, targetPos, followSpeed);
     }
+    
+    /// <summary>
+    /// Rotates a vector to current camera perspective while keeping y value
+    /// </summary>
+    /// <param name="vector">vector to rotate</param>
+    /// <returns>Returns rotated vector</returns>
+    public static Vector3 ApplyCameraRotation(Vector3 vector)
+    {
+        Camera cam = Camera.main;
+        Vector3 camForward = cam.transform.forward;
+        camForward.y = 0;
+        camForward.Normalize();
+        Vector3 camRight = cam.transform.right;
+        camRight.y = 0;
+        camRight.Normalize();
+        Vector3 rotatedVector = vector.x * camRight + vector.y * Vector3.up + vector.z * camForward;
+        return rotatedVector;
+    }
+    
 }
