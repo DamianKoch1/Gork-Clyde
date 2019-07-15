@@ -24,7 +24,7 @@ public class PressurePlate : TriggerObject
             GetComponent<AudioSource>().Play();
             foreach (GameObject target in targets)
             {
-                target.GetComponent<IActivatable>().OnPlateActivated();
+                target.GetComponent<IActivatable>()?.OnPlateActivated();
             }
         }
         objectsOnPlateCount++;
@@ -39,7 +39,7 @@ public class PressurePlate : TriggerObject
         {
             foreach (GameObject target in targets)
             {
-                target.GetComponent<IActivatable>().OnPlateExited();
+                target.GetComponent<IActivatable>()?.OnPlateExited();
             }
         }
         objectsOnPlateCount--;

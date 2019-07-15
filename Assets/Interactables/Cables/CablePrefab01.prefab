@@ -45,8 +45,9 @@ GameObject:
   - component: {fileID: 4528878789340284106}
   - component: {fileID: 2425176414376040795}
   - component: {fileID: 4584677934998200346}
+  - component: {fileID: 1770626223546356245}
   m_Layer: 0
-  m_Name: Pipe
+  m_Name: CablePrefab01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -203,6 +204,21 @@ MonoBehaviour:
   updateInPlayMode: 0
   curveSpace: 1
   mode: 2
+--- !u!114 &1770626223546356245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4400388031465417278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 453f73a31dcb66d4491f338184ca1eca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activeMat: {fileID: 2100000, guid: 648b108acc530f24c834d382713b1ce2, type: 2}
+  inactiveMat: {fileID: 2100000, guid: bad1d397ca3d0dd4c99b6cd8bbe86287, type: 2}
+  active: 0
 --- !u!1 &4528878789765343647
 GameObject:
   m_ObjectHideFlags: 0
