@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static VectorMath;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Throwing))]
@@ -15,7 +14,8 @@ public class Gork : Player
 	[HideInInspector]
 	public GameObject pushedObj;
 
-	private bool pushing;
+	[HideInInspector]
+	public bool pushing;
 	
 	public static string XAxis = "GorkHorizontal",
 	ZAxis = "GorkVertical",
@@ -104,10 +104,12 @@ public class Gork : Player
         anim.SetBool("push", true);
 		pushing = true;
 		Rigidbody objectRb = pushedObj.GetComponent<Rigidbody>();
-		AxisAlignTo(transform, objectRb);
+
+		
+		
 		ResetMotion();
-		setMotion = SetMotionSingleAxis;
-		pushedObj.layer = 2;
+		setMotion = SetMotionPushing;
+		//pushedObj.layer = 2;
 		pushedObj.GetComponent<PushableBig>().isPushed = true;
 		AddFixedJoint(objectRb);
 	}
@@ -135,7 +137,7 @@ public class Gork : Player
 
 		if (pushedObj)
 		{
-			pushedObj.layer = 0;
+			//pushedObj.layer = 0;
 			pushedObj.GetComponent<PushableBig>().isPushed = false;
 			pushedObj = null;
 		}
@@ -147,24 +149,17 @@ public class Gork : Player
 	}
 
 	/// <summary>
-	/// Disables diagonal movement, can only move on one axis
+	/// Disables rotating to motion vector
 	/// </summary>
-	private void SetMotionSingleAxis()
+	private void SetMotionPushing()
 	{
-		var x = Input.GetAxis(xAxis);
-		var z = Input.GetAxis(zAxis);
-		if (Mathf.Abs(x) > Mathf.Abs(z))
-		{
-			motion.x = x;
-			motion.z = 0;
-		}
-		else
-		{
-			motion.x = 0;
-			motion.z = z;
-		}
+		motion.x = Input.GetAxis(xAxis);
+		motion.z = Input.GetAxis(zAxis);
+		
 		motion *= speed;
-		motion = ApplyCameraRotation(motion);
+		motion = CameraBehaviour.ApplyCameraRotation(motion);
 	}
 
+	
+	
 }
