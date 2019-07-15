@@ -33,6 +33,7 @@ public class PushableBig : Pushable
         if (gork.pushing) return;
         
         gork.pushedObj = null;
+        gameObject.layer = 0;
     }
 
     public Vector3 GetClosestPushPosition(Vector3 objPosition)
