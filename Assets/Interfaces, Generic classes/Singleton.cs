@@ -7,7 +7,7 @@ using UnityEngine;
 /// Used to implement singletons that are attached to GameObjects
 /// </summary>
 /// <typeparam name="T">Type of class to make a singleton of</typeparam>
-public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
+public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
     private static T instance;
 
