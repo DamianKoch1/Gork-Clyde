@@ -163,8 +163,12 @@ public class Gork : Player
 
 	private void AlignToPushableSide()
 	{
-		rb.position = pushedObj.GetComponent<PushableBig>().GetClosestPushPosition(rb.position);
-		transform.LookAt(pushedObj.transform.position);
+		var pos = pushedObj.GetComponent<PushableBig>().GetClosestPushPosition(rb.position);
+		
+		pos.y = rb.position.y;
+		transform.position = pos;
+		
+		transform.LookAt(pushedObj.transform);
 	}
 
 	
