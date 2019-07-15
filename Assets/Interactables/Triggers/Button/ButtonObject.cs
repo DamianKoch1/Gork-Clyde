@@ -21,6 +21,7 @@ public class ButtonObject : TriggerObject
         if (!triggered)
         {
             triggered = true;
+            GetComponent<Animator>().SetBool("BoolTriggerButton", true);
             GetComponent<AudioSource>().Play();
             foreach (GameObject target in targets)
             {
@@ -30,6 +31,7 @@ public class ButtonObject : TriggerObject
         else
         {
             triggered = false;
+            GetComponent<Animator>().SetBool("BoolTriggerButton", false);
             GetComponent<AudioSource>().Play();
             foreach (GameObject target in targets)
             {
