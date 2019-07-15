@@ -24,7 +24,7 @@ public class ButtonObject : TriggerObject
             GetComponent<AudioSource>().Play();
             foreach (GameObject target in targets)
             {
-                target.GetComponent<IActivatable>().OnButtonActivated();
+                target.GetComponent<IActivatable>()?.OnButtonActivated();
             }
         }
         else
@@ -33,7 +33,7 @@ public class ButtonObject : TriggerObject
             GetComponent<AudioSource>().Play();
             foreach (GameObject target in targets)
             {
-                target.GetComponent<IActivatable>().OnButtonDeactivated();
+                target.GetComponent<IActivatable>()?.OnButtonDeactivated();
             }
         }
     }
