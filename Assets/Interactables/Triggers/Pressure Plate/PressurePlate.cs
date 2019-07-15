@@ -21,13 +21,14 @@ public class PressurePlate : TriggerObject
     {
         if (objectsOnPlateCount == 0)
         {
-            GetComponent<AudioSource>().Play();
             foreach (GameObject target in targets)
             {
                 target.GetComponent<IActivatable>()?.OnPlateActivated();
             }
         }
         objectsOnPlateCount++;
+        GetComponent<Animator>().SetTrigger("OnPlate");
+
     }
 
     /// <summary>
@@ -43,6 +44,7 @@ public class PressurePlate : TriggerObject
             }
         }
         objectsOnPlateCount--;
+        GetComponent<Animator>().SetTrigger("OnPlate");
     }
 
 }
