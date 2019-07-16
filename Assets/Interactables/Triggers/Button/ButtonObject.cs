@@ -21,19 +21,21 @@ public class ButtonObject : TriggerObject
         if (!triggered)
         {
             triggered = true;
+            GetComponent<Animator>().SetBool("BoolTriggerButton", true);
             GetComponent<AudioSource>().Play();
             foreach (GameObject target in targets)
             {
-                target.GetComponent<IActivatable>().OnButtonActivated();
+                target.GetComponent<IActivatable>()?.OnButtonActivated();
             }
         }
         else
         {
             triggered = false;
+            GetComponent<Animator>().SetBool("BoolTriggerButton", false);
             GetComponent<AudioSource>().Play();
             foreach (GameObject target in targets)
             {
-                target.GetComponent<IActivatable>().OnButtonDeactivated();
+                target.GetComponent<IActivatable>()?.OnButtonDeactivated();
             }
         }
     }
