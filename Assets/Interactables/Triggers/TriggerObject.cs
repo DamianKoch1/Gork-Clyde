@@ -7,6 +7,12 @@ public abstract class TriggerObject : MonoBehaviour
     [SerializeField]
     protected GameObject[] targets;
 
+    [SerializeField]
+    protected Renderer cableRenderer;
+
+    [SerializeField]
+    protected Material activeMat, inactiveMat;
+
     private enum TriggerableBy {Clyde, Gork, All};
     [SerializeField]
     private TriggerableBy triggerableBy = TriggerableBy.All;
@@ -18,6 +24,11 @@ public abstract class TriggerObject : MonoBehaviour
         OnTriggered();
     }
     
+    /// <summary>
+    /// Checks if collider is able to trigger this object
+    /// </summary>
+    /// <param name="other">collider to check</param>
+    /// <returns></returns>
     protected bool MatchesTriggerCondition(Collider other)
     {
         if (other.isTrigger) return false;
@@ -39,7 +50,15 @@ public abstract class TriggerObject : MonoBehaviour
     }
   
     protected abstract void OnTriggered();
-   
-      
+  
+
+    /// <summary>
+    /// Sets own cable mesh renderer material to given material
+    /// </summary>
+    /// <param name="m">new material</param>
+    protected void SetCableMaterial(Material m)
+    {
+        cableRenderer.material = m;
+    }
    
 }
