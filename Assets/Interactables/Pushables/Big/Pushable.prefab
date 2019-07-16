@@ -366,6 +366,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPushed: 0
+  gorkPushDistance: 2
 --- !u!135 &7341662568781150830
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -377,7 +378,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.75
+  m_Radius: 0.525
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &7098303819947076371
 MonoBehaviour:

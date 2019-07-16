@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static VectorMath;
 
 /// <summary>
 /// Base class for players
@@ -151,7 +150,7 @@ public abstract class Player : MonoBehaviour
             motion = motion.normalized;
         }
         motion *= moveSpeed;
-        motion = ApplyCameraRotation(motion);
+        motion = CameraBehaviour.ApplyCameraRotation(motion);
         LookForward();
     }
 
