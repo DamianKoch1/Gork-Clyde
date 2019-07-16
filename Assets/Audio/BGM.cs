@@ -12,7 +12,7 @@ public class BGM : Singleton<BGM>
 	/// <param name="newBgm">new bgm to play</param>
 	public void SetBgm(AudioClip newBgm)
 	{
-		var audioSource = GetComponent<AudioSource>();
+		var audioSource = Instance.GetComponent<AudioSource>();
 		if (!audioSource.clip == newBgm)
 		{
 			audioSource.clip = newBgm;
@@ -25,6 +25,6 @@ public class BGM : Singleton<BGM>
 	/// </summary>
 	public void StopBgm()
 	{
-		GetComponent<AudioSource>().Stop();
+		Instance.GetComponent<AudioSource>().Stop();
 	}
 }
