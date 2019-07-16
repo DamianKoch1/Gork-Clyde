@@ -21,7 +21,7 @@ public class Airstream : MonoBehaviour, IActivatable
 
     private void Start()
     {
-        if (activeAtStart)
+        if (!activeAtStart)
         {
             ToggleAirstream();
         }

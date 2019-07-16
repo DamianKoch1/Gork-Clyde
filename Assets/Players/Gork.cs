@@ -104,12 +104,9 @@ public class Gork : Player
         anim.SetBool("push", true);
 		pushing = true;
 		Rigidbody objectRb = pushedObj.GetComponent<Rigidbody>();
-
-		
-		
+		AlignToPushableSide();
 		ResetMotion();
 		setMotion = SetMotionPushing;
-		//pushedObj.layer = 2;
 		pushedObj.GetComponent<PushableBig>().isPushed = true;
 		AddFixedJoint(objectRb);
 	}
@@ -137,7 +134,6 @@ public class Gork : Player
 
 		if (pushedObj)
 		{
-			//pushedObj.layer = 0;
 			pushedObj.GetComponent<PushableBig>().isPushed = false;
 			pushedObj = null;
 		}
@@ -155,9 +151,24 @@ public class Gork : Player
 	{
 		motion.x = Input.GetAxis(xAxis);
 		motion.z = Input.GetAxis(zAxis);
+
+		if (motion.magnitude > 1)
+		{
+			motion.Normalize();
+		}
 		
 		motion *= speed;
 		motion = CameraBehaviour.ApplyCameraRotation(motion);
+	}
+
+	private void AlignToPushableSide()
+	{
+		var pos = pushedObj.GetComponent<PushableBig>().GetClosestPushPosition(rb.position);
+		
+		pos.y = rb.position.y;
+		transform.position = pos;
+		
+		transform.LookAt(pushedObj.transform);
 	}
 
 	
