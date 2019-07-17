@@ -60,7 +60,6 @@ public class PushableBig : Pushable
                 closestPosition = pos;
             }
         }
-        print(closestPosition);
         return closestPosition;
     }
     
