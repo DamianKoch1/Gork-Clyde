@@ -38,6 +38,7 @@ public class Clyde : Player
         if (pickupCooldown != 0) return;
         if (!groundedInfo.transform) return;
         var _gork = groundedInfo.transform.GetComponent<Gork>();
+        if (_gork?.isPushing == true) return;
         _gork?.throwing.PickUp(gameObject);
     }
 
