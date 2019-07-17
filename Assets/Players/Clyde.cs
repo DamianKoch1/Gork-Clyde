@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Carryable))]
 public class Clyde : Player
 {
     public static string XAxis = "ClydeHorizontal", ZAxis = "ClydeVertical", JumpButton = "ClydeJump";
@@ -68,6 +69,7 @@ public class Clyde : Player
         transform.SetParent(null, true);
         ResetMotion();
         canMove = true;
+        GetComponent<Carryable>().isHeld = false;
         anim.SetTrigger("throwCancelled");
         gork.GetComponent<Gork>().anim.SetTrigger("cancelthrow");
         rb.isKinematic = false;
