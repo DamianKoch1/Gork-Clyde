@@ -103,9 +103,9 @@ public class ThrowIndicator : MonoBehaviour
     {
         if (heldObject.GetComponent<Clyde>())
         {
-            throwVector.x *= 0.987f;
+            throwVector.x *= 0.9896f;
             throwVector.y *= 0.99f;
-            throwVector.z *= 0.987f;
+            throwVector.z *= 0.9896f;
         }
         return lineRenderer.gameObject.transform.position + throwVector * time + Physics.gravity * time * time * 0.5f;
     }
