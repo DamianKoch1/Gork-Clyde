@@ -5,6 +5,7 @@ using UnityEngine;
 /// <summary>
 /// Base class for players
 /// </summary>
+[RequireComponent(typeof(Rigidbody))]
 public abstract class Player : MonoBehaviour
 {
     [SerializeField]

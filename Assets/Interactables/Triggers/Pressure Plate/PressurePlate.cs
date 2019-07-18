@@ -22,6 +22,7 @@ public class PressurePlate : TriggerObject
         if (objectsOnPlateCount == 0)
         {
             GetComponent<Animator>().SetBool("OnPlate", true);
+            SetCableMaterial(activeMat);
             foreach (GameObject target in targets)
             {
                 target.GetComponent<IActivatable>()?.OnPlateActivated();
@@ -39,6 +40,7 @@ public class PressurePlate : TriggerObject
         if (objectsOnPlateCount == 1)
         {
             GetComponent<Animator>().SetBool("OnPlate", false);
+            SetCableMaterial(inactiveMat);
             foreach (GameObject target in targets)
             {
                 target.GetComponent<IActivatable>()?.OnPlateExited();

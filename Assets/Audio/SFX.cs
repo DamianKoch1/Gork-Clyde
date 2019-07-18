@@ -9,7 +9,7 @@ public class SFX : Singleton<SFX>
 {
     public void PlaySound(AudioClip ac)
     {
-        GetComponent<AudioSource>().clip = ac;
-        GetComponent<AudioSource>().Play();
+        Instance.GetComponent<AudioSource>().clip = ac;
+        Instance.GetComponent<AudioSource>().Play();
     }
 }
