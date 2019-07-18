@@ -15,7 +15,7 @@ public class Gork : Player
 	public GameObject pushedObj;
 
 	[HideInInspector]
-	public bool pushing;
+	public bool isPushing;
 	
 	public static string XAxis = "GorkHorizontal",
 	ZAxis = "GorkVertical",
@@ -34,7 +34,7 @@ public class Gork : Player
 	protected override void Update()
 	{
 		base.Update();
-		if (pushing)
+		if (isPushing)
 		{
 			CheckIfStillPushing();
 		}
@@ -66,7 +66,7 @@ public class Gork : Player
 
 		if (Input.GetButtonUp(GorkInteract))
 		{
-			if (pushing)
+			if (isPushing)
 			{
 				StopPushing();
 			}
@@ -97,12 +97,12 @@ public class Gork : Player
 	private void StartPushing()
 	{
 		if (throwing.IsCarryingObject()) return;
-		if (pushing) return;
+		if (isPushing) return;
 		if (fixedJoint) return;
 		if (!pushedObj) return;
 
         anim.SetBool("push", true);
-		pushing = true;
+		isPushing = true;
 		Rigidbody objectRb = pushedObj.GetComponent<Rigidbody>();
 		AlignToPushableSide();
 		ResetMotion();
@@ -139,7 +139,7 @@ public class Gork : Player
 		}
 
 		anim.SetBool("push", false);
-		pushing = false;
+		isPushing = false;
 		ResetMotion();
 		setMotion = SetMotionDefault;
 	}
