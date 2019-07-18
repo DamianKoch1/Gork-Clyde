@@ -23,9 +23,10 @@ public class ThrowIndicator : MonoBehaviour
     private LineRenderer lineRenderer;
 
     private RaycastHit hit;
+
     
     /// <summary>
-    /// Updates indicator based on throw direction / strength, instanciates / deletes landing indicatior based on whether indicator hits something
+    /// Updates indicator based on throw direction / strength, instantiates / deletes landing indicator based on whether indicator hits something
     /// </summary>
     /// <param name="_throwVector">throw direction * strength</param>
     /// <param name="_heldObject">held object</param>
@@ -100,13 +101,13 @@ public class ThrowIndicator : MonoBehaviour
     /// <returns>returns position of point at time</returns>
     private Vector3 PointPosAtTime(float time) 
     {
-        float amplifier = 1;
-        
-        if (!heldObject.GetComponent<Clyde>())
+        if (heldObject.GetComponent<Clyde>())
         {
-            amplifier = 0.5f;
+            throwVector.x *= 0.987f;
+            throwVector.y *= 0.99f;
+            throwVector.z *= 0.987f;
         }
-        return lineRenderer.gameObject.transform.position + throwVector * time + Physics.gravity * time * time * amplifier;
+        return lineRenderer.gameObject.transform.position + throwVector * time + Physics.gravity * time * time * 0.5f;
     }
 }    
 
