@@ -65,7 +65,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  jumpHeight: 8
+  jumpHeight: 8.25
   airMovespeedPenalty: 0.85
   throwMovespeedPenalty: 0.75
   isThrown: 0
@@ -88,6 +88,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ef1ccd984b461441bb3f1b20dca628e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isHeld: 0
 --- !u!54 &2553107321341475815
 Rigidbody:
   m_ObjectHideFlags: 0
