@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
 public class MovingPlatform : MonoBehaviour, IActivatable
@@ -8,7 +9,7 @@ public class MovingPlatform : MonoBehaviour, IActivatable
     private GameObject start, target, platform;
     private Vector3 pos1, pos2, targetPos;
     private bool stop, blocked;
-    public enum Mode { Autostart, Triggerable };
+    public enum Mode { Autostart, Triggerable, MoveOnce};
     public Mode mode = Mode.Autostart;
     [SerializeField]
     private float speed;
@@ -43,6 +44,10 @@ public class MovingPlatform : MonoBehaviour, IActivatable
     /// </summary>
     private void MovePlatform()
     {
+        if (mode == Mode.MoveOnce)
+        {
+            if (Vector3.Distance(rb.position, pos2) < 0.1f) return;
+        }
         if (stop) return;
         if (blocked) return;
 
@@ -52,6 +57,7 @@ public class MovingPlatform : MonoBehaviour, IActivatable
         }
         rb.MovePosition(pos1 + 0.5f * (1 + Mathf.Sin(moveAmount - Mathf.PI / 2)) * (pos2 - pos1));
         moveAmount += Time.deltaTime * speed;
+      
     }
 
 

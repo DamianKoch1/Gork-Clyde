@@ -30,7 +30,7 @@ public class PushableBig : Pushable
         if (other.isTrigger) return;
         var gork = other.GetComponent<Gork>();
         if (!gork) return;
-        if (gork.pushing) return;
+        if (gork.isPushing) return;
         
         gork.pushedObj = null;
         gameObject.layer = 0;
@@ -60,7 +60,6 @@ public class PushableBig : Pushable
                 closestPosition = pos;
             }
         }
-        print(closestPosition);
         return closestPosition;
     }
     

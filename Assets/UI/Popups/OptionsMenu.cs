@@ -13,8 +13,11 @@ public class OptionsMenu : MonoBehaviour
     private AudioMixer mixer;
 
     [SerializeField]
-    private Slider BgmSlider, SfxSlider;
+    private Slider bgmSlider, sfxSlider;
 
+    [SerializeField] 
+    private Toggle fullscreenToggle, muteToggle;
+    
     private Canvas canvas;
 
     [SerializeField]
@@ -22,8 +25,9 @@ public class OptionsMenu : MonoBehaviour
 
     private void Start()
     {
-        SetSliderValues();
         canvas = GetComponent<Canvas>();
+        SetSliderValues();
+        SetCheckBoxStates();
     }
 
     private void Update()
@@ -33,6 +37,7 @@ public class OptionsMenu : MonoBehaviour
             CheckInput();
         }
     }
+
 
     private void CheckInput()
     {
@@ -46,45 +51,66 @@ public class OptionsMenu : MonoBehaviour
     }
 
     /// <summary>
-    /// Matches slider values with current bus volumes
+    /// Matches slider values / game volume with PlayerPrefs saved volumes
     /// </summary>
     private void SetSliderValues()
     {
-        float temp;
+        float bgmVolume = PlayerPrefs.GetFloat("BgmVolume", 0);
+        bgmSlider.value = (float)Math.Pow(10, bgmVolume / 20);
+        mixer.SetFloat("BgmVolume", bgmVolume);
+        
+        float sfxVolume = PlayerPrefs.GetFloat("SfxVolume", 0);
+        sfxSlider.value = (float)Math.Pow(10, sfxVolume / 20);
+        mixer.SetFloat("SfxVolume", sfxVolume);
+    }
 
-        mixer.GetFloat("BgmVolume", out temp);
-        BgmSlider.value = (float)Math.Pow(10, temp / 20);
+    /// <summary>
+    /// Matches checkbox states with PlayerPrefs saved values and applies checkbox effects
+    /// </summary>
+    private void SetCheckBoxStates()
+    {
+        var isFullscreen = Convert.ToBoolean(PlayerPrefs.GetInt("Fullscreen", 1));
+        fullscreenToggle.isOn = isFullscreen;
+        Screen.fullScreen = isFullscreen;
 
-        mixer.GetFloat("SfxVolume", out temp);
-        SfxSlider.value = (float)Math.Pow(10, temp / 20);
+        var isMuted = Convert.ToBoolean(PlayerPrefs.GetInt("Mute", 0));
+        muteToggle.isOn = isMuted;
+        Mute(isMuted);
     }
 
     public void SetBgmVolume(float value)
     {
-        mixer.SetFloat("BgmVolume", Mathf.Log10(value) * 20);
+        SetVolume("BgmVolume", Mathf.Log10(value) * 20);
     }
 
     public void SetSfxVolume(float value)
     {
-        mixer.SetFloat("SfxVolume", Mathf.Log10(value) * 20);
+        SetVolume("SfxVolume", Mathf.Log10(value) * 20);
     }
 
-    public void Mute(bool mute)
+    private void SetVolume(string volumeType, float value)
     {
-        if (mute)
+        mixer.SetFloat(volumeType, value);
+        PlayerPrefs.SetFloat(volumeType, value);
+    }
+
+    public void Mute(bool isMuted)
+    {
+        if (isMuted)
         {
             mixer.SetFloat("MasterVolume", -80);
         }
         else
         {
             mixer.SetFloat("MasterVolume", 0);
-
         }
+        PlayerPrefs.SetInt("Mute", Convert.ToInt32(isMuted));
     }
 
-    public void Fullscreen(bool fullscreen)
+    public void Fullscreen(bool isFullscreen)
     {
-        Screen.fullScreen = fullscreen;
+        Screen.fullScreen = isFullscreen;
+        PlayerPrefs.SetInt("Fullscreen", Convert.ToInt32(isFullscreen));
     }
 
     public void ToggleMenu(GameObject menu)
