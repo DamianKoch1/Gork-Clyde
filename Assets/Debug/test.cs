@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -6,8 +7,14 @@ using UnityEngine.AI;
 public class test : MonoBehaviour
 {
     private NavMeshAgent agent;
-    private float hp;
+    
+    [SerializeField]
+    private float strength;
 
+    private float attackCD = 0f;
+
+    
+    
     [SerializeField]
     private Rigidbody target;
 
@@ -31,6 +38,22 @@ public class test : MonoBehaviour
 
     private void Attack(Player target)
     {
-        target.rb.AddForce(((target.rb.position - transform.position) * 3 + Vector3.up*6) * 20f, ForceMode.VelocityChange);
+        if (attackCD > 0) return;
+        target.rb.AddForce(((target.rb.position - transform.position) * 3 + Vector3.up*6) * 10f, ForceMode.VelocityChange);
+        target.TakeDamage(strength);
+        StopCoroutine(CoolDownAttack());
+        StartCoroutine(CoolDownAttack());
     }
+
+    private IEnumerator CoolDownAttack()
+    {
+        attackCD = 2f;
+        while (attackCD > 0)
+        {
+            attackCD -= Time.deltaTime;
+            yield return null;
+        }
+    }
+    
+    
 }
