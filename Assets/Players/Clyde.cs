@@ -25,6 +25,8 @@ public class Clyde : Player
         InitializeInputs(XAxis, ZAxis, JumpButton);
     }
 
+    
+    
     protected override void Update()
     {
         base.Update();

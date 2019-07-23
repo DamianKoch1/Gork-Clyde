@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 /// <summary>
 /// Base class for players
@@ -39,6 +41,8 @@ public abstract class Player : MonoBehaviour
     [HideInInspector]
     public float ghostjumpTimer = 0f;
 
+    protected float maxHp = 10, hp = 10;
+    
     [HideInInspector]
     public bool canMove = true, inAirstream = false;
     private ParticleSystem walkParticles;
@@ -167,6 +171,22 @@ public abstract class Player : MonoBehaviour
         anim.ResetTrigger("land");
     }
 
+    public void TakeDamage(float dmg)
+    {
+        hp -= dmg;
+        GetComponentInChildren<SpriteRenderer>().size = new Vector2(hp/maxHp, 1);
+        if (hp <= 0)
+        {
+            OnDeath();
+        }
+    }
+
+    protected virtual void OnDeath()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+    
+    
     /// <summary>
     /// Setting animations / state bools
     /// </summary>
