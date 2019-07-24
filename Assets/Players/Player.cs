@@ -8,7 +8,7 @@ using UnityEngine.UI;
 /// Base class for players
 /// </summary>
 [RequireComponent(typeof(Rigidbody))]
-public abstract class Player : MonoBehaviour
+public abstract class Player : MonoBehaviour, IDamageable
 {
     [SerializeField]
     protected float speed, jumpHeight;
@@ -174,14 +174,15 @@ public abstract class Player : MonoBehaviour
     public void TakeDamage(float dmg)
     {
         hp -= dmg;
-        GetComponentInChildren<SpriteRenderer>().size = new Vector2(hp/maxHp, 1);
         if (hp <= 0)
         {
+            hp = 0;
             OnDeath();
         }
+        GetComponentInChildren<SpriteRenderer>().size = new Vector2(hp/maxHp, 1);
     }
 
-    protected virtual void OnDeath()
+    public void OnDeath()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }

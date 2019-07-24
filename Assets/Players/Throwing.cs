@@ -96,6 +96,14 @@ public class Throwing : MonoBehaviour
 	    }
 	    else if (carryableObjects.Count > 0)
 	    {
+		    if (carryableObjects[0].GetComponent<IDamageable>() != null)
+		    {
+			    carryableObjects[0].GetComponent<IDamageable>().TakeDamage(4);
+			    anim.SetTrigger("pickUp");
+			    anim.SetTrigger("throw");
+			    carryableObjects[0].GetComponent<Rigidbody>().AddForce((transform.forward + Vector3.up) * 30, ForceMode.VelocityChange);
+		    }
+		    else
 		    PickUp(carryableObjects[0]);
 	    }
     }
@@ -104,7 +112,7 @@ public class Throwing : MonoBehaviour
     {
 	    if (other.isTrigger) return;
 	    if (carryableObjects.Contains(other.gameObject)) return;
-	    if (!other.GetComponent<Carryable>()) return;
+	    if (!other.GetComponent<Carryable>() && !other.GetComponent<test>()) return;
 
 	    carryableObjects.Add(other.gameObject);
     }
