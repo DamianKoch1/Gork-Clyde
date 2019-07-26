@@ -38,34 +38,49 @@ public class CameraBehaviour : MonoBehaviour
 
     private void Update()
     {
-        UpdatePlayerCameras();
     }
 
 
     private void FixedUpdate()
     {
+        UpdatePlayerCameras();
         RotateCamera();
         MoveCamera();
     }
 
     private void UpdatePlayerCameras()
     {
-        if (Input.GetButton(Gork.GorkCam))
-        {
-            gorkCam.Priority = 3;
-        }
-        else
-        {
-            gorkCam.Priority = 0;
-        }
+        UpdateGorkCam();
+        UpdateClydeCam();
+    }
 
-        if (Input.GetButton(Clyde.ClydeCam))
+    private void UpdateGorkCam()
+    {
+        if (gork.GetComponent<Player>().canMove)
         {
-            clydeCam.Priority = 3;
+            if (Input.GetButton(Gork.GorkCam))
+            {
+                gorkCam.Priority = 3;
+            }
+            else
+            {
+                gorkCam.Priority = 0;
+            }
         }
-        else
+    }
+    
+    private void UpdateClydeCam()
+    {
+        if (clyde.GetComponent<Player>().canMove)
         {
-            clydeCam.Priority = 0;
+            if (Input.GetButton(Clyde.ClydeCam))
+            {
+                clydeCam.Priority = 3;
+            }
+            else
+            {
+                clydeCam.Priority = 0;
+            }
         }
     }
     
@@ -97,7 +112,7 @@ public class CameraBehaviour : MonoBehaviour
     }
 
     /// <summary>
-    /// Camera stays between players, zooms based on distance, if player can't move focuses other only
+    /// Camera stays between players, zooms based on distance, if player can't move activate 1Player camera
     /// </summary>
     private void MoveCamera()
     {
@@ -107,11 +122,11 @@ public class CameraBehaviour : MonoBehaviour
 
         if (!clyde.GetComponent<Player>().canMove)
         {
-            targetPos = gork.transform.position + offset / zoomMultiplier;
+            gorkCam.Priority = 3;
         }
         else if (!gork.GetComponent<Player>().canMove)
         {
-            targetPos = clyde.transform.position + offset / zoomMultiplier;
+            clydeCam.Priority = 3;
         }
         else
         {
