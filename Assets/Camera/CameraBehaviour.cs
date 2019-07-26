@@ -36,11 +36,6 @@ public class CameraBehaviour : MonoBehaviour
         GetComponent<CinemachineVirtualCamera>().Priority = 1;
     }
 
-    private void Update()
-    {
-    }
-
-
     private void FixedUpdate()
     {
         UpdatePlayerCameras();
@@ -56,7 +51,7 @@ public class CameraBehaviour : MonoBehaviour
 
     private void UpdateGorkCam()
     {
-        if (gork.GetComponent<Player>().canMove)
+        if (gork.GetComponent<PlayerState>().canMove)
         {
             if (Input.GetButton(Gork.GorkCam))
             {
@@ -71,7 +66,7 @@ public class CameraBehaviour : MonoBehaviour
     
     private void UpdateClydeCam()
     {
-        if (clyde.GetComponent<Player>().canMove)
+        if (clyde.GetComponent<PlayerState>().canMove)
         {
             if (Input.GetButton(Clyde.ClydeCam))
             {
@@ -120,11 +115,11 @@ public class CameraBehaviour : MonoBehaviour
 
         zoomMultiplier = Mathf.Clamp((playerDistanceZoomThreshhold * startPlayerDistance / playerDistance), minZoom, maxZoom);
 
-        if (!clyde.GetComponent<Player>().canMove)
+        if (!clyde.GetComponent<PlayerState>().canMove)
         {
             targetPos = gork.transform.position + offset / zoomMultiplier;
         }
-        else if (!gork.GetComponent<Player>().canMove)
+        else if (!gork.GetComponent<PlayerState>().canMove)
         {
             targetPos = clyde.transform.position + offset / zoomMultiplier;
         }

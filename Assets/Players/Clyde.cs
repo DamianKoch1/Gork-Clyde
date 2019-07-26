@@ -39,8 +39,8 @@ public class Clyde : Player
     private void CheckIfOnGork()
     {
         if (pickupCooldown != 0) return;
-        if (!groundedInfo.transform) return;
-        var _gork = groundedInfo.transform.GetComponent<Gork>();
+        if (!state.groundedInfo.transform) return;
+        var _gork = state.groundedInfo.transform.GetComponent<Gork>();
         if (_gork?.isPushing == true) return;
         _gork?.throwing.PickUp(gameObject);
     }
@@ -72,7 +72,7 @@ public class Clyde : Player
     {
         transform.SetParent(null, true);
         ResetMotion();
-        canMove = true;
+        state.canMove = true;
         GetComponent<Carryable>().isHeld = false;
         anim.SetTrigger("throwCancelled");
         gork.GetComponent<Gork>().anim.SetTrigger("cancelthrow");

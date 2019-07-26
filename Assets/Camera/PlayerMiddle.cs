@@ -20,11 +20,11 @@ public class PlayerMiddle : MonoBehaviour
     /// </summary>
     private void MoveToMiddle()
     {
-        if (!clyde.GetComponent<Player>().canMove)
+        if (!clyde.GetComponent<PlayerState>().canMove)
         {
             transform.position = gork.transform.position;
         }
-        else if (!gork.GetComponent<Player>().canMove)
+        else if (!gork.GetComponent<PlayerState>().canMove)
         {
             transform.position = clyde.transform.position;
         }
