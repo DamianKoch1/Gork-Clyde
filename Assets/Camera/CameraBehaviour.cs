@@ -112,7 +112,7 @@ public class CameraBehaviour : MonoBehaviour
     }
 
     /// <summary>
-    /// Camera stays between players, zooms based on distance, if player can't move activate 1Player camera
+    /// Camera stays between players, zooms based on distance, if player can't move focuses other only
     /// </summary>
     private void MoveCamera()
     {
@@ -122,11 +122,11 @@ public class CameraBehaviour : MonoBehaviour
 
         if (!clyde.GetComponent<Player>().canMove)
         {
-            gorkCam.Priority = 3;
+            targetPos = gork.transform.position + offset / zoomMultiplier;
         }
         else if (!gork.GetComponent<Player>().canMove)
         {
-            clydeCam.Priority = 3;
+            targetPos = clyde.transform.position + offset / zoomMultiplier;
         }
         else
         {
