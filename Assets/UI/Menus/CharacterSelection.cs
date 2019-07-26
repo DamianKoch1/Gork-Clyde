@@ -60,9 +60,11 @@ public class CharacterSelection : MonoBehaviour
         Gork.ZAxis = "GorkVertical";
         Gork.JumpButton = "GorkJump";
         Gork.GorkInteract = "GorkInteract";
+        Gork.GorkCam = "GorkCam";
         Clyde.XAxis = "ClydeHorizontal";
         Clyde.ZAxis = "ClydeVertical";
         Clyde.JumpButton = "ClydeJump";
+        Clyde.ClydeCam = "ClydeCam";
         evtSystem.SetSelectedGameObject(playButton.gameObject);
     }
 
@@ -79,9 +81,11 @@ public class CharacterSelection : MonoBehaviour
         Gork.ZAxis = "ClydeVertical";
         Gork.JumpButton = "ClydeJump";
         Gork.GorkInteract = "ClydeInteract";
+        Gork.GorkCam = "ClydeCam";
         Clyde.XAxis = "GorkHorizontal";
         Clyde.ZAxis = "GorkVertical";
         Clyde.JumpButton = "GorkJump";
+        Clyde.ClydeCam = "GorkCam";
         evtSystem.SetSelectedGameObject(playButton.gameObject);
     }
 

@@ -5,7 +5,10 @@ using UnityEngine;
 [RequireComponent(typeof(Carryable))]
 public class Clyde : Player
 {
-    public static string XAxis = "ClydeHorizontal", ZAxis = "ClydeVertical", JumpButton = "ClydeJump";
+    public static string XAxis = "ClydeHorizontal",
+    ZAxis = "ClydeVertical",
+    JumpButton = "ClydeJump",
+    ClydeCam = "ClydeCam";
 
     /// <summary>
     /// reference to gork, reenabling collision with when cancelling throw
