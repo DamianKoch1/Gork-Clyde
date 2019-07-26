@@ -1,9 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class CameraBehaviour : MonoBehaviour
 {
@@ -13,6 +11,8 @@ public class CameraBehaviour : MonoBehaviour
     private Vector3 offset;
     private Vector3 playerMiddle;
     private float startPlayerDistance, playerDistance;
+    [SerializeField]
+    private CinemachineVirtualCamera gorkCam, clydeCam;
 
     /// <summary>
     /// max tolerated player distance before zoom = this * playerDistance at start
@@ -36,12 +36,54 @@ public class CameraBehaviour : MonoBehaviour
         GetComponent<CinemachineVirtualCamera>().Priority = 1;
     }
 
-  
+    private void Update()
+    {
+    }
+
+
     private void FixedUpdate()
     {
+        UpdatePlayerCameras();
         RotateCamera();
         MoveCamera();
     }
+
+    private void UpdatePlayerCameras()
+    {
+        UpdateGorkCam();
+        UpdateClydeCam();
+    }
+
+    private void UpdateGorkCam()
+    {
+        if (gork.GetComponent<Player>().canMove)
+        {
+            if (Input.GetButton(Gork.GorkCam))
+            {
+                gorkCam.Priority = 3;
+            }
+            else
+            {
+                gorkCam.Priority = 0;
+            }
+        }
+    }
+    
+    private void UpdateClydeCam()
+    {
+        if (clyde.GetComponent<Player>().canMove)
+        {
+            if (Input.GetButton(Clyde.ClydeCam))
+            {
+                clydeCam.Priority = 3;
+            }
+            else
+            {
+                clydeCam.Priority = 0;
+            }
+        }
+    }
+    
     
     private void InitializeVariables()
     {

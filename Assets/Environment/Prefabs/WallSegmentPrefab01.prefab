@@ -289,6 +289,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 31033c38c001ad241ba90824c0203167, type: 2}
+    - target: {fileID: -1504981713932161579, guid: 3be01cd1baec46247b2747bc87544347,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3be01cd1baec46247b2747bc87544347, type: 3}
 --- !u!1 &3776667727920097989 stripped
@@ -310,11 +315,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2213086550842399042}
     m_Modifications:
-    - target: {fileID: 2476632055748035402, guid: 2cbe9b8328be0974b83187807aa4e00c,
-        type: 3}
-      propertyPath: m_Name
-      value: PillarPrefab01
-      objectReference: {fileID: 0}
     - target: {fileID: 1442729006937141593, guid: 2cbe9b8328be0974b83187807aa4e00c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -369,6 +369,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2476632055748035402, guid: 2cbe9b8328be0974b83187807aa4e00c,
+        type: 3}
+      propertyPath: m_Name
+      value: PillarPrefab01
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2cbe9b8328be0974b83187807aa4e00c, type: 3}

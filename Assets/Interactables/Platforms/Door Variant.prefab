@@ -25,9 +25,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f229282f381f5684da4c1d4e33d3f6af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 3205700189564830328}
-  message: PlatformBlocked
-  message2: PlatformUnblocked
 --- !u!1001 &3542148729468338212
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -35,6 +32,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2113545945582256732, guid: b93f87bc9c26c3d4bab6735257716824,
+        type: 3}
+      propertyPath: m_Name
+      value: Door Variant
+      objectReference: {fileID: 0}
     - target: {fileID: 2113545945582256729, guid: b93f87bc9c26c3d4bab6735257716824,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -90,6 +92,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 300087746331376727, guid: b93f87bc9c26c3d4bab6735257716824,
+        type: 3}
+      propertyPath: mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2113545945728698670, guid: b93f87bc9c26c3d4bab6735257716824,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.38
+      objectReference: {fileID: 0}
+    - target: {fileID: 2113545945996717948, guid: b93f87bc9c26c3d4bab6735257716824,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 6.36
+      objectReference: {fileID: 0}
     - target: {fileID: 2344895240503981414, guid: b93f87bc9c26c3d4bab6735257716824,
         type: 3}
       propertyPath: m_LocalRotation.x
@@ -110,29 +127,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.x
       value: 90
       objectReference: {fileID: 0}
-    - target: {fileID: 2113545945996717948, guid: b93f87bc9c26c3d4bab6735257716824,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 6.36
-      objectReference: {fileID: 0}
-    - target: {fileID: 2113545945728698670, guid: b93f87bc9c26c3d4bab6735257716824,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.38
-      objectReference: {fileID: 0}
-    - target: {fileID: 2113545945582256732, guid: b93f87bc9c26c3d4bab6735257716824,
-        type: 3}
-      propertyPath: m_Name
-      value: Door
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b93f87bc9c26c3d4bab6735257716824, type: 3}
---- !u!1 &3205700189564830328 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2113545945582256732, guid: b93f87bc9c26c3d4bab6735257716824,
-    type: 3}
-  m_PrefabInstance: {fileID: 3542148729468338212}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6421029135866425518 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7508677580360233098, guid: b93f87bc9c26c3d4bab6735257716824,
