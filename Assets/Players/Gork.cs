@@ -50,7 +50,7 @@ public class Gork : Player
 		{
 			StopPushing();
 		}
-		else if (!IsGrounded())
+		else if (!state.wasGrounded)
 		{
 			StopPushing();
 		}
