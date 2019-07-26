@@ -128,11 +128,12 @@ public class Throwing : MonoBehaviour
 		    clyde.anim.SetTrigger("pickedUp");
 	    }
 
+	    obj.GetComponent<Carryable>().isHeld = true;
 	    anim.SetTrigger("pickUp");
 	    Physics.IgnoreCollision(GetComponent<Collider>(), obj.GetComponent<Collider>());
 	    obj.transform.SetParent(heldObjectSlot.transform, true);
 	    obj.transform.position = heldObjectSlot.transform.position;
-	    obj.transform.LookAt(obj.transform.position + transform.forward);
+	    //obj.transform.LookAt(obj.transform.position + transform.forward);
 	    Rigidbody objectRb = obj.GetComponent<Rigidbody>();
 	    objectRb.isKinematic = true;
     }
@@ -151,6 +152,7 @@ public class Throwing : MonoBehaviour
 		    clyde.isThrown = true;
 	    }
 
+	    obj.GetComponent<Carryable>().isHeld = false;
 	    GetComponent<AudioSource>().Play();
 	    anim.SetTrigger("throw");
 	    obj.transform.SetParent(null, true);
