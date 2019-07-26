@@ -5,6 +5,7 @@ using UnityEngine;
 /// <summary>
 /// Base class for players
 /// </summary>
+[RequireComponent(typeof(Rigidbody))]
 public abstract class Player : MonoBehaviour
 {
     [SerializeField]
@@ -243,12 +244,12 @@ public abstract class Player : MonoBehaviour
         var extents = GetComponent<Collider>().bounds.extents;
       
         if (Physics.Raycast(rb.position - 0.6f * extents.y * Vector3.up, motion.x * Vector3.right,
-        extents.x * 1.1f, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore))
+        extents.x * 1.35f, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore))
         {
             motion.x = 0;
         }
         if (Physics.Raycast(rb.position - 0.6f * extents.y * Vector3.up, motion.z * Vector3.forward,
-        extents.x * 1.1f, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore))
+        extents.x * 1.35f, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore))
         {
             motion.z = 0;
         }
