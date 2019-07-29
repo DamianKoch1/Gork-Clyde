@@ -30,9 +30,10 @@ public class Throwing : MonoBehaviour
     private GameObject heldObjectSlot;
     
     // Start is called before the first frame update
-    private void Start()
+    public void Initialize(Animator _anim)
     {
 	    throwIndicator = GetComponent<ThrowIndicator>();
+	    anim = _anim;
     }
 
     // Update is called once per frame
@@ -133,7 +134,6 @@ public class Throwing : MonoBehaviour
 	    Physics.IgnoreCollision(GetComponent<Collider>(), obj.GetComponent<Collider>());
 	    obj.transform.SetParent(heldObjectSlot.transform, true);
 	    obj.transform.position = heldObjectSlot.transform.position;
-	    //obj.transform.LookAt(obj.transform.position + transform.forward);
 	    Rigidbody objectRb = obj.GetComponent<Rigidbody>();
 	    objectRb.isKinematic = true;
     }

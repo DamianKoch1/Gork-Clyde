@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(BoxCollider))]
+[RequireComponent(typeof(SphereCollider))]
+[RequireComponent(typeof(Rigidbody))]
 public abstract class Pushable : MonoBehaviour
 {
     private ParticleSystem pushedParticles;
@@ -10,6 +13,9 @@ public abstract class Pushable : MonoBehaviour
     [HideInInspector]
     public bool isPushed;
 
+    [SerializeField]
+    private float playerPushDistance = 2f;
+    
     private void Start()
     {
         InitializeVariables();
@@ -86,5 +92,39 @@ public abstract class Pushable : MonoBehaviour
         {
             pushedParticles.Play();
         }
+    }
+    
+    /// <summary>
+    /// Returns closest pushable side to given player position
+    /// </summary>
+    /// <param name="playerPos">position of player</param>
+    /// <returns></returns>
+    public Vector3 GetClosestPushPosition(Vector3 playerPos)
+    {
+        Vector3[] pushPositions = new Vector3[6];
+        var transformPos = transform.position;
+        var up = transform.up;
+        var right = transform.right;
+        var forward = transform.forward;
+        
+        pushPositions[0] = transformPos + up * playerPushDistance;
+        pushPositions[1] = transformPos - up * playerPushDistance;
+        pushPositions[2] = transformPos + right * playerPushDistance;
+        pushPositions[3] = transformPos - right * playerPushDistance;
+        pushPositions[4] = transformPos + forward * playerPushDistance;
+        pushPositions[5] = transformPos - forward * playerPushDistance;
+        
+        Vector3 closestPosition = pushPositions[0];
+
+        foreach (var pos in pushPositions)
+        {
+            if (Vector3.Distance(playerPos, pos) < Vector3.Distance(playerPos, closestPosition))
+            {
+                closestPosition = pos;
+            }
+        }
+
+        closestPosition.y = playerPos.y;
+        return closestPosition;
     }
 }

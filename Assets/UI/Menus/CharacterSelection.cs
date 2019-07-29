@@ -64,6 +64,7 @@ public class CharacterSelection : MonoBehaviour
         Clyde.XAxis = "ClydeHorizontal";
         Clyde.ZAxis = "ClydeVertical";
         Clyde.JumpButton = "ClydeJump";
+        Clyde.ClydeInteract = "ClydeInteract";
         Clyde.ClydeCam = "ClydeCam";
         evtSystem.SetSelectedGameObject(playButton.gameObject);
     }
@@ -85,6 +86,7 @@ public class CharacterSelection : MonoBehaviour
         Clyde.XAxis = "GorkHorizontal";
         Clyde.ZAxis = "GorkVertical";
         Clyde.JumpButton = "GorkJump";
+        Clyde.ClydeInteract = "GorkInteract";
         Clyde.ClydeCam = "GorkCam";
         evtSystem.SetSelectedGameObject(playButton.gameObject);
     }
