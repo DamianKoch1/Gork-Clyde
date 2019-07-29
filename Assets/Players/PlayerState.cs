@@ -91,6 +91,7 @@ public class PlayerState : MonoBehaviour
         {
             walkParticles.Play();
         }
+        canJumpTimeframe = maxGhostjumpDelay;
     }
 
     private void UpdateAirborneState()
@@ -131,7 +132,6 @@ public class PlayerState : MonoBehaviour
         anim.SetTrigger("land");
         anim.ResetTrigger("jump");
         StopCoroutine(DecreaseCanJumpTimer());
-        canJumpTimeframe = maxGhostjumpDelay;
         if (isThrown)
         {
             isThrown = false;
