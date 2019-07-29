@@ -51,6 +51,7 @@ public class PlayerState : MonoBehaviour
         anim = _anim;
         rb = _rb;
         walkParticles = _walkParticles;
+        canJumpTimeframe = maxGhostjumpDelay;
     }
 
     /// <summary>
@@ -129,8 +130,8 @@ public class PlayerState : MonoBehaviour
         anim.SetBool("falling", false);
         anim.SetTrigger("land");
         anim.ResetTrigger("jump");
-        canJumpTimeframe = maxGhostjumpDelay;
         StopCoroutine(DecreaseCanJumpTimer());
+        canJumpTimeframe = maxGhostjumpDelay;
         if (isThrown)
         {
             isThrown = false;
