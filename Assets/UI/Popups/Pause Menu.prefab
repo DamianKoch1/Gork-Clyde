@@ -666,14 +666,14 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8557111513564391488}
-        m_MethodName: ToggleMenu
-        m_Mode: 2
+        m_MethodName: LoadScene
+        m_Mode: 5
         m_Arguments:
-          m_ObjectArgument: {fileID: 4421844618050862589}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Prototype Level
+          m_StringArgument: Main Menu
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 8557111513564391488}
@@ -1591,6 +1591,11 @@ PrefabInstance:
     - target: {fileID: 2495304635855074006, guid: 5a49af38f5f73394697057d4ac3d5087,
         type: 3}
       propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4099438793462039324, guid: 5a49af38f5f73394697057d4ac3d5087,
+        type: 3}
+      propertyPath: inMainMenu
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 816476750369440583, guid: 5a49af38f5f73394697057d4ac3d5087,
