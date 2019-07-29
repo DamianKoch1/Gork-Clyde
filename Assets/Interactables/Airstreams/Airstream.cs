@@ -36,7 +36,7 @@ public class Airstream : MonoBehaviour, IActivatable
         var clyde = other.GetComponent<Clyde>();
         if (clyde)
         {
-            if (!clyde.inAirstream)
+            if (!clyde.state.inAirstream)
             {
                 OnClydeAirstreamEntered(clyde);
             }
@@ -51,7 +51,7 @@ public class Airstream : MonoBehaviour, IActivatable
         var clyde = other.GetComponent<Clyde>();
         if (clyde)
         {
-            clyde.inAirstream = false;
+            clyde.state.inAirstream = false;
         }
     }
 
@@ -71,8 +71,8 @@ public class Airstream : MonoBehaviour, IActivatable
     /// <param name="clyde">Reference to Clyde</param>
     private void OnClydeAirstreamEntered(Clyde clyde)
     {
-        clyde.inAirstream = true;
-        if (!clyde.canMove)
+        clyde.state.inAirstream = true;
+        if (!clyde.state.canMove)
         {
             clyde.CancelThrow();
         }

@@ -123,8 +123,8 @@ public class Throwing : MonoBehaviour
 	    var clyde = obj.GetComponent<Clyde>();
 	    if (clyde)
 	    {
-		    if (clyde.inAirstream) return;
-		    clyde.canMove = false;
+		    if (clyde.state.inAirstream) return;
+		    clyde.state.canMove = false;
 		    clyde.anim.SetTrigger("pickedUp");
 	    }
 
@@ -144,12 +144,12 @@ public class Throwing : MonoBehaviour
 	    if (clyde)
 	    {
 		    clyde.ResetMotion();
-		    clyde.canMove = true;
+		    clyde.state.canMove = true;
 		    clyde.anim.SetTrigger("thrown");
 		    clyde.anim.ResetTrigger("land");
 		    clyde.RestartPickupCooldown();
-		    clyde.ghostjumpTimer = 0;
-		    clyde.isThrown = true;
+		    clyde.state.canJumpTimeframe = 0;
+		    clyde.state.isThrown = true;
 	    }
 
 	    obj.GetComponent<Carryable>().isHeld = false;
