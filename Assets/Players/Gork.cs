@@ -16,11 +16,12 @@ public class Gork : Player
 
 	[HideInInspector]
 	public bool isPushing;
-	
+
 	public static string XAxis = "GorkHorizontal",
 	ZAxis = "GorkVertical",
 	JumpButton = "GorkJump",
-	GorkInteract = "GorkInteract";
+	GorkInteract = "GorkInteract",
+	GorkCam = "GorkCam";
 
 
 	protected override void Start()
@@ -49,7 +50,7 @@ public class Gork : Player
 		{
 			StopPushing();
 		}
-		else if (!IsGrounded())
+		else if (!state.wasGrounded)
 		{
 			StopPushing();
 		}
