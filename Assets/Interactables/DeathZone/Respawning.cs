@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -35,6 +36,7 @@ public class Respawning : MonoBehaviour
     /// <returns></returns>
     public IEnumerator UpdateSpawnPoint()
     {
+        yield return null;
         SetSpawnPoint();
         while (dynamicSpawnpoint)
         {
