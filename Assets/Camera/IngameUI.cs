@@ -56,12 +56,9 @@ public class IngameUI : MonoBehaviour
 
         if (Input.GetButtonDown("DebugRestart"))
         {
-            Restart();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 
-    public void Restart()
-    {
-         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
+    
 }
