@@ -131,7 +131,7 @@ public class Throwing : MonoBehaviour
 
 	    obj.GetComponent<Carryable>().isHeld = true;
 	    anim.SetTrigger("pickUp");
-	    obj.GetComponent<Collider>().enabled = false;
+	    Physics.IgnoreCollision(GetComponent<Collider>(), obj.GetComponent<Collider>());
 	    obj.transform.SetParent(heldObjectSlot.transform, true);
 	    obj.transform.position = heldObjectSlot.transform.position;
 	    Rigidbody objectRb = obj.GetComponent<Rigidbody>();
@@ -160,7 +160,7 @@ public class Throwing : MonoBehaviour
 	    objectRb.velocity = Vector3.zero;
 	    objectRb.isKinematic = false;
 	    objectRb.AddForce(vector, ForceMode.VelocityChange);
-	    obj.GetComponent<Collider>().enabled = true;
+	    Physics.IgnoreCollision(GetComponent<Collider>(), obj.GetComponent<Collider>(), false);
 	    throwIndicator.DestroyIndicator();
     }
 
