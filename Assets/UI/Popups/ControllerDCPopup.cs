@@ -2,13 +2,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class ControllerDCPopup : MonoBehaviour
 {
 	private bool checkingForDisconnects = false;
 	private bool isVisible = false;
 	
-
+	
 	private void Update()
 	{
 		if (!checkingForDisconnects)
@@ -54,13 +56,14 @@ public class ControllerDCPopup : MonoBehaviour
 	public void Show(bool show)
 	{
 		isVisible = show;
-		if (!show)
+		if (show)
 		{
-			Time.timeScale = 1;
+			EventSystem.current.SetSelectedGameObject(GetComponentInChildren<Button>().gameObject);
+			Time.timeScale = 0;
 		}
 		else
 		{
-			Time.timeScale = 0;
+			Time.timeScale = 1;
 		}
 		foreach (Transform child in transform)
 		{
