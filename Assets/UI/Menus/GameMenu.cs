@@ -2,27 +2,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameMenu : MonoBehaviour
 {
     [SerializeField]
     private AudioClip bgm;
-    
+
+    private GameObject toggleMenuOnSelected, toggleMenuOffSelected;
+
+    private void Start()
+    {
+        Cursor.visible = true;
+    }
+
+
     /// <summary>
     /// Stops bgm
     /// </summary>
     public void EndBgm()
     {
         BGM.Instance.StopBgm();
-    }
-
-
-    public void LoadCharacterSelection(string nextSceneName)
-    {
-        Time.timeScale = 1;
-        CharacterSelection.StoryPanelName = nextSceneName;
-        SceneManager.LoadScene("Character Selection");
     }
 
 
@@ -40,8 +42,26 @@ public class GameMenu : MonoBehaviour
     {
         var canvas = menu.GetComponent<Canvas>();
         canvas.enabled = !canvas.enabled;
+        if (canvas.enabled)
+        {
+            EventSystem.current.SetSelectedGameObject(toggleMenuOnSelected);
+        }
+        else
+        {
+            EventSystem.current.SetSelectedGameObject(toggleMenuOffSelected);
+        }
     }
 
+    public void SetToggleMenuOnSelected(GameObject obj)
+    {
+        toggleMenuOnSelected = obj;
+    }
+
+    public void SetToggleMenuOffSelected(GameObject obj)
+    {
+        toggleMenuOffSelected = obj;
+    }
+    
     public void Unpause()
     {
         Time.timeScale = 1;
@@ -51,4 +71,11 @@ public class GameMenu : MonoBehaviour
     {
         Application.Quit();
     }
+    
+    public void Restart()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
 }
