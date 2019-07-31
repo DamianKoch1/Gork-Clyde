@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class IngameUI : MonoBehaviour
 {
@@ -10,6 +12,7 @@ public class IngameUI : MonoBehaviour
     
     [SerializeField]
     private GameObject pauseMenu, optionsMenu;
+    
 
     private void Start()
     {
@@ -32,10 +35,12 @@ public class IngameUI : MonoBehaviour
             {
                 pauseCanvas.enabled = true;
                 Time.timeScale = 0;
+                EventSystem.current.SetSelectedGameObject(pauseMenu.GetComponentInChildren<Button>().gameObject);
             }
             else if (optionsCanvas.enabled)
             {
                 optionsCanvas.enabled = false;
+                EventSystem.current.SetSelectedGameObject(optionsMenu.GetComponentInChildren<Button>().gameObject);
             }
             else
             {
@@ -47,7 +52,12 @@ public class IngameUI : MonoBehaviour
 
         if (Input.GetButtonDown("DebugRestart"))
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            Restart();
         }
+    }
+
+    public void Restart()
+    {
+         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

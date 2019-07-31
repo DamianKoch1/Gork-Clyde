@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 
@@ -23,6 +24,8 @@ public class OptionsMenu : MonoBehaviour
     [SerializeField]
     private bool inMainMenu = false;
 
+    private GameObject toggleMenuOnSelected, toggleMenuOffSelected;
+    
     private void Start()
     {
         canvas = GetComponent<Canvas>();
@@ -115,7 +118,25 @@ public class OptionsMenu : MonoBehaviour
 
     public void ToggleMenu(GameObject menu)
     {
-        var menuCanvas = menu.GetComponent<Canvas>();
-        menuCanvas.enabled = !menuCanvas.enabled;
+        var canvas = menu.GetComponent<Canvas>();
+        canvas.enabled = !canvas.enabled;
+        if (canvas.enabled)
+        {
+            EventSystem.current.SetSelectedGameObject(toggleMenuOnSelected);
+        }
+        else
+        {
+            EventSystem.current.SetSelectedGameObject(toggleMenuOffSelected);
+        }
+    }
+
+    public void SetToggleMenuOnSelected(GameObject obj)
+    {
+        toggleMenuOnSelected = obj;
+    }
+
+    public void SetToggleMenuOffSelected(GameObject obj)
+    {
+        toggleMenuOffSelected = obj;
     }
 }
