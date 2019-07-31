@@ -17,6 +17,8 @@ public class IngameUI : MonoBehaviour
     private void Start()
     {
         BGM.Instance.SetBgm(bgm);
+        Cursor.visible = false;
+
     }
 
     private void Update()
@@ -33,6 +35,7 @@ public class IngameUI : MonoBehaviour
             var pauseCanvas = pauseMenu.GetComponent<Canvas>();
             if (!pauseCanvas.enabled)
             {
+                Cursor.visible = true;
                 pauseCanvas.enabled = true;
                 Time.timeScale = 0;
                 EventSystem.current.SetSelectedGameObject(pauseMenu.GetComponentInChildren<Button>().gameObject);
@@ -47,6 +50,7 @@ public class IngameUI : MonoBehaviour
                 pauseCanvas.enabled = false;
                 Time.timeScale = 1;
                 MenuButton.FocusNothing();
+                Cursor.visible = false;
             }
         }
 
