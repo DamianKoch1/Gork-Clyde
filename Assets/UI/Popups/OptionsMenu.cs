@@ -24,7 +24,7 @@ public class OptionsMenu : MonoBehaviour
     [SerializeField]
     private bool inMainMenu = false;
 
-    private GameObject toggleMenuOnSelected, toggleMenuOffSelected;
+    private GameObject onMenuToggledOnSelected, onMenuToggledOffSelected;
 
     public GameObject firstSelected, mainMenuSelected;
 
@@ -35,6 +35,10 @@ public class OptionsMenu : MonoBehaviour
         canvas = GetComponent<Canvas>();
         SetSliderValues();
         SetCheckBoxStates();
+        if (!inMainMenu)
+        {
+            MenuButton.FocusNothing();
+        }
     }
 
     private void Update()
@@ -134,32 +138,32 @@ public class OptionsMenu : MonoBehaviour
             menu.SetActive(!menu.activeSelf);
             if (menu.activeSelf)
             {
-                EventSystem.current.SetSelectedGameObject(toggleMenuOnSelected);
+                EventSystem.current.SetSelectedGameObject(onMenuToggledOnSelected);
             }
             else
             {
-                EventSystem.current.SetSelectedGameObject(toggleMenuOffSelected);
+                EventSystem.current.SetSelectedGameObject(onMenuToggledOffSelected);
             }
             return;
         }
         canvas.enabled = !canvas.enabled;
         if (canvas.enabled)
         {
-            EventSystem.current.SetSelectedGameObject(toggleMenuOnSelected);
+            EventSystem.current.SetSelectedGameObject(onMenuToggledOnSelected);
         }
         else
         {
-            EventSystem.current.SetSelectedGameObject(toggleMenuOffSelected);
+            EventSystem.current.SetSelectedGameObject(onMenuToggledOffSelected);
         }
     }
 
-    public void SetToggleMenuOnSelected(GameObject obj)
+    public void SetOnMenuToggledOnSelected(GameObject obj)
     {
-        toggleMenuOnSelected = obj;
+        onMenuToggledOnSelected = obj;
     }
 
-    public void SetToggleMenuOffSelected(GameObject obj)
+    public void SetOnMenuToggledOffSelected(GameObject obj)
     {
-        toggleMenuOffSelected = obj;
+        onMenuToggledOffSelected = obj;
     }
 }

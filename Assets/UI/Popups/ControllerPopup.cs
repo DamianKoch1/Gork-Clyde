@@ -13,6 +13,9 @@ public class ControllerPopup : MonoBehaviour
 	/// </summary>
 	public static bool HasShown = false;
 
+	[SerializeField] 
+	private GameObject selectOnHide;
+
 	private void Start()
 	{
 		if (!HasShown)
@@ -36,6 +39,10 @@ public class ControllerPopup : MonoBehaviour
 		if (show)
 		{
 			EventSystem.current.SetSelectedGameObject(GetComponentInChildren<Button>().gameObject);
+		}
+		else
+		{
+			EventSystem.current.SetSelectedGameObject(selectOnHide);
 		}
 	}
 }
