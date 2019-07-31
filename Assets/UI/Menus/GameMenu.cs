@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class GameMenu : MonoBehaviour
 {
 
-    private GameObject toggleMenuOnSelected, toggleMenuOffSelected;
+    private GameObject selectOnMenuToggledOn, selectOnMenuToggledOff;
 
     private void Start()
     {
@@ -44,33 +44,33 @@ public class GameMenu : MonoBehaviour
             menu.SetActive(!menu.activeSelf);
             if (menu.activeSelf)
             {
-                EventSystem.current.SetSelectedGameObject(toggleMenuOnSelected);
+                EventSystem.current.SetSelectedGameObject(selectOnMenuToggledOn);
             }
             else
             {
-                EventSystem.current.SetSelectedGameObject(toggleMenuOffSelected);
+                EventSystem.current.SetSelectedGameObject(selectOnMenuToggledOff);
             }
             return;
         }
         canvas.enabled = !canvas.enabled;
         if (canvas.enabled)
         {
-            EventSystem.current.SetSelectedGameObject(toggleMenuOnSelected);
+            EventSystem.current.SetSelectedGameObject(selectOnMenuToggledOn);
         }
         else
         {
-            EventSystem.current.SetSelectedGameObject(toggleMenuOffSelected);
+            EventSystem.current.SetSelectedGameObject(selectOnMenuToggledOff);
         }
     }
 
-    public void SetToggleMenuOnSelected(GameObject obj)
+    public void SetOnMenuToggledOnSelected(GameObject obj)
     {
-        toggleMenuOnSelected = obj;
+        selectOnMenuToggledOn = obj;
     }
 
-    public void SetToggleMenuOffSelected(GameObject obj)
+    public void SetOnMenuToggledOffSelected(GameObject obj)
     {
-        toggleMenuOffSelected = obj;
+        selectOnMenuToggledOff = obj;
     }
     
     public void Unpause()

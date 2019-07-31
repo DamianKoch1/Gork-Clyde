@@ -916,7 +916,7 @@ PrefabInstance:
     - target: {fileID: 716161596893405821, guid: 5bc9fcf2c676be44a929f462d6bb6028,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetToggleMenuOffSelected
+      value: SetOnMenuToggledOffSelected
       objectReference: {fileID: 0}
     - target: {fileID: 716161596893405821, guid: 5bc9fcf2c676be44a929f462d6bb6028,
         type: 3}
@@ -1228,6 +1228,11 @@ PrefabInstance:
       propertyPath: m_Navigation.m_SelectOnDown
       value: 
       objectReference: {fileID: 1721819599492982616}
+    - target: {fileID: 7806763090176797864, guid: 5bc9fcf2c676be44a929f462d6bb6028,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetOnMenuToggledOnSelected
+      objectReference: {fileID: 0}
     - target: {fileID: 3921362423341508378, guid: 5bc9fcf2c676be44a929f462d6bb6028,
         type: 3}
       propertyPath: m_Navigation.m_Mode
@@ -1281,7 +1286,7 @@ PrefabInstance:
     - target: {fileID: 8047437506471892672, guid: 5bc9fcf2c676be44a929f462d6bb6028,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetToggleMenuOnSelected
+      value: SetOnMenuToggledOnSelected
       objectReference: {fileID: 0}
     - target: {fileID: 8047437506471892672, guid: 5bc9fcf2c676be44a929f462d6bb6028,
         type: 3}
@@ -1412,6 +1417,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4439060156092155144, guid: 5bc9fcf2c676be44a929f462d6bb6028,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetOnMenuToggledOffSelected
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5bc9fcf2c676be44a929f462d6bb6028, type: 3}
