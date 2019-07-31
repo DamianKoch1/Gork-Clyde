@@ -18,14 +18,6 @@ public class GameMenu : MonoBehaviour
     }
 
 
-    public void LoadCharacterSelection(string nextSceneName)
-    {
-        Time.timeScale = 1;
-        CharacterSelection.StoryPanelName = nextSceneName;
-        SceneManager.LoadScene("Character Selection");
-    }
-
-
     public void LoadScene(string sceneName)
     {
         Time.timeScale = 1;
