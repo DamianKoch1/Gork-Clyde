@@ -12,7 +12,13 @@ public class GameMenu : MonoBehaviour
     private AudioClip bgm;
 
     private GameObject toggleMenuOnSelected, toggleMenuOffSelected;
-    
+
+    private void Start()
+    {
+        Cursor.visible = true;
+    }
+
+
     /// <summary>
     /// Stops bgm
     /// </summary>
@@ -65,5 +71,5 @@ public class GameMenu : MonoBehaviour
     {
         Application.Quit();
     }
-   
+
 }
