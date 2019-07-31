@@ -25,6 +25,10 @@ public class OptionsMenu : MonoBehaviour
     private bool inMainMenu = false;
 
     private GameObject toggleMenuOnSelected, toggleMenuOffSelected;
+
+    public GameObject firstSelected, mainMenuSelected;
+
+    public GameObject controls;
     
     private void Start()
     {
@@ -46,9 +50,15 @@ public class OptionsMenu : MonoBehaviour
     {
         if (Input.GetButtonDown("Cancel"))
         {
-            if (canvas.enabled)
+            if (controls.activeSelf)
+            {
+                controls.SetActive(false);
+                EventSystem.current.SetSelectedGameObject(firstSelected);
+            }
+            else if (canvas.enabled)
             {
                 canvas.enabled = false;
+                EventSystem.current.SetSelectedGameObject(mainMenuSelected);
             }
         }
     }
@@ -119,6 +129,19 @@ public class OptionsMenu : MonoBehaviour
     public void ToggleMenu(GameObject menu)
     {
         var canvas = menu.GetComponent<Canvas>();
+        if (!canvas)
+        {
+            menu.SetActive(!menu.activeSelf);
+            if (menu.activeSelf)
+            {
+                EventSystem.current.SetSelectedGameObject(toggleMenuOnSelected);
+            }
+            else
+            {
+                EventSystem.current.SetSelectedGameObject(toggleMenuOffSelected);
+            }
+            return;
+        }
         canvas.enabled = !canvas.enabled;
         if (canvas.enabled)
         {

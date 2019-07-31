@@ -8,8 +8,6 @@ using UnityEngine.UI;
 
 public class GameMenu : MonoBehaviour
 {
-    [SerializeField]
-    private AudioClip bgm;
 
     private GameObject toggleMenuOnSelected, toggleMenuOffSelected;
 
@@ -41,6 +39,19 @@ public class GameMenu : MonoBehaviour
     public void ToggleMenu(GameObject menu)
     {
         var canvas = menu.GetComponent<Canvas>();
+        if (!canvas)
+        {
+            menu.SetActive(!menu.activeSelf);
+            if (menu.activeSelf)
+            {
+                EventSystem.current.SetSelectedGameObject(toggleMenuOnSelected);
+            }
+            else
+            {
+                EventSystem.current.SetSelectedGameObject(toggleMenuOffSelected);
+            }
+            return;
+        }
         canvas.enabled = !canvas.enabled;
         if (canvas.enabled)
         {
