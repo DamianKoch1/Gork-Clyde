@@ -11,7 +11,13 @@ public class IngameUI : MonoBehaviour
     private AudioClip bgm;
     
     [SerializeField]
-    private GameObject pauseMenu, optionsMenu;
+    private GameMenu pauseMenu;
+
+    [SerializeField] 
+    private OptionsMenu optionsMenu;
+
+    [SerializeField] 
+    private GameObject pauseFirstSelected;
     
 
     private void Start()
@@ -38,12 +44,17 @@ public class IngameUI : MonoBehaviour
                 Cursor.visible = true;
                 pauseCanvas.enabled = true;
                 Time.timeScale = 0;
-                EventSystem.current.SetSelectedGameObject(pauseMenu.GetComponentInChildren<Button>().gameObject);
+                EventSystem.current.SetSelectedGameObject(pauseFirstSelected);
+            }
+            else if (optionsMenu.controls.activeSelf)
+            {
+                optionsMenu.controls.SetActive(false);
+                EventSystem.current.SetSelectedGameObject(optionsMenu.firstSelected);
             }
             else if (optionsCanvas.enabled)
             {
                 optionsCanvas.enabled = false;
-                EventSystem.current.SetSelectedGameObject(optionsMenu.GetComponentInChildren<Button>().gameObject);
+                EventSystem.current.SetSelectedGameObject(pauseFirstSelected);
             }
             else
             {
