@@ -42,6 +42,12 @@ public class GameMenu : MonoBehaviour
         SceneManager.LoadScene(sceneName);
     }
 
+    public void LoadLoadingScreen(string sceneName)
+    {
+        LoadingScreen.NextLevelName = sceneName;
+        SceneManager.LoadScene("Loading Screen");
+    }
+    
     /// <summary>
     /// Toggles pause/options menu
     /// </summary>
