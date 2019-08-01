@@ -71,6 +71,7 @@ public class ControllerDCPopup : MonoBehaviour
 	public void Show(bool show)
 	{
 		isVisible = show;
+		Cursor.visible = show;
 		if (show)
 		{
 			previousSelected = EventSystem.current.currentSelectedGameObject;
