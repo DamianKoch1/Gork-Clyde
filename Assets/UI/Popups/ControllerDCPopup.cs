@@ -10,6 +10,8 @@ public class ControllerDCPopup : MonoBehaviour
 	private bool checkingForDisconnects = false;
 	private bool isVisible = false;
 
+	private bool previousCursorVisible;
+
 	private GameObject previousSelected;
 
 	private float previousTimescale;
@@ -71,9 +73,10 @@ public class ControllerDCPopup : MonoBehaviour
 	public void Show(bool show)
 	{
 		isVisible = show;
-		Cursor.visible = show;
 		if (show)
 		{
+			previousCursorVisible = Cursor.visible;
+			Cursor.visible = true;
 			previousSelected = EventSystem.current.currentSelectedGameObject;
 			previousTimescale = Time.timeScale;
 			EventSystem.current.SetSelectedGameObject(backButton);
@@ -81,6 +84,7 @@ public class ControllerDCPopup : MonoBehaviour
 		}
 		else
 		{
+			Cursor.visible = previousCursorVisible;
 			Time.timeScale = previousTimescale;
 			EventSystem.current.SetSelectedGameObject(previousSelected);
 		}
