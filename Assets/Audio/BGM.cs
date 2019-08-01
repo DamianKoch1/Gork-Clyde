@@ -13,7 +13,7 @@ public class BGM : Singleton<BGM>
 	public void SetBgm(AudioClip newBgm)
 	{
 		var audioSource = Instance.GetComponent<AudioSource>();
-		if (!audioSource.clip == newBgm)
+		if (audioSource.clip != newBgm)
 		{
 			audioSource.clip = newBgm;
 			audioSource.Play();
