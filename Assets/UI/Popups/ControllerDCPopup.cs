@@ -2,13 +2,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class ControllerDCPopup : MonoBehaviour
 {
 	private bool checkingForDisconnects = false;
 	private bool isVisible = false;
-	
 
+	private GameObject previousSelected;
+
+	private float previousTimescale;
+	
 	private void Update()
 	{
 		if (!checkingForDisconnects)
@@ -33,7 +38,7 @@ public class ControllerDCPopup : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Pauses game if ingame and shows popup when noticing joystick disconnection
+	/// Checks if a joystick has been disconnected
 	/// </summary>
 	private void CheckForDisconnects()
 	{
@@ -48,19 +53,23 @@ public class ControllerDCPopup : MonoBehaviour
 	}
 	
 	/// <summary>
-	/// Toggles Popup
+	/// Toggles Popup, pauses game if popup is visible
 	/// </summary>
 	/// <param name="show"></param>
 	public void Show(bool show)
 	{
 		isVisible = show;
-		if (!show)
+		if (show)
 		{
-			Time.timeScale = 1;
+			previousSelected = EventSystem.current.currentSelectedGameObject;
+			previousTimescale = Time.timeScale;
+			EventSystem.current.SetSelectedGameObject(GetComponentInChildren<Button>().gameObject);
+			Time.timeScale = 0;
 		}
 		else
 		{
-			Time.timeScale = 0;
+			Time.timeScale = previousTimescale;
+			EventSystem.current.SetSelectedGameObject(previousSelected);
 		}
 		foreach (Transform child in transform)
 		{
