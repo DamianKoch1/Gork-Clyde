@@ -11,9 +11,19 @@ public class GameMenu : MonoBehaviour
 
     private GameObject selectOnMenuToggledOn, selectOnMenuToggledOff;
 
+    [SerializeField] 
+    private AudioClip bgm;
+
+    [SerializeField] 
+    private bool setNewBgm = false;
+
     private void Start()
     {
         Cursor.visible = true;
+        if (setNewBgm)
+        {
+            BGM.Instance.SetBgm(bgm);
+        }
     }
 
 
