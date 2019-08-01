@@ -10,20 +10,24 @@ public class ControllerDCPopup : MonoBehaviour
 	private bool checkingForDisconnects = false;
 	private bool isVisible = false;
 
+	private bool previousCursorVisible;
+
 	private GameObject previousSelected;
 
 	private float previousTimescale;
+
+	[SerializeField] 
+	private GameObject backButton;
+
+	private static bool useKeyboard = false;
 	
 	private void Update()
 	{
-		if (!checkingForDisconnects)
-		{
-			CheckControllerCount();
-		}
-		else if (!isVisible)
-		{
-			CheckForDisconnects();		
-		}
+		if (useKeyboard) return;
+		CheckControllerCount();
+		if (!checkingForDisconnects) return;
+		if (isVisible) return;
+		CheckForDisconnects();		
 	}
 
 	/// <summary>
@@ -34,7 +38,12 @@ public class ControllerDCPopup : MonoBehaviour
 		if (Input.GetJoystickNames().Length > 1)
 		{
 			checkingForDisconnects = true;
+			if (isVisible)
+			{
+				Show(false);
+			}
 		}
+		
 	}
 
 	/// <summary>
@@ -51,6 +60,11 @@ public class ControllerDCPopup : MonoBehaviour
 			}
 		}
 	}
+
+	public void UseKeyboard()
+	{
+		useKeyboard = true;
+	}
 	
 	/// <summary>
 	/// Toggles Popup, pauses game if popup is visible
@@ -61,13 +75,16 @@ public class ControllerDCPopup : MonoBehaviour
 		isVisible = show;
 		if (show)
 		{
+			previousCursorVisible = Cursor.visible;
+			Cursor.visible = true;
 			previousSelected = EventSystem.current.currentSelectedGameObject;
 			previousTimescale = Time.timeScale;
-			EventSystem.current.SetSelectedGameObject(GetComponentInChildren<Button>().gameObject);
+			EventSystem.current.SetSelectedGameObject(backButton);
 			Time.timeScale = 0;
 		}
 		else
 		{
+			Cursor.visible = previousCursorVisible;
 			Time.timeScale = previousTimescale;
 			EventSystem.current.SetSelectedGameObject(previousSelected);
 		}
