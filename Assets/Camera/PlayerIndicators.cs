@@ -11,7 +11,7 @@ public class PlayerIndicators : MonoBehaviour
     private Vector3 gorkPos, clydePos;
     private Camera cam;
     [SerializeField]
-    private GameObject gorkIndicator, clydeIndicator;
+    private GameObject gorkIndicator, clydeIndicator, gorkBg, clydeBg;
 
     [Range(0, 0.1f)]
     public float indicatorDistanceX = 0.05f, indicatorDistanceY = 0.05f;
@@ -38,11 +38,12 @@ public class PlayerIndicators : MonoBehaviour
         gorkPos = cam.WorldToScreenPoint(gorkTransform.position);
         if (!cam.pixelRect.Contains(gorkPos))
         {
-            UpdateIndicator(gorkIndicator, gorkPos);
+            UpdateIndicator(gorkIndicator, gorkBg, gorkPos);
         }
         else if (gorkIndicator.activeSelf)
         {
             gorkIndicator.SetActive(false);
+            gorkBg.SetActive(false);
         }
     }
 
@@ -54,11 +55,12 @@ public class PlayerIndicators : MonoBehaviour
         clydePos = cam.WorldToScreenPoint(clydeTransform.position);
         if (!cam.pixelRect.Contains(clydePos))
         {
-            UpdateIndicator(clydeIndicator, clydePos);
+            UpdateIndicator(clydeIndicator, clydeBg, clydePos);
         }
         else if (clydeIndicator.activeSelf)
         {
             clydeIndicator.SetActive(false);
+            clydeBg.SetActive(false);
         }
     }
 
@@ -67,15 +69,21 @@ public class PlayerIndicators : MonoBehaviour
     /// </summary>
     /// <param name="indicator"></param>
     /// <param name="targetPos"></param>
-    private void UpdateIndicator(GameObject indicator, Vector3 targetPos)
+    private void UpdateIndicator(GameObject indicator, GameObject bg, Vector3 targetPos)
     {
         Vector2 rectSize = canvasRect.sizeDelta;
 
         RectTransform indicatorRect = indicator.GetComponent<RectTransform>();
+        RectTransform bgRect = bg.GetComponent<RectTransform>();
 
         if (!indicator.activeSelf)
         {
             indicator.SetActive(true);
+        }
+        
+        if (!bg.activeSelf)
+        {
+            bg.SetActive(true);
         }
 
         Vector2 indicatorTargetPos = cam.ScreenToViewportPoint(targetPos);
@@ -96,7 +104,7 @@ public class PlayerIndicators : MonoBehaviour
         }
        
 
-        indicatorRect.eulerAngles = new Vector3(0, 0, zRotationAngles);
+        bgRect.eulerAngles = new Vector3(0, 0, zRotationAngles);
 
         //applying min distance from screen edge
         indicatorTargetPos.x = Mathf.Clamp(indicatorTargetPos.x, indicatorDistanceX, 1 - indicatorDistanceX);
@@ -105,6 +113,7 @@ public class PlayerIndicators : MonoBehaviour
         indicatorTargetPos.x *= rectSize.x;
         indicatorTargetPos.y *= rectSize.y;
         indicatorRect.anchoredPosition = indicatorTargetPos;
+        bgRect.anchoredPosition = indicatorTargetPos;
     }
 
 }
