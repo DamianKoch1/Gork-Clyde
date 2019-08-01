@@ -100,7 +100,7 @@ public abstract class Player : MonoBehaviour
             {
                 if (state.canJumpTimeframe > 0)
                 {
-                    Jump();
+                    StartCoroutine(Jump());
                 }
             }
         }
@@ -178,7 +178,7 @@ public abstract class Player : MonoBehaviour
         setMotion = SetMotionDefault;
     }
 
-    private void Jump()
+    private IEnumerator Jump()
     {
         walkParticles.Stop();
         transform.SetParent(null, true);
@@ -187,6 +187,23 @@ public abstract class Player : MonoBehaviour
         rb.AddForce(jumpHeight * Vector3.up * 1.6f, ForceMode.VelocityChange);
         anim.SetTrigger("jump");
         anim.ResetTrigger("land");
+        bool jumpHeld = true;
+        while (true)
+        {
+            if (rb.velocity.y < 0) yield break;
+            if (jumpHeld)
+            {
+                if (!Input.GetButton(jumpButton))
+                {
+                    jumpHeld = false;
+                }
+            }
+            else
+            {
+                rb.AddForce(-Vector3.up * 20, ForceMode.Acceleration);
+            }
+            yield return null;
+        }
     }
 
     
