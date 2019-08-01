@@ -8,6 +8,7 @@ public class Respawning : MonoBehaviour
 {
 
     private Vector3 spawnpoint;
+    private Quaternion rotation;
     private Rigidbody rb;
 
     [SerializeField]
@@ -26,8 +27,9 @@ public class Respawning : MonoBehaviour
     public void Respawn()
     {
         GetComponent<Player>()?.ResetMotion();
-        rb.velocity = Vector3.zero;
         rb.MovePosition(spawnpoint);
+        transform.rotation = rotation;
+        rb.velocity = Vector3.zero;
     }
 
     /// <summary>
@@ -69,6 +71,7 @@ public class Respawning : MonoBehaviour
     private void SetSpawnPoint()
     {
         spawnpoint = rb.position;
+        rotation = transform.rotation;
     }
     
 }
