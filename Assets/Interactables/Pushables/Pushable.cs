@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider))]
 [RequireComponent(typeof(SphereCollider))]
 [RequireComponent(typeof(Rigidbody))]
-public abstract class Pushable : MonoBehaviour
+public class Pushable : MonoBehaviour
 {
     private ParticleSystem pushedParticles;
     private Rigidbody rb;
@@ -126,5 +126,33 @@ public abstract class Pushable : MonoBehaviour
 
         closestPosition.y = playerPos.y;
         return closestPosition;
+    }
+    
+    /// <summary>
+    /// Enables player to push this object while in trigger
+    /// </summary>
+    /// <param name="other"></param>
+    protected virtual void OnTriggerStay(Collider other)
+    {
+        if (other.isTrigger) return;
+        var player = other.GetComponent<Pushing>();
+        if (!player) return;
+
+        player.pushedObj = gameObject;
+    }
+
+    /// <summary>
+    /// Prevents player from pushing this object after leaving it
+    /// </summary>
+    /// <param name="other"></param>
+    protected virtual void OnTriggerExit(Collider other)
+    {
+        if (other.isTrigger) return;
+        var player = other.GetComponent<Pushing>();
+        if (!player) return;
+        if (player.isPushing) return;
+        
+        player.pushedObj = null;
+        gameObject.layer = 0;
     }
 }
