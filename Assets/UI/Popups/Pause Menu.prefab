@@ -800,7 +800,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: bbc914f0f59353a44a00c5420cb5213a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 08541def363cd0245a25276efa602102, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -922,6 +922,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bgm: {fileID: 0}
+  setNewBgm: 0
 --- !u!1 &4421844618199592672
 GameObject:
   m_ObjectHideFlags: 0
@@ -1483,6 +1484,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 961147772252509926}
     m_Modifications:
+    - target: {fileID: 2495304635855074026, guid: 5a49af38f5f73394697057d4ac3d5087,
+        type: 3}
+      propertyPath: m_Name
+      value: Options
+      objectReference: {fileID: 0}
     - target: {fileID: 2495304635855074006, guid: 5a49af38f5f73394697057d4ac3d5087,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1587,11 +1593,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2495304635855074026, guid: 5a49af38f5f73394697057d4ac3d5087,
-        type: 3}
-      propertyPath: m_Name
-      value: Options
       objectReference: {fileID: 0}
     - target: {fileID: 4099438793462039324, guid: 5a49af38f5f73394697057d4ac3d5087,
         type: 3}
