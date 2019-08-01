@@ -24,6 +24,7 @@ public class IngameUI : MonoBehaviour
     {
         BGM.Instance.SetBgm(bgm);
         Cursor.visible = false;
+        MenuButton.FocusNothing();
 
     }
 
