@@ -12,7 +12,7 @@ public class LevelButton : MonoBehaviour
     {
         if (levelId > GameSaver.HighestLevelId)
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
     }
 
