@@ -32,7 +32,7 @@ public class PushableSmall : Pushable
     /// Enables clyde to push this object while in trigger
     /// </summary>
     /// <param name="other"></param>
-    private void OnTriggerStay(Collider other)
+    protected override void OnTriggerStay(Collider other)
     {
         if (other.isTrigger) return;
         var clyde = other.GetComponent<Clyde>();
@@ -45,7 +45,7 @@ public class PushableSmall : Pushable
     /// Prevents clyde from pushing this object after leaving it
     /// </summary>
     /// <param name="other"></param>
-    private void OnTriggerExit(Collider other)
+    protected override void OnTriggerExit(Collider other)
     {
         if (other.isTrigger) return;
         var clyde = other.GetComponent<Clyde>();
