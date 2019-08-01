@@ -19,7 +19,7 @@ public class GameSaver : MonoBehaviour
             if (highestLevelId != 0) return highestLevelId;
         
             highestLevelId = 1;
-            string[] filePaths = Directory.GetFiles(Application.persistentDataPath, ".dat");
+            string[] filePaths = Directory.GetFiles(Application.persistentDataPath, "Save.dat");
             if (filePaths.Length <= 0) return highestLevelId;
         
             BinaryFormatter binaryFormatter = new BinaryFormatter();
