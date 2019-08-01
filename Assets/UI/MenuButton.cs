@@ -25,7 +25,9 @@ public class MenuButton : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(gameObject);
     }
 
-    // used to prevent clicking invisible options button after disabling pause menu
+    /// <summary>
+    /// Prevents triggering invisible buttons from hidden popups
+    /// </summary>
     public static void FocusNothing()
     {
         EventSystem.current.SetSelectedGameObject(null);
