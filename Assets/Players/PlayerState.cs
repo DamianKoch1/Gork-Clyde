@@ -165,9 +165,13 @@ public class PlayerState : MonoBehaviour
         out groundedInfo, GetComponent<Collider>().bounds.extents.y - 0.1f, Physics.AllLayers,
         QueryTriggerInteraction.Ignore);
         if (collidingTransforms.Count == 0) retval = false;
+        if (groundedInfo.transform)
+        {
+            
         if (!groundedInfo.transform.CompareTag("platform"))
         {
             if (Mathf.Abs(rb.velocity.y) > 0.5f) retval = false;
+        }
         }
         return retval;
     }

@@ -11,19 +11,28 @@ public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
     private static T instance;
 
-    public static T Instance => instance;
-
-
-    protected void Start()
+    public static T Instance
     {
-        if (!instance)
+        get
         {
-            instance = GetComponent<T>();
-            DontDestroyOnLoad(gameObject);
+            if (!instance)
+            {
+                instance = FindObjectOfType<T>();
+                DontDestroyOnLoad(instance.gameObject);
+            }
+            return instance;
         }
-        else
+    }
+
+
+    protected virtual void Start()
+    {
+        if (instance)
         {
-            Destroy(gameObject);
+            if (this != instance)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }

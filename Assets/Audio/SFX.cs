@@ -12,4 +12,5 @@ public class SFX : Singleton<SFX>
         Instance.GetComponent<AudioSource>().clip = ac;
         Instance.GetComponent<AudioSource>().Play();
     }
+
 }
