@@ -2,23 +2,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class ControllerDCPopup : MonoBehaviour
 {
 	private bool checkingForDisconnects = false;
 	private bool isVisible = false;
-	
 
+	private bool previousCursorVisible;
+
+	private GameObject previousSelected;
+
+	private float previousTimescale;
+
+	[SerializeField] 
+	private GameObject backButton;
+
+	private static bool useKeyboard = false;
+	
 	private void Update()
 	{
-		if (!checkingForDisconnects)
-		{
-			CheckControllerCount();
-		}
-		else if (!isVisible)
-		{
-			CheckForDisconnects();		
-		}
+		if (useKeyboard) return;
+		CheckControllerCount();
+		if (!checkingForDisconnects) return;
+		if (isVisible) return;
+		CheckForDisconnects();		
 	}
 
 	/// <summary>
@@ -29,11 +38,16 @@ public class ControllerDCPopup : MonoBehaviour
 		if (Input.GetJoystickNames().Length > 1)
 		{
 			checkingForDisconnects = true;
+			if (isVisible)
+			{
+				Show(false);
+			}
 		}
+		
 	}
 
 	/// <summary>
-	/// Pauses game if ingame and shows popup when noticing joystick disconnection
+	/// Checks if a joystick has been disconnected
 	/// </summary>
 	private void CheckForDisconnects()
 	{
@@ -46,21 +60,33 @@ public class ControllerDCPopup : MonoBehaviour
 			}
 		}
 	}
+
+	public void UseKeyboard()
+	{
+		useKeyboard = true;
+	}
 	
 	/// <summary>
-	/// Toggles Popup
+	/// Toggles Popup, pauses game if popup is visible
 	/// </summary>
 	/// <param name="show"></param>
 	public void Show(bool show)
 	{
 		isVisible = show;
-		if (!show)
+		if (show)
 		{
-			Time.timeScale = 1;
+			previousCursorVisible = Cursor.visible;
+			Cursor.visible = true;
+			previousSelected = EventSystem.current.currentSelectedGameObject;
+			previousTimescale = Time.timeScale;
+			EventSystem.current.SetSelectedGameObject(backButton);
+			Time.timeScale = 0;
 		}
 		else
 		{
-			Time.timeScale = 0;
+			Cursor.visible = previousCursorVisible;
+			Time.timeScale = previousTimescale;
+			EventSystem.current.SetSelectedGameObject(previousSelected);
 		}
 		foreach (Transform child in transform)
 		{

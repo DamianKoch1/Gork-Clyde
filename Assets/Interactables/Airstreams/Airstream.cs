@@ -62,7 +62,7 @@ public class Airstream : MonoBehaviour, IActivatable
     private void AddAirstreamForce(Rigidbody rb)
     {
         direction = transform.forward;
-        rb.AddForce(direction * strength * Time.deltaTime * 60, ForceMode.Acceleration);
+        rb.AddForce(direction * strength * Time.deltaTime * 60 * rb.GetComponent<AirstreamAffected>().airstreamForceMultiplier, ForceMode.Acceleration);
     }
 
     /// <summary>
