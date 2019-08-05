@@ -39,13 +39,13 @@ public class GameMenu : MonoBehaviour
     public void LoadScene(string sceneName)
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene(sceneName);
+        Fade.FadeToBlack(sceneName);
     }
 
     public void LoadLoadingScreen(string sceneName)
     {
         LoadingScreen.NextLevelName = sceneName;
-        SceneManager.LoadScene("Loading Screen");
+        Fade.FadeToBlack("Loading Screen");
     }
     
     /// <summary>
@@ -102,7 +102,7 @@ public class GameMenu : MonoBehaviour
     public void Restart()
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Fade.FadeToBlack(SceneManager.GetActiveScene().name);
     }
 
 }

@@ -8,13 +8,13 @@ public class StoryPanel : MonoBehaviour
 {
 	public void LoadNextPanel(string name)
 	{
-		SceneManager.LoadScene(name);
+		Fade.FadeToBlack(name);
 	}
 
 	public void LoadLevel(string name)
 	{
 		LoadingScreen.NextLevelName = name;
-		SceneManager.LoadScene("Loading Screen");
+		Fade.FadeToBlack("Loading Screen");
 	}
 
 	private void Update()
