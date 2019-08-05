@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerIndicators : MonoBehaviour
 {
@@ -67,8 +65,9 @@ public class PlayerIndicators : MonoBehaviour
     /// <summary>
     /// Move Indicator to screen border pointing to player screen position
     /// </summary>
-    /// <param name="indicator"></param>
-    /// <param name="targetPos"></param>
+    /// <param name="indicator">indicator to update</param>
+    /// <param name="bg">indicator background to update</param>
+    /// <param name="targetPos">position of indicator target</param>
     private void UpdateIndicator(GameObject indicator, GameObject bg, Vector3 targetPos)
     {
         Vector2 rectSize = canvasRect.sizeDelta;
@@ -103,7 +102,6 @@ public class PlayerIndicators : MonoBehaviour
             zRotationAngles = -45 + rotationMultiplier.x * 90 + rotationMultiplier.y * 90;
         }
        
-
         bgRect.eulerAngles = new Vector3(0, 0, zRotationAngles);
 
         //applying min distance from screen edge
@@ -112,6 +110,7 @@ public class PlayerIndicators : MonoBehaviour
        
         indicatorTargetPos.x *= rectSize.x;
         indicatorTargetPos.y *= rectSize.y;
+        
         indicatorRect.anchoredPosition = indicatorTargetPos;
         bgRect.anchoredPosition = indicatorTargetPos;
     }

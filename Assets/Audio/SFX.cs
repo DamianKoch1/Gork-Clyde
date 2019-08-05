@@ -1,9 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-
-//only used for button click sounds that would get swallowed because button loads another scene atm
+/// <summary>
+/// Only used for button click sounds that would get swallowed because button loads another scene atm
+/// </summary>
 [RequireComponent(typeof(AudioSource))]
 public class SFX : Singleton<SFX>
 {

@@ -1,7 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+/// <summary>
+/// Add to any gameObject to make it carryable by Gork
+/// </summary>
 [RequireComponent(typeof(Rigidbody))]
 public class Carryable : MonoBehaviour
 {

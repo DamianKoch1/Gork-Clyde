@@ -1,7 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+/// <summary>
+/// Base class for trigger objects
+/// </summary>
+[RequireComponent(typeof(AudioSource))]
 public abstract class TriggerObject : MonoBehaviour
 {
     [SerializeField]
@@ -18,6 +20,10 @@ public abstract class TriggerObject : MonoBehaviour
     private TriggerableBy triggerableBy = TriggerableBy.All;
    
 
+    /// <summary>
+    /// Activates this object if something that can trigger it enters trigger
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerEnter(Collider other)
     {
         if (!MatchesTriggerCondition(other)) return;
@@ -49,6 +55,9 @@ public abstract class TriggerObject : MonoBehaviour
         return false;
     }
   
+    /// <summary>
+    /// Gets called when object is activated
+    /// </summary>
     protected abstract void OnTriggered();
   
 

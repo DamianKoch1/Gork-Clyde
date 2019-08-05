@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Cinemachine;
+﻿using Cinemachine;
 using UnityEngine;
 
 public class CameraBehaviour : MonoBehaviour
@@ -15,7 +13,7 @@ public class CameraBehaviour : MonoBehaviour
     private CinemachineVirtualCamera gorkCam, clydeCam;
 
     /// <summary>
-    /// max tolerated player distance before zoom = this * playerDistance at start
+    /// max tolerated player distance before zoom = this * startPlayerDistance
     /// </summary>
     [SerializeField]
     private float playerDistanceZoomThreshhold = 2;
@@ -25,7 +23,6 @@ public class CameraBehaviour : MonoBehaviour
     [SerializeField]
     private float followSpeed, rotateSpeed = 2;
     private Vector3 targetPos;
-    private RaycastHit hit;
 
   
 
@@ -86,7 +83,6 @@ public class CameraBehaviour : MonoBehaviour
         offset = transform.position - playerMiddle;
         startPlayerDistance = Vector3.Distance(gork.transform.position, clyde.transform.position);
         playerDistance = startPlayerDistance;
-        
     }
 
     /// <summary>

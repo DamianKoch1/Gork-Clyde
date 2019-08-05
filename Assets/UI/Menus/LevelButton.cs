@@ -1,14 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class LevelButton : MonoBehaviour
 {
     [SerializeField] 
     private int levelId;
     
-    // Start is called before the first frame update
     void Start()
+    {
+        CheckIfUnlocked();
+    }
+
+    /// <summary>
+    /// Deletes itself when saved highest level id is lower than this buttons levelId
+    /// </summary>
+    private void CheckIfUnlocked()
     {
         if (levelId > GameSaver.HighestLevelId)
         {
