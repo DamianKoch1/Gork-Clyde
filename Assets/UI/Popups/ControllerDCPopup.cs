@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
+/// <summary>
+/// Pauses game and shows if controller is disconnected
+/// </summary>
 public class ControllerDCPopup : MonoBehaviour
 {
 	private bool checkingForDisconnects = false;
@@ -23,6 +23,14 @@ public class ControllerDCPopup : MonoBehaviour
 	
 	private void Update()
 	{
+		CheckControllerStates();
+	}
+
+	/// <summary>
+	/// If not using keyboard, checks if 2 controllers are plugged in, if so starts checking if one is disconnected
+	/// </summary>
+	private void CheckControllerStates()
+	{
 		if (useKeyboard) return;
 		CheckControllerCount();
 		if (!checkingForDisconnects) return;
@@ -31,7 +39,7 @@ public class ControllerDCPopup : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Checks if at least 2 controllers are plugged in
+	/// Checks if at least 2 controllers are plugged in, closes popup when controller is replugged if it was visible
 	/// </summary>
 	private void CheckControllerCount()
 	{
@@ -61,13 +69,16 @@ public class ControllerDCPopup : MonoBehaviour
 		}
 	}
 
+	/// <summary>
+	/// Disables this popup
+	/// </summary>
 	public void UseKeyboard()
 	{
 		useKeyboard = true;
 	}
 	
 	/// <summary>
-	/// Toggles Popup, pauses game if popup is visible
+	/// Toggles popup
 	/// </summary>
 	/// <param name="show"></param>
 	public void Show(bool show)
@@ -75,22 +86,40 @@ public class ControllerDCPopup : MonoBehaviour
 		isVisible = show;
 		if (show)
 		{
-			previousCursorVisible = Cursor.visible;
-			Cursor.visible = true;
-			previousSelected = EventSystem.current.currentSelectedGameObject;
-			previousTimescale = Time.timeScale;
-			EventSystem.current.SetSelectedGameObject(backButton);
-			Time.timeScale = 0;
+			OnPopupShown();
 		}
 		else
 		{
-			Cursor.visible = previousCursorVisible;
-			Time.timeScale = previousTimescale;
-			EventSystem.current.SetSelectedGameObject(previousSelected);
+			OnPopupHidden();
 		}
 		foreach (Transform child in transform)
 		{
 			child.gameObject.SetActive(show);
 		}
 	}
+
+	/// <summary>
+	/// Saves previous cursor state, selected button and timescale, enables cursor, selects backButton, pauses game
+	/// </summary>
+	private void OnPopupShown()
+	{
+		previousCursorVisible = Cursor.visible;
+		Cursor.visible = true;
+		previousSelected = EventSystem.current.currentSelectedGameObject;
+		previousTimescale = Time.timeScale;
+		EventSystem.current.SetSelectedGameObject(backButton);
+		Time.timeScale = 0;
+	}
+
+	/// <summary>
+	/// Restores previous cursor state, selected button and timescale
+	/// </summary>
+	private void OnPopupHidden()
+	{
+		Cursor.visible = previousCursorVisible;
+		Time.timeScale = previousTimescale;
+		EventSystem.current.SetSelectedGameObject(previousSelected);
+	}
+	
+	
 }

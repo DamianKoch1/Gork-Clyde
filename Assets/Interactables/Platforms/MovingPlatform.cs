@@ -1,12 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class MovingPlatform : MonoBehaviour, IActivatable
 {
     [SerializeField]
     private GameObject start, target, platform;
-    private Vector3 pos1, pos2, targetPos;
+    private Vector3 pos1, pos2;
     private bool stop, blocked;
     public enum Mode { Autostart, Triggerable, MoveOnce};
     public Mode mode = Mode.Autostart;
@@ -31,7 +29,6 @@ public class MovingPlatform : MonoBehaviour, IActivatable
         rb = platform.GetComponent<Rigidbody>();
         pos1 = start.transform.position;
         pos2 = target.transform.position;
-        targetPos = pos2;
         if (mode != Mode.Autostart)
         {
             stop = true;
@@ -43,12 +40,12 @@ public class MovingPlatform : MonoBehaviour, IActivatable
     /// </summary>
     private void MovePlatform()
     {
+        if (stop) return;
+        if (blocked) return;
         if (mode == Mode.MoveOnce)
         {
             if (Vector3.Distance(rb.position, pos2) < 0.1f) return;
         }
-        if (stop) return;
-        if (blocked) return;
 
         if (moveAmount >= Mathf.PI * 200)
         {
@@ -56,7 +53,6 @@ public class MovingPlatform : MonoBehaviour, IActivatable
         }
         rb.MovePosition(pos1 + 0.5f * (1 + Mathf.Sin(moveAmount - Mathf.PI / 2)) * (pos2 - pos1));
         moveAmount += Time.deltaTime * speed;
-      
     }
 
 

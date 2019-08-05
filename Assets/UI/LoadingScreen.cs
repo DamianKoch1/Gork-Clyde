@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -7,12 +6,18 @@ using UnityEngine.SceneManagement;
 
 public class LoadingScreen : MonoBehaviour
 {
+    
+    /// <summary>
+    /// Scene that will be loaded
+    /// </summary>
     public static string NextLevelName;
 
 
     [SerializeField]
     private Image loadingBar;
 
+    //-----------
+    //if called from start, loading screen itself will take too long to be loaded
     private bool started;
    
     private void Start()
@@ -24,18 +29,19 @@ public class LoadingScreen : MonoBehaviour
     {
         if (!started)
         {
-            //if called from start, loading screen itself will take too long to be loaded
+            started = true;
             StartCoroutine(LoadNextLevel());
         }
     }
+    //-----------
 
+    
     /// <summary>
-    /// Loads next level async, shows progress on bar
+    /// Loads next level async, shows progress on bar, fades out when done
     /// </summary>
     /// <returns></returns>
     private IEnumerator LoadNextLevel()
     {
-        started = true;
         AsyncOperation loading = SceneManager.LoadSceneAsync(NextLevelName);
         loading.allowSceneActivation = false;
         loadingBar.fillAmount = 0;

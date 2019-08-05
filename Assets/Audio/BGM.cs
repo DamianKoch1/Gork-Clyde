@@ -1,8 +1,9 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 
+/// <summary>
+/// Plays BGM, stays loaded between scenes
+/// </summary>
 [RequireComponent(typeof(AudioSource))]
 public class BGM : Singleton<BGM>
 {
@@ -13,7 +14,7 @@ public class BGM : Singleton<BGM>
 	}
 
 	/// <summary>
-	/// Sets a new bgm and plays it if it's not the current one.
+	/// Sets a new bgm and plays it if it's not the current one
 	/// </summary>
 	/// <param name="newBgm">new bgm to play</param>
 	public void SetBgm(AudioClip newBgm)
@@ -28,13 +29,17 @@ public class BGM : Singleton<BGM>
 	}
 
 	/// <summary>
-	/// Stops bgm
+	/// Fades bgm out
 	/// </summary>
 	public void StopBgm()
 	{
 		StartCoroutine(FadeOut());
 	}
 
+	/// <summary>
+	/// Fades instance's AudioSource volume in
+	/// </summary>
+	/// <returns></returns>
 	private IEnumerator FadeIn()
 	{
 		var audioSource = Instance.GetComponent<AudioSource>();
@@ -49,6 +54,10 @@ public class BGM : Singleton<BGM>
 		audioSource.volume = 0.5f;
 	}
 	
+	/// <summary>
+	/// Fades instance's AudioSource volume out
+	/// </summary>
+	/// <returns></returns>
 	private IEnumerator FadeOut()
 	{
 		var audioSource = Instance.GetComponent<AudioSource>();

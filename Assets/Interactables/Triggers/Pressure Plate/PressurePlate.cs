@@ -1,11 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+/// <summary>
+/// Activates objects while player/pushable is on plate
+/// </summary>
 public class PressurePlate : TriggerObject
 {
 
-    private int objectsOnPlateCount;
+    private int objectsOnPlateCount = 0;
 
 
     private void OnTriggerExit(Collider other)
@@ -15,7 +16,7 @@ public class PressurePlate : TriggerObject
     }
 
     /// <summary>
-    /// Activates targets
+    /// Activates targets if plate was empty
     /// </summary>
     protected override void OnTriggered()
     {
@@ -23,6 +24,7 @@ public class PressurePlate : TriggerObject
         {
             GetComponent<Animator>().SetBool("OnPlate", true);
             SetCableMaterial(activeMat);
+            GetComponent<AudioSource>().Play();
             foreach (GameObject target in targets)
             {
                 target.GetComponent<IActivatable>()?.OnPlateActivated();
@@ -33,7 +35,7 @@ public class PressurePlate : TriggerObject
     }
 
     /// <summary>
-    /// Deactivates targets
+    /// Deactivates targets if last object exited
     /// </summary>
     private void OnPlateExited()
     {
@@ -41,6 +43,7 @@ public class PressurePlate : TriggerObject
         {
             GetComponent<Animator>().SetBool("OnPlate", false);
             SetCableMaterial(inactiveMat);
+            GetComponent<AudioSource>().Play();
             foreach (GameObject target in targets)
             {
                 target.GetComponent<IActivatable>()?.OnPlateExited();

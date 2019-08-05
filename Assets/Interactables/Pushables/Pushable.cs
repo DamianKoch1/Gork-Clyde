@@ -1,7 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+/// <summary>
+/// Base class for pushables, can also be attached to gameobject to make it pushable, override OnTriggerEnter/Exit to decide which player can push
+/// </summary>
 [RequireComponent(typeof(BoxCollider))]
 [RequireComponent(typeof(SphereCollider))]
 [RequireComponent(typeof(Rigidbody))]

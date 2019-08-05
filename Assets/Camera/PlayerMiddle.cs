@@ -1,7 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+/// <summary>
+/// Keeps an opject in the middle of both players, currently used as a camera target
+/// </summary>
 public class PlayerMiddle : MonoBehaviour
 {
     [SerializeField]
