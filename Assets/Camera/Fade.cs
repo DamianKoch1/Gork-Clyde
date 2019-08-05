@@ -27,7 +27,8 @@ public class Fade : MonoBehaviour
     /// </summary>
     public void OnBlackFadeFinished()
     {
-        SceneManager.LoadScene(NextSceneName);
+        LoadingScreen.NextLevelName = NextSceneName;
+        SceneManager.LoadScene("Loading Screen");
     }
 
 }

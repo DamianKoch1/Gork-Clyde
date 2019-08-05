@@ -31,5 +31,6 @@ public class Goal : MonoBehaviour
         Fade.FadeToBlack();
     }
 
+    
 }
 
