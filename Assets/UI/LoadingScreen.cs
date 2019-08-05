@@ -9,6 +9,7 @@ public class LoadingScreen : MonoBehaviour
 {
     public static string NextLevelName;
 
+
     [SerializeField]
     private Image loadingBar;
 
@@ -36,11 +37,17 @@ public class LoadingScreen : MonoBehaviour
     {
         started = true;
         AsyncOperation loading = SceneManager.LoadSceneAsync(NextLevelName);
+        loading.allowSceneActivation = false;
         loadingBar.fillAmount = 0;
-        while (!loading.isDone)
+        while (loading.progress < 0.9f)
         {
             loadingBar.fillAmount = loading.progress;
             yield return null;
         }
+        loadingBar.fillAmount = loading.progress;
+        Fade.FadeToBlack();
+        Fade.onFadeFinished = () => { loading.allowSceneActivation = true; };
     }
+
+   
 }
