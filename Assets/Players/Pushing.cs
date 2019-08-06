@@ -19,16 +19,16 @@ public class Pushing : MonoBehaviour
 
     private Rigidbody rb;
 
+    public delegate void OnPushStarted();
     /// <summary>
     /// Add listener to e.g. change walk animation while pushing
     /// </summary>
-    public delegate void OnPushStarted();
     public OnPushStarted onPushStarted;
     
+    public delegate void OnPushStopped();
     /// <summary>
     /// Add listener to revert changes above when stopping push
     /// </summary>
-    public delegate void OnPushStopped();
     public OnPushStopped onPushStopped;
     
     public void Initialize(Animator _anim, PlayerState _state, Rigidbody _rb)

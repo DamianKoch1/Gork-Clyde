@@ -18,12 +18,7 @@ public class LoadingScreen : MonoBehaviour
 
     //-----------
     //if called from start, loading screen itself will take too long to be loaded
-    private bool started;
-   
-    private void Start()
-    {
-        started = false;
-    }
+    private bool started = false;
 
     private void Update()
     {
