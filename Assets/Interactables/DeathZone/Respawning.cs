@@ -1,8 +1,9 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
+/// <summary>
+/// Add to any gameObject to make it respawn when entering DeathZone
+/// </summary>
 [RequireComponent(typeof(Rigidbody))]
 public class Respawning : MonoBehaviour
 {
@@ -22,7 +23,7 @@ public class Respawning : MonoBehaviour
 
     
     /// <summary>
-    /// Respawn at last saved spawnpoint
+    /// Respawn at last saved spawnpoint, resets rotation/velocity
     /// </summary>
     public void Respawn()
     {
@@ -68,7 +69,9 @@ public class Respawning : MonoBehaviour
         return true;
     }
         
-    
+    /// <summary>
+    /// Saved spawnpoint/rotation
+    /// </summary>
     private void SetSpawnPoint()
     {
         spawnpoint = rb.position;

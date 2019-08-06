@@ -4,12 +4,9 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(AudioSource))]
 public class MenuButton : MonoBehaviour
 {
-    [SerializeField]
-    private AudioClip clickSound;
-
-    
     private void Start()
     {
         GetComponent<Button>().onClick.AddListener(PlayClickSound);
@@ -17,7 +14,7 @@ public class MenuButton : MonoBehaviour
 
     private void PlayClickSound()
     {
-        SFX.Instance.PlaySound(clickSound);
+        GetComponent<AudioSource>().Play();
     }
 
     public void GrabFocus()

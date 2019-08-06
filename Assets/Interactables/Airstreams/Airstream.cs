@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Globalization;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
 public class Airstream : MonoBehaviour, IActivatable
 {
@@ -17,12 +12,24 @@ public class Airstream : MonoBehaviour, IActivatable
   
     private void Start()
     {
+        SetStartState();
+    }
+
+    /// <summary>
+    /// Toggles airstream on/off depending on activeAtStart
+    /// </summary>
+    private void SetStartState()
+    {
         if (!activeAtStart)
         {
             ToggleAirstream();
         }
     }
-
+    
+    /// <summary>
+    /// Adds force to valid objects inside and detaches clyde from gork if necessary
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerStay(Collider other)
     {
         if (other.isTrigger) return;
@@ -40,6 +47,10 @@ public class Airstream : MonoBehaviour, IActivatable
     }
 
 
+    /// <summary>
+    /// Sets clyde's inAirstream state to false
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerExit(Collider other)
     {
         if (other.isTrigger) return;
@@ -97,7 +108,7 @@ public class Airstream : MonoBehaviour, IActivatable
     }
 
     /// <summary>
-    /// Toggles airstream on or off.
+    /// Toggles particles and collider on/off
     /// </summary>
     public void ToggleAirstream()
     {

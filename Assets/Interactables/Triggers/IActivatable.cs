@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+﻿/// <summary>
+/// Implements reaction to triggerObjects
+/// </summary>
 public interface IActivatable
 {
 	/// <summary>

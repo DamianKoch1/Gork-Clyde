@@ -1,7 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+/// <summary>
+/// Shows approximate throw path and landing spot
+/// </summary>
 public class ThrowIndicator : MonoBehaviour
 {
     [SerializeField] 
@@ -95,7 +96,7 @@ public class ThrowIndicator : MonoBehaviour
     }
     
     /// <summary>
-    /// Calculates position of indicator point based on given time passed, starts at own position
+    /// Calculates position of indicator point based on given time passed, starts at own position, adapts indicator for clyde to account for player anti-sliding force
     /// </summary>
     /// <param name="time">given time delta to calculate position for</param>
     /// <returns>returns position of point at time</returns>

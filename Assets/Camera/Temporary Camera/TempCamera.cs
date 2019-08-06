@@ -1,9 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Cinemachine;
+﻿using Cinemachine;
 using UnityEngine;
 
+/// <summary>
+/// Activates when both players enter small trigger, disables if one leaves outer trigger
+/// </summary>
 public class TempCamera : MonoBehaviour
 {
 	private GameObject cam;
