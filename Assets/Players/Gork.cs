@@ -1,17 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [RequireComponent(typeof(Throwing))]
 [RequireComponent(typeof(BoxCollider))]
 public class Gork : Player
 {
+	/// <summary>
+	/// Handles everything related to throwing objects
+	/// </summary>
 	[HideInInspector]
 	public Throwing throwing;
-
-	
-
-
 
 	public static string XAxis = "GorkHorizontal",
 	ZAxis = "GorkVertical",
@@ -27,10 +24,6 @@ public class Gork : Player
 		throwing = GetComponent<Throwing>();
 		throwing.Initialize(anim);
 	}
-
-	
-
-	
 
 	protected override void CheckInput()
 	{
@@ -67,13 +60,4 @@ public class Gork : Player
 			throwing.Interact();
 		}
 	}
-	
-	
-
-	
-
-
-
-	
-	
 }

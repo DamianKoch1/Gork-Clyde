@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Carryable))]
@@ -70,6 +69,10 @@ public class Clyde : Player
         _gork?.throwing.PickUp(gameObject);
     }
 
+    /// <summary>
+    /// Sets pickupCooldown to 0.5s and decreases it, can't be picked up while > 0
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator DecreasePickupCooldown()
     {
         pickupCooldown = 0.5f;
@@ -91,7 +94,7 @@ public class Clyde : Player
     }
 
     /// <summary>
-    /// Clyde can exit gork if he wants, adds small forward force
+    /// Clyde can exit gork using jump button, adds small forward force and detaches him from gork
     /// </summary>
     public void CancelThrow()
     {
