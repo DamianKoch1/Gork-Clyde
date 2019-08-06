@@ -1,7 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+/// <summary>
+/// Activates Camera if 2 players are in trigger
+/// </summary>
 public class TempCameraActivator : MonoBehaviour
 {
 	private TempCamera cam;

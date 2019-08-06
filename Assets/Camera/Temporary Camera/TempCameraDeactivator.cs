@@ -1,7 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+/// <summary>
+/// Deactivates camera if a player exits trigger
+/// </summary>
 public class TempCameraDeactivator : MonoBehaviour
 {
     private TempCamera cam;

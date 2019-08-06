@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Contains all state related information/functionality of a player
+/// </summary>
 public class PlayerState : MonoBehaviour
 {
-   
-    
     private Animator anim;
 
     private Rigidbody rb;
@@ -29,10 +30,14 @@ public class PlayerState : MonoBehaviour
     [HideInInspector]
     public float canJumpTimeframe = 0f;
     
-    private List<Transform> collidingTransforms = new List<Transform>();
-    
     public RaycastHit groundedInfo;
     
+    //-----------
+    /// <summary>
+    /// IsGrounded returns false if list is empty
+    /// </summary>
+    private List<Transform> collidingTransforms = new List<Transform>();
+   
     private void OnCollisionEnter(Collision other)
     {
         if (collidingTransforms.Contains(other.transform)) return;
@@ -44,7 +49,7 @@ public class PlayerState : MonoBehaviour
         if (!collidingTransforms.Contains(other.transform)) return;
         collidingTransforms.Remove(other.transform);
     }
-
+    //----------
 
     public void Initialize(Animator _anim, Rigidbody _rb, ParticleSystem _walkParticles)
     {
@@ -76,6 +81,9 @@ public class PlayerState : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Checks if currently landing/standing still
+    /// </summary>
     private void UpdateGroundedState()
     {
         if (!wasGrounded)
@@ -94,6 +102,9 @@ public class PlayerState : MonoBehaviour
         canJumpTimeframe = maxGhostjumpDelay;
     }
 
+    /// <summary>
+    /// Checks if falling/starting to fall or flying upwards
+    /// </summary>
     private void UpdateAirborneState()
     {
         if (walkParticles.isPlaying)
@@ -124,6 +135,9 @@ public class PlayerState : MonoBehaviour
         }
     }
     
+    /// <summary>
+    /// Triggers land animation, toggles other states
+    /// </summary>
     private void OnLanding()
     {
         falling = false;
@@ -138,17 +152,26 @@ public class PlayerState : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Stops walking dust vfx
+    /// </summary>
     private void OnStandingStill()
     {
         walkParticles.Stop();
     }
 
+    /// <summary>
+    /// Triggers fall animation
+    /// </summary>
     private void OnStartingFall()
     {
         falling = true;
         anim.SetBool("falling", true);
     }
     
+    /// <summary>
+    /// If falling, starts decreasing timeframe in which player can jump to make slightly missed jump timings more forgiving
+    /// </summary>
     private void OnLeavingGround()
     {
         wasGrounded = false;
@@ -159,6 +182,10 @@ public class PlayerState : MonoBehaviour
         }
     }
     
+    /// <summary>
+    /// Checks if player is on ground
+    /// </summary>
+    /// <returns></returns>
     private bool IsGrounded()
     {
         bool retval = Physics.SphereCast(transform.position, GetComponent<Collider>().bounds.extents.x / 2, -Vector3.up,
@@ -167,15 +194,18 @@ public class PlayerState : MonoBehaviour
         if (collidingTransforms.Count == 0) retval = false;
         if (groundedInfo.transform)
         {
-            
-        if (!groundedInfo.transform.CompareTag("platform"))
-        {
-            if (Mathf.Abs(rb.velocity.y) > 0.5f) retval = false;
-        }
+            if (!groundedInfo.transform.CompareTag("platform"))
+            {
+                if (Mathf.Abs(rb.velocity.y) > 0.5f) retval = false;
+            }
         }
         return retval;
     }
 
+    /// <summary>
+    /// Preventing rare double jump glitches by spamming it
+    /// </summary>
+    /// <returns></returns>
     public IEnumerator DecreaseCanJumpTimer()
     {
         while (true)

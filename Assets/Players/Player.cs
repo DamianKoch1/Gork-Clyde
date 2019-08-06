@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -178,6 +177,10 @@ public abstract class Player : MonoBehaviour
         setMotion = SetMotionDefault;
     }
 
+    /// <summary>
+    /// Starts adding downward force if jumpkey is no longer held during jump to enable smaller jumps
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator Jump()
     {
         walkParticles.Stop();

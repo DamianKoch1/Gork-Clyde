@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
 /// Used to prevent platforms squashing objects below
@@ -16,6 +14,10 @@ public class PlatformBlocking : MonoBehaviour
         platform = GetComponentInParent<MovingPlatform>();
     }
 
+    /// <summary>
+    /// Blocks platform if other can block
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerEnter(Collider other)
     {
         if (!CanBlock(other)) return;
@@ -24,6 +26,10 @@ public class PlatformBlocking : MonoBehaviour
         blockingObjCount++;
     }
 
+    /// <summary>
+    /// Unblocks platform if other was last blocking object
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerExit(Collider other)
     {
         if (!CanBlock(other)) return;
@@ -38,8 +44,8 @@ public class PlatformBlocking : MonoBehaviour
     /// <summary>
     /// Checks if collider is able to block platform
     /// </summary>
-    /// <param name="other">collider to check</param>
-    /// <returns>returns true if collider can block, false otherwise</returns>
+    /// <param name="other">Collider to check</param>
+    /// <returns>Returns true if collider is player/pushable, false otherwise</returns>
     private bool CanBlock(Collider other)
     {
         if (other.isTrigger) return false;
