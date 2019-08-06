@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class StoryPanel : MonoBehaviour
@@ -11,6 +8,10 @@ public class StoryPanel : MonoBehaviour
 		Fade.FadeToBlack(name);
 	}
 
+	/// <summary>
+	/// Loads given level using loading screen
+	/// </summary>
+	/// <param name="name">Level to load</param>
 	public void LoadLevel(string name)
 	{
 		LoadingScreen.NextLevelName = name;

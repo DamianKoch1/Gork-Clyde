@@ -1,7 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+/// <summary>
+/// Handles everything pushing related
+/// </summary>
 public class Pushing : MonoBehaviour
 {
     private FixedJoint fixedJoint;
@@ -19,9 +20,15 @@ public class Pushing : MonoBehaviour
     private Rigidbody rb;
 
     public delegate void OnPushStarted();
+    /// <summary>
+    /// Add listener to e.g. change walk animation while pushing
+    /// </summary>
     public OnPushStarted onPushStarted;
     
     public delegate void OnPushStopped();
+    /// <summary>
+    /// Add listener to revert changes above when stopping push
+    /// </summary>
     public OnPushStopped onPushStopped;
     
     public void Initialize(Animator _anim, PlayerState _state, Rigidbody _rb)
@@ -105,6 +112,9 @@ public class Pushing : MonoBehaviour
         onPushStopped();
     }
 
+    /// <summary>
+    /// Makes this object teleport in front of and look at closest pushable side
+    /// </summary>
     private void AlignToPushableSide()
     {
         var pos = pushedObj.GetComponent<Pushable>().GetClosestPushPosition(rb.position);

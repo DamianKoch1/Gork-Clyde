@@ -1,12 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PushableBig : Pushable
 {
-
-   
-    
     /// <summary>
     /// Enables gork to push this object while in trigger
     /// </summary>
