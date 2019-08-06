@@ -15,10 +15,6 @@ public class Airstream : MonoBehaviour, IActivatable
     private bool activeAtStart = true;
 
   
-    [SerializeField]
-    private ParticleSystem vfx1, vfx2;
-
-
     private void Start()
     {
         if (!activeAtStart)
@@ -62,7 +58,7 @@ public class Airstream : MonoBehaviour, IActivatable
     private void AddAirstreamForce(Rigidbody rb)
     {
         direction = transform.forward;
-        rb.AddForce(direction * strength * Time.deltaTime * 60, ForceMode.Acceleration);
+        rb.AddForce(direction * strength * Time.deltaTime * 60 * rb.GetComponent<AirstreamAffected>().airstreamForceMultiplier, ForceMode.Acceleration);
     }
 
     /// <summary>
@@ -109,14 +105,28 @@ public class Airstream : MonoBehaviour, IActivatable
         BoxCollider bc = GetComponent<BoxCollider>();
         if (bc.enabled)
         {
-            vfx1.Stop();
-            vfx2.Stop();
+            StopVfx();
         }
         else
         {
-            vfx1.Play();
-            vfx2.Play();
+            PlayVfx();
         }
         bc.enabled = !bc.enabled;
+    }
+
+    private void PlayVfx()
+    {
+        foreach (var vfx in  GetComponentsInChildren<ParticleSystem>())
+        {
+            vfx.Play();
+        }
+    }
+    
+    private void StopVfx()
+    {
+        foreach (var vfx in  GetComponentsInChildren<ParticleSystem>())
+        {
+            vfx.Stop();
+        }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 
@@ -23,11 +24,21 @@ public class OptionsMenu : MonoBehaviour
     [SerializeField]
     private bool inMainMenu = false;
 
+    private GameObject onMenuToggledOnSelected, onMenuToggledOffSelected;
+
+    public GameObject firstSelected, mainMenuSelected;
+
+    public GameObject controls;
+    
     private void Start()
     {
         canvas = GetComponent<Canvas>();
         SetSliderValues();
         SetCheckBoxStates();
+        if (!inMainMenu)
+        {
+            MenuButton.FocusNothing();
+        }
     }
 
     private void Update()
@@ -43,9 +54,15 @@ public class OptionsMenu : MonoBehaviour
     {
         if (Input.GetButtonDown("Cancel"))
         {
-            if (canvas.enabled)
+            if (controls.activeSelf)
+            {
+                controls.SetActive(false);
+                EventSystem.current.SetSelectedGameObject(firstSelected);
+            }
+            else if (canvas.enabled)
             {
                 canvas.enabled = false;
+                EventSystem.current.SetSelectedGameObject(mainMenuSelected);
             }
         }
     }
@@ -115,7 +132,38 @@ public class OptionsMenu : MonoBehaviour
 
     public void ToggleMenu(GameObject menu)
     {
-        var menuCanvas = menu.GetComponent<Canvas>();
-        menuCanvas.enabled = !menuCanvas.enabled;
+        var canvas = menu.GetComponent<Canvas>();
+        if (!canvas)
+        {
+            menu.SetActive(!menu.activeSelf);
+            if (menu.activeSelf)
+            {
+                EventSystem.current.SetSelectedGameObject(onMenuToggledOnSelected);
+            }
+            else
+            {
+                EventSystem.current.SetSelectedGameObject(onMenuToggledOffSelected);
+            }
+            return;
+        }
+        canvas.enabled = !canvas.enabled;
+        if (canvas.enabled)
+        {
+            EventSystem.current.SetSelectedGameObject(onMenuToggledOnSelected);
+        }
+        else
+        {
+            EventSystem.current.SetSelectedGameObject(onMenuToggledOffSelected);
+        }
+    }
+
+    public void SetOnMenuToggledOnSelected(GameObject obj)
+    {
+        onMenuToggledOnSelected = obj;
+    }
+
+    public void SetOnMenuToggledOffSelected(GameObject obj)
+    {
+        onMenuToggledOffSelected = obj;
     }
 }

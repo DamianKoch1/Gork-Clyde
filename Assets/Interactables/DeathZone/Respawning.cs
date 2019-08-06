@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -7,6 +8,7 @@ public class Respawning : MonoBehaviour
 {
 
     private Vector3 spawnpoint;
+    private Quaternion rotation;
     private Rigidbody rb;
 
     [SerializeField]
@@ -25,8 +27,9 @@ public class Respawning : MonoBehaviour
     public void Respawn()
     {
         GetComponent<Player>()?.ResetMotion();
-        rb.velocity = Vector3.zero;
         rb.MovePosition(spawnpoint);
+        transform.rotation = rotation;
+        rb.velocity = Vector3.zero;
     }
 
     /// <summary>
@@ -35,6 +38,7 @@ public class Respawning : MonoBehaviour
     /// <returns></returns>
     public IEnumerator UpdateSpawnPoint()
     {
+        yield return null;
         SetSpawnPoint();
         while (dynamicSpawnpoint)
         {
@@ -58,6 +62,7 @@ public class Respawning : MonoBehaviour
     private bool IsValidSpawnpoint(RaycastHit hit)
     {
         if (hit.transform.CompareTag("platform")) return false;
+        if (hit.transform.CompareTag("noSpawnpoint")) return false;
         if (GetComponent<Carryable>()?.isHeld == true) return false;
         if (GetComponent<Clyde>()?.state.inAirstream == true) return false;
         return true;
@@ -67,6 +72,7 @@ public class Respawning : MonoBehaviour
     private void SetSpawnPoint()
     {
         spawnpoint = rb.position;
+        rotation = transform.rotation;
     }
     
 }

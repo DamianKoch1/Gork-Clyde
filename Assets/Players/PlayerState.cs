@@ -51,6 +51,7 @@ public class PlayerState : MonoBehaviour
         anim = _anim;
         rb = _rb;
         walkParticles = _walkParticles;
+        canJumpTimeframe = maxGhostjumpDelay;
     }
 
     /// <summary>
@@ -90,6 +91,7 @@ public class PlayerState : MonoBehaviour
         {
             walkParticles.Play();
         }
+        canJumpTimeframe = maxGhostjumpDelay;
     }
 
     private void UpdateAirborneState()
@@ -129,7 +131,6 @@ public class PlayerState : MonoBehaviour
         anim.SetBool("falling", false);
         anim.SetTrigger("land");
         anim.ResetTrigger("jump");
-        canJumpTimeframe = maxGhostjumpDelay;
         StopCoroutine(DecreaseCanJumpTimer());
         if (isThrown)
         {
@@ -164,7 +165,14 @@ public class PlayerState : MonoBehaviour
         out groundedInfo, GetComponent<Collider>().bounds.extents.y - 0.1f, Physics.AllLayers,
         QueryTriggerInteraction.Ignore);
         if (collidingTransforms.Count == 0) retval = false;
-        if (Mathf.Abs(rb.velocity.y) > 0.5f) retval = false;
+        if (groundedInfo.transform)
+        {
+            
+        if (!groundedInfo.transform.CompareTag("platform"))
+        {
+            if (Mathf.Abs(rb.velocity.y) > 0.5f) retval = false;
+        }
+        }
         return retval;
     }
 

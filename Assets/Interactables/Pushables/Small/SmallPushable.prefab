@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 5789133625647090556}
   - component: {fileID: 3130819403160448634}
   - component: {fileID: 2149090978974191393}
+  - component: {fileID: 5759911395987835283}
   m_Layer: 2
   m_Name: SmallPushable
   m_TagString: pushable
@@ -126,6 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ef1ccd984b461441bb3f1b20dca628e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isHeld: 0
 --- !u!114 &5789133625647090556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,6 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPushed: 0
+  playerPushDistance: 1.2
 --- !u!114 &2149090978974191393
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,6 +167,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dynamicSpawnpoint: 0
+--- !u!135 &5759911395987835283
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6393501334172902942}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.7
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &3838751917603649017
 PrefabInstance:
   m_ObjectHideFlags: 0
