@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Carryable))]
+[RequireComponent(typeof(AirstreamAffected))]
 public class Clyde : Player
 {
     public static string XAxis = "ClydeHorizontal",
     ZAxis = "ClydeVertical",
     JumpButton = "ClydeJump",
+    ClydeInteract = "ClydeInteract",
     ClydeCam = "ClydeCam";
 
     /// <summary>
@@ -32,6 +34,29 @@ public class Clyde : Player
         base.Update();
         CheckIfOnGork();
     }
+    
+    protected override void CheckInput()
+    {
+        base.CheckInput();
+
+        if (Input.GetButtonDown(ClydeInteract))
+        {
+            if (pushing.pushedObj)
+            {
+                pushing.StartPushing();
+            }
+        }
+
+        if (Input.GetButtonUp(ClydeInteract))
+        {
+            if (pushing.isPushing)
+            {
+                pushing.StopPushing();
+            }
+        }
+    }
+    
+    
 
     /// <summary>
     /// Makes gork pick clyde up if clyde stands on him, prevents jumping on top of gork to reach unintended heights
@@ -41,11 +66,11 @@ public class Clyde : Player
         if (pickupCooldown != 0) return;
         if (!state.groundedInfo.transform) return;
         var _gork = state.groundedInfo.transform.GetComponent<Gork>();
-        if (_gork?.isPushing == true) return;
+        if (_gork?.pushing.isPushing == true) return;
         _gork?.throwing.PickUp(gameObject);
     }
 
-    public IEnumerator DecreasePickupCooldown()
+    private IEnumerator DecreasePickupCooldown()
     {
         pickupCooldown = 0.5f;
         while (pickupCooldown > 0)

@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 5348649067866839038}
   - component: {fileID: 4078991665789512561}
   - component: {fileID: 2002650188190270298}
+  - component: {fileID: 8135090562367645002}
   m_Layer: 12
   m_Name: Clyde
   m_TagString: player
@@ -70,6 +71,7 @@ MonoBehaviour:
   airMovespeedPenalty: 0.85
   throwMovespeedPenalty: 0.75
   state: {fileID: 0}
+  pushing: {fileID: 0}
   rb: {fileID: 0}
   anim: {fileID: 2447535924106207425}
   gork: {fileID: 0}
@@ -145,6 +147,20 @@ MonoBehaviour:
   wasGrounded: 0
   maxGhostjumpDelay: 0.2
   canJumpTimeframe: 0
+--- !u!114 &8135090562367645002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3874808357865764670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac0a407c5d71c464dad49e36ec71000c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pushedObj: {fileID: 0}
+  isPushing: 0
 --- !u!183 &5256570761919932447
 Cloth:
   m_ObjectHideFlags: 0

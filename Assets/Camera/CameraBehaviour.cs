@@ -55,7 +55,7 @@ public class CameraBehaviour : MonoBehaviour
         {
             if (Input.GetButton(Gork.GorkCam))
             {
-                gorkCam.Priority = 3;
+                gorkCam.Priority = 51;
             }
             else
             {
@@ -70,7 +70,7 @@ public class CameraBehaviour : MonoBehaviour
         {
             if (Input.GetButton(Clyde.ClydeCam))
             {
-                clydeCam.Priority = 3;
+                clydeCam.Priority = 51;
             }
             else
             {

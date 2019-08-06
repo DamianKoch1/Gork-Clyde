@@ -7,6 +7,8 @@ using UnityEngine;
 /// </summary>
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(PlayerState))]
+[RequireComponent(typeof(CapsuleCollider))]
+[RequireComponent(typeof(Pushing))]
 public abstract class Player : MonoBehaviour
 {
     [Header("Movement")]
@@ -33,6 +35,8 @@ public abstract class Player : MonoBehaviour
     [HideInInspector]
     public PlayerState state;
     
+    [HideInInspector]
+    public Pushing pushing;
   
     
     protected Vector3 motion;
@@ -54,8 +58,8 @@ public abstract class Player : MonoBehaviour
     protected virtual void Start()
     {
         InitializeVariables();
-        state = GetComponent<PlayerState>();
-        state.Initialize(anim, rb, walkParticles);
+        
+        InitializeComponents();
     }
 
 
@@ -77,6 +81,16 @@ public abstract class Player : MonoBehaviour
         setMotion = SetMotionDefault;
     }
 
+    private void InitializeComponents()
+    {
+        state = GetComponent<PlayerState>();
+        state.Initialize(anim, rb, walkParticles);
+        pushing = GetComponent<Pushing>();
+        pushing.Initialize(anim, state, rb);
+        pushing.onPushStarted = OnPushStarted;
+        pushing.onPushStopped = OnPushStopped;
+    }
+    
     protected virtual void CheckInput()
     {
         if (!state.canMove) return;
@@ -86,7 +100,7 @@ public abstract class Player : MonoBehaviour
             {
                 if (state.canJumpTimeframe > 0)
                 {
-                    Jump();
+                    StartCoroutine(Jump());
                 }
             }
         }
@@ -115,14 +129,14 @@ public abstract class Player : MonoBehaviour
     /// </summary>
     protected void SetMotionDefault()
     {
-        float moveSpeed = speed;
+        float finalSpeed = speed;
         if (state.isThrown)
         {
-            moveSpeed *= throwMovespeedPenalty;
+            finalSpeed *= throwMovespeedPenalty;
         }
         else if (!state.wasGrounded)
         {
-             moveSpeed *= airMovespeedPenalty;
+             finalSpeed *= airMovespeedPenalty;
         }
         motion.x = Input.GetAxis(xAxis);
         motion.z = Input.GetAxis(zAxis);
@@ -130,13 +144,41 @@ public abstract class Player : MonoBehaviour
         {
             motion = motion.normalized;
         }
-        motion *= moveSpeed;
+        motion *= finalSpeed;
         motion = CameraBehaviour.ApplyCameraRotation(motion);
         LookForward();
     }
 
+    /// <summary>
+    /// Disables rotating to motion vector
+    /// </summary>
+    private void SetMotionPushing()
+    {
+        motion.x = Input.GetAxis(xAxis);
+        motion.z = Input.GetAxis(zAxis);
 
-    private void Jump()
+        if (motion.magnitude > 1)
+        {
+            motion.Normalize();
+        }
+		
+        motion *= speed;
+        motion = CameraBehaviour.ApplyCameraRotation(motion);
+    }
+
+    private void OnPushStarted()
+    {
+        ResetMotion();
+        setMotion = SetMotionPushing;
+    }
+
+    private void OnPushStopped()
+    {
+        ResetMotion();
+        setMotion = SetMotionDefault;
+    }
+
+    private IEnumerator Jump()
     {
         walkParticles.Stop();
         transform.SetParent(null, true);
@@ -145,6 +187,23 @@ public abstract class Player : MonoBehaviour
         rb.AddForce(jumpHeight * Vector3.up * 1.6f, ForceMode.VelocityChange);
         anim.SetTrigger("jump");
         anim.ResetTrigger("land");
+        bool jumpHeld = true;
+        while (true)
+        {
+            if (rb.velocity.y < 0) yield break;
+            if (jumpHeld)
+            {
+                if (!Input.GetButton(jumpButton))
+                {
+                    jumpHeld = false;
+                }
+            }
+            else
+            {
+                rb.AddForce(-Vector3.up * 20, ForceMode.Acceleration);
+            }
+            yield return null;
+        }
     }
 
     

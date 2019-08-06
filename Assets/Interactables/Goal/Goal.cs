@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Goal : MonoBehaviour
 {
@@ -16,7 +17,6 @@ public class Goal : MonoBehaviour
         if (!player) return;
 
         player.state.canMove = false;
-        //player.anim.enabled = false;
         StopCoroutine(player.GetComponent<Respawning>().UpdateSpawnPoint());
         enteredPlayerCount++;
         if (enteredPlayerCount == 2)
@@ -27,9 +27,10 @@ public class Goal : MonoBehaviour
 
     void LoadNextLevel()
     {
-        Fade.NextSceneName = nextLevelName;
-        Fade.FadeToBlack();
+        LoadingScreen.NextLevelName = nextLevelName;
+        Fade.FadeToBlack("Loading Screen");
     }
 
+    
 }
 
