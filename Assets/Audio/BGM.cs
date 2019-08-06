@@ -7,12 +7,7 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class BGM : Singleton<BGM>
 {
-	protected override void Start()
-	{
-		base.Start();
-		StartCoroutine(FadeIn());
-	}
-
+	
 	/// <summary>
 	/// Sets a new bgm and plays it if it's not the current one
 	/// </summary>
@@ -42,6 +37,7 @@ public class BGM : Singleton<BGM>
 	/// <returns></returns>
 	private IEnumerator FadeIn()
 	{
+		StopCoroutine(FadeOut());
 		var audioSource = Instance.GetComponent<AudioSource>();
 		audioSource.Play();
 		var timer = 0.0f;
@@ -60,6 +56,7 @@ public class BGM : Singleton<BGM>
 	/// <returns></returns>
 	private IEnumerator FadeOut()
 	{
+		StopCoroutine(FadeIn());
 		var audioSource = Instance.GetComponent<AudioSource>();
 		var timer = 1.0f;
 		while (timer > 0)

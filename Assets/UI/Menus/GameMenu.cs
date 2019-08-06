@@ -22,6 +22,7 @@ public class GameMenu : MonoBehaviour
     private void Start()
     {
         Cursor.visible = true;
+        SetBgm();
     }
 
     /// <summary>
