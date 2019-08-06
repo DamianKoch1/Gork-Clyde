@@ -79,11 +79,10 @@ public class GameSaver : MonoBehaviour
 
 
     /// <summary>
-    /// Clears PlayerPrefs and deletes save
+    /// Deletes save
     /// </summary>
     public static void WipeSave()
     {
-        PlayerPrefs.DeleteAll();
         File.Delete(Path());
     }
 }
