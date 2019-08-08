@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class Airstream : MonoBehaviour, IActivatable
 {
@@ -8,6 +9,9 @@ public class Airstream : MonoBehaviour, IActivatable
 
     [SerializeField]
     private bool activeAtStart = true;
+    
+    [SerializeField]
+    private List<Ventilator> ventilators = new List<Ventilator>();
 
   
     private void Start()
@@ -108,7 +112,7 @@ public class Airstream : MonoBehaviour, IActivatable
     }
 
     /// <summary>
-    /// Toggles particles and collider on/off
+    /// Toggles particles / collider / fans on/off
     /// </summary>
     public void ToggleAirstream()
     {
@@ -117,10 +121,18 @@ public class Airstream : MonoBehaviour, IActivatable
         if (bc.enabled)
         {
             StopVfx();
+            foreach (var ventilator in ventilators)
+            {
+                StartCoroutine(ventilator.TurnOff());
+            }
         }
         else
         {
             PlayVfx();
+            foreach (var ventilator in ventilators)
+            {
+                StartCoroutine(ventilator.TurnOn());
+            }
         }
         bc.enabled = !bc.enabled;
     }
