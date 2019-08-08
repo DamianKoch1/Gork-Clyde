@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using SplineMesh;
-using UnityEngine;
+﻿using UnityEngine;
 
+/// <summary>
+/// Toggles material of children mesh renderers on (de)activation
+/// </summary>
 public class Cable : MonoBehaviour, IActivatable
 {
 
@@ -11,11 +10,19 @@ public class Cable : MonoBehaviour, IActivatable
     private Material activeMat, inactiveMat;
 
     [SerializeField]
-    private bool active = false;
+    private bool activeAtStart = false;
 
     private void Start()
     {
-        if (active)
+        SetStartMaterial();
+    }
+
+    /// <summary>
+    /// Sets starting material depending on activeAtStart
+    /// </summary>
+    private void SetStartMaterial()
+    {
+        if (activeAtStart)
         {
             SetMaterial(activeMat);
         }
@@ -50,7 +57,7 @@ public class Cable : MonoBehaviour, IActivatable
     /// </summary>
     private void ToggleMaterial()
     {
-        if (active)
+        if (activeAtStart)
         {
             SetMaterial(inactiveMat);
         }
@@ -59,7 +66,7 @@ public class Cable : MonoBehaviour, IActivatable
             SetMaterial(activeMat);
         }
 
-        active = !active;
+        activeAtStart = !activeAtStart;
     }
 
     /// <summary>

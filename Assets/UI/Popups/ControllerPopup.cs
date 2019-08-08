@@ -1,32 +1,33 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+/// <summary>
+/// Shows once at start to recommend using controllers
+/// </summary>
 public class ControllerPopup : MonoBehaviour
 {
-	/// <summary>
-	/// Doesnt appear on start if true, likely going into playerPrefs
-	/// </summary>
-	public static bool HasShown = false;
-
+	
 	[SerializeField] 
 	private GameObject selectOnHide;
 
 	private void Start()
 	{
-		if (!HasShown)
-		{
-			Show(true);
-			HasShown = true;
-		}
+		ShowOnNewGame();
 	}
 
 	/// <summary>
-	/// Shows popup
+	/// Shows this popup if never shown this save
+	/// </summary>
+	private void ShowOnNewGame()
+	{
+		if (PlayerPrefs.HasKey("ControllerRecommendationShown")) return;
+		Show(true);
+		PlayerPrefs.SetInt("ControllerRecommendationShown", 1);
+	}
+
+	/// <summary>
+	/// Toggles popup
 	/// </summary>
 	/// <param name="show"></param>
 	public void Show(bool show)

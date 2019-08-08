@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.EventSystems;
@@ -24,6 +22,9 @@ public class OptionsMenu : MonoBehaviour
     [SerializeField]
     private bool inMainMenu = false;
 
+    /// <summary>
+    /// Objects that will be selected when toggling options/... on/off
+    /// </summary>
     private GameObject onMenuToggledOnSelected, onMenuToggledOffSelected;
 
     public GameObject firstSelected, mainMenuSelected;
@@ -95,22 +96,39 @@ public class OptionsMenu : MonoBehaviour
         Mute(isMuted);
     }
 
+    /// <summary>
+    /// Uses Log10 of value to achieve more linear volume increase
+    /// </summary>
+    /// <param name="value">Value to use for volume calculation</param>
     public void SetBgmVolume(float value)
     {
         SetVolume("BgmVolume", Mathf.Log10(value) * 20);
     }
 
+    /// <summary>
+    /// Uses Log10 of value to achieve more linear volume increase
+    /// </summary>
+    /// <param name="value">Value to use for volume calculation</param>
     public void SetSfxVolume(float value)
     {
         SetVolume("SfxVolume", Mathf.Log10(value) * 20);
     }
 
+    /// <summary>
+    /// Sets given volume type to given volume and saves them to playerprefs
+    /// </summary>
+    /// <param name="volumeType">Type of volume</param>
+    /// <param name="value">Value of volume</param>
     private void SetVolume(string volumeType, float value)
     {
         mixer.SetFloat(volumeType, value);
         PlayerPrefs.SetFloat(volumeType, value);
     }
 
+    /// <summary>
+    /// Toggles sound
+    /// </summary>
+    /// <param name="isMuted">Mutes sound if true, unmutes otherwise</param>
     public void Mute(bool isMuted)
     {
         if (isMuted)
@@ -124,12 +142,20 @@ public class OptionsMenu : MonoBehaviour
         PlayerPrefs.SetInt("Mute", Convert.ToInt32(isMuted));
     }
 
+    /// <summary>
+    /// Toggles fullscreen
+    /// </summary>
+    /// <param name="isFullscreen">Sets to fullscreen if true, windowed otherwise</param>
     public void Fullscreen(bool isFullscreen)
     {
         Screen.fullScreen = isFullscreen;
         PlayerPrefs.SetInt("Fullscreen", Convert.ToInt32(isFullscreen));
     }
 
+    /// <summary>
+    /// Toggles given menu
+    /// </summary>
+    /// <param name="menu"></param>
     public void ToggleMenu(GameObject menu)
     {
         var canvas = menu.GetComponent<Canvas>();
@@ -157,11 +183,19 @@ public class OptionsMenu : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Sets what will be selected when toggling menu on
+    /// </summary>
+    /// <param name="obj">object to select next</param>
     public void SetOnMenuToggledOnSelected(GameObject obj)
     {
         onMenuToggledOnSelected = obj;
     }
 
+    /// <summary>
+    /// Sets what will be selected when toggling menu off
+    /// </summary>
+    /// <param name="obj">object to select next</param>
     public void SetOnMenuToggledOffSelected(GameObject obj)
     {
         onMenuToggledOffSelected = obj;
