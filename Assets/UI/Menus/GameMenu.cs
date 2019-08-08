@@ -1,25 +1,35 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
+/// <summary>
+/// Contains most functionality menu buttons may have
+/// </summary>
 public class GameMenu : MonoBehaviour
 {
 
+    /// <summary>
+    /// Objects that will be selected when toggling options/... on/off
+    /// </summary>
     private GameObject selectOnMenuToggledOn, selectOnMenuToggledOff;
 
     [SerializeField] 
-    private AudioClip bgm;
-
-    [SerializeField] 
     private bool setNewBgm = false;
+    
+    [SerializeField] 
+    private AudioClip bgm;
 
     private void Start()
     {
         Cursor.visible = true;
+        SetBgm();
+    }
+
+    /// <summary>
+    /// If setNewBgm is true, starts playing new bgm if not already playing
+    /// </summary>
+    private void SetBgm()
+    {
         if (setNewBgm)
         {
             BGM.Instance.SetBgm(bgm);
@@ -28,7 +38,7 @@ public class GameMenu : MonoBehaviour
 
 
     /// <summary>
-    /// Stops bgm
+    /// Fades bgm out
     /// </summary>
     public void EndBgm()
     {
@@ -36,16 +46,20 @@ public class GameMenu : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="sceneName"></param>
     public void LoadScene(string sceneName)
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene(sceneName);
+        Fade.FadeToBlack(sceneName);
     }
 
     public void LoadLoadingScreen(string sceneName)
     {
         LoadingScreen.NextLevelName = sceneName;
-        SceneManager.LoadScene("Loading Screen");
+        Fade.FadeToBlack("Loading Screen");
     }
     
     /// <summary>
@@ -79,11 +93,19 @@ public class GameMenu : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Sets what will be selected when toggling menu on
+    /// </summary>
+    /// <param name="obj">object to select next</param>
     public void SetOnMenuToggledOnSelected(GameObject obj)
     {
         selectOnMenuToggledOn = obj;
     }
 
+    /// <summary>
+    /// Sets what will be selected when toggling menu off
+    /// </summary>
+    /// <param name="obj">object to select next</param>
     public void SetOnMenuToggledOffSelected(GameObject obj)
     {
         selectOnMenuToggledOff = obj;
@@ -99,10 +121,13 @@ public class GameMenu : MonoBehaviour
         Application.Quit();
     }
     
+    /// <summary>
+    /// Restarts current level
+    /// </summary>
     public void Restart()
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Fade.FadeToBlack(SceneManager.GetActiveScene().name);
     }
 
 }
