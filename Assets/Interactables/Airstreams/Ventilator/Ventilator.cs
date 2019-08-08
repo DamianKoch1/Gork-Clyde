@@ -17,13 +17,11 @@ public class Ventilator : MonoBehaviour
 
     public IEnumerator TurnOn()
     {
-        print("start");
         StopCoroutine(TurnOff());
         float timer = 0;
         while (timer < transitionDuration)
         {
             rb.angularVelocity = new Vector3(0, 0, (timer / transitionDuration) * maxRotationSpeed);
-            print("on, " + rb.angularVelocity.z);
             timer += Time.deltaTime;
             yield return null;
         }
@@ -32,12 +30,10 @@ public class Ventilator : MonoBehaviour
 
     public IEnumerator TurnOff()
     {
-        print("stop");
         StopCoroutine(TurnOn());
         float timer = transitionDuration;
         while (timer > 0)
         {
-            print("off, " + rb.angularVelocity.z);
             rb.angularVelocity = new Vector3(0, 0, (timer / transitionDuration) *  maxRotationSpeed);
             if (rb.angularVelocity.z < minRotationSpeed)
             {
