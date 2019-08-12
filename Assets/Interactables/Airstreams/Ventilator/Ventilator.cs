@@ -10,18 +10,26 @@ public class Ventilator : MonoBehaviour
 
     private void Start()
     {
+        Initialize();
+    }
+
+    private void Initialize()
+    {
         rb = GetComponentInChildren<Rigidbody>();
         rb.maxAngularVelocity = maxRotationSpeed;
         StartCoroutine(TurnOn());
     }
-
+    
+    /// <summary>
+    /// Accelerates angular velocity to maxRotationSpeed for transitionDuration s
+    /// </summary>
+    /// <returns></returns>
     public IEnumerator TurnOn()
     {
         StopCoroutine(TurnOff());
         float timer = 0;
         while (timer < transitionDuration)
         {
-            //rb.AddRelativeTorque(new Vector3(0, 0, (timer / transitionDuration) * maxRotationSpeed), ForceMode.VelocityChange);
             rb.angularVelocity = transform.forward * (timer / transitionDuration) * maxRotationSpeed;
             timer += Time.deltaTime;
             yield return null;
@@ -29,13 +37,16 @@ public class Ventilator : MonoBehaviour
         rb.angularVelocity = transform.forward * maxRotationSpeed;
     }
 
+    /// <summary>
+    /// Deccelerates angular velocity to maxRotationSpeed for transitionDuration s
+    /// </summary>
+    /// <returns></returns>
     public IEnumerator TurnOff()
     {
         StopCoroutine(TurnOn());
         float timer = transitionDuration;
         while (timer > 0)
         {
-            //rb.AddRelativeTorque(new Vector3(0, 0, (timer / transitionDuration) * maxRotationSpeed), ForceMode.VelocityChange);
             rb.angularVelocity = transform.forward * (timer / transitionDuration) *  maxRotationSpeed;
             if (rb.angularVelocity.z < minRotationSpeed)
             {
