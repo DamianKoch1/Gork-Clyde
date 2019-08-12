@@ -21,11 +21,12 @@ public class Ventilator : MonoBehaviour
         float timer = 0;
         while (timer < transitionDuration)
         {
-            rb.angularVelocity = new Vector3(0, 0, (timer / transitionDuration) * maxRotationSpeed);
+            //rb.AddRelativeTorque(new Vector3(0, 0, (timer / transitionDuration) * maxRotationSpeed), ForceMode.VelocityChange);
+            rb.angularVelocity = transform.forward * (timer / transitionDuration) * maxRotationSpeed;
             timer += Time.deltaTime;
             yield return null;
         }
-        rb.angularVelocity = new Vector3(0, 0, maxRotationSpeed);
+        rb.angularVelocity = transform.forward * maxRotationSpeed;
     }
 
     public IEnumerator TurnOff()
@@ -34,10 +35,11 @@ public class Ventilator : MonoBehaviour
         float timer = transitionDuration;
         while (timer > 0)
         {
-            rb.angularVelocity = new Vector3(0, 0, (timer / transitionDuration) *  maxRotationSpeed);
+            //rb.AddRelativeTorque(new Vector3(0, 0, (timer / transitionDuration) * maxRotationSpeed), ForceMode.VelocityChange);
+            rb.angularVelocity = transform.forward * (timer / transitionDuration) *  maxRotationSpeed;
             if (rb.angularVelocity.z < minRotationSpeed)
             {
-                rb.angularVelocity = new Vector3(0, 0, minRotationSpeed);
+                rb.angularVelocity = transform.forward * minRotationSpeed;
                 yield break;
             }
             timer -= Time.deltaTime;
