@@ -41,13 +41,6 @@ public class Gork : Player
 				pushing.StopPushing();
 			}
 		}
-
-		//debug
-		if (Input.GetKeyDown(KeyCode.J))
-		{
-			throwing.PickUp(FindObjectOfType<Clyde>().gameObject);
-		}	
-		
 	}
 
 	/// <summary>
