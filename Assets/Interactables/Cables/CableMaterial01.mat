@@ -21,22 +21,18 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: CableMaterial01
-  m_Shader: {fileID: -6465566751694194690, guid: 19a1207fcd31beb4c9d03bfd64361f26,
-    type: 3}
+  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_ShaderKeywords: _EMISSION
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
+  m_CustomRenderQueue: 2050
+  stringTagMap:
+    RenderType: Opaque
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - Texture2D_ACA18426:
-        m_Texture: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _BaseMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -61,19 +57,11 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_A5631C68_Texture:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_41B359B: 1
-    - Vector1_89813170: 0
-    - Vector1_AC75C4D0: 1
-    - Vector1_EDE9745A: 0.5
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -96,11 +84,6 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - Color_392A306C: {r: 0.1533019, g: 0.46443614, b: 0.6132076, a: 0}
-    - Color_61795AC4: {r: 0, g: 0, b: 0, a: 0}
-    - Color_6C621F0D: {r: 0.10104778, g: 0.75488627, b: 1.1353015, a: 1}
-    - Color_B701E04C: {r: 3.771399, g: 13.96437, b: 19.468573, a: 1}
-    - Vector2_FE05C49B: {r: 1, g: 1, b: 0, a: 0}
     - _BaseColor: {r: 0.05660379, g: 0.05660379, b: 0.05660379, a: 1}
     - _Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _EmissionColor: {r: 0, g: 1.3632315, b: 2.8301888, a: 1}
