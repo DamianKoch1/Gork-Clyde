@@ -65,6 +65,10 @@ public abstract class Player : MonoBehaviour
     protected virtual void Update()
     {
         CheckInput();
+        if (pushing.isPushing)
+        {
+            pushing.UpdateLegs(motion);
+        }
     }
 
     protected void FixedUpdate()
