@@ -26,7 +26,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5526912744520468416}
   - component: {fileID: 907574646637082818}
-  - component: {fileID: 6450184351527494855}
   m_Layer: 0
   m_Name: Rotator
   m_TagString: Untagged
@@ -41,14 +40,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5128862470163853734}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8443926219049997445}
   m_Father: {fileID: 6451472366294742390}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
 --- !u!33 &907574646637082818
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -57,19 +56,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5128862470163853734}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!65 &6450184351527494855
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5128862470163853734}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8008161242767333527
 GameObject:
   m_ObjectHideFlags: 0
@@ -115,8 +101,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 2.5382078, y: 2.5277433, z: 4.169027}
+  m_Center: {x: -0.015696168, y: 0.010464191, z: -1.6368339}
 --- !u!114 &668820511342654543
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,9 +115,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06b9246262a6bc243ad4f9d37c63d3ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxRotationSpeed: 50
-  minRotationSpeed: 1
-  transitionDuration: 3
+  maxRotationSpeed: -12
+  minRotationSpeed: -0.1
+  transitionDuration: 4
 --- !u!1001 &3482530346213097375
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -225,6 +211,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6451472366294742390}
     m_Modifications:
+    - target: {fileID: -927199367670048503, guid: c08cae7f20ccc9c4cb38421a98e8d19b,
+        type: 3}
+      propertyPath: m_Name
+      value: VentilatorHullMesh
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: c08cae7f20ccc9c4cb38421a98e8d19b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -279,11 +270,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: c08cae7f20ccc9c4cb38421a98e8d19b,
-        type: 3}
-      propertyPath: m_Name
-      value: VentilatorHullMesh
       objectReference: {fileID: 0}
     - target: {fileID: -2416733968201007103, guid: c08cae7f20ccc9c4cb38421a98e8d19b,
         type: 3}
