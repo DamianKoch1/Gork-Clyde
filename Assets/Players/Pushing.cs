@@ -134,7 +134,7 @@ public class Pushing : MonoBehaviour
     public void UpdateLegs(Vector3 motion)
     {
         var angle = Vector3.SignedAngle(transform.forward, motion.normalized, Vector3.up);
-        if (angle < 0) angle = 360 + angle;
+        if (angle < 0) angle += 360;
         anim.SetFloat("AngleToPushable", angle);
     }
 }
