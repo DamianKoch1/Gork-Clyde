@@ -126,4 +126,9 @@ public class Pushing : MonoBehaviour
         lookAt.y = pos.y;
         transform.LookAt(lookAt);
     }
+
+    public void UpdateLegs(Vector3 motion)
+    {
+        print(Vector3.Dot((pushedObj.transform.position - rb.position).normalized, (motion*transform.right).normalized));
+    }
 }
