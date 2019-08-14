@@ -98,12 +98,9 @@ public abstract class Player : MonoBehaviour
         if (!state.canMove) return;
         if (Input.GetButtonDown(jumpButton))
         {
-            if (state.wasGrounded)
+            if (state.canJumpTimeframe > 0)
             {
-                if (state.canJumpTimeframe > 0)
-                {
-                    StartCoroutine(Jump());
-                }
+                StartCoroutine(Jump());
             }
         }
 
@@ -186,6 +183,7 @@ public abstract class Player : MonoBehaviour
     /// <returns></returns>
     private IEnumerator Jump()
     {
+        ResetMotion();
         transform.SetParent(null, true);
         StopCoroutine(state.DecreaseCanJumpTimer());
         state.canJumpTimeframe = 0;
