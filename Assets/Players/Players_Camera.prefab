@@ -487,6 +487,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 127357140451112695, guid: f055718a36d21f04195bab65c3180ef5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4042556606829868055, guid: f055718a36d21f04195bab65c3180ef5,
         type: 3}
       propertyPath: m_IsActive
@@ -706,11 +711,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 127357140451112695, guid: f055718a36d21f04195bab65c3180ef5,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f055718a36d21f04195bab65c3180ef5, type: 3}
@@ -999,6 +999,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2002650188190270298, guid: 5db7da3d9d401f14f97a7aef596827e0,
+        type: 3}
+      propertyPath: maxGhostjumpDelay
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 1088568127900295901, guid: 5db7da3d9d401f14f97a7aef596827e0,
         type: 3}

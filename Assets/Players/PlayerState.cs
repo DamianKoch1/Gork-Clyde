@@ -154,9 +154,9 @@ public class PlayerState : MonoBehaviour
         anim.SetBool("falling", false);
         anim.ResetTrigger("jump");
         StopCoroutine(DecreaseCanJumpTimer());
+        anim.SetTrigger("land");
         if (highestFallVelocity < -minLandingVFXFallSpeed)
         {
-            anim.SetTrigger("land");
             landingParticles.Stop();
             landingParticles.Play();
         }
@@ -226,7 +226,7 @@ public class PlayerState : MonoBehaviour
         while (true)
         {
             canJumpTimeframe = Mathf.Max(canJumpTimeframe - Time.deltaTime, 0);
-            yield return null;
+            yield return new WaitForEndOfFrame();
         }
     }
 
