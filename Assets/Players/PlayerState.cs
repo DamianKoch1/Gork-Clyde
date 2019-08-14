@@ -195,6 +195,11 @@ public class PlayerState : MonoBehaviour
             canJumpTimeframe = maxGhostjumpDelay;
             StartCoroutine(DecreaseCanJumpTimer());
         }
+        else
+        {
+            StopCoroutine(DecreaseCanJumpTimer());
+            canJumpTimeframe = 0;
+        }
     }
     
     /// <summary>
