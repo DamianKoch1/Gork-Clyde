@@ -126,4 +126,15 @@ public class Pushing : MonoBehaviour
         lookAt.y = pos.y;
         transform.LookAt(lookAt);
     }
+
+    /// <summary>
+    /// Sets AngleToPushable parameter depending on motion angle to forward vector
+    /// </summary>
+    /// <param name="motion">Current movement motion</param>
+    public void UpdateLegs(Vector3 motion)
+    {
+        var angle = Vector3.SignedAngle(transform.forward, motion.normalized, Vector3.up);
+        if (angle < 0) angle += 360;
+        anim.SetFloat("AngleToPushable", angle);
+    }
 }
