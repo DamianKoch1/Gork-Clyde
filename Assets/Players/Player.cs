@@ -46,7 +46,7 @@ public abstract class Player : MonoBehaviour
     [Header("References")]
     public Animator anim;
 
-    private ParticleSystem walkParticles;
+   
 
     protected delegate void SetMotion();
 
@@ -80,14 +80,13 @@ public abstract class Player : MonoBehaviour
     private void InitializeVariables()
     {
         rb = GetComponent<Rigidbody>();
-        walkParticles = GetComponentInChildren<ParticleSystem>();
         setMotion = SetMotionDefault;
     }
 
     private void InitializeComponents()
     {
         state = GetComponent<PlayerState>();
-        state.Initialize(anim, rb, walkParticles);
+        state.Initialize(anim, rb);
         pushing = GetComponent<Pushing>();
         pushing.Initialize(anim, state, rb);
         pushing.onPushStarted = OnPushStarted;
@@ -99,12 +98,9 @@ public abstract class Player : MonoBehaviour
         if (!state.canMove) return;
         if (Input.GetButtonDown(jumpButton))
         {
-            if (state.wasGrounded)
+            if (state.canJumpTimeframe > 0)
             {
-                if (state.canJumpTimeframe > 0)
-                {
-                    StartCoroutine(Jump());
-                }
+                StartCoroutine(Jump());
             }
         }
 
@@ -187,7 +183,7 @@ public abstract class Player : MonoBehaviour
     /// <returns></returns>
     private IEnumerator Jump()
     {
-        walkParticles.Stop();
+        ResetMotion();
         transform.SetParent(null, true);
         StopCoroutine(state.DecreaseCanJumpTimer());
         state.canJumpTimeframe = 0;

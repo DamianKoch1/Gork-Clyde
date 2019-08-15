@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 /// <summary>
 /// Base class for pushables, can also be attached to gameobject to make it pushable, override OnTriggerEnter/Exit to decide which player can push
@@ -8,12 +9,13 @@
 [RequireComponent(typeof(Rigidbody))]
 public class Pushable : MonoBehaviour
 {
-    private ParticleSystem pushedParticles;
+    [SerializeField]
+    private ParticleSystem pushedParticles, landingParticles;
     private Rigidbody rb;
     private Vector3 previousPosition, currentPosition;
     [HideInInspector]
     public bool isPushed;
-
+    
     [SerializeField]
     private float playerPushDistance = 2f;
     
@@ -46,7 +48,6 @@ public class Pushable : MonoBehaviour
     
     private void InitializeVariables()
     {
-        pushedParticles = gameObject.GetComponentInChildren<ParticleSystem>();
         rb = GetComponent<Rigidbody>();
         previousPosition = rb.position;
         currentPosition = previousPosition;
@@ -156,4 +157,30 @@ public class Pushable : MonoBehaviour
         player.pushedObj = null;
         gameObject.layer = 0;
     }
+    
+    //----------------
+    /// <summary>
+    /// Plays collision vfx when landing after throw/fall
+    /// </summary>
+    private List<Transform> collidingTransforms = new List<Transform>();
+   
+    private void OnCollisionEnter(Collision other)
+    {
+        if (collidingTransforms.Contains(other.transform)) return;
+        if (collidingTransforms.Count == 0)
+        {
+            landingParticles.transform.position = other.contacts[0].point;
+            landingParticles.transform.up = other.contacts[0].normal;
+            landingParticles.Stop();
+            landingParticles.Play();
+        }
+        collidingTransforms.Add(other.transform);
+    }
+
+    private void OnCollisionExit(Collision other)
+    {
+        if (!collidingTransforms.Contains(other.transform)) return;
+        collidingTransforms.Remove(other.transform);
+    }
+    //----------------
 }
