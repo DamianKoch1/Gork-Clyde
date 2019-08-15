@@ -11,7 +11,8 @@ public class PlayerState : MonoBehaviour
 
     private Rigidbody rb;
     
-    private ParticleSystem walkParticles;
+    [SerializeField]
+    private ParticleSystem walkParticles, landingParticles;
 
     [HideInInspector]
     public bool canMove = true,
@@ -31,6 +32,11 @@ public class PlayerState : MonoBehaviour
     public float canJumpTimeframe = 0f;
     
     public RaycastHit groundedInfo;
+
+    private float highestFallVelocity = 0;
+
+    [SerializeField]
+    private float minLandingVFXFallSpeed = 15;
     
     //-----------
     /// <summary>
@@ -51,11 +57,10 @@ public class PlayerState : MonoBehaviour
     }
     //----------
 
-    public void Initialize(Animator _anim, Rigidbody _rb, ParticleSystem _walkParticles)
+    public void Initialize(Animator _anim, Rigidbody _rb)
     {
         anim = _anim;
         rb = _rb;
-        walkParticles = _walkParticles;
         canJumpTimeframe = maxGhostjumpDelay;
     }
 
@@ -120,6 +125,10 @@ public class PlayerState : MonoBehaviour
                 anim.SetBool("falling", false);
                 anim.SetTrigger("jump");
             }
+            else if (rb.velocity.y < highestFallVelocity)
+            {
+                highestFallVelocity = rb.velocity.y;
+            }
         }
         else
         {
@@ -143,9 +152,15 @@ public class PlayerState : MonoBehaviour
         falling = false;
         wasGrounded = true;
         anim.SetBool("falling", false);
-        anim.SetTrigger("land");
         anim.ResetTrigger("jump");
         StopCoroutine(DecreaseCanJumpTimer());
+        anim.SetTrigger("land");
+        if (highestFallVelocity < -minLandingVFXFallSpeed)
+        {
+            landingParticles.Stop();
+            landingParticles.Play();
+        }
+        highestFallVelocity = 0;
         if (isThrown)
         {
             isThrown = false;
@@ -180,6 +195,11 @@ public class PlayerState : MonoBehaviour
             canJumpTimeframe = maxGhostjumpDelay;
             StartCoroutine(DecreaseCanJumpTimer());
         }
+        else
+        {
+            StopCoroutine(DecreaseCanJumpTimer());
+            canJumpTimeframe = 0;
+        }
     }
     
     /// <summary>
@@ -211,7 +231,7 @@ public class PlayerState : MonoBehaviour
         while (true)
         {
             canJumpTimeframe = Mathf.Max(canJumpTimeframe - Time.deltaTime, 0);
-            yield return null;
+            yield return new WaitForEndOfFrame();
         }
     }
 
