@@ -8,7 +8,8 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: GroundVertexPainting01
-  m_Shader: {fileID: 4800000, guid: 09c6ded9241fc734fa9a860d377872b7, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: fe49cc36dc4d6a844811f35019f35caa,
+    type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -19,12 +20,44 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - Texture2D_159A5D2D:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_2C2DC5B9:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_578D8626:
+        m_Texture: {fileID: 2800000, guid: fcf00991685278f44b189e6ba10dafb8, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_58C2773E:
+        m_Texture: {fileID: 2800000, guid: 9b4b088e37de08f4ea064a999b4f0457, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_AE48CCC2:
+        m_Texture: {fileID: 2800000, guid: c36c8bbf920b11540a16044d27c37b6a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_C45793BD:
+        m_Texture: {fileID: 2800000, guid: 575fc5ee6077b93408b5f04f7ccaaec7, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_D6DFC223:
+        m_Texture: {fileID: 2800000, guid: 95a13cd291986274f932b9427c8e6e4d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_D99FBFB8:
+        m_Texture: {fileID: 2800000, guid: 9b1088bb9a7c3cc4eac07b332827ae5c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _Base:
         m_Texture: {fileID: 2800000, guid: 582755e05fbafb94eaa1639192289e22, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseBump:
-        m_Texture: {fileID: 2800000, guid: 90537a6bb14a6fe4a951ec38f4a86dfb, type: 3}
+        m_Texture: {fileID: 2800000, guid: 9b4b088e37de08f4ea064a999b4f0457, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
@@ -32,15 +65,15 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseNormal:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 9b4b088e37de08f4ea064a999b4f0457, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Blend:
-        m_Texture: {fileID: 2800000, guid: a9dd5de1cbb52194f92550eb4a81a60f, type: 3}
+        m_Texture: {fileID: 2800000, guid: 9b1088bb9a7c3cc4eac07b332827ae5c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BlendNormal:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 95a13cd291986274f932b9427c8e6e4d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -52,7 +85,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: aa137e8eaf189ae4d97a3e8201c9957a, type: 3}
+        m_Texture: {fileID: 2800000, guid: fcf00991685278f44b189e6ba10dafb8, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTexture:
@@ -80,7 +113,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Texture1:
-        m_Texture: {fileID: 2800000, guid: a9dd5de1cbb52194f92550eb4a81a60f, type: 3}
+        m_Texture: {fileID: 2800000, guid: 9b1088bb9a7c3cc4eac07b332827ae5c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Texture10:
@@ -92,7 +125,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Texture1Bump:
-        m_Texture: {fileID: 2800000, guid: 53f6ba4263e72ac48bae53443b9300ad, type: 3}
+        m_Texture: {fileID: 2800000, guid: 95a13cd291986274f932b9427c8e6e4d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Texture2:
@@ -136,6 +169,12 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Vector1_2E421BED: 0
+    - Vector1_369AB6D1: 1.75
+    - Vector1_60B74B29: 0.75
+    - Vector1_BE427D92: 1
+    - Vector1_BEE424A3: 0
+    - Vector1_DFF18A77: 0.5
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
