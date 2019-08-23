@@ -40,11 +40,19 @@ public class MovingPlatform : MonoBehaviour, IActivatable
     /// </summary>
     private void MovePlatform()
     {
-        if (stop) return;
-        if (blocked) return;
         if (mode == Mode.MoveOnce)
         {
-            if (Vector3.Distance(rb.position, pos2) < 0.1f) return;
+            if (!stop)
+            {
+                if (Vector3.Distance(rb.position, pos2) < 0.1f) return;
+            }
+            else if (Vector3.Distance(rb.position, pos1) < 0.1f) return;
+        }
+        else
+        {
+                
+            if (stop) return;
+            if (blocked) return;
         }
 
         if (moveAmount >= Mathf.PI * 200)
