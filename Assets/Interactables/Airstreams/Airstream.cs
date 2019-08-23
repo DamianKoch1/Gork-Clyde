@@ -13,6 +13,23 @@ public class Airstream : MonoBehaviour, IActivatable
     [SerializeField]
     private List<Ventilator> ventilators = new List<Ventilator>();
 
+
+    [Header("SFX")]
+    
+    [SerializeField] 
+    private AudioClip activateSFX;
+    
+    [SerializeField] 
+    private AudioClip deactivateSFX;
+    
+    [SerializeField] 
+    private AudioSource sfxAudioSource;
+    
+    [SerializeField] 
+    private AudioSource activeAudioSource;
+    
+    
+    
   
     private void Start()
     {
@@ -112,7 +129,7 @@ public class Airstream : MonoBehaviour, IActivatable
     }
 
     /// <summary>
-    /// Toggles particles / collider / fans on/off
+    /// Toggles particles / collider / fans on/off, plays sfx
     /// </summary>
     public void ToggleAirstream()
     {
@@ -121,6 +138,8 @@ public class Airstream : MonoBehaviour, IActivatable
         if (bc.enabled)
         {
             StopVfx();
+            sfxAudioSource.PlayOneShot(deactivateSFX);
+            activeAudioSource.Stop();
             foreach (var ventilator in ventilators)
             {
                 StartCoroutine(ventilator.TurnOff());
@@ -129,6 +148,8 @@ public class Airstream : MonoBehaviour, IActivatable
         else
         {
             PlayVfx();
+            sfxAudioSource.PlayOneShot(activateSFX);
+            activeAudioSource.Play();
             foreach (var ventilator in ventilators)
             {
                 StartCoroutine(ventilator.TurnOn());
