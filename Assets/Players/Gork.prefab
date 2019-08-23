@@ -1084,6 +1084,7 @@ MonoBehaviour:
   wasGrounded: 0
   maxGhostjumpDelay: 0.2
   canJumpTimeframe: 0
+  minLandingVFXFallSpeed: 12
 --- !u!114 &3302457993841318099
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1520,8 +1521,8 @@ SkinnedMeshRenderer:
   m_BlendShapeWeights: []
   m_RootBone: {fileID: 2117060015387753223}
   m_AABB:
-    m_Center: {x: -1.4551915e-11, y: 0.00079793204, z: 0.017605135}
-    m_Extent: {x: 0.00770178, y: 0.006435732, z: 0.0067067244}
+    m_Center: {x: 0.000075719356, y: -0.0005572117, z: 0.017582845}
+    m_Extent: {x: 0.0077198343, y: 0.0065269163, z: 0.0067411507}
   m_DirtyAABB: 0
 --- !u!183 &1423851904718301431
 Cloth:
