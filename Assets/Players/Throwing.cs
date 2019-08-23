@@ -28,6 +28,13 @@ public class Throwing : MonoBehaviour
     
     [SerializeField]
     private GameObject heldObjectSlot;
+
+    [Header("SFX")] 
+    [SerializeField] 
+    private AudioSource sfxAudioSource;
+
+    [SerializeField] 
+    private AudioClip throwSFX;
     
     // Start is called before the first frame update
     public void Initialize(Animator _anim)
@@ -154,7 +161,7 @@ public class Throwing : MonoBehaviour
 	    }
 
 	    obj.GetComponent<Carryable>().isHeld = false;
-	    GetComponent<AudioSource>().Play();
+	    sfxAudioSource.PlayOneShot(throwSFX);
 	    anim.SetTrigger("throw");
 	    obj.transform.SetParent(null, true);
 	    Rigidbody objectRb = obj.GetComponent<Rigidbody>();
