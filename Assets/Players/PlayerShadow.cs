@@ -7,12 +7,18 @@ using UnityEngine;
 /// </summary>
 public class PlayerShadow : MonoBehaviour
 {
-    // Update is called once per frame
     void Update()
     {
-        Physics.Raycast(transform.parent.position, -Vector3.up, out var raycastHit, Mathf.Infinity, Physics.AllLayers,
-            QueryTriggerInteraction.Ignore);
-        transform.position = raycastHit.point + Vector3.up*0.1f;
+        UpdateShadowPosition();
+    }
 
+    /// <summary>
+    /// Raycasts downwards from parent and sets shadow slightly above hit point
+    /// </summary>
+    private void UpdateShadowPosition()
+    {
+        Physics.Raycast(transform.parent.position, -Vector3.up, out var shadowPos, Mathf.Infinity, Physics.AllLayers,
+            QueryTriggerInteraction.Ignore);
+        transform.position = shadowPos.point + Vector3.up * 0.1f;
     }
 }
