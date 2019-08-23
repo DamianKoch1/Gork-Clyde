@@ -13,6 +13,19 @@ public class MovingPlatform : MonoBehaviour, IActivatable
     private Rigidbody rb;
     private float moveAmount = 0;
 
+    [Header("SFX")] 
+    
+    [SerializeField] 
+    private AudioClip startedSFX;
+    
+    [SerializeField] 
+    private AudioClip stoppedSFX;
+    
+    [SerializeField] 
+    private AudioClip collisionSFX;
+
+    private AudioSource audioSource;
+
 
     private void Start()
     {
@@ -29,6 +42,7 @@ public class MovingPlatform : MonoBehaviour, IActivatable
         rb = platform.GetComponent<Rigidbody>();
         pos1 = start.transform.position;
         pos2 = target.transform.position;
+        audioSource = GetComponent<AudioSource>();
         if (mode != Mode.Autostart)
         {
             stop = true;
@@ -67,29 +81,44 @@ public class MovingPlatform : MonoBehaviour, IActivatable
     public void Blocked()
     {
         blocked = true;
+        audioSource.PlayOneShot(collisionSFX);
     }
 
     public void Unblocked()
     {
         blocked = false;
+        if (!stop)
+        {
+            audioSource.PlayOneShot(startedSFX);
+        }
     }
 
     public void OnButtonActivated()
     {
         stop = false;
+        if (!blocked)
+        {
+            audioSource.PlayOneShot(startedSFX);
+        }
     }
 
     public void OnButtonDeactivated()
     {
         stop = true;
+        audioSource.PlayOneShot(stoppedSFX);
     }
 
     public void OnPlateActivated()
     {
         stop = false;
+        if (!blocked)
+        {
+            audioSource.PlayOneShot(startedSFX);
+        }
     }
     public void OnPlateExited()
     {
         stop = true;
+        audioSource.PlayOneShot(stoppedSFX);
     }
 }
