@@ -435,7 +435,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.7871129, g: 0.8125853, b: 0.8301887, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -496,11 +496,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1186107814}
     m_Modifications:
-    - target: {fileID: 8414597735948849626, guid: ae21ad92d98cad549b9967916cc777dc,
-        type: 3}
-      propertyPath: m_Name
-      value: ControllerDCPopup
-      objectReference: {fileID: 0}
     - target: {fileID: 4219315995587976681, guid: ae21ad92d98cad549b9967916cc777dc,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -605,6 +600,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8414597735948849626, guid: ae21ad92d98cad549b9967916cc777dc,
+        type: 3}
+      propertyPath: m_Name
+      value: ControllerDCPopup
       objectReference: {fileID: 0}
     - target: {fileID: 2115077706595388761, guid: ae21ad92d98cad549b9967916cc777dc,
         type: 3}
@@ -2295,11 +2295,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1186107814}
     m_Modifications:
-    - target: {fileID: 2576428113313384509, guid: 219ec2f3a4739f74999885c7c30e5fa5,
-        type: 3}
-      propertyPath: m_Name
-      value: Fade
-      objectReference: {fileID: 0}
     - target: {fileID: 2576428113313384510, guid: 219ec2f3a4739f74999885c7c30e5fa5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2404,6 +2399,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2576428113313384509, guid: 219ec2f3a4739f74999885c7c30e5fa5,
+        type: 3}
+      propertyPath: m_Name
+      value: Fade
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 219ec2f3a4739f74999885c7c30e5fa5, type: 3}
