@@ -678,11 +678,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2433603982372154571}
     m_Modifications:
-    - target: {fileID: 3180249123157283602, guid: 241f912dad7f7994eabe5a91d05ccdaa,
-        type: 3}
-      propertyPath: m_Name
-      value: Shadow
-      objectReference: {fileID: 0}
     - target: {fileID: 7721489509654714473, guid: 241f912dad7f7994eabe5a91d05ccdaa,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -691,12 +686,12 @@ PrefabInstance:
     - target: {fileID: 7721489509654714473, guid: 241f912dad7f7994eabe5a91d05ccdaa,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.68
+      value: -0.535
       objectReference: {fileID: 0}
     - target: {fileID: 7721489509654714473, guid: 241f912dad7f7994eabe5a91d05ccdaa,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7721489509654714473, guid: 241f912dad7f7994eabe5a91d05ccdaa,
         type: 3}
@@ -752,6 +747,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 4.621896
+      objectReference: {fileID: 0}
+    - target: {fileID: 3180249123157283602, guid: 241f912dad7f7994eabe5a91d05ccdaa,
+        type: 3}
+      propertyPath: m_Name
+      value: Shadow
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 241f912dad7f7994eabe5a91d05ccdaa, type: 3}
@@ -884,11 +884,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2433603982372154571}
     m_Modifications:
-    - target: {fileID: 6083157086161473864, guid: eb49f7cbe08b75444bb38f67c8c7d0fe,
-        type: 3}
-      propertyPath: m_Name
-      value: DustWalkVFX
-      objectReference: {fileID: 0}
     - target: {fileID: 1601969473879671137, guid: eb49f7cbe08b75444bb38f67c8c7d0fe,
         type: 3}
       propertyPath: lengthInSec
@@ -898,6 +893,11 @@ PrefabInstance:
         type: 3}
       propertyPath: playOnAwake
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6083157086161473864, guid: eb49f7cbe08b75444bb38f67c8c7d0fe,
+        type: 3}
+      propertyPath: m_Name
+      value: DustWalkVFX
       objectReference: {fileID: 0}
     - target: {fileID: 5366163259334342879, guid: eb49f7cbe08b75444bb38f67c8c7d0fe,
         type: 3}
