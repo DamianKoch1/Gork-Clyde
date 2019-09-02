@@ -7,6 +7,7 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider))]
 [RequireComponent(typeof(SphereCollider))]
 [RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(AudioSource))]
 public class Pushable : MonoBehaviour
 {
     [SerializeField]
@@ -18,6 +19,14 @@ public class Pushable : MonoBehaviour
     
     [SerializeField]
     private float playerPushDistance = 2f;
+
+    [Header("SFX")] 
+    
+    [SerializeField]
+    private AudioSource sfxAudioSource;
+    
+    [SerializeField]
+    private AudioSource pushedAudioSource;
     
     private void Start()
     {
@@ -26,7 +35,7 @@ public class Pushable : MonoBehaviour
 
     private void FixedUpdate()
     {
-        UpdateParticles();
+        UpdateState();
         UpdateLayer();
     }
 
@@ -51,31 +60,34 @@ public class Pushable : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         previousPosition = rb.position;
         currentPosition = previousPosition;
+        sfxAudioSource = GetComponent<AudioSource>();
     }
     
     /// <summary>
-    /// Shows vfx if pushed
+    /// Plays vfx / sfx if moving
     /// </summary>
-    private void UpdateParticles()
+    private void UpdateState()
     {
         currentPosition = rb.position;
         pushedParticles.transform.position = currentPosition - Vector3.up * transform.localScale.y / 5;
-        if (ShowPushedParticles())
+        if (IsMoving())
         {
             EmitPushedParticles();
+            pushedAudioSource.Play();
         }
         else if (pushedParticles.isPlaying)
         {
             pushedParticles.Stop();
+            pushedAudioSource.Stop();
         }
         previousPosition = currentPosition;
     }
 
     /// <summary>
-    /// Checks if vfx should be shown
+    /// Checks if pushable is moving
     /// </summary>
     /// <returns>Returns false if not pushed / falling / position unchanged, true otherwise</returns>
-    private bool ShowPushedParticles()
+    private bool IsMoving()
     {
         if (!isPushed) return false;
         if (Mathf.Abs(rb.velocity.y) > 0.1f) return false;
@@ -173,6 +185,8 @@ public class Pushable : MonoBehaviour
             landingParticles.transform.up = other.contacts[0].normal;
             landingParticles.Stop();
             landingParticles.Play();
+            sfxAudioSource.Stop();
+            sfxAudioSource.Play();
         }
         collidingTransforms.Add(other.transform);
     }
