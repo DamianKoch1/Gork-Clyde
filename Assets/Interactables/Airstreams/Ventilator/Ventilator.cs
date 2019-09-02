@@ -8,16 +8,23 @@ public class Ventilator : MonoBehaviour
     [SerializeField] 
     private float maxRotationSpeed = 10, minRotationSpeed = 0.1f, transitionDuration = 3;
 
-    private void Start()
-    {
-        Initialize();
-    }
-
-    private void Initialize()
+    public void Initialize(bool active)
     {
         rb = GetComponentInChildren<Rigidbody>();
         rb.maxAngularVelocity = maxRotationSpeed;
-        StartCoroutine(TurnOn());
+        Toggle(active);
+    }
+
+    public void Toggle(bool active)
+    {
+        if (active)
+        {
+            StartCoroutine(TurnOn());
+        }
+        else
+        {
+            StartCoroutine(TurnOff());
+        }
     }
     
     /// <summary>
@@ -26,7 +33,6 @@ public class Ventilator : MonoBehaviour
     /// <returns></returns>
     public IEnumerator TurnOn()
     {
-        StopCoroutine(TurnOff());
         float timer = 0;
         while (timer < transitionDuration)
         {
@@ -43,7 +49,6 @@ public class Ventilator : MonoBehaviour
     /// <returns></returns>
     public IEnumerator TurnOff()
     {
-        StopCoroutine(TurnOn());
         float timer = transitionDuration;
         while (timer > 0)
         {
