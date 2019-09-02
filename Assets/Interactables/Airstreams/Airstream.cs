@@ -37,13 +37,17 @@ public class Airstream : MonoBehaviour, IActivatable
     }
 
     /// <summary>
-    /// Toggles airstream on/off depending on activeAtStart
+    /// Toggles airstream / ventilators on/off depending on activeAtStart
     /// </summary>
     private void SetStartState()
     {
         if (!activeAtStart)
         {
             ToggleAirstream();
+        }
+        foreach (var ventilator in ventilators)
+        {
+            ventilator.Initialize(activeAtStart);
         }
     }
     
@@ -142,7 +146,8 @@ public class Airstream : MonoBehaviour, IActivatable
             activeAudioSource.Stop();
             foreach (var ventilator in ventilators)
             {
-                StartCoroutine(ventilator.TurnOff());
+                ventilator.StopAllCoroutines();
+                ventilator.Toggle(false);
             }
         }
         else
@@ -152,7 +157,8 @@ public class Airstream : MonoBehaviour, IActivatable
             activeAudioSource.Play();
             foreach (var ventilator in ventilators)
             {
-                StartCoroutine(ventilator.TurnOn());
+                ventilator.StopAllCoroutines();
+                ventilator.Toggle(true);
             }
         }
         bc.enabled = !bc.enabled;
