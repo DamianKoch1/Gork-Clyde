@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &7192570089422773055
 RectTransform:
   m_ObjectHideFlags: 0
@@ -35,7 +35,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 709, y: 467}
+  m_SizeDelta: {x: 782.4, y: 467}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4295531421489875553
 CanvasRenderer:
@@ -65,7 +65,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Texture: {fileID: 2800000, guid: e3b2d3bd0420deb4e8aa14b990e46bda, type: 3}
+  m_Texture: {fileID: 2800000, guid: 1bb880b55bceea84a9140b1c110c1732, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -106,8 +106,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 18.9, y: 4}
-  m_SizeDelta: {x: 193.1, y: 412}
+  m_AnchoredPosition: {x: -19, y: 4}
+  m_SizeDelta: {x: 221.6, y: 412}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8899276265941218145
 CanvasRenderer:
@@ -150,7 +150,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\nXBox\n Joystick\n A\n X\nStart\nRT\n\nB\nA\n\n"
+  m_Text: "\nXBox/PS4\n Joystick\n A/X\n X/\x10\x10\x10\x10\x10\x10\x10\u2B1C\u2B1C\u25FB\u25FB\u25FB\u2610\nStart/Options\nRT/R2\n\nB/\u25EF\nA/\u2610\n\n"
 --- !u!1 &3522639062600472362
 GameObject:
   m_ObjectHideFlags: 0
@@ -181,7 +181,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 711650953741394391}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -229,7 +229,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\n\nWASD/Arrow\nSpace\nE/Shift\nESC\nQ/Num 1\n\n\u26AB\u26AB\u26AB\u2B24\u25EF\n\u2610\n\n"
+  m_Text: "\n\nWASD\nSpace\nE/Shift\nESC\nQ/Num 1\n\n\u26AB\u26AB\u26AB\u2B24\u25EF\n\u2610\n\n"
 --- !u!1 &4274616979298462983
 GameObject:
   m_ObjectHideFlags: 0
@@ -264,7 +264,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -205.7, y: 5}
+  m_AnchoredPosition: {x: -253, y: 5}
   m_SizeDelta: {x: 246, y: 412}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3642279015743185460
@@ -360,7 +360,6 @@ RectTransform:
   - {fileID: 7192570089422773055}
   - {fileID: 7862295458089717463}
   - {fileID: 4038871032765858317}
-  - {fileID: 4761637070744306547}
   - {fileID: 4329242554991720191}
   - {fileID: 2903508922858570344}
   m_Father: {fileID: 4219315995587976681}
@@ -399,7 +398,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 1bb880b55bceea84a9140b1c110c1732, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 04cc7d539dd979b4c9792fc2d7553756, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -487,85 +486,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Controls
---- !u!1 &6681964254142925825
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4761637070744306547}
-  - component: {fileID: 282613176494355287}
-  - component: {fileID: 3342964936877655553}
-  m_Layer: 5
-  m_Name: ButtonPS4
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &4761637070744306547
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6681964254142925825}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 711650953741394391}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 220.7, y: 4}
-  m_SizeDelta: {x: 182.7, y: 412}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &282613176494355287
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6681964254142925825}
-  m_CullTransparentMesh: 0
---- !u!114 &3342964936877655553
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6681964254142925825}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.2627451, g: 0.2509804, b: 0.2509804, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_FontData:
-    m_Font: {fileID: 12800000, guid: e61507c86a63bd64eaf9f5b8d0dd2063, type: 3}
-    m_FontSize: 30
-    m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 2
-    m_MaxSize: 41
-    m_Alignment: 2
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: "\nPS4\nJoystick\nX\n\u2610\nOptions\nR2\n\n\u26AB\u26AB\u26AB\u2B24\u25EF\n\u2610\n\n"
 --- !u!1 &7788630313603192072
 GameObject:
   m_ObjectHideFlags: 0
@@ -596,11 +516,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 711650953741394391}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 23.8, y: 4}
+  m_AnchoredPosition: {x: 246, y: 4}
   m_SizeDelta: {x: 735, y: 412}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5095204681813999714
@@ -644,7 +564,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\n\nWASD/Arrow\nSpace\nE/Shift\nESC\nQ/Num 1\n\n\u26AB\u26AB\u26AB\u2B24\u25EF\n\u2610\n\n"
+  m_Text: "\nGork/Clyde\nWASD/Arrow\nSpace\nE/L.Shift\nESC\nQ/Num 1\n\n\u26AB\u26ABESC\nEnter\n\n"
 --- !u!1 &8414597735948849626
 GameObject:
   m_ObjectHideFlags: 0
