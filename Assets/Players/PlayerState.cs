@@ -51,6 +51,12 @@ public class PlayerState : MonoBehaviour
     
     [SerializeField] 
     private AudioClip jumpSFX;
+    
+    [SerializeField] 
+    private AudioClip walkSFX;
+    
+    [SerializeField] 
+    private AudioClip idleSFX;
 
     [SerializeField]
     private AudioSource sfxAudioSource;
@@ -97,11 +103,11 @@ public class PlayerState : MonoBehaviour
     /// <summary>
     /// Starting animations / setting state bools accordingly
     /// </summary>
-    public void UpdateState()
+    public void UpdateState(Vector3 motion)
     {
         if (IsGrounded())
         {
-            UpdateGroundedState();
+            UpdateGroundedState(motion);
         }
         else
         {
@@ -119,14 +125,14 @@ public class PlayerState : MonoBehaviour
     /// <summary>
     /// Checks if currently landing/standing still
     /// </summary>
-    private void UpdateGroundedState()
+    private void UpdateGroundedState(Vector3 motion)
     {
         if (!wasGrounded)
         {
             OnLanding();
         }
 
-        if (rb.velocity.magnitude < 0.1f)
+        if (motion.magnitude < 0.1f)
         {
             OnStandingStill();
         }
@@ -206,7 +212,12 @@ public class PlayerState : MonoBehaviour
     private void OnStandingStill()
     {
         walkParticles.Stop();
-        walkAudioSource.Stop();
+        if (walkAudioSource.clip != idleSFX)
+        {
+            walkAudioSource.Stop();
+            walkAudioSource.clip = idleSFX;
+            walkAudioSource.Play();
+        }
     }
     
     /// <summary>
@@ -215,7 +226,12 @@ public class PlayerState : MonoBehaviour
     private void OnWalking()
     {
         walkParticles.Play();
-        walkAudioSource.Play();
+        if (walkAudioSource.clip != walkSFX)
+        {
+            walkAudioSource.Stop();
+            walkAudioSource.clip = walkSFX;
+            walkAudioSource.Play();
+        }
     }
 
     /// <summary>
@@ -233,6 +249,7 @@ public class PlayerState : MonoBehaviour
     private void OnLeavingGround()
     {
         wasGrounded = false;
+        walkAudioSource.Stop();
         if (falling)
         {
             canJumpTimeframe = maxGhostjumpDelay;
