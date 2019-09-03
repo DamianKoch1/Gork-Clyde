@@ -84,6 +84,22 @@ MonoBehaviour:
   speedDown:
     overrideState: 1
     value: 1
+--- !u!114 &-7106129606629945116
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f848ec27aed44464493317be7fc364a6, type: 3}
+  m_Name: LWRPAO
+  m_EditorClassIdentifier: 
+  active: 1
+  enabled:
+    overrideState: 1
+    value: 1
 --- !u!114 &-6191591885104412843
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -96,7 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 556797029e73b2347956b6579e77e05b, type: 3}
   m_Name: DepthOfField
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   enabled:
     overrideState: 1
     value: 1
@@ -131,6 +147,7 @@ MonoBehaviour:
   - {fileID: -7198989880651789009}
   - {fileID: 7213659796494527102}
   - {fileID: 2694031885488070175}
+  - {fileID: -7106129606629945116}
 --- !u!114 &2694031885488070175
 MonoBehaviour:
   m_ObjectHideFlags: 3
