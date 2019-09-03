@@ -595,7 +595,7 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 5197143170361135831, guid: ae21ad92d98cad549b9967916cc777dc,
+    - target: {fileID: 4238729997233343678, guid: ae21ad92d98cad549b9967916cc777dc,
         type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -605,7 +605,7 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4238729997233343678, guid: ae21ad92d98cad549b9967916cc777dc,
+    - target: {fileID: 5197143170361135831, guid: ae21ad92d98cad549b9967916cc777dc,
         type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -743,7 +743,7 @@ PrefabInstance:
     - target: {fileID: 9154505855891437975, guid: 18edcd135db2a674994b74d9f69556a0,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: StartPanel1
+      value: Level1
       objectReference: {fileID: 0}
     - target: {fileID: 9154505855891437975, guid: 18edcd135db2a674994b74d9f69556a0,
         type: 3}
@@ -753,7 +753,7 @@ PrefabInstance:
     - target: {fileID: 9154505855891437975, guid: 18edcd135db2a674994b74d9f69556a0,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: LoadScene
+      value: LoadLoadingScreen
       objectReference: {fileID: 0}
     - target: {fileID: 9154505855891437975, guid: 18edcd135db2a674994b74d9f69556a0,
         type: 3}
@@ -785,6 +785,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 9154505855891437974, guid: 18edcd135db2a674994b74d9f69556a0,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9154505856568418857, guid: 18edcd135db2a674994b74d9f69556a0,
         type: 3}
       propertyPath: m_Text
@@ -804,11 +809,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_FontData.m_BestFit
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9154505855891437974, guid: 18edcd135db2a674994b74d9f69556a0,
-        type: 3}
-      propertyPath: m_RaycastTarget
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18edcd135db2a674994b74d9f69556a0, type: 3}
@@ -1295,7 +1295,7 @@ PrefabInstance:
     - target: {fileID: 9154505855891437975, guid: 18edcd135db2a674994b74d9f69556a0,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: LevelTutorial
+      value: StartPanel1
       objectReference: {fileID: 0}
     - target: {fileID: 9154505855891437975, guid: 18edcd135db2a674994b74d9f69556a0,
         type: 3}
@@ -1305,7 +1305,7 @@ PrefabInstance:
     - target: {fileID: 9154505855891437975, guid: 18edcd135db2a674994b74d9f69556a0,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: LoadLoadingScreen
+      value: LoadScene
       objectReference: {fileID: 0}
     - target: {fileID: 9154505855891437975, guid: 18edcd135db2a674994b74d9f69556a0,
         type: 3}
@@ -1337,6 +1337,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 9154505855891437974, guid: 18edcd135db2a674994b74d9f69556a0,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9154505856568418857, guid: 18edcd135db2a674994b74d9f69556a0,
         type: 3}
       propertyPath: m_Text
@@ -1356,11 +1361,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_FontData.m_BestFit
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9154505855891437974, guid: 18edcd135db2a674994b74d9f69556a0,
-        type: 3}
-      propertyPath: m_RaycastTarget
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18edcd135db2a674994b74d9f69556a0, type: 3}
@@ -1702,8 +1702,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63e4fe3f4bbf1b6468731b4ed25fe1e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  setNewBgm: 1
-  bgm: {fileID: 8300000, guid: 1e2caf9defc102c43b8a33cbbd4f24ea, type: 3}
+  setNewBgm: 0
+  bgm: {fileID: 0}
 --- !u!224 &1188231769 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 9154505855891437972, guid: 18edcd135db2a674994b74d9f69556a0,

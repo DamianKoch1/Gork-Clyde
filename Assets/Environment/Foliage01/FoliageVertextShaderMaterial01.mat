@@ -8,18 +8,22 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: FoliageVertextShaderMaterial01
-  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: a14752a26e0738142bc92ac3a83ea052,
+    type: 3}
   m_ShaderKeywords: _ALPHATEST_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 1
-  m_CustomRenderQueue: 2500
-  stringTagMap:
-    RenderType: TransparentCutout
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - Texture2D_3D4D7EA5:
+        m_Texture: {fileID: 2800000, guid: 85e2f673919430d4a9b416f30cc1ead7, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BaseMap:
         m_Texture: {fileID: 2800000, guid: 85e2f673919430d4a9b416f30cc1ead7, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -49,6 +53,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Vector1_5EE12EDC: 0.6
+    - Vector1_773CAC01: 0.5
+    - Vector1_BF5792B2: 0
+    - Vector1_EDE9471F: 0.1
     - _AlphaClip: 1
     - _Blend: 0
     - _BumpScale: 1
@@ -71,6 +79,8 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
+    - Color_F0FD8BC4: {r: 0.7821734, g: 0.8773585, b: 0.7821755, a: 0}
+    - Vector2_DBED9C8A: {r: 6, g: 0, b: 0, a: 0}
     - _BaseColor: {r: 0.5281939, g: 0.8396226, b: 0.5109024, a: 1}
     - _Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
