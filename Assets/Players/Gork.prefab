@@ -970,7 +970,7 @@ MonoBehaviour:
   throwBoxUpwardsAngle: 45
   heldObjectSlot: {fileID: 8013065875973554416}
   sfxAudioSource: {fileID: 1325763144624846294}
-  throwSFX: {fileID: 0}
+  throwSFX: {fileID: 8300000, guid: f23bc8f298a64b242af446c11d3da7a6, type: 3}
 --- !u!114 &6383798813248279562
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -993,8 +993,10 @@ MonoBehaviour:
   canJumpTimeframe: 0
   minLandingVFXFallSpeed: 12
   throwCollisionSFX: {fileID: 0}
-  landingSFX: {fileID: 0}
+  landingSFX: {fileID: 8300000, guid: e6f4c394dcc30404f9b8846eab88ae12, type: 3}
   jumpSFX: {fileID: 0}
+  walkSFX: {fileID: 8300000, guid: b83892ffadca9534997e2c18805f3d8c, type: 3}
+  idleSFX: {fileID: 8300000, guid: 1b40aca4ea8e2e44a962110057c401a7, type: 3}
   sfxAudioSource: {fileID: 1325763144624846294}
   walkAudioSource: {fileID: 1160657619686419191}
 --- !u!114 &3302457993841318099
@@ -1022,9 +1024,9 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -7626630697749693807, guid: 412b78ee19c7f2d429dcaa2f525e7fed,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: c3c9f1ddbb039e24a97e3e95d8e75195, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.9
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1627,8 +1629,8 @@ SkinnedMeshRenderer:
   m_BlendShapeWeights: []
   m_RootBone: {fileID: 2117060015387753223}
   m_AABB:
-    m_Center: {x: -1.4551915e-11, y: 0.00079793204, z: 0.017605135}
-    m_Extent: {x: 0.00770178, y: 0.006435732, z: 0.0067067244}
+    m_Center: {x: -1.4551915e-11, y: 0.0011352025, z: 0.017605135}
+    m_Extent: {x: 0.00770178, y: 0.0067730024, z: 0.0067067244}
   m_DirtyAABB: 0
 --- !u!183 &1423851904718301431
 Cloth:
@@ -2743,16 +2745,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6779424732701564715}
     m_Modifications:
-    - target: {fileID: 1601969473879671137, guid: eb49f7cbe08b75444bb38f67c8c7d0fe,
-        type: 3}
-      propertyPath: EmissionModule.rateOverTime.scalar
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1601969473879671137, guid: eb49f7cbe08b75444bb38f67c8c7d0fe,
-        type: 3}
-      propertyPath: playOnAwake
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6083157086161473864, guid: eb49f7cbe08b75444bb38f67c8c7d0fe,
         type: 3}
       propertyPath: m_Name
@@ -2811,6 +2803,16 @@ PrefabInstance:
     - target: {fileID: 5366163259334342879, guid: eb49f7cbe08b75444bb38f67c8c7d0fe,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1601969473879671137, guid: eb49f7cbe08b75444bb38f67c8c7d0fe,
+        type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1601969473879671137, guid: eb49f7cbe08b75444bb38f67c8c7d0fe,
+        type: 3}
+      propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -2920,6 +2922,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6779424732701564715}
     m_Modifications:
+    - target: {fileID: 3180249123157283602, guid: 241f912dad7f7994eabe5a91d05ccdaa,
+        type: 3}
+      propertyPath: m_Name
+      value: Shadow
+      objectReference: {fileID: 0}
     - target: {fileID: 7721489509654714473, guid: 241f912dad7f7994eabe5a91d05ccdaa,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2989,11 +2996,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 10.744417
-      objectReference: {fileID: 0}
-    - target: {fileID: 3180249123157283602, guid: 241f912dad7f7994eabe5a91d05ccdaa,
-        type: 3}
-      propertyPath: m_Name
-      value: Shadow
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 241f912dad7f7994eabe5a91d05ccdaa, type: 3}

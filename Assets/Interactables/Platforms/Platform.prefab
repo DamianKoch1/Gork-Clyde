@@ -52,6 +52,9 @@ MonoBehaviour:
   platform: {fileID: 7508677580360233098}
   mode: 1
   speed: 2
+  startedSFX: {fileID: 8300000, guid: 03ac5996fde1cde41bfc2f411b9afe5a, type: 3}
+  stoppedSFX: {fileID: 8300000, guid: d82d6629f383a4f41a3e385079270a1a, type: 3}
+  collisionSFX: {fileID: 8300000, guid: 3b514e8f305c3f64f9f25f46c95983e1, type: 3}
 --- !u!82 &4007007452278856077
 AudioSource:
   m_ObjectHideFlags: 0
@@ -64,8 +67,8 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -7626630697749693807, guid: 412b78ee19c7f2d429dcaa2f525e7fed,
     type: 2}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
+  m_PlayOnAwake: 0
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -74,9 +77,9 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 50
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
