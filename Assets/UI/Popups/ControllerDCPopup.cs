@@ -20,6 +20,16 @@ public class ControllerDCPopup : MonoBehaviour
 	private GameObject backButton;
 
 	private static bool useKeyboard = false;
+
+	[Header("SFX")] 
+	
+	private AudioSource audioSource;
+
+	[SerializeField] 
+	private AudioClip showSFX;
+	
+	[SerializeField] 
+	private AudioClip hideSFX;
 	
 	private void Update()
 	{
@@ -109,6 +119,7 @@ public class ControllerDCPopup : MonoBehaviour
 		previousTimescale = Time.timeScale;
 		EventSystem.current.SetSelectedGameObject(backButton);
 		Time.timeScale = 0;
+		audioSource.PlayOneShot(showSFX);
 	}
 
 	/// <summary>
@@ -119,6 +130,7 @@ public class ControllerDCPopup : MonoBehaviour
 		Cursor.visible = previousCursorVisible;
 		Time.timeScale = previousTimescale;
 		EventSystem.current.SetSelectedGameObject(previousSelected);
+		audioSource.PlayOneShot(hideSFX);
 	}
 	
 	

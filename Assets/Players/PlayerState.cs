@@ -5,6 +5,7 @@ using UnityEngine;
 /// <summary>
 /// Contains all state related information/functionality of a player
 /// </summary>
+[RequireComponent(typeof(AudioSource))]
 public class PlayerState : MonoBehaviour
 {
     private Animator anim;
@@ -37,6 +38,25 @@ public class PlayerState : MonoBehaviour
 
     [SerializeField]
     private float minLandingVFXFallSpeed = 15;
+
+    private Vector3 landingVFXPosition;
+
+    [Header("SFX")] 
+    
+    [SerializeField] 
+    private AudioClip throwCollisionSFX;
+    
+    [SerializeField] 
+    private AudioClip landingSFX;
+    
+    [SerializeField] 
+    private AudioClip jumpSFX;
+
+    [SerializeField]
+    private AudioSource sfxAudioSource;
+    
+    [SerializeField]
+    private AudioSource walkAudioSource;
     
     //-----------
     /// <summary>
@@ -48,6 +68,15 @@ public class PlayerState : MonoBehaviour
     {
         if (collidingTransforms.Contains(other.transform)) return;
         collidingTransforms.Add(other.transform);
+        if (isThrown)
+        {
+            landingParticles.Stop();
+            landingParticles.transform.position = other.contacts[0].point;
+            landingParticles.transform.up = other.contacts[0].normal;
+            landingParticles.Play();
+            sfxAudioSource.PlayOneShot(throwCollisionSFX);
+            isThrown = false;
+        }
     }
 
     private void OnCollisionExit(Collision other)
@@ -62,6 +91,7 @@ public class PlayerState : MonoBehaviour
         anim = _anim;
         rb = _rb;
         canJumpTimeframe = maxGhostjumpDelay;
+        landingVFXPosition = landingParticles.transform.localPosition;
     }
 
     /// <summary>
@@ -102,7 +132,7 @@ public class PlayerState : MonoBehaviour
         }
         else if (!walkParticles.isPlaying)
         {
-            walkParticles.Play();
+            OnWalking();
         }
         canJumpTimeframe = maxGhostjumpDelay;
     }
@@ -158,7 +188,10 @@ public class PlayerState : MonoBehaviour
         if (highestFallVelocity < -minLandingVFXFallSpeed)
         {
             landingParticles.Stop();
+            landingParticles.transform.localPosition = landingVFXPosition;
+            landingParticles.transform.up = Vector3.up;
             landingParticles.Play();
+            sfxAudioSource.PlayOneShot(landingSFX);
         }
         highestFallVelocity = 0;
         if (isThrown)
@@ -168,11 +201,21 @@ public class PlayerState : MonoBehaviour
     }
 
     /// <summary>
-    /// Stops walking dust vfx
+    /// Stops walking dust vfx / sfx
     /// </summary>
     private void OnStandingStill()
     {
         walkParticles.Stop();
+        walkAudioSource.Stop();
+    }
+    
+    /// <summary>
+    /// Plays walking dust vfx / sfx
+    /// </summary>
+    private void OnWalking()
+    {
+        walkParticles.Play();
+        walkAudioSource.Play();
     }
 
     /// <summary>
@@ -199,6 +242,7 @@ public class PlayerState : MonoBehaviour
         {
             StopCoroutine(DecreaseCanJumpTimer());
             canJumpTimeframe = 0;
+            sfxAudioSource.PlayOneShot(jumpSFX);
         }
     }
     
