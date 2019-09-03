@@ -10,6 +10,17 @@ public class ControllerPopup : MonoBehaviour
 	
 	[SerializeField] 
 	private GameObject selectOnHide;
+	
+	[Header("SFX")] 
+	
+	[SerializeField]
+	private AudioSource audioSource;
+
+	[SerializeField] 
+	private AudioClip showSFX;
+	
+	[SerializeField] 
+	private AudioClip hideSFX;
 
 	private void Start()
 	{
@@ -40,10 +51,12 @@ public class ControllerPopup : MonoBehaviour
 		if (show)
 		{
 			EventSystem.current.SetSelectedGameObject(GetComponentInChildren<Button>().gameObject);
+			audioSource.PlayOneShot(showSFX);
 		}
 		else
 		{
 			EventSystem.current.SetSelectedGameObject(selectOnHide);
+			audioSource.PlayOneShot(hideSFX);
 		}
 	}
 }
