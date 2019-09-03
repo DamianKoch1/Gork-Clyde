@@ -74,7 +74,7 @@ public abstract class Player : MonoBehaviour
     protected void FixedUpdate()
     {
         MovePlayer();
-        state.UpdateState();
+        state.UpdateState(motion);
     }
     
     private void InitializeVariables()
