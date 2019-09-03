@@ -1,5 +1,21 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7815182986805744174
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f848ec27aed44464493317be7fc364a6, type: 3}
+  m_Name: LWRPAO
+  m_EditorClassIdentifier: 
+  active: 1
+  enabled:
+    overrideState: 1
+    value: 1
 --- !u!114 &-7617352649004954804
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -1419,6 +1435,7 @@ MonoBehaviour:
   - {fileID: -4606265438709526781}
   - {fileID: 2281335243091222874}
   - {fileID: -7617352649004954804}
+  - {fileID: -7815182986805744174}
 --- !u!114 &2281335243091222874
 MonoBehaviour:
   m_ObjectHideFlags: 3
