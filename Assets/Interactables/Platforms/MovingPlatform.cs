@@ -81,7 +81,10 @@ public class MovingPlatform : MonoBehaviour, IActivatable
     public void Blocked()
     {
         blocked = true;
-        audioSource.PlayOneShot(collisionSFX);
+        if (!stop)
+        {
+            audioSource.PlayOneShot(collisionSFX);
+        }
     }
 
     public void Unblocked()

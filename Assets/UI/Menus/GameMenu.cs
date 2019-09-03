@@ -60,6 +60,7 @@ public class GameMenu : MonoBehaviour
     {
         LoadingScreen.NextLevelName = sceneName;
         Fade.FadeToBlack("Loading Screen");
+        
     }
     
     /// <summary>

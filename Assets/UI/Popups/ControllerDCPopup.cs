@@ -23,6 +23,7 @@ public class ControllerDCPopup : MonoBehaviour
 
 	[Header("SFX")] 
 	
+	[SerializeField]
 	private AudioSource audioSource;
 
 	[SerializeField] 
