@@ -8,6 +8,9 @@ public class PressurePlate : TriggerObject
 
     private int objectsOnPlateCount = 0;
 
+    [SerializeField]
+    private AudioClip activateSFX, deactivateSFX;
+
 
     private void OnTriggerExit(Collider other)
     {
@@ -24,7 +27,7 @@ public class PressurePlate : TriggerObject
         {
             GetComponent<Animator>().SetBool("OnPlate", true);
             SetCableMaterial(activeMat);
-            GetComponent<AudioSource>().Play();
+            GetComponent<AudioSource>().PlayOneShot(activateSFX);
             foreach (GameObject target in targets)
             {
                 target.GetComponent<IActivatable>()?.OnPlateActivated();
@@ -43,7 +46,7 @@ public class PressurePlate : TriggerObject
         {
             GetComponent<Animator>().SetBool("OnPlate", false);
             SetCableMaterial(inactiveMat);
-            GetComponent<AudioSource>().Play();
+            GetComponent<AudioSource>().PlayOneShot(deactivateSFX);
             foreach (GameObject target in targets)
             {
                 target.GetComponent<IActivatable>()?.OnPlateExited();
