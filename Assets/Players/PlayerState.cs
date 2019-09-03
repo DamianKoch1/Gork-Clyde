@@ -91,7 +91,7 @@ public class PlayerState : MonoBehaviour
         anim = _anim;
         rb = _rb;
         canJumpTimeframe = maxGhostjumpDelay;
-        landingVFXPosition = landingParticles.transform.position;
+        landingVFXPosition = landingParticles.transform.localPosition;
     }
 
     /// <summary>
@@ -188,7 +188,7 @@ public class PlayerState : MonoBehaviour
         if (highestFallVelocity < -minLandingVFXFallSpeed)
         {
             landingParticles.Stop();
-            landingParticles.transform.position = landingVFXPosition;
+            landingParticles.transform.localPosition = landingVFXPosition;
             landingParticles.transform.up = Vector3.up;
             landingParticles.Play();
             sfxAudioSource.PlayOneShot(landingSFX);

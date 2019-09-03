@@ -7,8 +7,20 @@ public class ButtonObject : TriggerObject
 {
 
     [SerializeField]
-    private bool oneTimeUse;
+    private bool oneTimeUse, activeAtStart;
+    
     private bool activated;
+
+    private void Start()
+    {
+        SetStartState();
+    }
+
+    private void SetStartState()
+    {
+        if (!activeAtStart) return;
+        OnActivated();
+    }
 
     /// <summary>
     /// (De)activates all targets, oneTimeUse possible
