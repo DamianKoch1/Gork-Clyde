@@ -132,6 +132,7 @@ public class Throwing : MonoBehaviour
 	    if (clyde)
 	    {
 		    if (clyde.state.inAirstream) return;
+		    if (!clyde.state.canMove) return;
 		    clyde.state.canMove = false;
 		    clyde.anim.SetTrigger("pickedUp");
 		    clyde.transform.LookAt(clyde.rb.position + transform.forward);
