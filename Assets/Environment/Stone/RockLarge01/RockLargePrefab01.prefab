@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3129226533310317126}
   - component: {fileID: 8669912624071950015}
   - component: {fileID: 4088208040055788810}
-  - component: {fileID: 8578790477329457896}
+  - component: {fileID: 995331436731669669}
   m_Layer: 0
   m_Name: RockLargePrefab01
   m_TagString: noSpawnpoint
@@ -98,8 +98,8 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!64 &8578790477329457896
-MeshCollider:
+--- !u!65 &995331436731669669
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -108,7 +108,6 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: -5805435408412104753, guid: 8813cc71f81d78541aebc0454869aa92, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 0.86067575, y: 0.6649314, z: 1.1537802}
+  m_Center: {x: -0.034909047, y: -0.07490576, z: 0.5730854}
