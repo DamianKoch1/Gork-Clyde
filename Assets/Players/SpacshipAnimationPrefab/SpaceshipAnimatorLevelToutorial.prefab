@@ -2971,6 +2971,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   backButton: {fileID: 7989045192447533879}
+  audioSource: {fileID: 0}
   showSFX: {fileID: 0}
   hideSFX: {fileID: 0}
 --- !u!82 &7989045191507640240
@@ -19633,6 +19634,8 @@ MonoBehaviour:
   throwCollisionSFX: {fileID: 0}
   landingSFX: {fileID: 0}
   jumpSFX: {fileID: 0}
+  walkSFX: {fileID: 0}
+  idleSFX: {fileID: 0}
   sfxAudioSource: {fileID: 7989045192478128310}
   walkAudioSource: {fileID: 7989045192478128311}
 --- !u!114 &7989045192478128309
@@ -20645,7 +20648,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f320e0f88161ba43949709084eb445f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bgm: {fileID: 8300000, guid: 75f569497b4a30b4a94ec893be635a0b, type: 3}
+  bgm: {fileID: 8300000, guid: 7a0c1b954762903488edabee6b320a07, type: 3}
   pauseMenu: {fileID: 7989045192165020850}
   optionsMenu: {fileID: 7989045192800525743}
   pauseFirstSelected: {fileID: 7989045191019376036}
@@ -21370,6 +21373,8 @@ MonoBehaviour:
   throwCollisionSFX: {fileID: 0}
   landingSFX: {fileID: 0}
   jumpSFX: {fileID: 0}
+  walkSFX: {fileID: 0}
+  idleSFX: {fileID: 0}
   sfxAudioSource: {fileID: 7989045192716287776}
   walkAudioSource: {fileID: 7989045192716287777}
 --- !u!114 &7989045192716287783

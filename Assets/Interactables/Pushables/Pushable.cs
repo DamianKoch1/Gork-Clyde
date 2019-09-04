@@ -73,7 +73,10 @@ public class Pushable : MonoBehaviour
         if (IsMoving())
         {
             EmitPushedParticles();
-            pushedAudioSource.Play();
+            if (!pushedAudioSource.isPlaying)
+            {
+                pushedAudioSource.Play();
+            }
         }
         else if (pushedParticles.isPlaying)
         {
@@ -90,7 +93,7 @@ public class Pushable : MonoBehaviour
     private bool IsMoving()
     {
         if (!isPushed) return false;
-        if (Mathf.Abs(rb.velocity.y) > 0.1f) return false;
+        if (Mathf.Abs(rb.velocity.y) > 0.2f) return false;
         if (currentPosition == previousPosition) return false;
         return true;
     }

@@ -155,9 +155,11 @@ MonoBehaviour:
   maxGhostjumpDelay: 0.2
   canJumpTimeframe: 0
   minLandingVFXFallSpeed: 15
-  throwCollisionSFX: {fileID: 0}
-  landingSFX: {fileID: 0}
-  jumpSFX: {fileID: 0}
+  throwCollisionSFX: {fileID: 8300000, guid: 79dc66730b44d0046969a9dc85a95d65, type: 3}
+  landingSFX: {fileID: 8300000, guid: b4a9bb8c61faa7f47a024e4d7457c092, type: 3}
+  jumpSFX: {fileID: 8300000, guid: fcffb8b94730bb643a8943c082ace00f, type: 3}
+  walkSFX: {fileID: 8300000, guid: c539aec2a72ff3047b39a6bfb764f0b1, type: 3}
+  idleSFX: {fileID: 8300000, guid: 1770b551d3a9e054398ffd489df9980c, type: 3}
   sfxAudioSource: {fileID: 5090413825949392846}
   walkAudioSource: {fileID: 1193423907782552220}
 --- !u!114 &8135090562367645002
@@ -187,7 +189,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.9
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -196,9 +198,9 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 75
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -231,7 +233,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -282,7 +284,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -7626630697749693807, guid: 412b78ee19c7f2d429dcaa2f525e7fed,
     type: 2}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: c539aec2a72ff3047b39a6bfb764f0b1, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -293,9 +295,9 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 75
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -328,7 +330,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -541,11 +543,6 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: e82d060fff29fb942a0a11162db63b83, type: 2}
-    - target: {fileID: -4560490421634678440, guid: b079d4711bcc87d48874a20d04fe4bec,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: ad6715028aa3b744c8651a2336198ab0, type: 2}
     - target: {fileID: -4216859302048453862, guid: b079d4711bcc87d48874a20d04fe4bec,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -616,6 +613,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.6
       objectReference: {fileID: 0}
+    - target: {fileID: -4560490421634678440, guid: b079d4711bcc87d48874a20d04fe4bec,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ad6715028aa3b744c8651a2336198ab0, type: 2}
     - target: {fileID: -1178944866958211071, guid: b079d4711bcc87d48874a20d04fe4bec,
         type: 3}
       propertyPath: m_AABB.m_Center.x
@@ -678,6 +680,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2433603982372154571}
     m_Modifications:
+    - target: {fileID: 3180249123157283602, guid: 241f912dad7f7994eabe5a91d05ccdaa,
+        type: 3}
+      propertyPath: m_Name
+      value: Shadow
+      objectReference: {fileID: 0}
     - target: {fileID: 7721489509654714473, guid: 241f912dad7f7994eabe5a91d05ccdaa,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -747,11 +754,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 4.621896
-      objectReference: {fileID: 0}
-    - target: {fileID: 3180249123157283602, guid: 241f912dad7f7994eabe5a91d05ccdaa,
-        type: 3}
-      propertyPath: m_Name
-      value: Shadow
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 241f912dad7f7994eabe5a91d05ccdaa, type: 3}
@@ -884,16 +886,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2433603982372154571}
     m_Modifications:
-    - target: {fileID: 1601969473879671137, guid: eb49f7cbe08b75444bb38f67c8c7d0fe,
-        type: 3}
-      propertyPath: lengthInSec
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1601969473879671137, guid: eb49f7cbe08b75444bb38f67c8c7d0fe,
-        type: 3}
-      propertyPath: playOnAwake
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6083157086161473864, guid: eb49f7cbe08b75444bb38f67c8c7d0fe,
         type: 3}
       propertyPath: m_Name
@@ -968,6 +960,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.581
+      objectReference: {fileID: 0}
+    - target: {fileID: 1601969473879671137, guid: eb49f7cbe08b75444bb38f67c8c7d0fe,
+        type: 3}
+      propertyPath: lengthInSec
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1601969473879671137, guid: eb49f7cbe08b75444bb38f67c8c7d0fe,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb49f7cbe08b75444bb38f67c8c7d0fe, type: 3}
