@@ -41,9 +41,9 @@ public class BGM : Singleton<BGM>
 		var audioSource = Instance.GetComponent<AudioSource>();
 		audioSource.Play();
 		var timer = 0.0f;
-		while (timer < 1)
+		while (timer < 0.5f)
 		{
-			audioSource.volume = timer / 2;
+			audioSource.volume = timer;
 			timer += Time.deltaTime;
 			yield return null;
 		}
@@ -58,10 +58,10 @@ public class BGM : Singleton<BGM>
 	{
 		StopCoroutine(FadeIn());
 		var audioSource = Instance.GetComponent<AudioSource>();
-		var timer = 1.0f;
+		var timer = 0.5f;
 		while (timer > 0)
 		{
-			audioSource.volume = timer / 2;
+			audioSource.volume = timer;
 			timer -= Time.deltaTime;
 			yield return null;
 		}
