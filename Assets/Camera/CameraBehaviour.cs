@@ -5,6 +5,8 @@ public class CameraBehaviour : MonoBehaviour
 {
     [SerializeField]
     private GameObject gork, clyde;
+    
+    public static bool gorkCamEnabled = true, clydeCamEnabled = true;
 
     private Vector3 offset;
     private Vector3 playerMiddle;
@@ -48,6 +50,11 @@ public class CameraBehaviour : MonoBehaviour
 
     private void UpdateGorkCam()
     {
+        if (!gorkCamEnabled)
+        {
+            gorkCam.Priority = 0;
+            return;
+        }
         if (gork.GetComponent<PlayerState>().canMove)
         {
             if (Input.GetButton(Gork.GorkCam))
@@ -63,6 +70,11 @@ public class CameraBehaviour : MonoBehaviour
     
     private void UpdateClydeCam()
     {
+        if (!clydeCamEnabled)
+        {
+            clydeCam.Priority = 0;
+            return;
+        }
         if (clyde.GetComponent<PlayerState>().canMove)
         {
             if (Input.GetButton(Clyde.ClydeCam))
