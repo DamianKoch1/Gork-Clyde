@@ -42,10 +42,6 @@ public class Gork : Player
 			}
 		}
 		
-		if (Input.GetKeyDown(KeyCode.J))
-		{
-			throwing.PickUp(FindObjectOfType<Clyde>().gameObject);
-		}
 	}
 
 	/// <summary>
