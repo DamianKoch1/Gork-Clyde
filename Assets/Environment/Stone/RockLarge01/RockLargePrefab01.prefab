@@ -11,8 +11,7 @@ GameObject:
   - component: {fileID: 6212214639191619696}
   - component: {fileID: 3129226533310317126}
   - component: {fileID: 8669912624071950015}
-  - component: {fileID: 4088208040055788810}
-  - component: {fileID: 8578790477329457896}
+  - component: {fileID: 3373593706867009479}
   m_Layer: 0
   m_Name: RockLargePrefab01
   m_TagString: noSpawnpoint
@@ -79,36 +78,17 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!95 &4088208040055788810
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6948317088837110371}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 8813cc71f81d78541aebc0454869aa92, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
---- !u!64 &8578790477329457896
+--- !u!64 &3373593706867009479
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6948317088837110371}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 98aa7559d259fe945bde2e7dbeaaf0d9, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 14
   m_Mesh: {fileID: -5805435408412104753, guid: 8813cc71f81d78541aebc0454869aa92, type: 3}
