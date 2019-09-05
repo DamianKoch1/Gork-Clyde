@@ -104,21 +104,7 @@ public abstract class Player : MonoBehaviour
             }
         }
 
-        //debug
-        if (Input.GetButtonDown("DebugFast"))
-        {
-            Time.timeScale *= 2;
-        }
-        if (Input.GetButtonDown("DebugSlow"))
-        {
-            Time.timeScale /= 2;
-        }
-
-        if (Input.GetButton("DebugFly"))
-        {
-            rb.velocity = Vector3.up * 8;
-        }
-        //
+     
     }
 
   
