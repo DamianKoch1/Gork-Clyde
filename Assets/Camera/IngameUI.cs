@@ -38,10 +38,6 @@ public class IngameUI : MonoBehaviour
             OnBackPressed();
         }
 
-        if (Input.GetButtonDown("DebugRestart"))
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
     }
 
     /// <summary>
