@@ -38,7 +38,7 @@ public class CameraBehaviour : MonoBehaviour
     private void FixedUpdate()
     {
         UpdatePlayerCameras();
-        RotateCamera();
+
         MoveCamera();
     }
 
@@ -97,23 +97,7 @@ public class CameraBehaviour : MonoBehaviour
         playerDistance = startPlayerDistance;
     }
 
-    /// <summary>
-    ///cutted, kept for playtesting
-    /// </summary>
-    private void RotateCamera()
-    {
-        if (Input.GetAxis("Mouse X") != 0)
-        {
-            offset = Quaternion.AngleAxis(Input.GetAxis("Mouse X") * rotateSpeed, Vector3.up) * offset;
-            transform.RotateAround(transform.position, Vector3.up, Input.GetAxis("Mouse X") * rotateSpeed);
-        }
-        if (Input.GetAxis("Mouse Y") != 0)
-        {
-            offset = Quaternion.AngleAxis(Input.GetAxis("Mouse Y") * rotateSpeed, -transform.right) * offset;
-            transform.RotateAround(transform.position, -transform.right, Input.GetAxis("Mouse Y") * rotateSpeed);
-        }
-    }
-
+  
     /// <summary>
     /// Camera stays between players, zooms based on distance, if player can't move focuses other only
     /// </summary>
