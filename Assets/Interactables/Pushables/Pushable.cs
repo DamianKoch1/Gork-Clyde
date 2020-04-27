@@ -11,9 +11,16 @@ using UnityEngine;
 public class Pushable : MonoBehaviour
 {
     [SerializeField]
-    private ParticleSystem pushedParticles, landingParticles;
+    private ParticleSystem pushedParticles;
+
+    [SerializeField]
+    private ParticleSystem landingParticles;
+
     private Rigidbody rb;
-    private Vector3 previousPosition, currentPosition;
+    private Vector3 previousPosition;
+    private Vector3 currentPosition;
+
+
     [HideInInspector]
     public bool isPushed;
     
@@ -70,7 +77,7 @@ public class Pushable : MonoBehaviour
     {
         currentPosition = rb.position;
         pushedParticles.transform.position = currentPosition - Vector3.up * transform.localScale.y / 5;
-        if (IsMoving())
+        if (IsMovingOnGround())
         {
             EmitPushedParticles();
             if (!pushedAudioSource.isPlaying)
@@ -90,10 +97,10 @@ public class Pushable : MonoBehaviour
     /// Checks if pushable is moving
     /// </summary>
     /// <returns>Returns false if not pushed / falling / position unchanged, true otherwise</returns>
-    private bool IsMoving()
+    private bool IsMovingOnGround()
     {
         if (!isPushed) return false;
-        if (Mathf.Abs(rb.velocity.y) > 0.2f) return false;
+        if (Mathf.Abs(rb.velocity.y) > 0.4f) return false;
         if (currentPosition == previousPosition) return false;
         return true;
     }
@@ -152,7 +159,7 @@ public class Pushable : MonoBehaviour
     protected virtual void OnTriggerStay(Collider other)
     {
         if (other.isTrigger) return;
-        var player = other.GetComponent<Pushing>();
+        var player = other.GetComponent<PushBehaviour>();
         if (!player) return;
 
         player.pushedObj = gameObject;
@@ -165,7 +172,7 @@ public class Pushable : MonoBehaviour
     protected virtual void OnTriggerExit(Collider other)
     {
         if (other.isTrigger) return;
-        var player = other.GetComponent<Pushing>();
+        var player = other.GetComponent<PushBehaviour>();
         if (!player) return;
         if (player.isPushing) return;
         
@@ -173,10 +180,6 @@ public class Pushable : MonoBehaviour
         gameObject.layer = 0;
     }
     
-    //----------------
-    /// <summary>
-    /// Plays collision vfx when landing after throw/fall
-    /// </summary>
     private List<Transform> collidingTransforms = new List<Transform>();
    
     private void OnCollisionEnter(Collision other)
@@ -199,5 +202,4 @@ public class Pushable : MonoBehaviour
         if (!collidingTransforms.Contains(other.transform)) return;
         collidingTransforms.Remove(other.transform);
     }
-    //----------------
 }

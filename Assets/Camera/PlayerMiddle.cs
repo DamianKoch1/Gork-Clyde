@@ -1,12 +1,15 @@
 ﻿using UnityEngine;
 
 /// <summary>
-/// Keeps an opject in the middle of both players, currently used as a camera target
+/// Keeps an opject in the middle of both players, useful as camera target
 /// </summary>
 public class PlayerMiddle : MonoBehaviour
 {
     [SerializeField]
-    private GameObject gork, clyde;
+    private Player gork;
+
+    [SerializeField]
+    private Player clyde;
 
     private Vector3 playerMiddle;
 
@@ -16,16 +19,13 @@ public class PlayerMiddle : MonoBehaviour
     }
 
     
-    /// <summary>
-    /// Moves between players
-    /// </summary>
     private void MoveToMiddle()
     {
-        if (!clyde.GetComponent<PlayerState>().canMove)
+        if (!clyde.canMove)
         {
             transform.position = gork.transform.position;
         }
-        else if (!gork.GetComponent<PlayerState>().canMove)
+        else if (!gork.canMove)
         {
             transform.position = clyde.transform.position;
         }

@@ -3,16 +3,33 @@
 public class PlayerIndicators : MonoBehaviour
 {
     [SerializeField]
-    private Transform gorkTransform, clydeTransform;
+    private Transform gorkTransform;
+
+    [SerializeField]
+    private Transform clydeTransform;
+
     [SerializeField]
     private RectTransform canvasRect;
-    private Vector3 gorkPos, clydePos;
+
     private Camera cam;
+
     [SerializeField]
-    private GameObject gorkIndicator, clydeIndicator, gorkBg, clydeBg;
+    private GameObject gorkIndicator;
+
+    [SerializeField]
+    private GameObject clydeIndicator;
+
+    [SerializeField]
+    private GameObject gorkBg;
+
+    [SerializeField]
+    private GameObject clydeBg;
 
     [Range(0, 0.1f)]
-    public float indicatorDistanceX = 0.05f, indicatorDistanceY = 0.05f;
+    public float indicatorDistanceX = 0.05f;
+
+    [Range(0, 0.1f)]
+    public float indicatorDistanceY = 0.05f;
 
     private void Start()
     {
@@ -23,44 +40,27 @@ public class PlayerIndicators : MonoBehaviour
 
     private void Update()
     {
-        CheckGork();
-        CheckClyde();
-    }
-
-    
-    /// <summary>
-    /// Updates gork indicator if gork is out of screen
-    /// </summary>
-    private void CheckGork()
-    {
-        gorkPos = cam.WorldToScreenPoint(gorkTransform.position);
-        if (!cam.pixelRect.Contains(gorkPos))
-        {
-            UpdateIndicator(gorkIndicator, gorkBg, gorkPos);
-        }
-        else if (gorkIndicator.activeSelf)
-        {
-            gorkIndicator.SetActive(false);
-            gorkBg.SetActive(false);
-        }
+        UpdateIndicator(gorkTransform, gorkIndicator, gorkBg);
+        UpdateIndicator(clydeTransform, clydeIndicator, clydeBg);
     }
 
     /// <summary>
-    /// Updates clyde indicator if clyde is out of screen
+    /// Updates player indicator if it is out of screen
     /// </summary>
-    private void CheckClyde()
+    private void UpdateIndicator(Transform playerTransform, GameObject indicator, GameObject bg)
     {
-        clydePos = cam.WorldToScreenPoint(clydeTransform.position);
-        if (!cam.pixelRect.Contains(clydePos))
+        var playerScreenPos = cam.WorldToScreenPoint(playerTransform.position);
+        if (!cam.pixelRect.Contains(playerScreenPos))
         {
-            UpdateIndicator(clydeIndicator, clydeBg, clydePos);
+            MoveIndicator(indicator, bg, playerScreenPos);
         }
-        else if (clydeIndicator.activeSelf)
+        else if (indicator.activeSelf)
         {
-            clydeIndicator.SetActive(false);
-            clydeBg.SetActive(false);
+            indicator.SetActive(false);
+            bg.SetActive(false);
         }
     }
+
 
     /// <summary>
     /// Move Indicator to screen border pointing to player screen position
@@ -68,7 +68,7 @@ public class PlayerIndicators : MonoBehaviour
     /// <param name="indicator">indicator to update</param>
     /// <param name="bg">indicator background to update</param>
     /// <param name="targetPos">position of indicator target</param>
-    private void UpdateIndicator(GameObject indicator, GameObject bg, Vector3 targetPos)
+    private void MoveIndicator(GameObject indicator, GameObject bg, Vector3 targetPos)
     {
         Vector2 rectSize = canvasRect.sizeDelta;
 
@@ -79,7 +79,7 @@ public class PlayerIndicators : MonoBehaviour
         {
             indicator.SetActive(true);
         }
-        
+
         if (!bg.activeSelf)
         {
             bg.SetActive(true);
@@ -101,16 +101,16 @@ public class PlayerIndicators : MonoBehaviour
         {
             zRotationAngles = -45 + rotationMultiplier.x * 90 + rotationMultiplier.y * 90;
         }
-       
+
         bgRect.eulerAngles = new Vector3(0, 0, zRotationAngles);
 
         //applying min distance from screen edge
         indicatorTargetPos.x = Mathf.Clamp(indicatorTargetPos.x, indicatorDistanceX, 1 - indicatorDistanceX);
         indicatorTargetPos.y = Mathf.Clamp(indicatorTargetPos.y, indicatorDistanceY, 1 - indicatorDistanceY);
-       
+
         indicatorTargetPos.x *= rectSize.x;
         indicatorTargetPos.y *= rectSize.y;
-        
+
         indicatorRect.anchoredPosition = indicatorTargetPos;
         bgRect.anchoredPosition = indicatorTargetPos;
     }

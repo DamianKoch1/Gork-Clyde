@@ -4,26 +4,43 @@ using UnityEngine;
 public class CameraBehaviour : MonoBehaviour
 {
     [SerializeField]
-    private GameObject gork, clyde;
-    
-    public static bool gorkCamEnabled = true, clydeCamEnabled = true;
+    private Player gork;
+
+    [SerializeField]
+    private Player clyde;
+
+
+    public static bool gorkCamEnabled = true;
+    public static bool clydeCamEnabled = true;
 
     private Vector3 offset;
     private Vector3 playerMiddle;
-    private float startPlayerDistance, playerDistance;
-    [SerializeField]
-    private CinemachineVirtualCamera gorkCam, clydeCam;
+    private float startPlayerDistance;
+    private float curPlayerDistance;
 
-    /// <summary>
-    /// max tolerated player distance before zoom = this * startPlayerDistance
-    /// </summary>
     [SerializeField]
+    private CinemachineVirtualCamera gorkCam;
+
+    [SerializeField]
+    private CinemachineVirtualCamera clydeCam;
+
+    [SerializeField, Tooltip("Max tolerated ratio of current player distance to start player distance before camera zooms out")]
     private float playerDistanceZoomThreshhold = 2;
+
     private float zoomMultiplier;
+
     [SerializeField]
-    private float minZoom, maxZoom;
+    private float minZoom;
+
     [SerializeField]
-    private float followSpeed, rotateSpeed = 2;
+    private float maxZoom;
+
+    [SerializeField]
+    private float followSpeed;
+
+    [SerializeField]
+    private float rotateSpeed = 2;
+
     private Vector3 targetPos;
 
   
@@ -35,7 +52,7 @@ public class CameraBehaviour : MonoBehaviour
         GetComponent<CinemachineVirtualCamera>().Priority = 1;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         UpdatePlayerCameras();
 
@@ -55,7 +72,7 @@ public class CameraBehaviour : MonoBehaviour
             gorkCam.Priority = 0;
             return;
         }
-        if (gork.GetComponent<PlayerState>().canMove)
+        if (gork.canMove)
         {
             if (Input.GetButton(Gork.GorkCam))
             {
@@ -75,7 +92,7 @@ public class CameraBehaviour : MonoBehaviour
             clydeCam.Priority = 0;
             return;
         }
-        if (clyde.GetComponent<PlayerState>().canMove)
+        if (clyde.canMove)
         {
             if (Input.GetButton(Clyde.ClydeCam))
             {
@@ -94,24 +111,24 @@ public class CameraBehaviour : MonoBehaviour
         playerMiddle = 0.5f * (gork.transform.position + clyde.transform.position);
         offset = transform.position - playerMiddle;
         startPlayerDistance = Vector3.Distance(gork.transform.position, clyde.transform.position);
-        playerDistance = startPlayerDistance;
+        curPlayerDistance = startPlayerDistance;
     }
 
   
     /// <summary>
-    /// Camera stays between players, zooms based on distance, if player can't move focuses other only
+    /// Camera stays between players, zooms based on distance, if one player can't move focuses other only
     /// </summary>
     private void MoveCamera()
     {
-        playerDistance = Vector3.Distance(gork.transform.position, clyde.transform.position);
+        curPlayerDistance = Vector3.Distance(gork.transform.position, clyde.transform.position);
 
-        zoomMultiplier = Mathf.Clamp((playerDistanceZoomThreshhold * startPlayerDistance / playerDistance), minZoom, maxZoom);
+        zoomMultiplier = Mathf.Clamp((playerDistanceZoomThreshhold * startPlayerDistance / curPlayerDistance), minZoom, maxZoom);
 
-        if (!clyde.GetComponent<PlayerState>().canMove)
+        if (!clyde.canMove)
         {
             targetPos = gork.transform.position + offset / zoomMultiplier;
         }
-        else if (!gork.GetComponent<PlayerState>().canMove)
+        else if (!gork.canMove)
         {
             targetPos = clyde.transform.position + offset / zoomMultiplier;
         }

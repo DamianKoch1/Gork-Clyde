@@ -7,12 +7,22 @@ public class ButtonObject : TriggerObject
 {
 
     [SerializeField]
-    private bool oneTimeUse, activeAtStart;
-    
+    private bool oneTimeUse;
+
+    [SerializeField]
+    private bool activeAtStart;
+
+
     private bool activated;
+
+    private Animator anim;
+
+    private AudioSource audioSource;
 
     private void Start()
     {
+        anim = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
         SetStartState();
     }
 
@@ -48,8 +58,8 @@ public class ButtonObject : TriggerObject
     {
         activated = true;
         SetCableMaterial(activeMat);
-        GetComponent<Animator>().SetBool("BoolTriggerButton", true);
-        GetComponent<AudioSource>().Play();
+        anim.SetBool("BoolTriggerButton", true);
+        audioSource.Play();
         foreach (GameObject target in targets)
         {
             target.GetComponent<IActivatable>()?.OnButtonActivated();
@@ -63,8 +73,8 @@ public class ButtonObject : TriggerObject
     {
         activated = false;
         SetCableMaterial(inactiveMat);
-        GetComponent<Animator>().SetBool("BoolTriggerButton", false);
-        GetComponent<AudioSource>().Play();
+        anim.SetBool("BoolTriggerButton", false);
+        audioSource.Play();
         foreach (GameObject target in targets)
         {
             target.GetComponent<IActivatable>()?.OnButtonDeactivated();

@@ -15,7 +15,8 @@ public class TempCameraActivator : MonoBehaviour
 
 	private void OnTriggerEnter(Collider other)
 	{
-		if (!cam.CanActivateCam(other)) return;
+        if (other.isTrigger) return;
+        if (!other.GetComponent<Player>()) return;
 
 		playersInTrigger++;
 		if (playersInTrigger == 2)
@@ -26,8 +27,9 @@ public class TempCameraActivator : MonoBehaviour
 
 	private void OnTriggerExit(Collider other)
 	{
-		if (!cam.CanActivateCam(other)) return;
+        if (other.isTrigger) return;
+        if (!other.GetComponent<Player>()) return;
 
-		playersInTrigger--;
+        playersInTrigger--;
 	}
 }

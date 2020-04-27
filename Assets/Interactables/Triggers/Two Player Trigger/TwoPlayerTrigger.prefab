@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1022437411194523428}
   m_Layer: 0
-  m_Name: OneTimeTrigger
+  m_Name: TwoPlayerTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 4401630293013473941}
   - component: {fileID: 975409004823280906}
   m_Layer: 0
-  m_Name: OTTDeactivator
+  m_Name: Deactivator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -89,7 +89,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 782b12e51e846054c8042363a8308ce2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  targets: []
 --- !u!1 &5842054807072759565
 GameObject:
   m_ObjectHideFlags: 0
@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 8052262757958592120}
   - component: {fileID: 9148119307340304074}
   m_Layer: 0
-  m_Name: OTTActivator
+  m_Name: Activator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -147,4 +147,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7d38f5e695db2a429897804ef621616, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  targets: []

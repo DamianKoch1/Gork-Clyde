@@ -1,28 +1,27 @@
 ﻿using UnityEngine;
 
-[RequireComponent(typeof(Throwing))]
+[RequireComponent(typeof(ThrowBehaviour))]
 [RequireComponent(typeof(BoxCollider))]
 public class Gork : Player
 {
 	/// <summary>
 	/// Handles everything related to throwing objects
 	/// </summary>
-	[HideInInspector]
-	public Throwing throwing;
+	public ThrowBehaviour throwBehaviour { private set; get; }
 
-	public static string XAxis = "GorkHorizontal",
-	ZAxis = "GorkVertical",
-	JumpButton = "GorkJump",
-	GorkInteract = "GorkInteract",
-	GorkCam = "GorkCam";
+    public static string XAxis = "GorkHorizontal";
+    public static string ZAxis = "GorkVertical";
+    public static string JumpButton = "GorkJump";
+    public static string GorkInteract = "GorkInteract";
+	public static string GorkCam = "GorkCam";
 
 
 	protected override void Start()
 	{
 		base.Start();
 		InitializeInputs(XAxis, ZAxis, JumpButton);
-		throwing = GetComponent<Throwing>();
-		throwing.Initialize(anim);
+		throwBehaviour = GetComponent<ThrowBehaviour>();
+		throwBehaviour.Initialize(anim);
 	}
 
 	protected override void CheckInput()
@@ -36,9 +35,9 @@ public class Gork : Player
 
 		if (Input.GetButtonUp(GorkInteract))
 		{
-			if (pushing.isPushing)
+			if (pushBehaviour.isPushing)
 			{
-				pushing.StopPushing();
+				pushBehaviour.StopPushing();
 			}
 		}
 		
@@ -49,16 +48,16 @@ public class Gork : Player
 	/// </summary>
 	private void Interact()
 	{
-		if (pushing.pushedObj)
+		if (pushBehaviour.pushedObj)
 		{
-			if (!throwing.IsCarryingObject())
+			if (!throwBehaviour.IsCarryingObject())
 			{
-				pushing.StartPushing();
+				pushBehaviour.StartPushing();
 			}
 		}
 		else
 		{
-			throwing.Interact();
+			throwBehaviour.Interact();
 		}
 	}
 }

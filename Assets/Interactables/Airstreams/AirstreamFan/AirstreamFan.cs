@@ -1,12 +1,18 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class Ventilator : MonoBehaviour
+public class AirstreamFan : MonoBehaviour
 {
     private Rigidbody rb;
 
-    [SerializeField] 
-    private float maxRotationSpeed = 10, minRotationSpeed = 0.1f, transitionDuration = 3;
+    [SerializeField]
+    private float minRotationSpeed = 0.1f;
+
+    [SerializeField]
+    private float maxRotationSpeed = 10;
+
+    [SerializeField]
+    private float transitionDuration = 3;
 
     public void Initialize(bool active)
     {
@@ -26,7 +32,7 @@ public class Ventilator : MonoBehaviour
             StartCoroutine(TurnOff());
         }
     }
-    
+
     /// <summary>
     /// Accelerates angular velocity to maxRotationSpeed for transitionDuration s
     /// </summary>
@@ -52,7 +58,7 @@ public class Ventilator : MonoBehaviour
         float timer = transitionDuration;
         while (timer > 0)
         {
-            rb.angularVelocity = transform.forward * (timer / transitionDuration) *  maxRotationSpeed;
+            rb.angularVelocity = transform.forward * (timer / transitionDuration) * maxRotationSpeed;
             if (rb.angularVelocity.z < minRotationSpeed)
             {
                 rb.angularVelocity = transform.forward * minRotationSpeed;

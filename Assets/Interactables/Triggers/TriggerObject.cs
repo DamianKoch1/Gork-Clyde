@@ -3,7 +3,6 @@
 /// <summary>
 /// Base class for trigger objects
 /// </summary>
-[RequireComponent(typeof(AudioSource))]
 public abstract class TriggerObject : MonoBehaviour
 {
     [SerializeField]
@@ -13,9 +12,18 @@ public abstract class TriggerObject : MonoBehaviour
     protected Renderer cableRenderer;
 
     [SerializeField]
-    protected Material activeMat, inactiveMat;
+    protected Material activeMat;
 
-    private enum TriggerableBy {Clyde, Gork, All};
+    [SerializeField]
+    protected Material inactiveMat;
+
+    private enum TriggerableBy
+    {
+        Clyde,
+        Gork,
+        All
+    };
+
     [SerializeField]
     private TriggerableBy triggerableBy = TriggerableBy.All;
    

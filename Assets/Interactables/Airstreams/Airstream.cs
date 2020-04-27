@@ -4,6 +4,7 @@ using UnityEngine;
 public class Airstream : MonoBehaviour, IActivatable
 {
     private Vector3 direction;
+
     [SerializeField]
     private float strength;
 
@@ -11,7 +12,7 @@ public class Airstream : MonoBehaviour, IActivatable
     private bool activeAtStart = true;
     
     [SerializeField]
-    private List<Ventilator> ventilators = new List<Ventilator>();
+    private List<AirstreamFan> fans;
 
 
     [Header("SFX")]
@@ -22,10 +23,10 @@ public class Airstream : MonoBehaviour, IActivatable
     [SerializeField] 
     private AudioClip deactivateSFX;
     
-    [SerializeField] 
+    [SerializeField, Tooltip("Used to play activate / deactivate sounds")] 
     private AudioSource sfxAudioSource;
     
-    [SerializeField] 
+    [SerializeField, Tooltip("Used to play continuous wind sound")] 
     private AudioSource activeAudioSource;
     
     
@@ -45,9 +46,9 @@ public class Airstream : MonoBehaviour, IActivatable
         {
             ToggleAirstream();
         }
-        foreach (var ventilator in ventilators)
+        foreach (var fan in fans)
         {
-            ventilator.Initialize(activeAtStart);
+            fan.Initialize(activeAtStart);
         }
     }
     
@@ -64,7 +65,7 @@ public class Airstream : MonoBehaviour, IActivatable
         var clyde = other.GetComponent<Clyde>();
         if (clyde)
         {
-            if (!clyde.state.inAirstream)
+            if (!clyde.inAirstream)
             {
                 OnClydeAirstreamEntered(clyde);
             }
@@ -73,7 +74,7 @@ public class Airstream : MonoBehaviour, IActivatable
 
 
     /// <summary>
-    /// Sets clyde's inAirstream state to false
+    /// Sets Clyde's inAirstream state to false
     /// </summary>
     /// <param name="other"></param>
     private void OnTriggerExit(Collider other)
@@ -83,7 +84,7 @@ public class Airstream : MonoBehaviour, IActivatable
         var clyde = other.GetComponent<Clyde>();
         if (clyde)
         {
-            clyde.state.inAirstream = false;
+            clyde.inAirstream = false;
         }
     }
 
@@ -98,13 +99,13 @@ public class Airstream : MonoBehaviour, IActivatable
     }
 
     /// <summary>
-    /// Used to detach Clyde from gork if he tries to carry Clyde through an airstream.
+    /// Used to detach Clyde from Gork if he tries to carry Clyde through an airstream.
     /// </summary>
     /// <param name="clyde">Reference to Clyde</param>
     private void OnClydeAirstreamEntered(Clyde clyde)
     {
-        clyde.state.inAirstream = true;
-        if (!clyde.state.canMove)
+        clyde.inAirstream = true;
+        if (!clyde.canMove)
         {
             clyde.CancelThrow();
         }
@@ -133,7 +134,7 @@ public class Airstream : MonoBehaviour, IActivatable
     }
 
     /// <summary>
-    /// Toggles particles / collider / fans on/off, plays sfx
+    /// Toggles particles / collider / fans on / off, plays sfx
     /// </summary>
     public void ToggleAirstream()
     {
@@ -144,7 +145,7 @@ public class Airstream : MonoBehaviour, IActivatable
             StopVfx();
             sfxAudioSource.PlayOneShot(deactivateSFX);
             activeAudioSource.Stop();
-            foreach (var ventilator in ventilators)
+            foreach (var ventilator in fans)
             {
                 ventilator.StopAllCoroutines();
                 ventilator.Toggle(false);
@@ -155,7 +156,7 @@ public class Airstream : MonoBehaviour, IActivatable
             PlayVfx();
             sfxAudioSource.PlayOneShot(activateSFX);
             activeAudioSource.Play();
-            foreach (var ventilator in ventilators)
+            foreach (var ventilator in fans)
             {
                 ventilator.StopAllCoroutines();
                 ventilator.Toggle(true);
