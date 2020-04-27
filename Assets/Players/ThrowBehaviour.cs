@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(ThrowIndicator))]
-public class Throwing : MonoBehaviour
+public class ThrowBehaviour : MonoBehaviour
 {
     private List<GameObject> carryableObjects = new List<GameObject>();
 
@@ -35,15 +35,23 @@ public class Throwing : MonoBehaviour
 
     [SerializeField] 
     private AudioClip throwSFX;
-    
-    // Start is called before the first frame update
+
+
+    public GameObject HeldObject
+    {
+        get
+        {
+            if (!IsCarryingObject()) return null;
+            return heldObjectSlot.transform.GetChild(0).gameObject;
+        }
+    }
+
     public void Initialize(Animator _anim)
     {
 	    throwIndicator = GetComponent<ThrowIndicator>();
 	    anim = _anim;
     }
 
-    // Update is called once per frame
     private void Update()
     {
 	    UpdateThrowIndicator();
@@ -59,7 +67,7 @@ public class Throwing : MonoBehaviour
 	    {
 		    if (IsCarryingObject())
 		    {
-			    var clyde = HeldObject().GetComponent<Clyde>();
+			    var clyde = HeldObject.GetComponent<Clyde>();
 			    if (clyde)
 			    {
 				    clyde.CancelThrow();
@@ -76,7 +84,7 @@ public class Throwing : MonoBehaviour
     {
 	    if (IsCarryingObject())
 	    {
-		    throwIndicator.UpdateIndicator(ThrowVector(), HeldObject());
+		    throwIndicator.UpdateIndicator(CalculateThrowVector(), HeldObject);
 	    }
 	    else
 	    {
@@ -90,17 +98,13 @@ public class Throwing : MonoBehaviour
 	    return false;
     }
 
-    public GameObject HeldObject()
-    {
-	    if (!IsCarryingObject()) return null;
-	    return heldObjectSlot.transform.GetChild(0).gameObject;
-    }
+   
 
     public void Interact()
     {
 	    if (IsCarryingObject())
 	    {
-		    Throw(HeldObject(), ThrowVector());
+		    Throw(HeldObject, CalculateThrowVector());
 	    }
 	    else if (carryableObjects.Count > 0)
 	    {
@@ -131,9 +135,9 @@ public class Throwing : MonoBehaviour
 	    var clyde = obj.GetComponent<Clyde>();
 	    if (clyde)
 	    {
-		    if (clyde.state.inAirstream) return;
-		    if (!clyde.state.canMove) return;
-		    clyde.state.canMove = false;
+		    if (clyde.inAirstream) return;
+		    if (!clyde.canMove) return;
+		    clyde.canMove = false;
 		    clyde.anim.SetTrigger("pickedUp");
 		    clyde.transform.LookAt(clyde.rb.position + transform.forward);
 	    }
@@ -153,12 +157,12 @@ public class Throwing : MonoBehaviour
 	    if (clyde)
 	    {
 		    clyde.ResetMotion();
-		    clyde.state.canMove = true;
+		    clyde.canMove = true;
 		    clyde.anim.SetTrigger("thrown");
 		    clyde.anim.ResetTrigger("land");
 		    clyde.RestartPickupCooldown();
-		    clyde.state.canJumpTimeframe = 0;
-		    clyde.state.isThrown = true;
+		    clyde.canJumpTimeframe = 0;
+		    clyde.isThrown = true;
 	    }
 
 	    obj.GetComponent<Carryable>().isHeld = false;
@@ -173,18 +177,19 @@ public class Throwing : MonoBehaviour
 	    throwIndicator.DestroyIndicator();
     }
 
-    private Vector3 ThrowVector()
+    private Vector3 CalculateThrowVector()
     {
 	    Vector3 throwVector = transform.forward;
 	    float angle = throwUpwardsAngle;
-	    if (!HeldObject().GetComponent<Clyde>())
+        var clyde = HeldObject.GetComponent<Clyde>();
+	    if (!clyde)
 	    {
 		    angle = throwBoxUpwardsAngle;
 	    }
 	    throwVector = Quaternion.AngleAxis(angle, -transform.right) * throwVector;
 
 	    float throwStr = throwStrength;
-	    if (!HeldObject().GetComponent<Clyde>())
+	    if (!clyde)
 	    {
 		    throwStr = throwBoxStrength;
 	    }

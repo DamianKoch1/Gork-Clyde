@@ -25,7 +25,7 @@ public class MenuButton : MonoBehaviour
     /// <summary>
     /// Prevents triggering invisible buttons from hidden popups
     /// </summary>
-    public static void FocusNothing()
+    public static void RemoveFocus()
     {
         EventSystem.current.SetSelectedGameObject(null);
     }

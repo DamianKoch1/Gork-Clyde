@@ -1,11 +1,14 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 /// <summary>
-/// Handles everything pushing related
+/// Enables players to push objects
 /// </summary>
-public class Pushing : MonoBehaviour
+public class PushBehaviour : MonoBehaviour
 {
     private FixedJoint fixedJoint;
+
+    public bool canPushBigObjects;
 
     [HideInInspector]
     public GameObject pushedObj;
@@ -13,28 +16,26 @@ public class Pushing : MonoBehaviour
     [HideInInspector]
     public bool isPushing;
 
-    private PlayerState state;
-    
+    private Player player;
+
     private Animator anim;
 
     private Rigidbody rb;
 
-    public delegate void OnPushStarted();
     /// <summary>
     /// Add listener to e.g. change walk animation while pushing
     /// </summary>
-    public OnPushStarted onPushStarted;
+    public Action onPushStarted;
     
-    public delegate void OnPushStopped();
     /// <summary>
     /// Add listener to revert changes above when stopping push
     /// </summary>
-    public OnPushStopped onPushStopped;
+    public Action onPushStopped;
     
-    public void Initialize(Animator _anim, PlayerState _state, Rigidbody _rb)
+    public void Initialize(Animator _anim, Player _player, Rigidbody _rb)
     {
         anim = _anim;
-        state = _state;
+        player = _player;
         rb = _rb;
     }
     
@@ -55,7 +56,7 @@ public class Pushing : MonoBehaviour
         {
             StopPushing();
         }
-        else if (!state.wasGrounded)
+        else if (!player.wasGrounded)
         {
             StopPushing();
         }
@@ -66,7 +67,7 @@ public class Pushing : MonoBehaviour
     /// </summary>
     public void StartPushing()
     {
-        if (GetComponent<Throwing>()?.IsCarryingObject() == true) return;
+        if (GetComponent<ThrowBehaviour>()?.IsCarryingObject() == true) return;
         if (isPushing) return;
         if (fixedJoint) return;
         if (!pushedObj) return;
@@ -75,7 +76,7 @@ public class Pushing : MonoBehaviour
         isPushing = true;
         Rigidbody objectRb = pushedObj.GetComponent<Rigidbody>();
         AlignToPushableSide();
-        onPushStarted();
+        onPushStarted?.Invoke();
         pushedObj.GetComponent<Pushable>().isPushed = true;
         AddFixedJoint(objectRb);
     }
@@ -109,11 +110,11 @@ public class Pushing : MonoBehaviour
 
         anim.SetBool("push", false);
         isPushing = false;
-        onPushStopped();
+        onPushStopped?.Invoke();
     }
 
     /// <summary>
-    /// Makes this object teleport in front of and look at closest pushable side
+    /// Aligns self to closest side of pushed object
     /// </summary>
     private void AlignToPushableSide()
     {
@@ -134,7 +135,7 @@ public class Pushing : MonoBehaviour
     public void UpdateLegs(Vector3 motion)
     {
         var angle = Vector3.SignedAngle(transform.forward, motion.normalized, Vector3.up);
-        if (angle < 0) angle += 360;
+        while (angle < 0) angle += 360;
         anim.SetFloat("AngleToPushable", angle);
     }
 }

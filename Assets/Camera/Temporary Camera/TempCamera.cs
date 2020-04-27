@@ -2,7 +2,7 @@
 using UnityEngine;
 
 /// <summary>
-/// Activates when both players enter small trigger, disables if one leaves outer trigger
+/// Activates when both players enter inner trigger, deactivates if one leaves outer trigger
 /// </summary>
 public class TempCamera : MonoBehaviour
 {
@@ -37,18 +37,5 @@ public class TempCamera : MonoBehaviour
 		if (!cam.activeSelf) return;
 
 		cam.SetActive(false);
-	}
-
-	
-	/// <summary>
-	/// Checks if collider can activate camera (is a player)
-	/// </summary>
-	/// <param name="other">collider to check</param>
-	/// <returns></returns>
-	public bool CanActivateCam(Collider other)
-	{
-		if (other.isTrigger) return false;
-		if (other.GetComponent<Player>()) return true;
-		return false;
 	}
 }

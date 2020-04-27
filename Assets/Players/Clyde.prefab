@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 2553107321341475815}
   - component: {fileID: 5348649067866839038}
   - component: {fileID: 4078991665789512561}
-  - component: {fileID: 2002650188190270298}
   - component: {fileID: 8135090562367645002}
   - component: {fileID: 5090413825949392846}
   - component: {fileID: 1193423907782552220}
@@ -74,10 +73,23 @@ MonoBehaviour:
   jumpHeight: 8.25
   airMovespeedPenalty: 0.85
   throwMovespeedPenalty: 0.75
-  state: {fileID: 0}
-  pushing: {fileID: 0}
-  rb: {fileID: 0}
   anim: {fileID: 2447535924106207425}
+  walkParticles: {fileID: 7680902654541984930}
+  landingParticles: {fileID: 3072339216232293824}
+  canMove: 1
+  isThrown: 0
+  inAirstream: 0
+  wasGrounded: 0
+  maxGhostjumpDelay: 0.2
+  canJumpTimeframe: 0
+  minLandingVFXFallSpeed: 15
+  throwCollisionSFX: {fileID: 8300000, guid: 79dc66730b44d0046969a9dc85a95d65, type: 3}
+  landingSFX: {fileID: 8300000, guid: b4a9bb8c61faa7f47a024e4d7457c092, type: 3}
+  jumpSFX: {fileID: 8300000, guid: fcffb8b94730bb643a8943c082ace00f, type: 3}
+  walkSFX: {fileID: 8300000, guid: c539aec2a72ff3047b39a6bfb764f0b1, type: 3}
+  idleSFX: {fileID: 8300000, guid: 1770b551d3a9e054398ffd489df9980c, type: 3}
+  sfxAudioSource: {fileID: 5090413825949392846}
+  walkAudioSource: {fileID: 1193423907782552220}
   gork: {fileID: 0}
 --- !u!114 &8373350507250307866
 MonoBehaviour:
@@ -134,34 +146,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dynamicSpawnpoint: 1
---- !u!114 &2002650188190270298
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3874808357865764670}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a25a8c223a4e311498131bc8af5771ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  walkParticles: {fileID: 7680902654541984930}
-  landingParticles: {fileID: 3072339216232293824}
-  canMove: 1
-  isThrown: 0
-  inAirstream: 0
-  wasGrounded: 0
-  maxGhostjumpDelay: 0.2
-  canJumpTimeframe: 0
-  minLandingVFXFallSpeed: 15
-  throwCollisionSFX: {fileID: 8300000, guid: 79dc66730b44d0046969a9dc85a95d65, type: 3}
-  landingSFX: {fileID: 8300000, guid: b4a9bb8c61faa7f47a024e4d7457c092, type: 3}
-  jumpSFX: {fileID: 8300000, guid: fcffb8b94730bb643a8943c082ace00f, type: 3}
-  walkSFX: {fileID: 8300000, guid: c539aec2a72ff3047b39a6bfb764f0b1, type: 3}
-  idleSFX: {fileID: 8300000, guid: 1770b551d3a9e054398ffd489df9980c, type: 3}
-  sfxAudioSource: {fileID: 5090413825949392846}
-  walkAudioSource: {fileID: 1193423907782552220}
 --- !u!114 &8135090562367645002
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,6 +158,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0a407c5d71c464dad49e36ec71000c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canPushBigObjects: 0
   pushedObj: {fileID: 0}
   isPushing: 0
 --- !u!82 &5090413825949392846
@@ -680,11 +665,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2433603982372154571}
     m_Modifications:
-    - target: {fileID: 3180249123157283602, guid: 241f912dad7f7994eabe5a91d05ccdaa,
-        type: 3}
-      propertyPath: m_Name
-      value: Shadow
-      objectReference: {fileID: 0}
     - target: {fileID: 7721489509654714473, guid: 241f912dad7f7994eabe5a91d05ccdaa,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -754,6 +734,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 4.621896
+      objectReference: {fileID: 0}
+    - target: {fileID: 3180249123157283602, guid: 241f912dad7f7994eabe5a91d05ccdaa,
+        type: 3}
+      propertyPath: m_Name
+      value: Shadow
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 241f912dad7f7994eabe5a91d05ccdaa, type: 3}
@@ -886,6 +871,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2433603982372154571}
     m_Modifications:
+    - target: {fileID: 1601969473879671137, guid: eb49f7cbe08b75444bb38f67c8c7d0fe,
+        type: 3}
+      propertyPath: lengthInSec
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1601969473879671137, guid: eb49f7cbe08b75444bb38f67c8c7d0fe,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6083157086161473864, guid: eb49f7cbe08b75444bb38f67c8c7d0fe,
         type: 3}
       propertyPath: m_Name
@@ -960,16 +955,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.581
-      objectReference: {fileID: 0}
-    - target: {fileID: 1601969473879671137, guid: eb49f7cbe08b75444bb38f67c8c7d0fe,
-        type: 3}
-      propertyPath: lengthInSec
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1601969473879671137, guid: eb49f7cbe08b75444bb38f67c8c7d0fe,
-        type: 3}
-      propertyPath: playOnAwake
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb49f7cbe08b75444bb38f67c8c7d0fe, type: 3}

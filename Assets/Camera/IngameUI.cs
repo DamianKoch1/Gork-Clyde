@@ -13,16 +13,21 @@ public class IngameUI : MonoBehaviour
     [SerializeField] 
     private OptionsMenu optionsMenu;
 
-    [SerializeField] 
+    [SerializeField, Tooltip("Object initially selected when pause menu is opened")] 
     private GameObject pauseFirstSelected;
+
+    private Canvas optionsCanvas;
+    private Canvas pauseCanvas;
     
 
     private void Start()
     {
         BGM.Instance.SetBgm(bgm);
         Cursor.visible = false;
-        MenuButton.FocusNothing();
+        MenuButton.RemoveFocus();
 
+        optionsCanvas = optionsMenu.GetComponent<Canvas>();
+        pauseCanvas = pauseMenu.GetComponent<Canvas>();
     }
 
     private void Update()
@@ -45,11 +50,10 @@ public class IngameUI : MonoBehaviour
     /// </summary>
     private void OnBackPressed()
     {
-        var optionsCanvas = optionsMenu.GetComponent<Canvas>();
-        var pauseCanvas = pauseMenu.GetComponent<Canvas>();
+        
         if (!pauseCanvas.enabled)
         {
-            Pause(pauseCanvas);   
+            Pause();   
         }
         else if (optionsMenu.controls.activeSelf)
         {
@@ -57,31 +61,29 @@ public class IngameUI : MonoBehaviour
         }
         else if (optionsCanvas.enabled)
         {
-            HideOptions(optionsCanvas);
+            HideOptions();
         }
         else
         {
-            Unpause(pauseCanvas);
+            Unpause();
         }
     }
 
     /// <summary>
     /// Hides pause menu, sets timescale to 1, disables cursor, clears button selection
     /// </summary>
-    /// <param name="pauseCanvas">Canvas of pause menu</param>
-    private void Unpause(Canvas pauseCanvas)
+    private void Unpause()
     {
         pauseCanvas.enabled = false;
         Time.timeScale = 1;
-        MenuButton.FocusNothing();
+        MenuButton.RemoveFocus();
         Cursor.visible = false;
     }
 
     /// <summary>
     /// Shows pause menu, sets timescale to 0, enables cursor, selects assigned pause menu button
     /// </summary>
-    /// <param name="pauseCanvas">Canvas of pause menu</param>
-    private void Pause(Canvas pauseCanvas)
+    private void Pause()
     {
         Cursor.visible = true;
         pauseCanvas.enabled = true;
@@ -102,7 +104,7 @@ public class IngameUI : MonoBehaviour
     /// Hides Options menu
     /// </summary>
     /// <param name="optionsCanvas">Canvas of options menu</param>
-    private void HideOptions(Canvas optionsCanvas)
+    private void HideOptions()
     { 
         optionsCanvas.enabled = false;
         EventSystem.current.SetSelectedGameObject(pauseFirstSelected);

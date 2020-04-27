@@ -3,33 +3,36 @@
 public class PushableBig : Pushable
 {
     /// <summary>
-    /// Enables gork to push this object while in trigger
+    /// Enables players "strong" push behaviours to push this object while in trigger
     /// </summary>
     /// <param name="other"></param>
     protected override void OnTriggerStay(Collider other)
     {
         if (other.isTrigger) return;
-        var gork = other.GetComponent<Gork>();
-        if (!gork) return;
 
-        gork.pushing.pushedObj = gameObject;
+        var pushBehaviour = other.GetComponent<PushBehaviour>();
+        if (!pushBehaviour) return;
+        if (!pushBehaviour.canPushBigObjects) return;
+
+        pushBehaviour.pushedObj = gameObject;
     }
 
     /// <summary>
-    /// Prevents gork from pushing this object after leaving it
+    /// Prevents players with "strong" push behaviours from pushing this object after leaving it
     /// </summary>
     /// <param name="other"></param>
     protected override void OnTriggerExit(Collider other)
     {
         if (other.isTrigger) return;
-        var gork = other.GetComponent<Gork>();
-        if (!gork) return;
-        if (gork.pushing.isPushing) return;
-        
-        gork.pushing.pushedObj = null;
+        var pushBehaviour = other.GetComponent<PushBehaviour>();
+        if (!pushBehaviour) return;
+        if (!pushBehaviour.canPushBigObjects) return;
+        if (pushBehaviour.isPushing) return;
+
+        pushBehaviour.pushedObj = null;
         gameObject.layer = 0;
     }
 
-  
-    
+
+
 }

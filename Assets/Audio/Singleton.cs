@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 /// <summary>
-/// Used to implement singletons that are attached to GameObjects
+/// Used to implement MonoBehaviour singletons
 /// </summary>
 /// <typeparam name="T">Type of class to make a singleton of</typeparam>
 public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour

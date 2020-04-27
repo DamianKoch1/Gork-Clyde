@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 
 /// <summary>
-/// Used to prevent platforms squashing objects below
+/// Used to prevent platforms squashing objects below it
 /// </summary>
-public class PlatformBlocking : MonoBehaviour
+public class PlatformBlockChecker : MonoBehaviour
 {
     private MovingPlatform platform;
 
@@ -22,7 +22,7 @@ public class PlatformBlocking : MonoBehaviour
     {
         if (!CanBlock(other)) return;
 
-        platform.Blocked();
+        platform.Block();
         blockingObjCount++;
     }
 
@@ -36,7 +36,7 @@ public class PlatformBlocking : MonoBehaviour
         blockingObjCount--;
         if (blockingObjCount == 0)
         {
-            platform.Unblocked();
+            platform.Unblock();
         }
 
     }

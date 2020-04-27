@@ -3,7 +3,7 @@
 /// <summary>
 /// Deactivates targets once if both players enter
 /// </summary>
-public class OTTActivator : MonoBehaviour
+public class TwoPlayerTriggerDeactivator : MonoBehaviour
 {
     [SerializeField]
     protected GameObject[] targets;
@@ -19,7 +19,7 @@ public class OTTActivator : MonoBehaviour
         {
             foreach (var target in targets)
             {
-                target.GetComponent<IActivatable>()?.OnButtonActivated();
+                target.GetComponent<IActivatable>()?.OnButtonDeactivated();
             }
             Destroy(gameObject);
         }

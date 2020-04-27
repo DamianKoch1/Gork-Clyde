@@ -38,7 +38,7 @@ public class OptionsMenu : MonoBehaviour
         SetCheckBoxStates();
         if (!inMainMenu)
         {
-            MenuButton.FocusNothing();
+            MenuButton.RemoveFocus();
         }
     }
 

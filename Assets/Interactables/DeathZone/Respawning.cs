@@ -65,12 +65,12 @@ public class Respawning : MonoBehaviour
         if (hit.transform.CompareTag("platform")) return false;
         if (hit.transform.CompareTag("noSpawnpoint")) return false;
         if (GetComponent<Carryable>()?.isHeld == true) return false;
-        if (GetComponent<Clyde>()?.state.inAirstream == true) return false;
+        if (GetComponent<Clyde>()?.inAirstream == true) return false;
         return true;
     }
         
     /// <summary>
-    /// Saved spawnpoint/rotation
+    /// Saves spawnpoint/rotation
     /// </summary>
     private void SetSpawnPoint()
     {

@@ -26,11 +26,11 @@ public class GameSaver : MonoBehaviour
     }
 
     /// <summary>
-    /// Checks for level number in scene name, sets highestLevelId to that if its lower
+    /// Checks for level number in scene name, sets highestLevelId to that if it was lower
     /// </summary>
     private void UpdateHighestLevelId()
     {
-        HighestLevelId = int.Parse(new string(SceneManager.GetActiveScene().name.Where(Char.IsDigit).ToArray()));
+        HighestLevelId = int.Parse(new string(SceneManager.GetActiveScene().name.Where(char.IsDigit).ToArray()));
     }
 
     /// <summary>
@@ -41,7 +41,7 @@ public class GameSaver : MonoBehaviour
     {
         highestLevelId = 1;
         string[] filePaths = Directory.GetFiles(Application.persistentDataPath, "Save.dat");
-        if (filePaths.Length <= 0) return highestLevelId;
+        if (filePaths.Length <= 0) return 1;
     
         BinaryFormatter binaryFormatter = new BinaryFormatter();
         using (FileStream fileStream = File.Open(Path(), FileMode.Open))
@@ -72,7 +72,7 @@ public class GameSaver : MonoBehaviour
     /// Default save file path
     /// </summary>
     /// <returns>Default save file path</returns>
-    private static String Path()
+    private static string Path()
     {
         return System.IO.Path.Combine(Application.persistentDataPath, "Save.dat");
     }

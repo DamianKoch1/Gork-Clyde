@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Attach to any object to make it cast a shadow on the ground
+/// Moves a self to ground below parent
 /// </summary>
 public class PlayerShadow : MonoBehaviour
 {
@@ -13,7 +13,7 @@ public class PlayerShadow : MonoBehaviour
     }
 
     /// <summary>
-    /// Raycasts downwards from parent and sets shadow slightly above hit point
+    /// Raycasts downwards from parent and sets own position slightly above hit point
     /// </summary>
     private void UpdateShadowPosition()
     {

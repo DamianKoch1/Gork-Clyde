@@ -5,11 +5,11 @@ using UnityEngine;
 [RequireComponent(typeof(AirstreamAffected))]
 public class Clyde : Player
 {
-    public static string XAxis = "ClydeHorizontal",
-    ZAxis = "ClydeVertical",
-    JumpButton = "ClydeJump",
-    ClydeInteract = "ClydeInteract",
-    ClydeCam = "ClydeCam";
+    public static string XAxis = "ClydeHorizontal";
+    public static string ZAxis = "ClydeVertical";
+    public static string JumpButton = "ClydeJump";
+    public static string ClydeInteract = "ClydeInteract";
+    public static string ClydeCam = "ClydeCam";
 
     /// <summary>
     /// reference to gork, reenabling collision with when cancelling throw
@@ -40,17 +40,17 @@ public class Clyde : Player
 
         if (Input.GetButtonDown(ClydeInteract))
         {
-            if (pushing.pushedObj)
+            if (pushBehaviour.pushedObj)
             {
-                pushing.StartPushing();
+                pushBehaviour.StartPushing();
             }
         }
 
         if (Input.GetButtonUp(ClydeInteract))
         {
-            if (pushing.isPushing)
+            if (pushBehaviour.isPushing)
             {
-                pushing.StopPushing();
+                pushBehaviour.StopPushing();
             }
         }
     }
@@ -58,15 +58,15 @@ public class Clyde : Player
     
 
     /// <summary>
-    /// Makes gork pick clyde up if clyde stands on him, prevents jumping on top of gork to reach unintended heights
+    /// Makes Gork pick Clyde up if clyde stands on him, prevents jumping on top of Gork to reach unintended heights
     /// </summary>
     private void CheckIfOnGork()
     {
         if (pickupCooldown != 0) return;
-        if (!state.groundedInfo.transform) return;
-        var _gork = state.groundedInfo.transform.GetComponent<Gork>();
-        if (_gork?.pushing.isPushing == true) return;
-        _gork?.throwing.PickUp(gameObject);
+        if (!groundedInfo.transform) return;
+        var _gork = groundedInfo.transform.GetComponent<Gork>();
+        if (_gork?.pushBehaviour.isPushing == true) return;
+        _gork?.throwBehaviour.PickUp(gameObject);
     }
 
     /// <summary>
@@ -100,7 +100,7 @@ public class Clyde : Player
     {
         transform.SetParent(null, true);
         ResetMotion();
-        state.canMove = true;
+        canMove = true;
         GetComponent<Carryable>().isHeld = false;
         anim.SetTrigger("throwCancelled");
         gork.GetComponent<Gork>().anim.SetTrigger("cancelthrow");

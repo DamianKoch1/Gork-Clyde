@@ -3,25 +3,44 @@
 public class MovingPlatform : MonoBehaviour, IActivatable
 {
     [SerializeField]
-    private GameObject start, target, platform;
-    private Vector3 pos1, pos2;
-    private bool stop, blocked;
-    public enum Mode { Autostart, Triggerable, MoveOnce};
+    private GameObject start;
+
+    [SerializeField]
+    private GameObject target;
+
+    [SerializeField]
+    private GameObject platform;
+
+    private Vector3 pos1;
+    private Vector3 pos2;
+
+    private bool stop;
+    private bool blocked;
+    public enum Mode
+    {
+        Autostart,
+        Triggerable,
+        MoveOnce
+    };
+
     public Mode mode = Mode.Autostart;
+
     [SerializeField]
     private float speed;
+
     private Rigidbody rb;
+
     private float moveAmount = 0;
 
-    [Header("SFX")] 
-    
-    [SerializeField] 
+    [Header("SFX")]
+
+    [SerializeField]
     private AudioClip startedSFX;
-    
-    [SerializeField] 
+
+    [SerializeField]
     private AudioClip stoppedSFX;
-    
-    [SerializeField] 
+
+    [SerializeField]
     private AudioClip collisionSFX;
 
     private AudioSource audioSource;
@@ -36,7 +55,7 @@ public class MovingPlatform : MonoBehaviour, IActivatable
     {
         MovePlatform();
     }
- 
+
     private void InitializeVariables()
     {
         rb = platform.GetComponent<Rigidbody>();
@@ -64,7 +83,7 @@ public class MovingPlatform : MonoBehaviour, IActivatable
         }
         else
         {
-                
+
             if (stop) return;
             if (blocked) return;
         }
@@ -78,7 +97,7 @@ public class MovingPlatform : MonoBehaviour, IActivatable
     }
 
 
-    public void Blocked()
+    public void Block()
     {
         blocked = true;
         if (!stop)
@@ -87,7 +106,7 @@ public class MovingPlatform : MonoBehaviour, IActivatable
         }
     }
 
-    public void Unblocked()
+    public void Unblock()
     {
         blocked = false;
         if (!stop)

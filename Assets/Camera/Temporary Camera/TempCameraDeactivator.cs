@@ -15,7 +15,8 @@ public class TempCameraDeactivator : MonoBehaviour
     
     private void OnTriggerExit(Collider other)
     {
-        if (!cam.CanActivateCam(other)) return;
+        if (other.isTrigger) return;
+        if (!other.GetComponent<Player>()) return;
 
         cam.DeactivateCamera();
     }
