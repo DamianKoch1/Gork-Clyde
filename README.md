@@ -5,7 +5,7 @@ Gork &amp; Clyde is a 3D local co-op puzzle platformer about two different and u
 
 ![thumbnail](/Images/thumbnail.png)
 
-[Technical Design Document](https://docs.google.com/document/d/1Gf1M1o4mBKhUVvD9nD4bGZbYGonhZHuuQ1Y-MCH5hHs/edit?usp=sharing)
+[Technical Design Document (german)](https://docs.google.com/document/d/1Gf1M1o4mBKhUVvD9nD4bGZbYGonhZHuuQ1Y-MCH5hHs/edit?usp=sharing)
 
 [Trailer](https://www.instagram.com/p/B2ESddSCLU4/)
 
